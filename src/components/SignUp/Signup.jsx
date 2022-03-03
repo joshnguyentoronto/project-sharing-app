@@ -1,21 +1,8 @@
 import React, {Component} from 'react';
 
 
-export default class SignUpForm extends Component {
-    state={
-        firstName: '',
-        lastName: '',
-        username:'',
-        email:'',
-    }
-
-    handleSubmit(e){
-        this.setState({[e.target.name]: e.target.value})
-        console.log('hi')
-    }
-
-    render (){
-        return(
+export default function SignUpForm(props) {
+    return (
             <form onSubmit={() => this.handleSubmit}>
                 <label>
                     First Name:
@@ -39,6 +26,5 @@ export default class SignUpForm extends Component {
                 </label>
                 <button>Signup</button>
             </form>
-        )
-    }
+    )
 }
