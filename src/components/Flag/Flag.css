@@ -1,0 +1,8 @@
+.flag-btn {
+    background-color: lightgray;
+    border-radius: 20px;
+    width: 120px;
+    border: none;
+    display: inline;
+    margin: 0 20px;
+}

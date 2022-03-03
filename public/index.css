@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(225, 225, 225);
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(167, 167, 167);
+    border-radius: 100vw;
+}

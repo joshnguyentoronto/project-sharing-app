@@ -1,0 +1,7 @@
+.footer {
+    border-top: 1px solid black;
+    width: 100vw;
+    margin-left: -20px;
+    height: 80px;
+    background-color: lightblue;
+}

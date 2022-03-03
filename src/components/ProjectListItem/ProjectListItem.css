@@ -1,0 +1,29 @@
+.project-list-item {
+    border: 1px solid grey;
+    border-radius: 20px;
+    width: 100%;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 80px;
+}
+
+.project-list-item-img {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+}
+
+.project-list-item-foot-icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-list-item-foot-icon-stat {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

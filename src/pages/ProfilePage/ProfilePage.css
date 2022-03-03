@@ -1,0 +1,20 @@
+.ProfileCategory {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.ProfileCategory li {
+    padding: 5px 80px;
+  }
+
+.ProfileCategory li:hover:not(.active) {
+cursor: pointer;
+background-color: grey;
+color: white;
+}
+
+.ProfileCategory li.active {
+    color: white;
+    background-color: grey;
+  }
