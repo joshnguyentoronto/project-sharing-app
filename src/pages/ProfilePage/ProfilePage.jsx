@@ -3,22 +3,27 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import ProjectList from "../../components/ProjectList/ProjectList"
 import ProfileCategory from "../../components/ProfileCategory/ProfileCategory"
+import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 export default class ProfilePage extends Component {
     state={
-        categories: ["My Projects", "Liked", "About"],
-        activeCategory: ""
+        categories: ["Projects", "Saved", "Liked", "About"],
+        activeCategory: "Projects"
+    }
+
+    handleSetActiveCat = (cat) => {
+        this.setState({activeCategory: cat})
     }
 
     render() {
         return(
             <div className="profile">
-                <img src=""/>
-                <h1>Name</h1>
-                <p>Location</p>
-                <Link to="/profile/edit">Edit Profile</Link>
-                <br />
-                <ProfileCategory categories={this.state.categories}/>
+                <ProfileCard />
+                <ProfileCategory 
+                    categories={this.state.categories}
+                    activeCategory={this.state.activeCategory}
+                    handleSetActiveCat={this.handleSetActiveCat}
+                />
                 <ProjectList />
             </div>
         )

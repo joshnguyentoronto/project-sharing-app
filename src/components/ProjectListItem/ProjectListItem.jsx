@@ -5,18 +5,17 @@ export default function ProjectListItem(props) {
     return(
         <div className="project-list-item">
             <div className="project-list-item-img">
-
             </div>
             <div className="project-list-item-foot">
                 <div className="project-list-item-foot-icon">
                     <div className="project-list-item-foot-icon-author">
-                        <p>Title la la la la la la</p>
-                        <p>Name</p>
+                        <p>{props.project.title}</p>
+                        <p>{props.project.author}</p>
                     </div>
                     <div className="project-list-item-foot-icon-stat">
-                        <p>@ 100</p>
-                        <p>@ 124</p>
-                        <p>@ 43</p>
+                        <p>{"Like: " + props.project.likeCount}</p>
+                        <p>{"View: " + props.project.viewCount}</p>
+                        <p>{"Com: " + props.project.comment.length}</p>
                     </div>
                 </div>
             </div>

@@ -9,11 +9,9 @@ const userLinkSchema = new Schema({
 })
 
 const userSchema = new Schema({
-  firstName: String,
-  lastName: String,
+  name: String,
   username: String,
   email: String,
-  about: String,
   avatar: String,
   bio: String,
   location: String,
@@ -21,9 +19,9 @@ const userSchema = new Schema({
   education: Array,
   experiences: Array,
   userLink: [userLinkSchema],
-  conversations: Array,
-  savedPosts: [{type: Schema.Types.ObjectId, ref: 'Project'}],
-  likedPosts: [{type: Schema.Types.ObjectId, ref: 'Project'}]   
+  conversations: [{type: Schema.Types.ObjectId, ref: 'Conversation'}],
+  savedPosts: Array,
+  likedPosts: Array   
 }, {
   timestamps: true
 });

@@ -10,7 +10,7 @@ export default function Filter(props) {
             </div>
             <div className='filter-flags'>
                 {props.flags.map(f => 
-                    <Flag key={f} flag={f} />
+                    <Flag onClick={() => {props.filterByFlag()}} key={f} flag={f} />
                 )}
             </div>
         </div>

@@ -9,7 +9,7 @@ export default function ProfileCategory(props) {
                     <li 
                         className={c === props.activeCategory ? 'active' : ''}
                         onClick={() => props.handleSetActiveCat(c)}
-                >{c}</li>
+                    >{c}</li>
                 )}
             </ul>
         </div>

@@ -1,30 +1,46 @@
 import React, { Component } from 'react';
-import { Route, Routes, Switch, Redirect } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 import AccountPage from '../AccountPage/AccountPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import Login from '../../components/Login/Login';
+import SignUpForm from '../../components/SignUp/Signup';
 
 
 export default class App extends Component {
+state = {
+  user: null
+}
+
+setUserInState = (incomingUserData) => {
+  this.setState({ user: incomingUserData})
+}
+
   render() {
     return (
       <main className="App">
         <Routes>
           <Route 
-            exact path="/" 
+            path="/" 
             element= {<HomePage/>}
           />
           <Route 
             path="/profile" 
             element= {<ProfilePage/>}
           />
-          <Route path="account" element= {<AccountPage/>}/>
-    
-
+          <Route path="account" element= {<AccountPage/>}>
+            <Route path="login" element={<Login/>}/>
+            <Route path="signup" element={<SignUpForm/>}/>
+          </Route>
         </Routes>
-        {/* should use useHistory, useLocation, and useParams if we want to use
+      </main>
+    );
+  }
+}
+
+
+ {/* should use useHistory, useLocation, and useParams if we want to use
         the same }
           {/* <Route exact path="/" render={(props) => (
             <HomePage {...props}/>
@@ -38,7 +54,3 @@ export default class App extends Component {
           {/* based on v6 react recommends doing any redirects on the server side 
           this is better for faster responses on the web server
           <Redirect to="/" /> */}
-      </main>
-    );
-  }
-}

@@ -1,17 +1,37 @@
 import React, {Component} from 'react';
 
 
-export default function SignUpForm(props) {
-    return (
-            <form onSubmit={() => this.handleSubmit}>
-                <label>
-                    First Name:
-                    <input type="text" name="firstName" placeholder="first name"></input>
-                </label>
-                <label>
-                    Last Name:
-                    <input type="text" name="lastName" placeholder="last name"></input>
-                </label>
+export default class SignUpForm extends Component {
+
+    state = {
+        name: '',
+        email: '',
+        password: '',
+        confirm: '',
+        error: '',
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+            error: ''
+        })
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const fetchResponse = await fetch('/api/users/signup', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({name: this.state.name, email: this.state.email, password: this.state.password,})
+        })
+      }
+
+    render(){
+        return (
+            <form onSubmit= {this.handleSubmit}>
+                <label>Name:</label>
+                <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.handleChange}></input>
                 <label>
                     User Name:
                     <input type="text" name="username" placeholder="username"></input>
@@ -24,7 +44,12 @@ export default function SignUpForm(props) {
                     Password:
                     <input type="text" name="password" placeholder="password"></input>
                 </label>
+                <label>
+                    Confirm:
+                    <input type="text" name="password" placeholder="password"></input>
+                </label>
                 <button>Signup</button>
             </form>
-    )
+        )
+    }
 }
