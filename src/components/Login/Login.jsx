@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Button from '@mui/material/Button'
+import {Link} from 'react-router-dom'
 
 export default function Login(props) {
     return (
@@ -13,7 +15,8 @@ export default function Login(props) {
                     Password:
                     <input type="text" name="password" placeholder="password"></input>
                 </label>
-                <button>Signup</button>
+                <Button variant="contained">Login</Button>
+                <Link to="/account/signup">Don't Have an account!<br></br> Sign up here</Link>
             </form>
         </div>
     )

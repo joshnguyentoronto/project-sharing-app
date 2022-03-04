@@ -6,22 +6,10 @@ import Login from "../../components/Login/Login"
 
 
 export default class AccountPage extends Component {
-    state={
-        firstName: '',
-        lastName: '',
-        username:'',
-        email:'',
-    }
-
-    handleSubmit(e){
-        this.setState({[e.target.name]: e.target.value})
-        console.log('hi')
-    }
-
-    render() {
+      render() {
         return(
             <div className="account">
-                <h1>Account Page</h1>
+                <h1>THE EXHIBIT</h1>
                 <Outlet/>
             </div>
         )

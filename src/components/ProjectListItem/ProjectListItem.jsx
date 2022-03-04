@@ -10,7 +10,7 @@ export default function ProjectListItem(props) {
                 <div className="project-list-item-foot-icon">
                     <div className="project-list-item-foot-icon-author">
                         <p>{props.project.title}</p>
-                        <p>{props.project.author.length > 1 ? "Group project" : props.project.author[0].name}</p>
+                        {/* <p>{props.project.author.length > 1 ? "Group project" : props.project.author[0].name}</p> */}
                     </div>
                     <div className="project-list-item-foot-icon-stat">
                         <p>{"Like" + props.project.likeCount}</p>

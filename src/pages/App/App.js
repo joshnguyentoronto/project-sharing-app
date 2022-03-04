@@ -31,7 +31,7 @@ setUserInState = (incomingUserData) => {
           />
           <Route path="account" element= {<AccountPage/>}>
             <Route path="login" element={<Login/>}/>
-            <Route path="signup" element={<SignUpForm/>}/>
+            <Route path="signup" element={<SignUpForm setUserInState={this.setUserInState}/>}/>
           </Route>
         </Routes>
       </main>
@@ -40,7 +40,7 @@ setUserInState = (incomingUserData) => {
 }
 
 
- {/* should use useHistory, useLocation, and useParams if we want to use
+ /* should use useHistory, useLocation, and useParams if we want to use
         the same }
           {/* <Route exact path="/" render={(props) => (
             <HomePage {...props}/>
@@ -50,7 +50,7 @@ setUserInState = (incomingUserData) => {
           )}/>
           <Route path="/account" render={(props) => (
             <AccountPage {...props}/>
-          )}/> */}
-          {/* based on v6 react recommends doing any redirects on the server side 
+          )}/> */
+          /* based on v6 react recommends doing any redirects on the server side 
           this is better for faster responses on the web server
-          <Redirect to="/" /> */}
+          <Redirect to="/" /> */
