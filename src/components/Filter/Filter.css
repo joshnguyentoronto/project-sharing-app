@@ -6,9 +6,24 @@
     place-content: center;
 }
 
+.filter-name {
+    display: grid;
+    place-content: center;
+}
+.filter-name h1 {
+    font-size: 32px;
+    letter-spacing: 10%;
+    font-family: Arial;
+
+}
+
 .filter-search {
     display: grid;
     place-content: center;
+}
+.filter-search button {
+    border: none;
+    background-color: transparent;
 }
 
 .filter-search-bar {

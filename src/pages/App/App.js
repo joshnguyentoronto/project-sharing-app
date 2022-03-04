@@ -31,7 +31,7 @@ setUserInState = (incomingUserData) => {
           />
           <Route path="account" element= {<AccountPage/>}>
             <Route path="login" element={<Login/>}/>
-            <Route path="signup" element={<SignUpForm/>}/>
+            <Route path="signup" element={<SignUpForm setUserInState={this.setUserInState}/>}/>
           </Route>
         </Routes>
       </main>

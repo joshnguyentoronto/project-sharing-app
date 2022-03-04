@@ -15,7 +15,9 @@ export default class HomePage extends Component {
         currentFlag: '',
         currentTag: '',
         currentProject: '',
+        refProjects: [],
         projects: [],
+        user: null
     }
 
     handleChange = (evt) => {
@@ -23,7 +25,14 @@ export default class HomePage extends Component {
     };
 
     viewProject = async (project) => {
-        this.setState({ currentProject: project })
+        try {
+            let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
+            let refProjects = await fetchRefProjectList.json()
+            console.log(refProjects)
+            this.setState({ currentProject: project, refProjects: refProjects })
+        } catch(err) {
+            console.log(err)
+        }
     }
 
     closeProject = async () => {
@@ -37,7 +46,7 @@ export default class HomePage extends Component {
     filterByTag = async (evt) => {
         evt.preventDefault()
         try {
-            let fetchProjectList = await fetch('/api/projects', {headers: { "tag": this.state.currentTag }})
+            let fetchProjectList = await fetch('/api/projects/tag', {headers: { "tag": this.state.currentTag }})
             let projects = await fetchProjectList.json()
             this.setState({ projects: projects })
         } catch(err) {
@@ -47,7 +56,7 @@ export default class HomePage extends Component {
 
     filterByFlag = async (flag) => {
         try {
-            let fetchProjectList = await fetch('/api/projects', {headers: { "flag": flag }})
+            let fetchProjectList = await fetch('/api/projects/flag', {headers: { "flag": flag }})
             let projects = await fetchProjectList.json()
             this.setState({ currentFlag: flag, projects: projects })
         } catch(err) {
@@ -57,7 +66,7 @@ export default class HomePage extends Component {
 
     async componentDidMount() {
         try {
-            let fetchProjectList = await fetch('/api/projects', {headers: { "flag": this.state.currentFlag }})
+            let fetchProjectList = await fetch('/api/projects')
             let projects = await fetchProjectList.json()
             this.setState({projects: projects})
         } catch(err) {
@@ -68,11 +77,11 @@ export default class HomePage extends Component {
     render() {
         return(
             <div className="home">
-                <Header openChatList={this.openChatList} />
+                <Header openChatList={this.openChatList} user={this.state.user} />
                 <Filter handleChange={this.handleChange} filterByTag={this.filterByTag} filterByFlag={this.filterByFlag} flags={this.state.flags}/>
                 <ProjectList viewProject={this.viewProject} projects={this.state.projects} />
                 <Footer />
-                {this.state.currentProject ? <ProjectDetail closeProject={this.closeProject} project={this.state.currentProject} /> : console.log('brows state')}
+                {this.state.currentProject ? <ProjectDetail closeProject={this.closeProject} project={this.state.currentProject} /> : false}
                 <div>
                     <h1>To cancel error message</h1>
                     <MessageList />

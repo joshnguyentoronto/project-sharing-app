@@ -8,11 +8,22 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 export default class ProfilePage extends Component {
     state={
         categories: ["Projects", "Saved", "Liked", "About"],
-        activeCategory: "Projects"
+        activeCategory: "Projects",
+        projects: [],
     }
 
     handleSetActiveCat = (cat) => {
         this.setState({activeCategory: cat})
+    }
+
+    async componentDidMount() {
+        try {
+            let fetchProjectList = await fetch('/api/projects')
+            let projects = await fetchProjectList.json()
+            this.setState({projects: projects})
+        } catch(err) {
+            console.log("home page error: ", err)
+        }
     }
 
     render() {
@@ -24,7 +35,7 @@ export default class ProfilePage extends Component {
                     activeCategory={this.state.activeCategory}
                     handleSetActiveCat={this.handleSetActiveCat}
                 />
-                <ProjectList />
+                <ProjectList projects={this.state.projects} />
             </div>
         )
     }
