@@ -6,15 +6,18 @@ module.exports = {
 
 async function projectsIndex(req, res) {
     try {
-        let projects = await ProjectModel.find({}).populate('author')
-        projects.forEach(pro => {
-            let authors = await pro.author.map(obj => {
-                obj = obj.name
-            })
-            pro.author = authors
-        })
-        console.log(projects)
-        res.status(200).json(projects)
+        let flag = req.get("flag")
+        let tag = req.get("tag")
+        if (flag) {
+            let projects = await ProjectModel.find({ flag: flag }).populate('author')
+            res.status(200).json(projects)
+        } else if (tag) {
+            let projects = await ProjectModel.find({ tag: tag }).populate('author')
+            res.status(200).json(projects)
+        } else {
+            let projects = await ProjectModel.find({}).populate('author')
+            res.status(200).json(projects)
+        }
     } catch(err) {
         res.status(400).json(err)
     }
