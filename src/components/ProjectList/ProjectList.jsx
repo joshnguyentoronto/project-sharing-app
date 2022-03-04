@@ -6,7 +6,7 @@ export default function ProjectList(props) {
     return(
         <div className="project-list">
             {props.projects.map(project => 
-                <ProjectListItem onClick={props.viewProject} key={project.title} project={project} />
+                <a onClick={() => props.viewProject(project)} key={project._id}><ProjectListItem key={project._id} project={project} /></a>
             )}
         </div>
     )
