@@ -60,6 +60,7 @@
     grid-area: head;
     display: flex;
     align-items: center;
+    height: 100px;
 }
 .project-detail-head button {
     border: none;

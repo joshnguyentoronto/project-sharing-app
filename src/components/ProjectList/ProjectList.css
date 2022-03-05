@@ -1,6 +1,7 @@
 .project-list {
     display: flex;
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
 }
 

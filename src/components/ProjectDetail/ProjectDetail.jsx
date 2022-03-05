@@ -74,9 +74,8 @@ export default function ProjectDetail(props) {
                         </div>
                     </div>
                 </div>
-
-
             </div>
+            
             <div className='project-detail-right' onClick={() => {props.closeProject()}}>
                 <div className='project-detail-right-sub' onClick={() => {props.closeProject()}}>
                     <button className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></button>
