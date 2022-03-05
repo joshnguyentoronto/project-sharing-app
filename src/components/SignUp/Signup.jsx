@@ -39,7 +39,7 @@ export default function SignUpForm(props){
 
         const userDoc = await JSON.parse(atob(token.split('.')[1])).user
         props.setUserInState(userDoc)
-        navigate("/")       
+        navigate("/account/setup")       
     }
     return (
         <form autocomplete="off" onSubmit= {handleSubmit}>

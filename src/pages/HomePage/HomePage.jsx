@@ -17,7 +17,6 @@ export default class HomePage extends Component {
         currentProject: '',
         refProjects: [],
         projects: [],
-        user: null
     }
 
     handleChange = (evt) => {
@@ -76,7 +75,8 @@ export default class HomePage extends Component {
     render() {
         return(
             <div className="home">
-                <Header openChatList={this.openChatList} user={this.state.user} />
+                {console.log(this.props)}
+                <Header openChatList={this.openChatList} user={this.props.user} userLogout={this.props.userLogout}/>
                 <Filter handleChange={this.handleChange} filterByTag={this.filterByTag} filterByFlag={this.filterByFlag} flags={this.state.flags}/>
                 <ProjectList viewProject={this.viewProject} projects={this.state.projects} />
                 {this.state.currentProject ? <ProjectDetail closeProject={this.closeProject} project={this.state.currentProject} refProjects={this.state.refProjects}/> : false}

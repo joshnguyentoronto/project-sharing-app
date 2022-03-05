@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 
 
 export default function Header(props) {
+
     return(
         <div className="header">
             <div className='header-icon'>
@@ -13,7 +14,11 @@ export default function Header(props) {
                 <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button>
                 <button className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                 {props.user ? 
-                    <Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link> : 
+                    <div>
+                        <Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                        <Link onClick={props.userLogout}to="/">Logout</Link>
+                    </div>
+                    : 
                     <Link to="/account/login">Login / Signup</Link>
                 }
             </div>

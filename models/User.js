@@ -10,7 +10,10 @@ const userLinkSchema = new Schema({
 
 const userSchema = new Schema({
   name: {type: String, required: true},
-  username: {type:String, required:true},
+  username: {
+    type:String, 
+    unique: true,
+    required:true},
   email: {
     type:String,
     unique:true,
@@ -28,7 +31,7 @@ const userSchema = new Schema({
   bio: String,
   location: String,
   skill: Array,
-  education: Array,
+  education: String,
   experiences: Array,
   userLink: [userLinkSchema],
   conversations: [{type: Schema.Types.ObjectId, ref: 'Conversation'}],

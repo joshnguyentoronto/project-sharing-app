@@ -5,6 +5,23 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
     create,
+    login,
+    setup
+}
+
+async function setup(req,res){
+    console.log(req.user)
+    console.log(req.body)
+    try {
+        let user = await UserModel.findById(req.user._id)
+        user.location = req.body.location,
+        user.education =req.body.education,
+        user.bio = req.body.bio
+        user.save()
+        res.status(200).json()     
+    } catch(err){
+        res.status(400).json(err)
+    }
 }
 
 async function create(req,res){
@@ -17,6 +34,18 @@ async function create(req,res){
             password: hashedPassword
         })
         const token = jwt.sign({user}, process.env.SECRET, { expiresIn: '24h' })
+        res.status(200).json(token)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function login(req,res){
+    try {
+        const user = await UserModel.findOne({username: req.body.username})
+        if (!(await bcrypt.compare(req.body.password, user.password))) throw new Error();
+
+        const token = jwt.sign({user}, process.env.SECRET, {expiresIn: '24h'})
         res.status(200).json(token)
     } catch(err) {
         res.status(400).json(err)
