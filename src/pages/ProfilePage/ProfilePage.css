@@ -1,3 +1,11 @@
+.profile {
+  display: flex;
+}
+
+.profile-content-area {
+  padding: 100;
+}
+
 .ProfileCategory {
     list-style: none;
     padding: 0;
@@ -5,7 +13,9 @@
 }
 
 .ProfileCategory li {
-    padding: 5px 80px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin: 16px 32px;
   }
 
 .ProfileCategory li:hover:not(.active) {
@@ -15,6 +25,6 @@ color: white;
 }
 
 .ProfileCategory li.active {
-    color: white;
+    color: black;
     background-color: grey;
   }
