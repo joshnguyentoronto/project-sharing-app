@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Button from '@mui/material/Button'
 import {Link ,useNavigate} from 'react-router-dom'
-import { FormHelperText, TextField, InputAdornment } from '@mui/material';
+import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
+import "./Login.css"
 
 export default function Login(props) {
 
@@ -37,29 +38,41 @@ export default function Login(props) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <TextField 
-                    id="outlined-basic" 
+        <Box
+        sx={{
+            maxWidth: '100%',
+        }}>
+            <form autocomplete="off" onSubmit={handleSubmit}>
+                <TextField
+                    fullWidth 
                     label="Username" 
-                    variant="outlined"
-                    type="text" 
+                    id="fullWidth"
+                    size="small"
+                    type="text"
+                    margin="normal" 
                     name="username"
                     value={userData.username} 
                     onChange={handleChange} 
                 />
-                <TextField 
-                    id="outlined-basic" 
-                    label="Password" 
-                    variant="outlined"
+                <br></br>
+                <TextField
+                    fullWidth 
+                    label="Password"
+                    size="small" 
                     type="password" 
                     name="password"
                     value={userData.password}
                     onChange={handleChange} 
                 />
+                <br></br>
+                <br></br>
                 <Button type="submit" variant="contained">Login</Button>
-                <Link to="/account/signup">Not a Member?<br></br> Sign up here</Link>
+                <br></br>
+                <br></br>
+                Not a Member?
+                <br></br> 
+                <Link to="/account/signup">Sign up here</Link>
             </form>
-        </div>
+        </Box>
     )
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Button from '@mui/material/Button'
 import {Link, useNavigate} from 'react-router-dom'
-import { FormHelperText, TextField, InputAdornment } from '@mui/material';
+import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
 
 export default function SignUpForm(props){
 
@@ -42,55 +42,73 @@ export default function SignUpForm(props){
         navigate("/account/setup")       
     }
     return (
-        <form autocomplete="off" onSubmit= {handleSubmit}>
-            <div>
-                <TextField 
-                    id="outlined-basic" 
-                    label="Name" 
-                    variant="outlined"
-                    type="text" 
-                    name="name" 
+        <Box
+        sx={{
+            maxWidth: '100%',
+        }}>
+            <form autoComplete="off" onSubmit= {handleSubmit}>
+                <div className="n-container">
+                    <TextField  
+                        label="Name"
+                        id="fullWidth" 
+                        size="small"
+                        type="text"
+                        margin="normal" 
+                        name="name" 
+                        onChange={handleChange} 
+                    />
+                    <TextField 
+                        label="Username" 
+                        id="fullWidth"
+                        size="small" 
+                        type="text"
+                        margin="normal" 
+                        name="username" 
+                        onChange={handleChange} 
+                    />
+                </div>
+                <br></br>
+                <TextField
+                    fullWidth 
+                    label="Email" 
+                    id="fullWidth" 
+                    size="small"
+                    type="text"
+                    margin="normal"
+                    name="email" 
                     onChange={handleChange} 
                 />
-                <TextField 
-                    id="outlined-basic" 
-                    label="Username" 
-                    variant="outlined"
-                    type="text" 
-                    name="username" 
+                <br></br>
+                <TextField
+                    fullWidth  
+                    label="Password"
+                    id="fullWidth" 
+                    size="small"
+                    type="password"
+                    margin="normal" 
+                    name="password"
                     onChange={handleChange} 
                 />
-            </div>
-            <TextField 
-                id="outlined-basic" 
-                label="Email" 
-                variant="outlined"
-                type="email" 
-                name="email" 
-                onChange={handleChange} 
-            />
-            <TextField 
-                id="outlined-basic" 
-                label="Password" 
-                variant="outlined"
-                type="password" 
-                name="password"
-                onChange={handleChange} 
-            />
-            <TextField 
-                id="outlined-basic" 
-                label="Confirm Password" 
-                variant="outlined"
-                type="password" 
-                name="confirm" 
-                onChange={handleChange} 
-            />
-            <br></br>
-            <Button disabled={userData.signup} type="submit" variant="contained">Signup</Button>
-            <br></br>
-            Already a Member
-            <br></br>
-            <Link to="/account/login">Login here</Link>
-        </form>
+                <br></br>
+                <TextField  
+                    fullWidth 
+                    label="Confirm Password" 
+                    id="fullWidth"
+                    size="small"
+                    type="password"
+                    margin="normal" 
+                    name="confirm" 
+                    onChange={handleChange} 
+                />
+                <br></br>
+                <br></br>
+                <Button disabled={userData.signup} type="submit" variant="contained">Signup</Button>
+                <br></br>
+                <br></br>
+                Already a Member
+                <br></br>
+                <Link to="/account/login">Login here</Link>
+            </form>
+        </Box>
     )
 }
