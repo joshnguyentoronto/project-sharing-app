@@ -1,6 +1,5 @@
 import "./ProfilePage.css"
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import ProjectList from "../../components/ProjectList/ProjectList"
 import ProfileCategory from "../../components/ProfileCategory/ProfileCategory"
 import ProfileCard from "../../components/ProfileCard/ProfileCard";

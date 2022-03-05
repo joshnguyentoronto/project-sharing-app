@@ -1,6 +1,6 @@
 import "./HomePage.css"
 import React, { Component } from 'react'
-import Header from "../../components/Header/Header"
+import HomeHeader from "../../components/HomeHeader/HomeHeader"
 import Filter from "../../components/Filter/Filter"
 import MessageBox from "../../components/MessageBox/MessageBox"
 import MessageList from "../../components/MessageList/MessageList"
@@ -76,7 +76,7 @@ export default class HomePage extends Component {
         return(
             <div className="home">
                 {console.log(this.props)}
-                <Header openChatList={this.openChatList} user={this.props.user} userLogout={this.props.userLogout}/>
+                <HomeHeader openChatList={this.openChatList} user={this.props.user} userLogout={this.props.userLogout}/>
                 <Filter handleChange={this.handleChange} filterByTag={this.filterByTag} filterByFlag={this.filterByFlag} flags={this.state.flags}/>
                 <ProjectList viewProject={this.viewProject} projects={this.state.projects} />
                 {this.state.currentProject ? <ProjectDetail closeProject={this.closeProject} project={this.state.currentProject} refProjects={this.state.refProjects}/> : false}
@@ -86,7 +86,9 @@ export default class HomePage extends Component {
                     <MessageBox />
                     <MessageListItem />
                 </div>
-                <Footer />
+                <React.StrictMode>
+                    <Footer />
+                </React.StrictMode>
             </div>
         )
     }

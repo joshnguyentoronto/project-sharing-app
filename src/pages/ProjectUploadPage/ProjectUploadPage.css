@@ -1,0 +1,42 @@
+.uploadpage {
+    margin: 0 20px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+.upload {
+    margin: 100px 0 0 0;
+    padding: 0 50px;
+    width: 100%;
+
+}
+
+.upload-img {
+    border: 1px dashed black;
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+}
+
+
+.input-img {
+    background-color: transparent;
+    font-size: 30px;
+    
+}
+.upload-img img {
+    width: 150px;
+    height: 150px;
+}
+
+
+.upload-btn-sec {
+    background-color: lightgrey;
+    border-radius: 50px;
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 5px;
+}
