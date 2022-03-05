@@ -3,8 +3,6 @@ import React from 'react';
 
 export default function MessageList(props) {
     return(
-        <div>
-            <h1>MessageList</h1>
-        </div>
+        <span>0</span>
     )
 }
