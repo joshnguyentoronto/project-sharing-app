@@ -23,7 +23,7 @@ setUserInState = (incomingUserData) => {
         <Routes>
           <Route 
             path="/" 
-            element= {<HomePage/>}
+            element= {<HomePage user={this.user}/>}
           />
           <Route 
             path="/profile" 
