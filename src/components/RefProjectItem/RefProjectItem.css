@@ -1,0 +1,10 @@
+.ref-project-item {
+    width: 30%;
+    height: auto;
+    border: none;
+    background-color: transparent;
+}
+.ref-project-item img {
+    width: 100%;
+    height: 100%;
+}

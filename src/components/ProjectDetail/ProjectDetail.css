@@ -34,22 +34,23 @@
     justify-content: space-between;
     align-items: center;
 }
-.project-detail-right a {
+.project-detail-right button {
     height: 50px;
     width: 50px;
-    background-color: lightgray;
+    background-color: lightgrey;
+    border: none;
     border-radius: 50%;
     display: grid;
     place-content: center;
 }
-.project-detail-right-x {
+.project-detail-right .project-detail-right-x {
     position: absolute;
     top: 10px;
     right: 20px;
     border: none;
     background-color: transparent;
 }
-.project-detail-right a img {
+.project-detail-right button img {
     height: 30px;
     width: 30px;
 }
@@ -60,7 +61,11 @@
     display: flex;
     align-items: center;
 }
-.project-detail-head a img {
+.project-detail-head button {
+    border: none;
+    background-color: transparent;
+}
+.project-detail-head button img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -95,9 +100,10 @@
 
 .project-detail-body-other {
     width: 100%;
-    height: 300px;
     background-color: lightgrey;
     position: relative;
+    margin: 50px 0;
+    padding: 15px 0;
 }
 .project-detail-body-other h3 {
     position: absolute;
@@ -107,7 +113,8 @@
 .project-detail-body-other-userimg {
     height: 70px;
     width: 70px;
-    border-radius: 45%;
+    border: none;
+    background-color: transparent;
 }
 .project-detail-body-other-userimg img {
     height: 50px;
@@ -118,18 +125,60 @@
     font-weight: bold;
     margin: 0 0 0 20px;
 }
+.project-detail-body-other-projects {
+    margin: 20px 0 ;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
 
 .project-detail-body-foot {
     width: 100%;
     height: 100vh;
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: auto 320px;
     grid-template-rows: 1fr;
+    grid-gap: 20px;
 }
 .project-detail-body-foot-comment {
     border: 1px solid black;
 }
-.project-detail-body-foot-detail {
+.project-detail-body-foot-comment-box {
+    border-bottom: 1px solid black;
+    display: grid;
+    grid-template-columns: 50px auto;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+}
+.project-detail-body-foot-comment-list {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.comment-main textarea {
+    width: 100%;
+    height: 130px;
+    resize: none;
     border: 1px solid black;
+}
+
+
+
+.project-detail-body-foot-detail > div {
+    border: 1px solid black;
+    margin: 0 0 20px 0;
+    padding: 10px;
+}
+
+.project-detail-body-foot-tag p {
+    margin: 0 0 20px 0;
+}
+.project-detail-body-foot-tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }

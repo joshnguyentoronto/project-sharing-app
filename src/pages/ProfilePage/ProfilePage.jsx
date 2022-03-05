@@ -10,6 +10,7 @@ export default class ProfilePage extends Component {
         categories: ["Projects", "Saved", "Liked", "About"],
         activeCategory: "Projects",
         projects: [],
+        username: 'Luye'
     }
 
     handleSetActiveCat = (cat) => {
@@ -30,12 +31,32 @@ export default class ProfilePage extends Component {
         return(
             <div className="profile">
                 <ProfileCard />
-                <ProfileCategory 
-                    categories={this.state.categories}
-                    activeCategory={this.state.activeCategory}
-                    handleSetActiveCat={this.handleSetActiveCat}
-                />
-                <ProjectList projects={this.state.projects} />
+                <div className="profile-content-area">
+                    <ProfileCategory 
+                        categories={this.state.categories}
+                        activeCategory={this.state.activeCategory}
+                        handleSetActiveCat={this.handleSetActiveCat}
+                    />
+                    {this.state.activeCategory === "Projects" ?
+                        <ProjectList projects={this.state.projects.filter(
+                            p => p.author.find(
+                                ({ username }) => username === this.state.username)
+                        )} />
+                        : <></>
+                    }
+                    {this.state.activeCategory === "About" ?
+                        <div>
+                            <p>About<br />hgthters</p>
+                            <p>Skills<br />fwefffffffew</p>
+                            <p>Work Experience<br />fasgsgfwrag</p>
+                            <p>Education<br />fgwedfwes</p>
+                            <p>Member since: March 2</p>
+                            <p>Contact<br />luye@luye.com</p>
+                            <p>Social<br />gesdge</p>
+                        </div>
+                        : <></>
+                    }
+                </div>
             </div>
         )
     }

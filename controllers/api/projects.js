@@ -53,7 +53,7 @@ async function projectsRef(req, res) {
     try {
         let userId = req.get("user")
         if (userId) {
-            let projects = await ProjectModel.find({ author: [userId] }).limit(3).populate('author')
+            let projects = await ProjectModel.find({ author: [userId] }).sort({"viewCount": -1}).limit(3).populate('author')
             res.status(200).json(projects)
         } else {
             let projects = await ProjectModel.find({}).populate('author')

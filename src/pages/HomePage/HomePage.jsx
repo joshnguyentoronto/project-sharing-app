@@ -28,7 +28,6 @@ export default class HomePage extends Component {
         try {
             let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
             let refProjects = await fetchRefProjectList.json()
-            console.log(refProjects)
             this.setState({ currentProject: project, refProjects: refProjects })
         } catch(err) {
             console.log(err)
@@ -80,15 +79,14 @@ export default class HomePage extends Component {
                 <Header openChatList={this.openChatList} user={this.state.user} />
                 <Filter handleChange={this.handleChange} filterByTag={this.filterByTag} filterByFlag={this.filterByFlag} flags={this.state.flags}/>
                 <ProjectList viewProject={this.viewProject} projects={this.state.projects} />
-                <Footer />
-                {this.state.currentProject ? <ProjectDetail closeProject={this.closeProject} project={this.state.currentProject} /> : false}
+                {this.state.currentProject ? <ProjectDetail closeProject={this.closeProject} project={this.state.currentProject} refProjects={this.state.refProjects}/> : false}
                 <div>
-                    <h1>To cancel error message</h1>
+                    <span>To cancel error message</span>
                     <MessageList />
                     <MessageBox />
                     <MessageListItem />
-                    
                 </div>
+                <Footer />
             </div>
         )
     }
