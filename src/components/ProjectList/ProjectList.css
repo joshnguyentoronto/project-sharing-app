@@ -1,9 +1,6 @@
 .project-list {
-    margin: 0 20px 100px 20px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
