@@ -7,6 +7,7 @@ module.exports = {
     projectsTag,
     projectsRef,
     projectsUser,
+    projectsSaved
 }
 
 async function projectsIndex(req, res) {
@@ -79,6 +80,29 @@ async function projectsRef(req, res) {
             let projects = await ProjectModel.find({}).populate('author')
             res.status(200).json(projects)
         }
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function projectsSaved(req, res) {
+    try {
+        let userId = req.get("user")
+        let user = await UserModel.findOne({ name: [userId] })
+        let idArr = user.likedPosts
+        // let savedProjects = []
+        // let one = await ProjectModel.find({_id: idArr[0]}).populate('author')
+        // console.log("fweagfweFGWEGGWRG", one) 
+        // above return [{}]
+        // idArr.forEach(async function(id) {
+        //     let p = await ProjectModel.find({_id:id}).populate('author')
+        //     console.log( "fadfafeggggggggggggggg", p)
+        //     savedProjects.push(p)
+        // }
+        // )
+
+        let savedProjects = idArr.map(async id => await ProjectModel.find({_id:id}).populate('author'))
+        res.status(200).json(savedProjects)
     } catch(err) {
         res.status(400).json(err)
     }
