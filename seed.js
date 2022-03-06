@@ -1,6 +1,8 @@
 
 require('dotenv').config();
 require('./config/database');
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
 const UserModel = require('./models/User');
 const ProjectModel = require('./models/Project');
@@ -9,19 +11,18 @@ const ConversationModel = require('./models/Conversation');
 async function populateDB() {
 
     await UserModel.deleteMany({})
+    const hashedPassword = await bcrypt.hash('password', parseInt(process.env.SALT_ROUNDS))
     const newUser = await UserModel.create([
         {
             name: 'Josh Nguyen',
             username: 'Josh',
+            password: hashedPassword,
             email: 'josh@gmail.com',
             avatar: 'lala',
             bio: 'Hello, this is test account, feel free to do whatever you want',
-            Location: 'Toronto, Ontario',
+            location: 'Toronto, Ontario',
             skill: ["HTML", "CSS", "JavaScript"],
-            education: [
-                { school: "Humber College", major: "Hospitality" },
-                { school: "UoT", major: "Computer Science" }
-            ],
+            education: "Humber College",
             experiences: [
                 { company: "Scotia Bank", title: "banker" },
                 { company: "La La", title: "Ba Ba Ba" }
@@ -36,16 +37,14 @@ async function populateDB() {
         },
         {
             name: 'Lu Ye',
-            username: 'Luye',
+            username: 'luye',
             email: 'Lu@gmail.com',
+            password: hashedPassword,
             avatar: 'lala',
             bio: 'Hello, this is test account, feel free to do whatever you want',
-            Location: 'Toronto, Ontario',
+            location: 'Toronto, Ontario',
             skill: ["HTML", "CSS", "JavaScript"],
-            education: [
-                { school: "Humber College", major: "Hospitality" },
-                { school: "UoT", major: "Computer Science" }
-            ],
+            education: "UWO",
             experiences: [
                 { company: "Scotia Bank", title: "banker" },
                 { company: "La La", title: "Ba Ba Ba" }
@@ -62,14 +61,12 @@ async function populateDB() {
             name: 'Janusshan Paramasivam',
             username: 'Janusshan',
             email: 'janusshan@gmail.com',
+            password: hashedPassword,
             avatar: 'lala',
             bio: 'Hello, this is test account, feel free to do whatever you want',
-            Location: 'Toronto, Ontario',
+            location: 'Toronto, Ontario',
             skill: ["HTML", "CSS", "JavaScript"],
-            education: [
-                { school: "Humber College", major: "Hospitality" },
-                { school: "UoT", major: "Computer Science" }
-            ],
+            education: "UoT",
             experiences: [
                 { company: "Scotia Bank", title: "banker" },
                 { company: "La La", title: "Ba Ba Ba" }

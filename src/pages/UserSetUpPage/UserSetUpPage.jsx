@@ -33,7 +33,7 @@ export default function UserSetUpPage(props){
             })
         })
         if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-        navigate("/profile")       
+        navigate("/")       
     }
 
     return (

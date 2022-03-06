@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const textSchema = new Schema({
+    index: Number,
     heading: String,
     text: String,
 }, {
@@ -9,6 +10,7 @@ const textSchema = new Schema({
 })
 
 const projectLinkSchema = new Schema({
+    index: Number,
     name: String,
     url: String,
 }, {

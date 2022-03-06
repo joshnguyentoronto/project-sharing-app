@@ -1,7 +1,6 @@
 import "./ProfilePage.css"
 import React, { Component } from 'react'
 import ProjectList from "../../components/ProjectList/ProjectList"
-import ProfileCategory from "../../components/ProfileCategory/ProfileCategory"
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 export default class ProfilePage extends Component {
@@ -9,17 +8,28 @@ export default class ProfilePage extends Component {
         categories: ["Projects", "Saved", "Liked", "About"],
         activeCategory: "Projects",
         projects: [],
-        username: 'Luye'
     }
 
     handleSetActiveCat = (cat) => {
         this.setState({activeCategory: cat})
     }
 
+    // handleGetSaved = () => {
+    //     try {
+    //         let fetchProjectList = await fetch('/api/projects/save', {headers: { "user": "Josh" }})
+    //         let projects = await fetchProjectList.json()
+    //         console.log(projects)
+    //         this.setState({projects: projects})
+    //     } catch(err) {
+    //         console.log("home page error: ", err)
+    //     }
+    // }
+
     async componentDidMount() {
         try {
-            let fetchProjectList = await fetch('/api/projects')
+            let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": "Josh" }})
             let projects = await fetchProjectList.json()
+            console.log(projects)
             this.setState({projects: projects})
         } catch(err) {
             console.log("home page error: ", err)
@@ -29,32 +39,43 @@ export default class ProfilePage extends Component {
     render() {
         return(
             <div className="profile">
-                <ProfileCard />
+                <ProfileCard user={this.props.user}/>
                 <div className="profile-content-area">
-                    <ProfileCategory 
-                        categories={this.state.categories}
-                        activeCategory={this.state.activeCategory}
-                        handleSetActiveCat={this.handleSetActiveCat}
-                    />
-                    {this.state.activeCategory === "Projects" ?
-                        <ProjectList projects={this.state.projects.filter(
-                            p => p.author.find(
-                                ({ username }) => username === this.state.username)
-                        )} />
-                        : <></>
-                    }
+                    <ul className="ProfileCategory">
+                        <li 
+                            className={"Projects" === this.state.activeCategory ? 'active' : ''}
+                            onClick={() => this.handleSetActiveCat("Projects")}
+                        >Projects</li>
+                        <li 
+                            className={"Saved" === this.state.activeCategory ? 'active' : ''}
+                            onClick={() => {
+                                this.handleSetActiveCat("Saved")
+                            }}
+                        >Saved</li>
+                        <li 
+                            className={"Liked" === this.state.activeCategory ? 'active' : ''}
+                            onClick={() => this.handleSetActiveCat("Liked")}
+                        >Liked</li>
+                        <li 
+                            className={"About" === this.state.activeCategory ? 'active' : ''}
+                            onClick={() => this.handleSetActiveCat("About")}
+                        >About</li>
+                    </ul>
+                    
                     {this.state.activeCategory === "About" ?
                         <div>
-                            <p>About<br />hgthters</p>
-                            <p>Skills<br />fwefffffffew</p>
-                            <p>Work Experience<br />fasgsgfwrag</p>
-                            <p>Education<br />fgwedfwes</p>
-                            <p>Member since: March 2</p>
-                            <p>Contact<br />luye@luye.com</p>
-                            <p>Social<br />gesdge</p>
-                        </div>
-                        : <></>
+                        <p>About<br />{this.props.user.bio}</p>
+                        <p>Skills<br /><ul>{this.props.user.skill.map(s => <li>{s}</li>)}</ul></p>
+                        <p>Work Experience<br /><ul>{this.props.user.experiences.map(e => <li>{e.company}: {e.title}</li>)}</ul></p>
+                        <p>Education<br />{this.props.user.education}</p>
+                        <p>Member since: March 2</p>
+                        <p>Contact<br />{this.props.user.email}</p>
+                        <p>Social<br /><ul>{this.props.user.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p>
+                    </div>
+                    :
+                    <ProjectList projects={this.state.projects} />
                     }
+                    
                 </div>
             </div>
         )

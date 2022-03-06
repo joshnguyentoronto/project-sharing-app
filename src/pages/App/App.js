@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 import AccountPage from '../AccountPage/AccountPage';
@@ -8,7 +8,6 @@ import Login from '../../components/Login/Login';
 import SignUpForm from '../../components/SignUp/Signup';
 import UserSetUpPage from '../UserSetUpPage/UserSetUpPage';
 import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
-
 
 export default class App extends Component {
   state = {
@@ -53,7 +52,7 @@ export default class App extends Component {
           />
           <Route 
             path="/profile" 
-            element={<ProfilePage/>}
+            element={<ProfilePage user={this.state.user}/>}
           />
           <Route path="account" element={<AccountPage/>}>
             <Route path="login" element={<Login setUserInState={this.setUserInState}/>}/>
@@ -62,7 +61,11 @@ export default class App extends Component {
           </Route>
           <Route 
             path="/upload"
-            element={<ProjectUploadPage />}
+            element={<ProjectUploadPage user={this.state.user}/>}
+          />
+          <Route
+            path="*"
+            element={<Navigate to="/" />}
           />
         </Routes>
       </main>

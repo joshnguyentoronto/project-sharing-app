@@ -1,0 +1,18 @@
+.messagelist-container {
+    display: flex;
+    flex-basis: 50%;
+    gap: 5px;
+    text-align: left;
+}
+
+.messagelist-container:hover {
+    cursor: pointer;
+}
+
+.mlHeader {
+    display: flex;
+}
+
+.messagelist-container img {
+
+}

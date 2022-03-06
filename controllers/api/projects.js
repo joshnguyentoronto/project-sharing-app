@@ -1,10 +1,12 @@
 const ProjectModel = require('../../models/Project.js')
+const UserModel = require('../../models/User.js')
 
 module.exports = {
     projectsIndex,
     projectsFlag,
     projectsTag,
     projectsRef,
+    projectsUser,
 }
 
 async function projectsIndex(req, res) {
@@ -15,6 +17,24 @@ async function projectsIndex(req, res) {
         res.status(400).json(err)
     }
 }
+
+
+
+async function projectsUser(req, res) {
+    try {
+        let name = req.get("user")
+        if (name) {
+            let user = await UserModel.findOne({ username: name })
+            console.log(user)
+            let projects = await ProjectModel.find({ author: [user._id] }).populate('author')
+            res.status(200).json(projects)
+        }
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+
 
 async function projectsFlag(req, res) {
     try {

@@ -20,6 +20,10 @@ img {
     padding: 0 20px;
 }
 
+.header-icon h1 {
+    font-size: 32px;
+}
+
 .header-search form {
     display: flex;
     align-items: center;

@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import HomeHeader from "../../components/HomeHeader/HomeHeader"
 import Filter from "../../components/Filter/Filter"
 import MessageBox from "../../components/MessageBox/MessageBox"
-import MessageList from "../../components/MessageList/MessageList"
-import MessageListItem from "../../components/MessageListItem/MessageListItem"
 import ProjectList from "../../components/ProjectList/ProjectList"
 import ProjectDetail from "../../components/ProjectDetail/ProjectDetail"
 import Footer from "../../components/Footer/Footer"
@@ -17,12 +15,14 @@ export default class HomePage extends Component {
         currentProject: '',
         refProjects: [],
         projects: [],
+        openChat: false,
     }
 
     handleChange = (evt) => {
         this.setState({ [evt.target.name]: evt.target.value });
     };
 
+    // create a method that set currentProject when hover
     viewProject = async (project) => {
         try {
             let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
@@ -38,7 +38,9 @@ export default class HomePage extends Component {
     }
 
     openChatList = () => {
-        console.log("hello")
+        let value = !this.state.openChat
+        console.log(value)
+        this.setState({openChat: value})
     }
 
     filterByTag = async (evt) => {
@@ -62,6 +64,34 @@ export default class HomePage extends Component {
         }
     }
 
+    saveProject = async () => {
+        try {
+            let fetchResponse = await fetch('/api/users/save', {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({savedPosts: this.state.currentProject._id, userId: this.props.user._id})
+            })
+            let serverResponse = await fetchResponse.json()
+            console.log("Success:", serverResponse)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    likeProject = async () => {
+        try {
+            let fetchResponse = await fetch('/api/users/like', {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({likedPosts: this.state.currentProject._id, userId: this.props.user._id})
+            })
+            let serverResponse = await fetchResponse.json()
+            console.log("Success:", serverResponse)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     async componentDidMount() {
         try {
             let fetchProjectList = await fetch('/api/projects')
@@ -75,20 +105,20 @@ export default class HomePage extends Component {
     render() {
         return(
             <div className="home">
-                {console.log(this.props)}
                 <HomeHeader openChatList={this.openChatList} user={this.props.user} userLogout={this.props.userLogout}/>
                 <Filter handleChange={this.handleChange} filterByTag={this.filterByTag} filterByFlag={this.filterByFlag} flags={this.state.flags}/>
                 <ProjectList viewProject={this.viewProject} projects={this.state.projects} />
-                {this.state.currentProject ? <ProjectDetail closeProject={this.closeProject} project={this.state.currentProject} refProjects={this.state.refProjects}/> : false}
-                <div>
-                    <span>To cancel error message</span>
-                    <MessageList />
-                    <MessageBox />
-                    <MessageListItem />
-                </div>
-                <React.StrictMode>
-                    <Footer />
-                </React.StrictMode>
+                {this.state.currentProject ? 
+                <ProjectDetail 
+                    closeProject={this.closeProject} 
+                    project={this.state.currentProject} 
+                    refProjects={this.state.refProjects}
+                    saveProject={this.saveProject}
+                    likeProject={this.likeProject}
+                /> 
+                : false}
+                {this.state.openChat ? <MessageBox openChatList={this.openChatList}/> : false }
+                <Footer />
             </div>
         )
     }

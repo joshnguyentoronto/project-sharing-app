@@ -6,7 +6,9 @@ const bcrypt = require('bcrypt')
 module.exports = {
     create,
     login,
-    setup
+    setup,
+    saveOne,
+    likeOne
 }
 
 async function setup(req,res){
@@ -36,7 +38,7 @@ async function create(req,res){
         const token = jwt.sign({user}, process.env.SECRET, { expiresIn: '24h' })
         res.status(200).json(token)
     } catch(err) {
-        res.status(400).json(err)
+        cc
     }
 }
 
@@ -47,6 +49,36 @@ async function login(req,res){
 
         const token = jwt.sign({user}, process.env.SECRET, {expiresIn: '24h'})
         res.status(200).json(token)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function saveOne(req, res) {
+    try {
+        // console.log(req.user)
+        let user = await UserModel.findById(req.body.userId)
+        if (user.savedPosts.some(s => s === req.body.savedPosts)) {
+            user.savedPosts.delete(req.body.savedPosts)
+            user.save()
+        } else {
+            user.savedPosts.push(req.body.savedPosts)
+            user.save()
+            console.log(req.user)
+        }
+        res.status(200).json(user)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function likeOne(req, res) {
+    try {
+        console.log(req.user)
+        let user = await UserModel.findById(req.body.userId)
+        user.likedPosts.push(req.body.likedPosts)
+        user.save()
+        res.status(200).json(user)
     } catch(err) {
         res.status(400).json(err)
     }

@@ -1,0 +1,22 @@
+.input-link-each {
+    display: flex;
+    gap: 20px;
+}
+
+.input-link-each-name input {
+    height: 30px;
+    width: 120px;
+}
+
+.input-link-each-url input {
+    height: 30px;
+    width: 270px;
+}
+
+.input-link-each-del {
+    width: 40px;
+    padding: 25px 0 0 0;
+}
+.input-link-each-del p {
+    margin: 0;
+}

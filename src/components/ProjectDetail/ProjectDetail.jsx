@@ -1,10 +1,12 @@
 import './ProjectDetail.css'
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RefProjectItem from '../RefProjectItem/RefProjectItem';
 import CommentItem from '../CommentItem/CommentItem';
 import TagItem from '../TagItem/TagItem'
 
 export default function ProjectDetail(props) {
+    
     return(
         <div className='project-detail-background'>
             <div className='project-detail-left' onClick={() => {props.closeProject()}}></div>
@@ -76,12 +78,12 @@ export default function ProjectDetail(props) {
                 </div>
             </div>
             
-            <div className='project-detail-right' onClick={() => {props.closeProject()}}>
-                <div className='project-detail-right-sub' onClick={() => {props.closeProject()}}>
+            <div className='project-detail-right'>
+                <div className='project-detail-right-sub'>
                     <button className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></button>
-                    <button><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
-                    <button><img src={require('../../images/icons/like.svg')} alt="svg icon" /></button>
-                    <button><img src={require('../../images/icons/save-white.svg')} alt="svg icon" /></button>
+                    <button><Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link></button>
+                    <button onClick={() => props.likeProject()}><img src={require('../../images/icons/like.svg')} alt="svg icon" /></button>
+                    <button onClick={() => props.saveProject()}><img src={require('../../images/icons/save-white.svg')} alt="svg icon" /></button>
                     <button><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                     <button><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>

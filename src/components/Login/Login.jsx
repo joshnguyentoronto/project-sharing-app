@@ -42,7 +42,7 @@ export default function Login(props) {
         sx={{
             maxWidth: '100%',
         }}>
-            <form autocomplete="off" onSubmit={handleSubmit}>
+            <form autoComplete='off' onSubmit={handleSubmit}>
                 <TextField
                     fullWidth 
                     label="Username" 

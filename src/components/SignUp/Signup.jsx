@@ -67,7 +67,6 @@ export default function SignUpForm(props){
                         onChange={handleChange} 
                     />
                 </div>
-                <br></br>
                 <TextField
                     fullWidth 
                     label="Email" 
