@@ -56,15 +56,14 @@ async function login(req,res){
 
 async function saveOne(req, res) {
     try {
-        // console.log(req.user)
         let user = await UserModel.findById(req.body.userId)
         if (user.savedPosts.some(s => s === req.body.savedPosts)) {
-            user.savedPosts.delete(req.body.savedPosts)
+            let index = user.savedPosts.indexOf(req.body.savedPosts)
+            user.savedPosts.splice(index, 1)
             user.save()
         } else {
             user.savedPosts.push(req.body.savedPosts)
             user.save()
-            console.log(req.user)
         }
         res.status(200).json(user)
     } catch(err) {
@@ -74,10 +73,16 @@ async function saveOne(req, res) {
 
 async function likeOne(req, res) {
     try {
-        console.log(req.user)
         let user = await UserModel.findById(req.body.userId)
-        user.likedPosts.push(req.body.likedPosts)
-        user.save()
+        if (user.likedPosts.some(l => l === req.body.likedPosts)) {
+            let index = user.likedPosts.indexOf(req.body.likedPosts)
+            user.likedPosts.splice(index, 1)
+            user.save()
+        } else {
+            user.likedPosts.push(req.body.likedPosts)
+            user.save()
+        }
+
         res.status(200).json(user)
     } catch(err) {
         res.status(400).json(err)
