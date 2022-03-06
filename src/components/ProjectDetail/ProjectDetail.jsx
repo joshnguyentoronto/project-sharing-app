@@ -33,7 +33,6 @@ export default function ProjectDetail(props) {
                     </div>
                 </div>
 
-
                 <div className='project-detail-body-foot'>
                     <div className='project-detail-body-foot-comment'>
                         <div className='project-detail-body-foot-comment-box'>
@@ -41,12 +40,12 @@ export default function ProjectDetail(props) {
                                 <button className='comment-user-img'><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
                             </div>
                             <div className='comment-main'>
-                                <textarea name="comment" cols="30" rows="10"></textarea>
-                                <button>Post a Comment</button>
+                                <textarea onChange={props.handleChange} name="comment" value={props.comment}></textarea>
+                                <button onClick={() => props.postComment()} >Post a Comment</button>
                             </div>
                         </div>
                         <div className='project-detail-body-foot-comment-list'>
-                            {props.project.comment.map(com => <CommentItem comment={com}/>)}
+                            {props.project.comment.map(com => <CommentItem key={com} comment={com}/>)}
                         </div>
                     </div>
                     <div className='project-detail-body-foot-detail'>
@@ -71,7 +70,7 @@ export default function ProjectDetail(props) {
                         <div className='project-detail-body-foot-tag'>
                             <p>Tags</p>
                             <div className='project-detail-body-foot-tag-container'>
-                                {props.project.tag.map(tag => <TagItem tag={tag} />)}
+                                {props.project.tag.map(tag => <TagItem key={tag} tag={tag} />)}
                             </div>
                         </div>
                     </div>

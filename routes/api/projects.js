@@ -8,4 +8,7 @@ router.get('/flag', projectsCtrl.projectsFlag)
 router.get('/tag', projectsCtrl.projectsTag)
 router.get('/ref', projectsCtrl.projectsRef)
 
+router.post('/new', projectsCtrl.createProject)
+router.post('/comment', projectsCtrl.createComment)
+
 module.exports = router;

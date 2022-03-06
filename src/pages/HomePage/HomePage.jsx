@@ -1,5 +1,6 @@
 import "./HomePage.css"
 import React, { Component } from 'react'
+import { useLocation } from "react-router-dom"
 import HomeHeader from "../../components/HomeHeader/HomeHeader"
 import Filter from "../../components/Filter/Filter"
 import MessageBox from "../../components/MessageBox/MessageBox"
@@ -16,6 +17,7 @@ export default class HomePage extends Component {
         refProjects: [],
         projects: [],
         openChat: false,
+        comment: '',
     }
 
     handleChange = (evt) => {
@@ -92,6 +94,29 @@ export default class HomePage extends Component {
         }
     }
 
+    postComment = async () => {
+        try {
+            let fetchResponse = await fetch('/api/projects/comment', {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    projectId: this.state.currentProject._id,
+                    comment: this.state.comment,
+                    userId: this.props.user._id
+                })
+            })
+            let project = await fetchResponse.json()
+            console.log(project)
+            if (!fetchResponse.ok) {
+                throw new Error('Fetch failed - Bad request')
+            } else {
+                this.setState({ currentProject: project, comment: ''})
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     async componentDidMount() {
         try {
             let fetchProjectList = await fetch('/api/projects')
@@ -115,6 +140,9 @@ export default class HomePage extends Component {
                     refProjects={this.state.refProjects}
                     saveProject={this.saveProject}
                     likeProject={this.likeProject}
+                    handleChange={this.handleChange}
+                    postComment={this.postComment}
+                    comment={this.state.comment}
                 /> 
                 : false}
                 {this.state.openChat ? <MessageBox openChatList={this.openChatList}/> : false }
