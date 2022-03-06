@@ -7,6 +7,7 @@ import MessageBox from "../../components/MessageBox/MessageBox"
 import ProjectList from "../../components/ProjectList/ProjectList"
 import ProjectDetail from "../../components/ProjectDetail/ProjectDetail"
 import Footer from "../../components/Footer/Footer"
+import UserCard from "../../components/UserCard/UserCard"
 
 export default class HomePage extends Component {
     state={
@@ -14,10 +15,20 @@ export default class HomePage extends Component {
         currentFlag: '',
         currentTag: '',
         currentProject: '',
+        viewMode: false,
+        isSaved: false,
+        isLiked: false,
+        hoverIsLiked: false,
         refProjects: [],
         projects: [],
         openChat: false,
         comment: '',
+        hoverUserState: false,
+        hoverUser: {},
+
+        // FOR LU
+        hoverProjectState: false,
+        // hoverProject: {},
     }
 
     handleChange = (evt) => {
@@ -27,16 +38,32 @@ export default class HomePage extends Component {
     // create a method that set currentProject when hover
     viewProject = async (project) => {
         try {
+            let fetchUser = await fetch('/api/users/', { headers: { "userId": this.props.user._id }})
+            let user = await fetchUser.json()
             let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
             let refProjects = await fetchRefProjectList.json()
-            this.setState({ currentProject: project, refProjects: refProjects })
+            if (user.savedPosts.indexOf(project._id) != -1 ) {
+                if (user.likedPosts.indexOf(project._id) != -1 ) {
+                    this.setState({ isLiked: true, isSaved: true, currentProject: project, viewMode: true, refProjects: refProjects })
+                } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+                    this.setState({ isLiked: false, isSaved: true, currentProject: project, viewMode: true, refProjects: refProjects })
+                }
+            } else if (user.savedPosts.indexOf(project._id) == -1 ) {
+                if (user.likedPosts.indexOf(project._id) != -1 ) {
+                    this.setState({ isLiked: true, isSaved: false, currentProject: project, viewMode: true, refProjects: refProjects })
+                } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+                    this.setState({ isLiked: false, isSaved: false, currentProject: project, viewMode: true, refProjects: refProjects })
+                }
+            } else {
+                this.setState({ currentProject: project, viewMode: true, refProjects: refProjects })
+            }
         } catch(err) {
             console.log(err)
         }
     }
 
     closeProject = async () => {
-        this.setState({ currentProject: '' })
+        this.setState({ currentProject: '', viewMode: false })
     }
 
     openChatList = () => {
@@ -73,8 +100,13 @@ export default class HomePage extends Component {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({savedPosts: this.state.currentProject._id, userId: this.props.user._id})
             })
-            let serverResponse = await fetchResponse.json()
-            console.log("Success:", serverResponse)
+            let user = await fetchResponse.json()
+            if (user.savedPosts.indexOf(this.state.currentProject._id) != -1 ) {
+                this.setState({ isSaved: true })
+            } else if (user.savedPosts.indexOf(this.state.currentProject._id) == -1 ) {
+                this.setState({ isSaved: false })
+            }
+            console.log("Success:", user)
         } catch (err) {
             console.log(err)
         }
@@ -87,8 +119,13 @@ export default class HomePage extends Component {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({likedPosts: this.state.currentProject._id, userId: this.props.user._id})
             })
-            let serverResponse = await fetchResponse.json()
-            console.log("Success:", serverResponse)
+            let user = await fetchResponse.json()
+            if (user.likedPosts.indexOf(this.state.currentProject._id) != -1 ) {
+                this.setState({ isLiked: true })
+            } else if (user.likedPosts.indexOf(this.state.currentProject._id) == -1 ) {
+                this.setState({ isLiked: false })
+            }
+            console.log("Success:", user)
         } catch (err) {
             console.log(err)
         }
@@ -117,6 +154,29 @@ export default class HomePage extends Component {
         }
     }
 
+    UserHoverOver = async () => {
+        this.setState({ hoverState: true })
+    }
+    
+    UserHoverOut = async () => {
+        this.setState({ hoverState: false })
+    }
+
+    hoverProject = async (project) => {
+        this.setState({ currentProject: project })
+    //     try {
+    //         let fetchUser = await fetch('/api/users/', { headers: { "userId": this.props.user._id }})
+    //         let user = await fetchUser.json()
+    //         if (user.likedPosts.indexOf(project._id) != -1 ) {
+    //             this.setState({ hoverIsLiked: true })
+    //         } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+    //             this.setState({ hoverIsLiked: false, currentProject: project })
+    //         }
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    }
+
     async componentDidMount() {
         try {
             let fetchProjectList = await fetch('/api/projects')
@@ -132,19 +192,37 @@ export default class HomePage extends Component {
             <div className="home">
                 <HomeHeader openChatList={this.openChatList} user={this.props.user} userLogout={this.props.userLogout}/>
                 <Filter handleChange={this.handleChange} filterByTag={this.filterByTag} filterByFlag={this.filterByFlag} flags={this.state.flags}/>
-                <ProjectList viewProject={this.viewProject} projects={this.state.projects} />
-                {this.state.currentProject ? 
-                <ProjectDetail 
-                    closeProject={this.closeProject} 
-                    project={this.state.currentProject} 
-                    refProjects={this.state.refProjects}
+                <ProjectList 
+                    viewProject={this.viewProject}
+                    projects={this.state.projects}
+                    hoverUserState={this.state.hoverUserState}
+                    hoverUser={this.state.hoverUser}
+                    hoverProject={this.hoverProject}
                     saveProject={this.saveProject}
                     likeProject={this.likeProject}
-                    handleChange={this.handleChange}
-                    postComment={this.postComment}
-                    comment={this.state.comment}
-                /> 
-                : false}
+                    isSaved={this.state.isSaved}
+                    hoverIsLiked={this.state.hoverIsLiked}
+                />
+                {this.state.viewMode ? 
+                    <ProjectDetail 
+                        closeProject={this.closeProject} 
+                        project={this.state.currentProject} 
+                        refProjects={this.state.refProjects}
+                        saveProject={this.saveProject}
+                        likeProject={this.likeProject}
+                        handleChange={this.handleChange}
+                        postComment={this.postComment}
+                        comment={this.state.comment}
+                        isSaved={this.state.isSaved}
+                        isLiked={this.state.isLiked}
+                        hoverUserState={this.state.hoverUserState}
+                        hoverUser={this.state.hoverUser}
+                        UserHoverOver={this.UserHoverOver}
+                        UserHoverOut={this.UserHoverOut}
+                    /> 
+                    :
+                    false
+                }
                 {this.state.openChat ? <MessageBox openChatList={this.openChatList}/> : false }
                 <Footer />
             </div>

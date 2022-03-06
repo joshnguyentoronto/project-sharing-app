@@ -9,6 +9,7 @@
     height: 80px;
     background-color: white;
     padding: 0 20px;
+    z-index: 100;
 }
 
 .header-link-container {

@@ -7,12 +7,9 @@ module.exports = {
     projectsTag,
     projectsRef,
     projectsUser,
-<<<<<<< HEAD
-    projectsSaved
-=======
+    projectsSaved,
     createProject,
     createComment,
->>>>>>> master
 }
 
 async function projectsIndex(req, res) {
@@ -26,11 +23,11 @@ async function projectsIndex(req, res) {
 
 async function projectsUser(req, res) {
     try {
-        let name = req.get("user")
-        if (name) {
-            let user = await UserModel.findOne({ username: name })
-            console.log(user)
-            let projects = await ProjectModel.find({ author: [user._id] }).populate('author')
+        let userId = req.get("user")
+        if (userId) {
+            let user = await UserModel.findById(userId)
+            // console.log(user)
+            let projects = await ProjectModel.find({ author: [userId] }).populate('author')
             res.status(200).json(projects)
         }
     } catch(err) {
@@ -86,25 +83,16 @@ async function projectsRef(req, res) {
 async function projectsSaved(req, res) {
     try {
         let userId = req.get("user")
-        let user = await UserModel.findOne({ name: [userId] })
-        let idArr = user.likedPosts
-        // let savedProjects = []
-        // let one = await ProjectModel.find({_id: idArr[0]}).populate('author')
-        // console.log("fweagfweFGWEGGWRG", one) 
-        // above return [{}]
-        // idArr.forEach(async function(id) {
-        //     let p = await ProjectModel.find({_id:id}).populate('author')
-        //     console.log( "fadfafeggggggggggggggg", p)
-        //     savedProjects.push(p)
-        // }
-        // )
-
-        let savedProjects = idArr.map(async id => await ProjectModel.find({_id:id}).populate('author'))
-        res.status(200).json(savedProjects)
+        let user = await UserModel.findById(userId)
+        let idArr = user.savedPosts
+        let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate('author')
+        res.status(200).json(projects)
     } catch(err) {
         res.status(400).json(err)
     }
 }
+
+
 async function createProject(req, res) {
     try {
         const newProject = await ProjectModel.create(req.body)

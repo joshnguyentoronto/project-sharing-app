@@ -8,7 +8,18 @@ module.exports = {
     login,
     setup,
     saveOne,
-    likeOne
+    likeOne,
+    getUser,
+}
+
+async function getUser(req,res){
+    try {
+        let userId = req.get('userId')
+        const user = await UserModel.findById(userId)
+        res.status(200).json(user)
+    } catch(err) {
+        res.status(400).json(err)
+    }
 }
 
 async function setup(req,res){
@@ -38,7 +49,7 @@ async function create(req,res){
         const token = jwt.sign({user}, process.env.SECRET, { expiresIn: '24h' })
         res.status(200).json(token)
     } catch(err) {
-        cc
+        res.status(400).json(err)
     }
 }
 
