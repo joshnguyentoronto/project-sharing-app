@@ -1,0 +1,19 @@
+.tag-item {
+    background-color: lightgrey;
+    border-radius: 50px;
+    height: 30px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.tag-item span {
+    margin: 0 0 0 5px;
+}
+
+.tag-item span img {
+    width: 20px;
+    height: 20px;
+}

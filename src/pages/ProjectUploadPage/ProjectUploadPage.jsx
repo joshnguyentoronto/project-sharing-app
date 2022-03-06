@@ -1,37 +1,94 @@
 import "./ProjectUploadPage.css"
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
+import { Link, Navigate, Route } from "react-router-dom";
 import Header from '../../components/Header/Header'
 import InputLink from '../../components/InputLink/InputLink'
 import InputSection from '../../components/InputSection/InputSection'
+import InputTagItem from "../../components/InputTagItem/InputTagItem";
 
 export default class ProjectUploadPage extends Component {
     state = {
         currentTag: '',
         projects: [],
+        tagItem: '',
 
         // author: this.props.user._id,
         author: '',
         title: '',
-        flag: '',
+        flag: 'UX/UI design',
         tag: [],
-        likeCount: 0,
-        viewCount: 0,
         text: [{ index: 0, heading: '', text: '' }],
         textNum: 1,
         link: [{ index: 0, name: '', url: '' }],
         linkNum: 1,
-        comment: [],
     }
     
     handleChange = (evt) => {
         this.setState({ [evt.target.name]: evt.target.value });
     };
 
-    submitProject = (evt) => {
+
+    submitProject = async (evt) => {
         evt.preventDefault()
-        window.confirm("Your project will be published. Do you want to continue ?")
-        console.log("submit project")
+        if (!this.state.title) {
+            alert("Invalid Project Title!")
+        } else if (!this.state.tag[0]) {
+            alert("Your project need at least 1 tag")
+        } else if (!this.state.link[0].name) {
+            alert("You must name your link to the Url!")
+        } else if (!this.state.link[0].url) {
+            alert("Your project should have link to your GitHub repo or your website product!")
+        } else if (!this.state.text[0].heading) {
+            alert("Your project should have smaller heading for each section")
+        } else if (!this.state.text[0].text) {
+            alert("You must describe or introduce your project!")
+        } else {
+            if (window.confirm("Your project will be published. Do you want to continue ?")) {
+                try {
+                    let date = new Date()
+                    const fetchResponse = await fetch('/api/projects/new', {
+                        method: 'POST',
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({
+                            author: [this.props.user._id],
+                            title: this.state.title,
+                            date: date,
+                            viewCount: 0,
+                            likeCount: 0,
+                            text: this.state.text,
+                            projectLink: this.state.link,
+                            comment: [],
+                            flag: this.state.flag,
+                            tag: this.state.tag,
+                        })
+                    })
+                    if (!fetchResponse.ok) {
+                        throw new Error('Fetch failed - Bad request')
+                    } else {
+                        window.location.href = "/"
+                    }
+                } catch (err) {
+                    console.log("Submit error", err)
+                }
+            } else {
+                return false
+            }
+        }
+        
+    }
+
+    addTag = (evt) => {
+        evt.preventDefault()
+        evt.target.firstChild.value = ""
+        this.setState({ tag: [...this.state.tag, this.state.tagItem.toLowerCase() ], tagItem: '' })
+    }
+    
+    removeTag = (tag) => {
+        let tagCopy = this.state.tag
+        tagCopy.splice(tagCopy.findIndex(m => {
+            return m == tag
+        }), 1)
+        this.setState({ tag: tagCopy })
     }
 
     addLink = () => {
@@ -133,7 +190,7 @@ export default class ProjectUploadPage extends Component {
                 <Header />
                 <div className="upload">
                     <h3>Upload a Project</h3>
-                    <form autoComplete='off' onSubmit={this.submitProject} >
+                    <div>
                         <div  className="upload-img">
                             <input className="input-img" type="file" name="img" accept="image/*" />
                         </div>
@@ -152,7 +209,13 @@ export default class ProjectUploadPage extends Component {
                         </div>
                         <div>
                             <p>Tag</p>
-                            <input onChange={this.handleChange} name="tag" type="text" required />
+                            <form onSubmit={this.addTag}>
+                                <input onChange={this.handleChange} name="tagItem" type="text" placeholder="Ex: javascript, nodejs, mongodb" required />
+                                <button onSubmit={this.addTag}>+</button>
+                            </form>
+                            <div className="tag-items">
+                                {this.state.tag.map(tag => <InputTagItem key={tag} tag={tag} removeTag={this.removeTag} /> )}
+                            </div>
                         </div>
                         <div>
                             <div className="input-li-container" >
@@ -165,10 +228,10 @@ export default class ProjectUploadPage extends Component {
                             <p onClick={this.addSection} className="upload-btn-sec">Add Section</p>
                         </div>
                         <div className="form-action">
-                            <Link to="/" className="form-action-link">Close</Link>
+                            <Link to="/"  className="form-action-link">Close</Link>
                             <button onClick={this.submitProject}>Publish</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         )

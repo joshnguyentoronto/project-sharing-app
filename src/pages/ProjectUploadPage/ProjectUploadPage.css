@@ -62,6 +62,14 @@ input {
     width: 150px;
 }
 
+.tag-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+    width: 500px;
+}
+
 
 .input-li-container {
     margin: 0 0 20px 0;
