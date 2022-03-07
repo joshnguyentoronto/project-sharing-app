@@ -15,7 +15,7 @@ export default function HomeHeader(props) {
                 <button onClick={props.openChatList} className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                 {props.user ? 
                     <div>
-                        <Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                        <Link to="/profile" ><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
                         <Link onClick={props.userLogout}to="/">Logout</Link>
                     </div>
                     : 

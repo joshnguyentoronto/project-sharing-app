@@ -58,7 +58,7 @@ export default function MessageListItem(props) {
                         text={m.text}
                         currentUser={props.currentUser}
                         sender={m.sender}
-                        recipient={m.recipient}                    
+                        recipient={m.recipient}                   
                     />
                 )}
             </div>

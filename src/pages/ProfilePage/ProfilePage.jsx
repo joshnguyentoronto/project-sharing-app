@@ -2,6 +2,7 @@ import "./ProfilePage.css"
 import React, { Component } from 'react'
 import ProjectList from "../../components/ProjectList/ProjectList"
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
+import ProjectDetail from "../../components/ProjectDetail/ProjectDetail";
 
 export default class ProfilePage extends Component {
     state={
@@ -16,6 +17,7 @@ export default class ProfilePage extends Component {
 
     savedProjects = async () => {
         try {
+            console.log(this.props.user)
             let fetchProjectList = await fetch('/api/projects/saved', {headers: { "user": this.props.user._id }})
             let projects = await fetchProjectList.json()
             this.setState({ projects: projects })
@@ -72,9 +74,37 @@ export default class ProfilePage extends Component {
                         <p>Social<br /><ul>{this.props.user.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p>
                     </div>
                     :
-                    <ProjectList projects={this.state.projects} />
+                    <ProjectList 
+                        projects={this.state.projects} 
+                        hoverIsLiked={this.props.hoverIsLiked}
+                        hoverProject={this.props.hoverProject} 
+                        hoverUser={this.props.hoverUser}
+                        hoverUserState={this.props.hoverUserState}
+                        isSaved={this.props.isSaved}
+                        likeProject={this.props.likeProject}
+                        saveProject={this.props.saveProject}
+                        viewProject={this.props.viewProject}
+                    />
                     }
-                    
+                    {this.props.viewMode ? 
+                        <ProjectDetail 
+                            closeProject={this.props.closeProject} 
+                            project={this.props.currentProject} 
+                            refProjects={this.props.refProjects}
+                            saveProject={this.props.saveProject}
+                            likeProject={this.props.likeProject}
+                            handleChange={this.props.handleChange}
+                            postComment={this.props.postComment}
+                            delCom={this.props.delCom}
+                            comment={this.props.comment}
+                            isSaved={this.props.isSaved}
+                            isLiked={this.props.isLiked}
+                            hoverUserState={this.props.hoverUserState}
+                            hoverUser={this.props.hoverUser}
+                        /> 
+                        :
+                        false
+                    }
                 </div>
             </div>
         )
