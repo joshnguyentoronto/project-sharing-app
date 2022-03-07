@@ -1,12 +1,20 @@
 import './ProjectDetail.css'
-import React from 'react';
+import React, {useState}from 'react';
 import { Link } from 'react-router-dom';
 import RefProjectItem from '../RefProjectItem/RefProjectItem';
 import CommentItem from '../CommentItem/CommentItem';
 import TagItem from '../TagItem/TagItem'
 import UserCard from '../UserCard/UserCard';
+import MessagePopUp from '../MessagePopUp/MessagePopUp';
 
 export default function ProjectDetail(props) {
+
+    const [popUpChat, setpopUpChat] = useState(false)
+
+    function openChatBox(){
+        let value = !popUpChat
+        setpopUpChat(value)
+    }
     
     return(
         <div className='project-detail-background'>
@@ -98,7 +106,7 @@ export default function ProjectDetail(props) {
                     </div>
                     <button onClick={() => props.likeProject()}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
                     <button onClick={() => props.saveProject()}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
-                    <button><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
+                    <button onClick={() => openChatBox()}><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                     <button><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>
             </div>

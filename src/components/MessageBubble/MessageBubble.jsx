@@ -10,7 +10,6 @@ export default function MessageListItem(props) {
     }
     return(
         <div className={`bubble ${position}`}>
-            
             <p>{props.text}</p>
         </div>
     )
