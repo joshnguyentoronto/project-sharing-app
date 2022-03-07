@@ -34,7 +34,6 @@ const userSchema = new Schema({
   education: String,
   experiences: Array,
   userLink: [userLinkSchema],
-  conversations: [{type: Schema.Types.ObjectId, ref: 'Conversation'}],
   savedPosts: Array,
   likedPosts: Array   
 }, {

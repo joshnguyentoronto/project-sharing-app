@@ -1,3 +1,4 @@
+const ConversationModel = require('../../models/Conversation')
 const UserModel = require('../../models/User');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -8,7 +9,33 @@ module.exports = {
     login,
     setup,
     saveOne,
-    likeOne
+    likeOne,
+    getAllMessages,
+    createMessage
+}
+
+async function createMessage(req,res){
+    let conversation = await ConversationModel.findById(req.body.convoId)
+    let recipient =''
+    if (req.body.users[0]._id == req.user._id){
+        recipient = req.body.users[1]._id
+    } else {
+        recipient = req.body.users[0]._id
+    }
+    let newMessage = {
+        text: req.body.text,
+        sender: req.user._id,
+        recipient: recipient,
+        date: new Date() 
+    }
+    conversation.messages.push(newMessage)
+    conversation.save()
+    res.status(200).json(JSON.stringify(conversation))
+}
+
+async function getAllMessages(req,res){
+    let conversations = await ConversationModel.find({users: req.user._id}).populate('users')
+    res.status(200).json(JSON.stringify(conversations))
 }
 
 async function setup(req,res){

@@ -10,7 +10,7 @@ const ConversationModel = require('./models/Conversation');
 
 async function populateDB() {
 
-    await UserModel.deleteMany({})
+    // await UserModel.deleteMany({})
     const hashedPassword = await bcrypt.hash('password', parseInt(process.env.SALT_ROUNDS))
     const newUser = await UserModel.create([
         {
@@ -18,7 +18,7 @@ async function populateDB() {
             username: 'Josh',
             password: hashedPassword,
             email: 'josh@gmail.com',
-            avatar: 'lala',
+            avatar: '../../images/image/no_profile_image.png',
             bio: 'Hello, this is test account, feel free to do whatever you want',
             location: 'Toronto, Ontario',
             skill: ["HTML", "CSS", "JavaScript"],
@@ -40,7 +40,7 @@ async function populateDB() {
             username: 'luye',
             email: 'Lu@gmail.com',
             password: hashedPassword,
-            avatar: 'lala',
+            avatar: '../../images/image/no_profile_image.png',
             bio: 'Hello, this is test account, feel free to do whatever you want',
             location: 'Toronto, Ontario',
             skill: ["HTML", "CSS", "JavaScript"],
@@ -62,7 +62,7 @@ async function populateDB() {
             username: 'Janusshan',
             email: 'janusshan@gmail.com',
             password: hashedPassword,
-            avatar: 'lala',
+            avatar: '../../images/image/no_profile_image.png',
             bio: 'Hello, this is test account, feel free to do whatever you want',
             location: 'Toronto, Ontario',
             skill: ["HTML", "CSS", "JavaScript"],
@@ -79,6 +79,92 @@ async function populateDB() {
             savedPosts: ["postID", "postID"],
             likedPosts: ["postID", "postID"],
         }
+    ])
+    await ConversationModel.deleteMany({})
+    user1 = await UserModel.findOne({username: 'Janusshan'})
+    user2 = await UserModel.findOne({username: 'Josh'})
+    user3 = await UserModel.findOne({username: 'luye'})
+
+    const newConversations = await ConversationModel.create([
+        {
+            users: [
+                user1._id,
+                user2._id,
+            ],
+            messages: [
+                {
+                    text: 'Hello',
+                    sender: user1._id,
+                    recipient: user2.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Response',
+                    sender: user2._id,
+                    recipient: user1.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Hello1',
+                    sender: user1._id,
+                    recipient: user2.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Response1',
+                    sender: user2._id,
+                    recipient: user1.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Hello2',
+                    sender: user1._id,
+                    recipient: user2.id,
+                    date: new Date(),            
+                },
+
+            ],
+            lastMessage: 'last message 2'
+        },
+        {
+            users: [
+                user1._id,
+                user3._id,
+            ],
+            messages: [
+                {
+                    text: 'Hello',
+                    sender: user3._id,
+                    recipient: user1.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Response',
+                    sender: user1._id,
+                    recipient: user3.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Hello1',
+                    sender: user3._id,
+                    recipient: user1.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Response1',
+                    sender: user1._id,
+                    recipient: user3.id,
+                    date: new Date(),            
+                },
+                {
+                    text: 'Hello2',
+                    sender: user3._id,
+                    recipient: user1.id,
+                    date: new Date(),            
+                },
+            ],
+            lastMessage: 'last message'
+        },
     ])
 
     await ProjectModel.deleteMany({})
@@ -360,9 +446,6 @@ async function populateDB() {
             tag: [ "hubspot", "wix", "clickup", "loomly", "sprout" ]
         }
     ])
-
-    await ConversationModel.deleteMany({})
-
     console.log(newProjects)
     
     process.exit();

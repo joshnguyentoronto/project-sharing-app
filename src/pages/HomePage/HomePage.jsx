@@ -16,6 +16,7 @@ export default class HomePage extends Component {
         refProjects: [],
         projects: [],
         openChat: false,
+        messageList: [],
     }
 
     handleChange = (evt) => {
@@ -37,9 +38,16 @@ export default class HomePage extends Component {
         this.setState({ currentProject: '' })
     }
 
-    openChatList = () => {
+    openChatList = async () => {
         let value = !this.state.openChat
-        console.log(value)
+        if (value){
+            let jwt = localStorage.getItem('token')
+            let fetchResponse = await fetch('/api/users/allmessages', {headers: {'Authorization': 'Bearer ' + jwt}})
+            let messages = await fetchResponse.json()
+            let array = await JSON.parse(messages)
+            console.log(array)
+            this.setState({messageList: array})
+        }
         this.setState({openChat: value})
     }
 
@@ -117,7 +125,13 @@ export default class HomePage extends Component {
                     likeProject={this.likeProject}
                 /> 
                 : false}
-                {this.state.openChat ? <MessageBox openChatList={this.openChatList}/> : false }
+                {this.state.openChat ? 
+                    <MessageBox 
+                        messageList={this.state.messageList} 
+                        openChatList={this.openChatList}
+                        currentUser={this.props.user}
+                    /> 
+                    : false }
                 <Footer />
             </div>
         )
