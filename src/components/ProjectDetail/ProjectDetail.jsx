@@ -12,6 +12,7 @@ export default function ProjectDetail(props) {
     const [popUpChat, setpopUpChat] = useState(false)
 
     function openChatBox(){
+        console.log('hit')
         let value = !popUpChat
         setpopUpChat(value)
     }
@@ -24,6 +25,14 @@ export default function ProjectDetail(props) {
                 {props.project.author.length > 1 ? <p className="project-detail-head-name">Group Project</p> : <p className="project-detail-head-name">{props.project.author[0].username}</p>}
             </div>
             <div className='project-detail-body'>
+                {popUpChat ?
+                <MessagePopUp
+                    name={'Placeholdername Change'}
+                    avatar={'placeholder'}
+                    closeChatBox={openChatBox}
+                /> :
+                false
+                }
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
                     <p className='project-detail-body-img'>Image</p>
@@ -106,7 +115,7 @@ export default function ProjectDetail(props) {
                     </div>
                     <button onClick={() => props.likeProject()}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
                     <button onClick={() => props.saveProject()}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
-                    <button onClick={() => openChatBox()}><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
+                    <button onClick={openChatBox}><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                     <button><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>
             </div>
