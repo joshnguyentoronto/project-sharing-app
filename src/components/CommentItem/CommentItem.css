@@ -5,8 +5,30 @@
     width: 100%;
 }
 
+.comment-each-main-head {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment-each-main-head p:nth-child(1) {
+    font-weight: 600;
+}
+.comment-each-main-head p:nth-child(2) {
+    color: grey;
+}
+.comment-each-main-head p:nth-child(3) {
+    color: grey;
+}
+.comment-each-main-head p:nth-child(4) {
+    color: grey;
+}
+.comment-each-main-head p:nth-child(4):hover {
+    color: black;
+}
+
 .comment-each-main p {
-    margin: 0;
+    margin: 5px 0;
 }
 
 .comment-user-img {

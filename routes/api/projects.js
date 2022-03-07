@@ -10,6 +10,7 @@ router.get('/ref', projectsCtrl.projectsRef)
 router.get('/saved', projectsCtrl.projectsSaved)
 
 router.post('/new', projectsCtrl.createProject)
-router.post('/comment', projectsCtrl.createComment)
+router.post('/comment/new', projectsCtrl.createComment)
+router.post('/comment/delete', projectsCtrl.deleteComment)
 
 module.exports = router;

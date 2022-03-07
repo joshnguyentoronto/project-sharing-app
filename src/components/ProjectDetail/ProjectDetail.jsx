@@ -30,7 +30,7 @@ export default function ProjectDetail(props) {
                     <h3>You may also like</h3>
                     <button className="project-detail-body-other-userimg"><Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link> {props.project.author.length > 1 ? <span className="project-detail-body-other-username">Group Project</span> : <span className="project-detail-body-other-name">{props.project.author[0].username}</span>} </button>
                     <div className='project-detail-body-other-projects'>
-                        {props.refProjects.map(project => <RefProjectItem key={project.title} project={project} />)}
+                        {props.refProjects.map(project => <RefProjectItem key={project._id} project={project} />)}
                     </div>
                 </div>
 
@@ -46,7 +46,16 @@ export default function ProjectDetail(props) {
                             </div>
                         </div>
                         <div className='project-detail-body-foot-comment-list'>
-                            {props.project.comment.map(com => <CommentItem key={com} comment={com}/>)}
+                            {props.project.comment.map(com => <CommentItem 
+                                key={com._id} 
+                                user={com.user} 
+                                comment={com.text} 
+                                like={com.likeCount} 
+                                date={com.date}
+                                delCom={props.delCom}
+                                id={com._id}
+                                projectId={props.project._id}
+                            />)}
                         </div>
                     </div>
                     <div className='project-detail-body-foot-detail'>

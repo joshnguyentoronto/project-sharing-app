@@ -133,7 +133,7 @@ export default class HomePage extends Component {
 
     postComment = async () => {
         try {
-            let fetchResponse = await fetch('/api/projects/comment', {
+            let fetchResponse = await fetch('/api/projects/comment/new', {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -143,23 +143,37 @@ export default class HomePage extends Component {
                 })
             })
             let project = await fetchResponse.json()
-            console.log(project)
             if (!fetchResponse.ok) {
                 throw new Error('Fetch failed - Bad request')
             } else {
-                this.setState({ currentProject: project, comment: ''})
+                this.setState({ currentProject: project, comment: '' })
             }
         } catch (err) {
             console.log(err)
         }
     }
 
-    UserHoverOver = async () => {
-        this.setState({ hoverState: true })
-    }
-    
-    UserHoverOut = async () => {
-        this.setState({ hoverState: false })
+    delCom = async (arr) => {
+        console.log(arr)
+        try {
+            let fetchResponse = await fetch('/api/projects/comment/delete', {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    commentId: arr[0],
+                    projectId: arr[1]
+                })
+            })
+            let project = await fetchResponse.json()
+            console.log(project)
+            if (!fetchResponse.ok) {
+                throw new Error('Fetch failed - Bad request')
+            } else {
+                this.setState({ currentProject: project, comment: '' })
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     hoverProject = async (project) => {
@@ -187,6 +201,7 @@ export default class HomePage extends Component {
         }
     }
 
+
     render() {
         return(
             <div className="home">
@@ -212,13 +227,12 @@ export default class HomePage extends Component {
                         likeProject={this.likeProject}
                         handleChange={this.handleChange}
                         postComment={this.postComment}
+                        delCom={this.delCom}
                         comment={this.state.comment}
                         isSaved={this.state.isSaved}
                         isLiked={this.state.isLiked}
                         hoverUserState={this.state.hoverUserState}
                         hoverUser={this.state.hoverUser}
-                        UserHoverOver={this.UserHoverOver}
-                        UserHoverOut={this.UserHoverOut}
                     /> 
                     :
                     false

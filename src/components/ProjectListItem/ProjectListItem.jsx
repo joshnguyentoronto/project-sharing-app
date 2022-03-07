@@ -18,7 +18,7 @@ export default function ProjectListItem(props) {
                         <img className="img-views-count" src={require('../../images/icons/views.svg')} alt="views" /><span>100</span>
                     </span> 
                 </div>
-                <span class="placeholder-img" onClick={() => props.viewProject(props.project)} ></span>   
+                <span className="placeholder-img" onClick={() => props.viewProject(props.project)} ></span>   
             </div>
             <div className="project-list-item-foot">
                 <div className='profile-btn-hover' >

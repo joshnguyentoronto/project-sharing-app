@@ -10,7 +10,7 @@ const ConversationModel = require('./models/Conversation');
 
 async function populateDB() {
 
-    // await UserModel.deleteMany({})
+    await UserModel.deleteMany({})
     // const hashedPassword = await bcrypt.hash('password', parseInt(process.env.SALT_ROUNDS))
     // const newUser = await UserModel.create([
     //     {
@@ -81,7 +81,7 @@ async function populateDB() {
     //     }
     // ])
 
-    // await ProjectModel.deleteMany({})
+    await ProjectModel.deleteMany({})
     // const newProjects = await ProjectModel.create([
     //     {
     //         author: [newUser[0]._id],
@@ -101,7 +101,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "UX/UI design",
     //         tag: [ "html", "css", "sass", "react", "angular", "figma" ]
@@ -124,7 +124,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Data Science",
     //         tag: [ "mongodb", "mysql", "sql", "postgresql" ]
@@ -147,7 +147,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Software Engineer",
     //         tag: [ "nodejs", "python", "django", "express", "javascript" ]
@@ -170,7 +170,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Digital Marketing",
     //         tag: [ "hubspot", "wix", "clickup", "loomly", "sprout" ]
@@ -193,7 +193,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "UX/UI design",
     //         tag: [ "html", "css", "sass", "react", "angular", "figma" ]
@@ -216,7 +216,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Data Science",
     //         tag: [ "mongodb", "mysql", "sql", "postgresql" ]
@@ -239,7 +239,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Software Engineer",
     //         tag: [ "nodejs", "python", "django", "express", "javascript" ]
@@ -262,7 +262,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Digital Marketing",
     //         tag: [ "hubspot", "wix", "clickup", "loomly", "sprout" ]
@@ -285,7 +285,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "UX/UI design",
     //         tag: [ "html", "css", "sass", "react", "angular", "figma" ]
@@ -308,7 +308,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Data Science",
     //         tag: [ "mongodb", "mysql", "sql", "postgresql" ]
@@ -331,7 +331,7 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Software Engineer",
     //         tag: [ "nodejs", "python", "django", "express", "javascript" ]
@@ -354,14 +354,14 @@ async function populateDB() {
     //             { name: "Portfolio", url: "www.google.com" }
     //         ],
     //         comment: [
-    //             { user: "userID here", text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
+    //             { user: newUser[0]._id, text: "this is text inside the comment", date: 2022/03/03, likeCount: 12 }
     //         ],
     //         flag: "Digital Marketing",
     //         tag: [ "hubspot", "wix", "clickup", "loomly", "sprout" ]
     //     }
     // ])
 
-    await ConversationModel.deleteMany({})
+    // await ConversationModel.deleteMany({})
 
     // console.log(newProjects)
     

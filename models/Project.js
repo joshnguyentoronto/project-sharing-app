@@ -18,7 +18,7 @@ const projectLinkSchema = new Schema({
 })
 
 const commentSchema = new Schema({
-  user: String,
+  user: {type: Schema.Types.ObjectId, ref: 'User'},
   text: String,
   date: Date,
   likeCount: Number,
