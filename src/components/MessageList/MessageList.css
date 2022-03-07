@@ -1,18 +1,24 @@
 .messagelist-container {
     display: flex;
     flex-basis: 50%;
-    gap: 5px;
+    gap: 10px;
     text-align: left;
+    margin-bottom: 0.3em;
+    padding: 3px;
 }
 
 .messagelist-container:hover {
     cursor: pointer;
+    background-color: rgba(245, 245, 245, 0.87);
 }
 
-.mlHeader {
-    display: flex;
+.chat-name {
+    font-size: medium;
+
 }
 
-.messagelist-container img {
-
+.message-preview{
+    font-size: 75%;
+    color: grey;
+    opacity: 70%;
 }

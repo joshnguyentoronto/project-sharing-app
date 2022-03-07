@@ -31,6 +31,7 @@ async function createMessage(req,res){
     }
     conversation.messages.push(newMessage)
     conversation.save()
+    console.log(conversation)
     res.status(200).json(JSON.stringify(conversation))
 }
 

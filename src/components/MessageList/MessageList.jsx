@@ -1,5 +1,7 @@
 import './MessageList.css';
 import React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
 
 export default function MessageList(props) {
@@ -11,13 +13,11 @@ export default function MessageList(props) {
     }
     
     return(
-        <div>
-            <div onClick={() => props.onClick(props.messageData)} className='messagelist-container'>
-                <img src={require('../../images/image/no_profile_image.png')}></img>
-                <div>
-                    <p>{chatName}</p>
-                    <p>{props.lastMessage}</p>
-                </div>
+        <div onClick={() => props.onClick(props.messageData)} className='messagelist-container'>
+            <Avatar className="dp" src={require('../../images/image/no_profile_image.png')}/>
+            <div>
+                <p className='chat-name'>{chatName}</p>
+                <p className='message-preview'>{props.lastMessage}</p>
             </div>
         </div>
     )

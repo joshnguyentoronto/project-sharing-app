@@ -10,76 +10,76 @@ const ConversationModel = require('./models/Conversation');
 
 async function populateDB() {
 
-    await UserModel.deleteMany({})
-    // const hashedPassword = await bcrypt.hash('password', parseInt(process.env.SALT_ROUNDS))
-    // const newUser = await UserModel.create([
-    //     {
-    //         name: 'Josh Nguyen',
-    //         username: 'Josh',
-    //         password: hashedPassword,
-    //         email: 'josh@gmail.com',
-    //         avatar: 'lala',
-    //         bio: 'Hello, this is test account, feel free to do whatever you want',
-    //         location: 'Toronto, Ontario',
-    //         skill: ["HTML", "CSS", "JavaScript"],
-    //         education: "Humber College",
-    //         experiences: [
-    //             { company: "Scotia Bank", title: "banker" },
-    //             { company: "La La", title: "Ba Ba Ba" }
-    //         ],
-    //         userLink: [
-    //             { name: "Github", url: "www.google.com" },
-    //             { name: "linkedIn", url: "www.google.com" },
-    //             { name: "Portfolio", url: "www.google.com" }
-    //         ],
-    //         savedPosts: ["postID", "postID"],
-    //         likedPosts: ["postID", "postID"],
-    //     },
-    //     {
-    //         name: 'Lu Ye',
-    //         username: 'luye',
-    //         email: 'Lu@gmail.com',
-    //         password: hashedPassword,
-    //         avatar: 'lala',
-    //         bio: 'Hello, this is test account, feel free to do whatever you want',
-    //         location: 'Toronto, Ontario',
-    //         skill: ["HTML", "CSS", "JavaScript"],
-    //         education: "UWO",
-    //         experiences: [
-    //             { company: "Scotia Bank", title: "banker" },
-    //             { company: "La La", title: "Ba Ba Ba" }
-    //         ],
-    //         userLink: [
-    //             { name: "Github", url: "www.google.com" },
-    //             { name: "linkedIn", url: "www.google.com" },
-    //             { name: "Portfolio", url: "www.google.com" }
-    //         ],
-    //         savedPosts: ["postID", "postID"],
-    //         likedPosts: ["postID", "postID"],
-    //     },
-    //     {
-    //         name: 'Janusshan Paramasivam',
-    //         username: 'Janusshan',
-    //         email: 'janusshan@gmail.com',
-    //         password: hashedPassword,
-    //         avatar: 'lala',
-    //         bio: 'Hello, this is test account, feel free to do whatever you want',
-    //         location: 'Toronto, Ontario',
-    //         skill: ["HTML", "CSS", "JavaScript"],
-    //         education: "UoT",
-    //         experiences: [
-    //             { company: "Scotia Bank", title: "banker" },
-    //             { company: "La La", title: "Ba Ba Ba" }
-    //         ],
-    //         userLink: [
-    //             { name: "Github", url: "www.google.com" },
-    //             { name: "linkedIn", url: "www.google.com" },
-    //             { name: "Portfolio", url: "www.google.com" }
-    //         ],
-    //         savedPosts: ["postID", "postID"],
-    //         likedPosts: ["postID", "postID"],
-    //     }
-    // ])
+    // await UserModel.deleteMany({})
+    const hashedPassword = await bcrypt.hash('password', parseInt(process.env.SALT_ROUNDS))
+    const newUser = await UserModel.create([
+        {
+            name: 'Fake Nguyen',
+            username: 'Josh',
+            password: hashedPassword,
+            email: 'josh@gmail.com',
+            avatar: 'lala',
+            bio: 'Hello, this is test account, feel free to do whatever you want',
+            location: 'Toronto, Ontario',
+            skill: ["HTML", "CSS", "JavaScript"],
+            education: "Humber College",
+            experiences: [
+                { company: "Scotia Bank", title: "banker" },
+                { company: "La La", title: "Ba Ba Ba" }
+            ],
+            userLink: [
+                { name: "Github", url: "www.google.com" },
+                { name: "linkedIn", url: "www.google.com" },
+                { name: "Portfolio", url: "www.google.com" }
+            ],
+            savedPosts: ["postID", "postID"],
+            likedPosts: ["postID", "postID"],
+        },
+        {
+            name: 'Lu Ye',
+            username: 'luye',
+            email: 'Lu@gmail.com',
+            password: hashedPassword,
+            avatar: 'lala',
+            bio: 'Hello, this is test account, feel free to do whatever you want',
+            location: 'Toronto, Ontario',
+            skill: ["HTML", "CSS", "JavaScript"],
+            education: "UWO",
+            experiences: [
+                { company: "Scotia Bank", title: "banker" },
+                { company: "La La", title: "Ba Ba Ba" }
+            ],
+            userLink: [
+                { name: "Github", url: "www.google.com" },
+                { name: "linkedIn", url: "www.google.com" },
+                { name: "Portfolio", url: "www.google.com" }
+            ],
+            savedPosts: ["postID", "postID"],
+            likedPosts: ["postID", "postID"],
+        },
+        {
+            name: 'Janusshan Paramasivam',
+            username: 'Janusshan',
+            email: 'janusshan@gmail.com',
+            password: hashedPassword,
+            avatar: 'lala',
+            bio: 'Hello, this is test account, feel free to do whatever you want',
+            location: 'Toronto, Ontario',
+            skill: ["HTML", "CSS", "JavaScript"],
+            education: "UoT",
+            experiences: [
+                { company: "Scotia Bank", title: "banker" },
+                { company: "La La", title: "Ba Ba Ba" }
+            ],
+            userLink: [
+                { name: "Github", url: "www.google.com" },
+                { name: "linkedIn", url: "www.google.com" },
+                { name: "Portfolio", url: "www.google.com" }
+            ],
+            savedPosts: ["postID", "postID"],
+            likedPosts: ["postID", "postID"],
+        }
+    ])
 
     await ConversationModel.deleteMany({})
     user1 = await UserModel.findOne({username: 'Janusshan'})
@@ -168,7 +168,7 @@ async function populateDB() {
         },
     ])
 
-    await ProjectModel.deleteMany({})
+    // await ProjectModel.deleteMany({})
     // const newProjects = await ProjectModel.create([
     //     {
     //         author: [newUser[0]._id],

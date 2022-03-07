@@ -1,3 +1,7 @@
 .messageListItem{
     display:flex;
 }
+
+.close{
+    float: right;
+}

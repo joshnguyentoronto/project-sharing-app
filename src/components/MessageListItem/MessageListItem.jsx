@@ -6,14 +6,13 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import MessageBubble from '../MessageBubble/MessageBubble'
 import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack'
 
 
 export default function MessageListItem(props) {
     const [draftMessage, setDraftMessage] = useState('')
     const [listofMessages, setListofMessages] = useState(props.messageData.messages)
-
-    console.log('right before')
-    console.log(props.messageData)
 
     function handleChange(e){
         setDraftMessage(e.target.value)
@@ -36,18 +35,23 @@ export default function MessageListItem(props) {
             })
         })
         console.log(fetchResponse.ok)
-        let parsed = await JSON.parse(fetchResponse)
-        console.log(parsed)
+                
+        let jsonResponse = await fetchResponse.json()
+        let parsed = await JSON.parse(jsonResponse)
+        setListofMessages(parsed.messages)
+        setDraftMessage('')
     }
 
     return(
         <div>
-            <div className='messageListItem'>
-                <ArrowBackIosNewIcon onClick={props.onClick} />
-                <img src={require('../../images/image/no_profile_image.png')}></img>
-                <p>Name</p>
-                <CloseIcon onClick={props.closeChat}/>
-            </div>
+            {/* <div className='messageListItem'>
+            </div> */}
+            <Stack direction="row">
+                    <ArrowBackIosNewIcon onClick={props.onClick} />
+                    <Avatar src={require('../../images/image/no_profile_image.png')}/>
+                    <p>Name</p>
+                    <CloseIcon className="close" onClick={props.closeChat}/>
+            </Stack>
             <div className='messages'>
                 {listofMessages.map(m =>
                     <MessageBubble
@@ -60,13 +64,14 @@ export default function MessageListItem(props) {
             </div>
             <div>
                 <form onSubmit={sendMessage}>
-                    <TextField  
+                    <TextField 
+                            fullWidth 
                             label="text"
-                            id="fullWidth" 
                             size="small"
                             type="text"
                             margin="normal" 
-                            name="text" 
+                            name="text"
+                            value={draftMessage} 
                             onChange={handleChange} 
                     />
                     <br></br>

@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import MessageList from "../../components/MessageList/MessageList"
 import MessageListItem from "../../components/MessageListItem/MessageListItem"
 import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
+import { TextField, InputAdornment } from '@mui/material';
 
 export default function MessageBox(props) {
     const [messageData, setMessageData] = useState(false)
@@ -27,18 +29,19 @@ export default function MessageBox(props) {
             </div>            
         )
     } else {
-        console.log('list view')
-        console.log(props.messageList)
         return (
             <div className='message-container'>
-                {/* remember to change this css tag from the message list.css to this one */}
-                <div className='mlHeader'>
-                    <p>Messages</p>
-                    <CloseIcon onClick={props.openChatList} />
-                </div>
+                <CloseIcon className="close" onClick={props.openChatList} />
+                <p className="message-title">Messages</p>            
                 <form>
-                    <input></input>
+                    <TextField
+                        fullWidth
+                        size="small"
+                        id="outlined-search" 
+                        label="Search" 
+                        type="search" />
                 </form>
+                <br></br>
                 {props.messageList.map(m =>
                     <MessageList
                         messageData={m}
@@ -52,31 +55,4 @@ export default function MessageBox(props) {
             </div>
         )
     }
-    // return (
-    //     <div className='message-container'>
-    //         {messageData ? 
-    //             messageListItem(props) : 
-    //             messageList(props)
-    //         }
-    //     </div>
-    // )
-
-    // if (messageData) {
-    //     console.log('if stat')
-    //     return (
-    //         <div className='message-container'>
-    //             {props.messageList.map(m =>
-    //                 <MessageList
-    //                     closeChat={props.openChatList}
-    //                     onClick={onClick}
-    //                     lastMessage={m.lastMessage}    
-    //                 />
-    //             )}      
-    //         </div>
-    //     )
-    // } else {
-    //     return (
-    //         false 
-    //     )
-    // }
 }

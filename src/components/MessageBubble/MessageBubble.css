@@ -1,7 +1,19 @@
-.bubble-right p{
+.bubble-right{
     text-align: right;
+    background-color: #29465B;
 }
 
-.bubble-left p{
+.bubble-left{
     text-align: left;
+    background-color:#8796A0
+}
+
+.bubble{
+    display: inline-block;
+    color:white;
+    border: 1px black solid;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    padding: 5px
+
 }
