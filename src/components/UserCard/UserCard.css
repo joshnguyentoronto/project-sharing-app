@@ -1,0 +1,72 @@
+.card {
+    width: 280px;
+    height: 300px;
+    position: absolute;
+    background-color: lightgrey;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+    bottom: 60px;
+    left: -40px;
+}
+
+#card-img {
+    width: 70px;
+    height: 70px;
+    margin: -45px 0 0 0;
+}
+
+.card-bg {
+    width: 100%;
+    height: 80px;
+    background-color: grey;
+}
+
+.card-name-name {
+    font-size: 20px;
+    margin: -5px 0 2px 0;
+    
+}
+.card-name-lo {
+    font-size: 15px;
+    margin: 2px 0;
+}
+
+.card-stat {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 1px solid black;
+    width: 250px;
+}
+.card-stat-each {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.card-stat-each:nth-child(2) {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.card-stat-each p {
+    font-size: 12px;
+    margin: 2px 0;
+}
+
+
+.card-btn {
+    display: flex;
+    flex-direction: column;
+}
+.card-btn button {
+    height: 25px;
+    width: 130px;
+    margin: 5px 0 0 0;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 50px;
+}

@@ -14,22 +14,20 @@ export default class ProfilePage extends Component {
         this.setState({activeCategory: cat})
     }
 
-    // handleGetSaved = () => {
-    //     try {
-    //         let fetchProjectList = await fetch('/api/projects/save', {headers: { "user": "Josh" }})
-    //         let projects = await fetchProjectList.json()
-    //         console.log(projects)
-    //         this.setState({projects: projects})
-    //     } catch(err) {
-    //         console.log("home page error: ", err)
-    //     }
-    // }
+    savedProjects = async () => {
+        try {
+            let fetchProjectList = await fetch('/api/projects/saved', {headers: { "user": this.props.user._id }})
+            let projects = await fetchProjectList.json()
+            this.setState({ projects: projects })
+        } catch(err) {
+            console.log("home page error: ", err)
+        }
+    }
 
     async componentDidMount() {
         try {
-            let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": "Josh" }})
+            let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": this.props.user._id }})
             let projects = await fetchProjectList.json()
-            console.log(projects)
             this.setState({projects: projects})
         } catch(err) {
             console.log("home page error: ", err)
@@ -49,7 +47,8 @@ export default class ProfilePage extends Component {
                         <li 
                             className={"Saved" === this.state.activeCategory ? 'active' : ''}
                             onClick={() => {
-                                this.handleSetActiveCat("Saved")
+                                this.handleSetActiveCat("Saved");
+                                this.savedProjects()
                             }}
                         >Saved</li>
                         <li 

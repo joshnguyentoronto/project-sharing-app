@@ -1,14 +1,15 @@
 .project-list-item {
     border: 1px solid white;
     border-radius: 5px;
-    width: 300px;
-    height: 380px;
+    width: 310px;
+    height: 310px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 80px;
+    grid-template-rows: 254px auto;
 }
 
 .project-list-item-img {
+    position: relative;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     width: 100%;
@@ -16,14 +17,58 @@
     background-color: grey;
 }
 
-.project-list-item-foot-icon {
+.placeholder-img {
+    display: block;
+    background: rgba(226, 201, 255, 0.616);
+    width: 100%;
+    height: 100%;
+}
+
+.project-list-item-img button:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+
+.img-bottom-icons {
+    position: absolute;
     display: flex;
-    justify-content: space-between;
+    bottom: 5px;
+    right: 16px;
+    gap: 16px;
+    visibility: hidden;
+    z-index: 10;
+}
+
+.img-bottom-icons >span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.img-save-button {
+    position: absolute;
+    top: 16px;
+    right: 5px;
+    visibility: hidden;
+    z-index: 10;
+}
+
+.project-list-item-img:hover .img-bottom-icons,
+.project-list-item-img:hover .img-save-button {
+    visibility: visible;
+}
+
+.project-list-item-foot {
+    display: flex;
     align-items: center;
 }
 
-.project-list-item-foot-icon-stat {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.user-card {
+    visibility: hidden;
+    position: relative;
+    bottom: -10px;
+    right: -20px;
+}
+.profile-btn-hover:hover .user-card {
+    visibility: visible;
 }

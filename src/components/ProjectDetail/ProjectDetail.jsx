@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import RefProjectItem from '../RefProjectItem/RefProjectItem';
 import CommentItem from '../CommentItem/CommentItem';
 import TagItem from '../TagItem/TagItem'
+import UserCard from '../UserCard/UserCard';
 
 export default function ProjectDetail(props) {
     
@@ -27,12 +28,11 @@ export default function ProjectDetail(props) {
                 </div>
                 <div className='project-detail-body-other'>
                     <h3>You may also like</h3>
-                    <button className="project-detail-body-other-userimg"><img src={require('../../images/icons/user.svg')} alt="svg icon" /> {props.project.author.length > 1 ? <span className="project-detail-body-other-username">Group Project</span> : <span className="project-detail-body-other-name">{props.project.author[0].username}</span>} </button>
+                    <button className="project-detail-body-other-userimg"><Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link> {props.project.author.length > 1 ? <span className="project-detail-body-other-username">Group Project</span> : <span className="project-detail-body-other-name">{props.project.author[0].username}</span>} </button>
                     <div className='project-detail-body-other-projects'>
-                        {props.refProjects.map(project => <RefProjectItem key={project.title} project={project} />)}
+                        {props.refProjects.map(project => <RefProjectItem key={project._id} project={project} />)}
                     </div>
                 </div>
-
 
                 <div className='project-detail-body-foot'>
                     <div className='project-detail-body-foot-comment'>
@@ -41,12 +41,21 @@ export default function ProjectDetail(props) {
                                 <button className='comment-user-img'><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
                             </div>
                             <div className='comment-main'>
-                                <textarea name="comment" cols="30" rows="10"></textarea>
-                                <button>Post a Comment</button>
+                                <textarea onChange={props.handleChange} name="comment" value={props.comment}></textarea>
+                                <button onClick={() => props.postComment()} >Post a Comment</button>
                             </div>
                         </div>
                         <div className='project-detail-body-foot-comment-list'>
-                            {props.project.comment.map(com => <CommentItem comment={com}/>)}
+                            {props.project.comment.map(com => <CommentItem 
+                                key={com._id} 
+                                user={com.user} 
+                                comment={com.text} 
+                                like={com.likeCount} 
+                                date={com.date}
+                                delCom={props.delCom}
+                                id={com._id}
+                                projectId={props.project._id}
+                            />)}
                         </div>
                     </div>
                     <div className='project-detail-body-foot-detail'>
@@ -71,7 +80,7 @@ export default function ProjectDetail(props) {
                         <div className='project-detail-body-foot-tag'>
                             <p>Tags</p>
                             <div className='project-detail-body-foot-tag-container'>
-                                {props.project.tag.map(tag => <TagItem tag={tag} />)}
+                                {props.project.tag.map(tag => <TagItem key={tag} tag={tag} />)}
                             </div>
                         </div>
                     </div>
@@ -81,9 +90,14 @@ export default function ProjectDetail(props) {
             <div className='project-detail-right'>
                 <div className='project-detail-right-sub'>
                     <button className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></button>
-                    <button><Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link></button>
-                    <button onClick={() => props.likeProject()}><img src={require('../../images/icons/like.svg')} alt="svg icon" /></button>
-                    <button onClick={() => props.saveProject()}><img src={require('../../images/icons/save-white.svg')} alt="svg icon" /></button>
+                    <div className='profilebtnhover' >
+                        <Link to="/profile"><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                        <div className="usercard" >
+                            <UserCard user={props.project.author[0]} />
+                        </div>
+                    </div>
+                    <button onClick={() => props.likeProject()}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
+                    <button onClick={() => props.saveProject()}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
                     <button><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                     <button><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>

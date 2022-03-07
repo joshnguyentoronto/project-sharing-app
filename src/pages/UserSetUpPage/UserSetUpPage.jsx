@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
-import { FormHelperText, TextField, InputAdornment } from '@mui/material';
+import { TextField } from '@mui/material';
 
 export default function UserSetUpPage(props){
 
@@ -33,7 +33,7 @@ export default function UserSetUpPage(props){
             })
         })
         if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-        navigate("/")       
+        navigate("/")
     }
 
     return (
