@@ -15,7 +15,6 @@ export default function ProjectList(props) {
                         likeProject={props.likeProject}
                         isSaved={props.isSaved}
                         isLiked={props.isLiked}
-                        // hoverIsLiked={props.hoverIsLiked}
                         hoverUserState={props.hoverUserState}
                         hoverUser={props.hoverUser}
                         viewProject={props.viewProject}

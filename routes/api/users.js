@@ -16,5 +16,6 @@ router.get('/recieve/message', usersCtrl.recieveMessage)
 
 router.post('/save', usersCtrl.saveOne)
 router.post('/like', usersCtrl.likeOne)
+router.post('/edit', usersCtrl.editProfile)
 
 module.exports = router;

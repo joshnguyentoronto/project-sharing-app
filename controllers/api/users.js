@@ -15,6 +15,7 @@ module.exports = {
     createMessage,
     createConvo,
     recieveMessage,
+    editProfile
 }
 
 async function recieveMessage(req,res){
@@ -162,6 +163,27 @@ async function likeOne(req, res) {
 
         res.status(200).json(user)
     } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function editProfile(req, res) {
+    try {
+        let userId = req.get('userId')
+        let user = await UserModel.findById(userId)
+        console.log("before save", user)
+        console.log(req.body)
+        user.name = req.body.name
+        user.bio = req.body.bio
+        user.education = req.body.education
+        user.experiences = req.body.experiences
+        user.location = req.body.location
+        user.skill = req.body.skill
+        user.userLink = req.body.userLink
+        user.save()
+        console.log("afterr save", user)
+        res.status(200).json(user)
+    }catch(err) {
         res.status(400).json(err)
     }
 }

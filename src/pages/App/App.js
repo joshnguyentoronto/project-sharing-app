@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate, Link } from 'react-router-dom'
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 import AccountPage from '../AccountPage/AccountPage';
@@ -8,6 +8,7 @@ import Login from '../../components/Login/Login';
 import SignUpForm from '../../components/SignUp/Signup';
 import UserSetUpPage from '../UserSetUpPage/UserSetUpPage';
 import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
+import EditProfilePage from '../EditProfilePage/EditProfilePage';
 // import {io} from 'socket.io-client';
 // const socket = io()
 
@@ -17,7 +18,6 @@ export default class App extends Component {
     flags: ['UX/UI design', 'Software Engineer', 'Data Science', 'Digital Marketing'],
     currentFlag: '',
     currentTag: '',
-
     user: null,
     currentProject: '',
     viewMode: false,
@@ -28,11 +28,8 @@ export default class App extends Component {
     isLiked: false,
     hoverUserState: false,
     hoverUser: {},
-    // hoverIsLiked: false,
   }
   
-
-  // create a method that set currentProject when hover
   viewProject = async (project) => {
     if (!this.state.user) {
         try {
@@ -137,24 +134,6 @@ export default class App extends Component {
 
   hoverProject = async (project) => {
     this.setState({ currentProject: project })
-    // console.log(this.state.currentProject)
-    // if (this.state.user.likedPosts.indexOf(project._id) == -1) {
-    //   this.setState({ hoverIsLiked: false, currentProject: project })
-    // } else {
-    //   this.setState({ hoverIsLiked: true, currentProject: project })
-    // }
-    
-    //     try {
-    //         let fetchUser = await fetch('/api/users/', { headers: { "userId": this.props.user._id }})
-    //         let user = await fetchUser.json()
-    //         if (user.likedPosts.indexOf(project._id) != -1 ) {
-    //             this.setState({ hoverIsLiked: true })
-    //         } else if (user.likedPosts.indexOf(project._id) == -1 ) {
-    //             this.setState({ hoverIsLiked: false, currentProject: project })
-    //         }
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
   }
 
   setUserInState = (incomingUserData) => {
@@ -215,6 +194,26 @@ export default class App extends Component {
       }
   }
 
+  submitProfile = async (postBody) => {
+    const fetchResponse = await fetch('/api/users/edit', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "userId": this.state.user._id
+        },
+        body: JSON.stringify(postBody)
+    })
+    let user = await fetchResponse.json()
+    if (!fetchResponse.ok) {
+      throw new Error('Fetch failed - Bad request')
+    } else {
+      const hiddenLink = document.getElementById('hidden-link')
+      hiddenLink.click()
+      this.setState({ user: user}) 
+    }
+}
+
+
   async componentDidMount(){
     let token = localStorage.getItem('token')
     if (token){
@@ -262,7 +261,7 @@ export default class App extends Component {
               isLiked={this.state.isLiked}
               hoverUserState={this.state.hoverUserState}
               hoverUser={this.state.hoverUser}
-              // hoverIsLiked={this.state.hoverIsLiked}
+    
               currentTag={this.state.currentTag}
               currentFlag={this.state.currentFlag}
               flags={this.state.flags}
@@ -293,8 +292,6 @@ export default class App extends Component {
               isLiked={this.state.isLiked}
               hoverUserState={this.state.hoverUserState}
               hoverUser={this.state.hoverUser}
-              // hoverIsLiked={this.state.hoverIsLiked}
-
               userLogout={this.userLogout}
               viewProject={this.viewProject}
               closeProject={this.closeProject}
@@ -304,7 +301,12 @@ export default class App extends Component {
               hoverProject={this.hoverProject}
               postComment={this.postComment}
               delCom={this.delCom}
+             
             />}
+          />
+          <Route 
+            path="/profile/edit"
+            element={<EditProfilePage user={this.state.user}  submitProfile={this.submitProfile}/>}
           />
           <Route path="account" element={<AccountPage/>}>
             <Route path="login" element={<Login setUserInState={this.setUserInState}/>}/>
@@ -320,6 +322,7 @@ export default class App extends Component {
             element={<Navigate to="/" />}
           />
         </Routes>
+        <Link id="hidden-link" to="/profile"></Link>
       </main>
     );
   }
