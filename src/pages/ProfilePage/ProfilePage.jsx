@@ -105,7 +105,7 @@ export default class ProfilePage extends Component {
                     :
                     <ProjectList 
                         user={this.props.user}
-                        projects={this.state.projects} 
+                        projects={this.state.projects}
                         // hoverIsLiked={this.props.hoverIsLiked}
                         hoverProject={this.props.hoverProject} 
                         hoverUser={this.props.hoverUser}
@@ -117,7 +117,8 @@ export default class ProfilePage extends Component {
                     />
                     }
                     {this.props.viewMode ? 
-                        <ProjectDetail 
+                        <ProjectDetail
+                            user={this.props.user}
                             closeProject={this.props.closeProject} 
                             project={this.props.currentProject} 
                             refProjects={this.props.refProjects}
@@ -126,6 +127,8 @@ export default class ProfilePage extends Component {
                             handleChange={this.props.handleChange}
                             postComment={this.props.postComment}
                             delCom={this.props.delCom}
+                            likeComment={this.props.likeComment}
+                            unlikeComment={this.props.unlikeComment}
                             comment={this.props.comment}
                             isSaved={this.props.isSaved}
                             isLiked={this.props.isLiked}

@@ -12,6 +12,8 @@ module.exports = {
     createProject,
     createComment,
     deleteComment,
+    likeComment,
+    unlikeComment,
 }
 
 async function projectsIndex(req, res) {
@@ -148,6 +150,7 @@ async function createComment(req, res) {
         let newProject = await ProjectModel.findById( req.body.projectId )
         let newCom = {
             user: req.body.userId,
+            likeUser: [],
             text: req.body.comment,
             date: new Date(),
             likeCount: 0
@@ -166,10 +169,6 @@ async function createComment(req, res) {
 
 async function deleteComment(req, res) {
     try {
-        // let newProject = await ProjectModel.findByIdAndUpdate(
-        //     req.body.projectId,
-        //     { "$pull": { "comment": [{ "_id": req.body.commentId }] } }
-        // )
         let newProject = await ProjectModel.findById( req.body.projectId )
         newProject.comment.remove({ _id: req.body.commentId })
         newProject.save()
@@ -191,7 +190,10 @@ async function deleteComment(req, res) {
 async function likeComment(req, res) {
     try {
         let newProject = await ProjectModel.findById( req.body.projectId )
-        
+        let index = await newProject.comment.findIndex(com => com._id == req.body.commentId)
+        await newProject.comment[index].likedUser.push(req.body.userId)
+        newProject.comment[index].likeCount = newProject.comment[index].likeCount + 1;
+        await newProject.save()
         let project = await newProject.populate([
             { path: 'author', model: 'User' },
             { path: 'comment', populate: { path: 'user', model: 'User' } }
@@ -206,8 +208,10 @@ async function likeComment(req, res) {
 async function unlikeComment(req, res) {
     try {
         let newProject = await ProjectModel.findById( req.body.projectId )
-        
-
+        let index = await newProject.comment.findIndex(com => com._id == req.body.commentId)
+        await newProject.comment[index].likedUser.splice( newProject.comment[index].likedUser.indexOf( req.body.userId ), 1 )
+        newProject.comment[index].likeCount = newProject.comment[index].likeCount - 1;
+        await newProject.save()
         let project = await newProject.populate([
             { path: 'author', model: 'User' },
             { path: 'comment', populate: { path: 'user', model: 'User' } }

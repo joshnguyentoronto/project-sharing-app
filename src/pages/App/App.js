@@ -18,6 +18,8 @@ export default class App extends Component {
     flags: ['UX/UI design', 'Software Engineer', 'Data Science', 'Digital Marketing'],
     currentFlag: '',
     currentTag: '',
+    openChat: false,
+    messageList: [],
 
     user: null,
     currentProject: '',
@@ -32,6 +34,17 @@ export default class App extends Component {
     // hoverIsLiked: false,
   }
   
+  openChatList = async () => {
+    let value = !this.state.openChat
+    if (value){
+        let jwt = localStorage.getItem('token')
+        let fetchResponse = await fetch('/api/users/allmessages', {headers: {'Authorization': 'Bearer ' + jwt}})
+        let messages = await fetchResponse.json()
+        let array = await JSON.parse(messages)
+        this.setState({messageList: array})
+    }
+    this.setState({openChat: value})
+  }
 
   // create a method that set currentProject when hover
   viewProject = async (project) => {
@@ -205,7 +218,6 @@ export default class App extends Component {
               })
           })
           let project = await fetchResponse.json()
-          console.log(project)
           if (!fetchResponse.ok) {
               throw new Error('Fetch failed - Bad request')
           } else {
@@ -214,6 +226,50 @@ export default class App extends Component {
       } catch (err) {
           console.log(err)
       }
+  }
+
+  likeComment = async (arr) => {
+    try {
+        let fetchResponse = await fetch('/api/projects/comment/like', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              commentId: arr[0],
+              projectId: arr[1],
+              userId: arr[2]
+            })
+        })
+        let project = await fetchResponse.json()
+        if (!fetchResponse.ok) {
+            throw new Error('Fetch failed - Bad request')
+        } else {
+            this.setState({ currentProject: project })
+        }
+    } catch (err) {
+        console.log(err)
+    }
+  }
+
+  unlikeComment = async (arr) => {
+    try {
+        let fetchResponse = await fetch('/api/projects/comment/unlike', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              commentId: arr[0],
+              projectId: arr[1],
+              userId: arr[2]
+            })
+        })
+        let project = await fetchResponse.json()
+        if (!fetchResponse.ok) {
+            throw new Error('Fetch failed - Bad request')
+        } else {
+            this.setState({ currentProject: project })
+        }
+    } catch (err) {
+        console.log(err)
+    }
   }
 
   async componentDidMount(){
@@ -267,6 +323,8 @@ export default class App extends Component {
               currentTag={this.state.currentTag}
               currentFlag={this.state.currentFlag}
               flags={this.state.flags}
+              openChat={this.state.openChat}
+              messageList={this.state.messageList}
 
               userLogout={this.userLogout}
               viewProject={this.viewProject}
@@ -275,12 +333,14 @@ export default class App extends Component {
               likeProject={this.likeProject}
               saveProject={this.saveProject}
               hoverProject={this.hoverProject}
-              postComment={this.postComment}
-              delCom={this.delCom}
               filterByFlag={this.filterByFlag}
               filterByTag={this.filterByTag}
-
               socket={socket}
+              postComment={this.postComment}
+              delCom={this.delCom}
+              likeComment={this.likeComment}
+              unlikeComment={this.unlikeComment}
+              openChatList={this.openChatList}
             />}
           />
           <Route 
@@ -307,6 +367,8 @@ export default class App extends Component {
               hoverProject={this.hoverProject}
               postComment={this.postComment}
               delCom={this.delCom}
+              likeComment={this.likeComment}
+              unlikeComment={this.unlikeComment}
             />}
           />
           <Route path="account" element={<AccountPage/>}>
@@ -316,7 +378,14 @@ export default class App extends Component {
           </Route>
           <Route 
             path="/upload"
-            element={<ProjectUploadPage user={this.state.user}/>}
+            element={<ProjectUploadPage 
+              user={this.state.user} 
+              openChat={this.state.openChat}
+              messageList={this.state.messageList}
+
+              userLogout={this.userLogout}
+              openChatList={this.openChatList}
+            />}
           />
           <Route
             path="*"

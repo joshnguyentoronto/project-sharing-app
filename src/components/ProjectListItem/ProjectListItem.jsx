@@ -31,12 +31,11 @@ export default class ProjectListItem extends Component {
                         <span>
                             <button className="img-like-button" onClick={() => this.props.likeProject(this.props.project)}>{ this.props.user.likedPosts.indexOf(this.props.project._id) != -1 ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button><span>100</span>
                         </span>
-
                         <span>
                             <img className="img-views-count" src={require('../../images/icons/views.svg')} alt="views" /><span>100</span>
                         </span> 
                     </div>
-                    <span className="placeholder-img" onClick={() => this.props.viewProject(this.props.project)} ></span>   
+                    <span className="placeholder-img" onClick={() => this.props.viewProject(this.props.project)} ><img src={require('../../images/image/prop-img.png')} alt="svg icon" /><div className='shader'></div></span>
                 </div>
                 <div className="project-list-item-foot">
                     <div className='profile-btn-hover' >
@@ -45,7 +44,8 @@ export default class ProjectListItem extends Component {
                             <UserCard user={this.props.project.author[0]} />
                         </div>
                     </div>
-                    <div>
+                    <div className="project-list-item-foot-name">
+                        <p>{this.props.project.title}</p>
                         <p>{this.props.project.author[0].name}</p>
                     </div>
                 </div>

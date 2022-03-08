@@ -1,10 +1,11 @@
 import "./ProjectUploadPage.css"
 import React, { Component } from 'react'
-import { Link, Navigate, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from '../../components/Header/Header'
 import InputLink from '../../components/InputLink/InputLink'
 import InputSection from '../../components/InputSection/InputSection'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
+import MessageBox from "../../components/MessageBox/MessageBox";
 
 export default class ProjectUploadPage extends Component {
     state = {
@@ -205,7 +206,11 @@ export default class ProjectUploadPage extends Component {
     render() {
         return(
             <div className="uploadpage">
-                <Header />
+                <Header
+                    openChatList={this.props.openChatList}
+                    userLogout={this.props.userLogout}
+                    user={this.props.user} 
+                />
                 <h3>Upload a Project</h3>
                 <div className="upload">
                     <div>
@@ -260,6 +265,13 @@ export default class ProjectUploadPage extends Component {
                         } */}
                     </div>
                 </div>
+                {this.props.openChat ? 
+                    <MessageBox 
+                        messageList={this.props.messageList} 
+                        openChatList={this.props.openChatList}
+                        currentUser={this.props.user}
+                    /> 
+                    : false }
             </div>
         )
     }

@@ -4,6 +4,8 @@
 
 body {
     width: 100vw;
+    scroll-behavior: smooth;
+    background-color: #f8f8ff;
 }
 
 ::-webkit-scrollbar {
