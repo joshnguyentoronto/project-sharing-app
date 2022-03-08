@@ -10,6 +10,7 @@ import Footer from "../../components/Footer/Footer"
 export default class HomePage extends Component {
     state={
         // hoverIsLiked: false
+        profile: false
     }
 
     // async componentDidUpdate(prevProps){
@@ -44,7 +45,8 @@ export default class HomePage extends Component {
                     user={this.props.user}
                 />
                 <Filter handleChange={this.props.handleChange} filterByTag={this.props.filterByTag} filterByFlag={this.props.filterByFlag} flags={this.props.flags}/>
-                <ProjectList 
+                <ProjectList
+                    profile={this.state.profile}
                     viewProject={this.props.viewProject}
                     projects={this.props.projects}
                     hoverUserState={this.props.hoverUserState}

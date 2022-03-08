@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate, Link } from 'react-router-dom'
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 import AccountPage from '../AccountPage/AccountPage';
@@ -86,6 +86,39 @@ export default class App extends Component {
     this.setState({ currentProject: '', viewMode: false })
   }
 
+  savedProjects = async () => {
+    try {
+        console.log(this.state.user)
+        let fetchProjectList = await fetch('/api/projects/saved', {headers: { "user": this.state.user._id }})
+        let projects = await fetchProjectList.json()
+        this.setState({ projects: projects })
+    } catch(err) {
+        console.log("home page error: ", err)
+    }
+  }
+
+  likedProjects = async () => {
+      try {
+          console.log(this.state.user)
+          let fetchProjectList = await fetch('/api/projects/liked', {headers: { "user": this.state.user._id }})
+          let projects = await fetchProjectList.json()
+          this.setState({ projects: projects })
+      } catch(err) {
+          console.log("home page error: ", err)
+      }
+  }
+
+  myProjects = async () => {
+    try {
+        console.log(this.state.user)
+        let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": this.state.user._id }})
+        let projects = await fetchProjectList.json()
+        this.setState({ projects: projects })
+    } catch(err) {
+        console.log("home page error: ", err)
+    }
+  }
+
   filterByTag = async (evt) => {
     evt.preventDefault()
     try {
@@ -130,22 +163,49 @@ export default class App extends Component {
     }
   }
 
-  likeProject = async (project) => {
-    try {
+  likeProject = async (obj) => {
+    if (obj.profile) {
+      let project = obj.project
+      try {
+        let fetchResponse = await fetch('/api/users/like/profile', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({likedPosts: project._id, userId: this.state.user._id, cat: obj.profile })
+        })
+        let object = await fetchResponse.json()
+        let user = object.user
+        let newProject = object.newProject
+        let newprojects = object.projectsList
+        if (user.likedPosts.indexOf(newProject._id) != -1 ) {
+            this.setState({ isLiked: true, user: user, projects: newprojects, currentProject: newProject })
+        } else if (user.likedPosts.indexOf(newProject._id) == -1 ) {
+            this.setState({ isLiked: false, user: user, projects: newprojects, currentProject: newProject })
+        }
+        console.log("Success:", user)
+      } catch (err) {
+          console.log(err)
+      }
+    } else {
+      let project = obj.project
+      try {
         let fetchResponse = await fetch('/api/users/like', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({likedPosts: project._id, userId: this.state.user._id})
         })
-        let user = await fetchResponse.json()
-        if (user.likedPosts.indexOf(project._id) != -1 ) {
-            this.setState({ isLiked: true, user: user })
-        } else if (user.likedPosts.indexOf(project._id) == -1 ) {
-            this.setState({ isLiked: false, user: user })
+        let object = await fetchResponse.json()
+        let user = object.user
+        let newProject = object.newProject
+        let newprojects = object.projectsList
+        if (user.likedPosts.indexOf(newProject._id) != -1 ) {
+            this.setState({ isLiked: true, user: user, projects: newprojects, currentProject: newProject })
+        } else if (user.likedPosts.indexOf(newProject._id) == -1 ) {
+            this.setState({ isLiked: false, user: user, projects: newprojects, currentProject: newProject })
         }
         console.log("Success:", user)
-    } catch (err) {
-        console.log(err)
+      } catch (err) {
+          console.log(err)
+      }
     }
   }
 
@@ -275,14 +335,15 @@ export default class App extends Component {
   async componentDidMount(){
     let token = localStorage.getItem('token')
     if (token){
-      const payload = JSON.parse(atob(token.split('.')[1]))
-      if (payload.exp < Date.now() /1000) {
-        localStorage.removeItem('token')
-        token= null
+      const payload = await JSON.parse(window.atob(token.split('.')[1]))
+      if (payload.exp < (Date.now() / 1000)) {
+        await localStorage.removeItem('token')
+        token = null
         try {
           let fetchProjectList = await fetch('/api/projects')
           let projects = await fetchProjectList.json()
-          this.setState({projects: projects})
+          console.log(projects)
+          this.setState({ projects: projects, user: null })
         } catch(err) {
           console.log("home page error: ", err)
         }
@@ -296,6 +357,14 @@ export default class App extends Component {
         } catch(err) {
           console.log("home page error: ", err)
         }
+      }
+    } else {
+      try {
+        let fetchProjectList = await fetch('/api/projects')
+        let projects = await fetchProjectList.json()
+        this.setState({ projects: projects, user: null })
+      } catch(err) {
+        console.log("home page error: ", err)
       }
     }
   }
@@ -369,6 +438,9 @@ export default class App extends Component {
               delCom={this.delCom}
               likeComment={this.likeComment}
               unlikeComment={this.unlikeComment}
+              savedProjects={this.savedProjects}
+              likedProjects={this.likedProjects}
+              myProjects={this.myProjects}
             />}
           />
           <Route path="account" element={<AccountPage/>}>
