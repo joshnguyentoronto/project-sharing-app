@@ -1,7 +1,7 @@
 import "./EditProfilePage.css"
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
-import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
+import { TextField } from '@mui/material';
 import InputLink from '../../components/InputLink/InputLink'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
 
