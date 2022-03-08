@@ -8,8 +8,9 @@ import Login from '../../components/Login/Login';
 import SignUpForm from '../../components/SignUp/Signup';
 import UserSetUpPage from '../UserSetUpPage/UserSetUpPage';
 import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
-// import {io} from 'socket.io-client';
-// const socket = io()
+import {io} from 'socket.io-client';
+
+const socket = io()
 
 
 export default class App extends Component {
@@ -278,6 +279,8 @@ export default class App extends Component {
               delCom={this.delCom}
               filterByFlag={this.filterByFlag}
               filterByTag={this.filterByTag}
+
+              socket={socket}
             />}
           />
           <Route 

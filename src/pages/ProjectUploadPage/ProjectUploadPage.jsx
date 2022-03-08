@@ -21,10 +21,24 @@ export default class ProjectUploadPage extends Component {
         textNum: 1,
         link: [{ index: 0, name: '', url: '' }],
         linkNum: 1,
+        img:[],
     }
     
     handleChange = (evt) => {
-        this.setState({ [evt.target.name]: evt.target.value });
+        if (evt.target.name == "img"){
+            for(let i=0; i< evt.target.files.length; i++){
+                if (i == 0){
+                    this.setState({ 
+                        img: URL.createObjectURL(evt.target.files[i]),
+                    });
+                }
+                this.setState({ 
+                    img: [...this.state.img, URL.createObjectURL(evt.target.files[i])],
+                });
+            }
+        }else {
+            this.setState({[evt.target.name]: evt.target})
+        }
     };
 
 
@@ -184,19 +198,20 @@ export default class ProjectUploadPage extends Component {
         }
     }
 
+    imagePreview = async () => {
+
+    }
+
     render() {
         return(
             <div className="uploadpage">
                 <Header />
+                <h3>Upload a Project</h3>
                 <div className="upload">
-                    <h3>Upload a Project</h3>
                     <div>
-                        <div  className="upload-img">
-                            <input className="input-img" type="file" name="img" accept="image/*" multiple />
-                        </div>
                         <div>
                             <p>Title</p>
-                            <input onChange={this.handleChange} name="title" type="text" required />
+                            <input onChange={this.handleChange, this.imagePreview} name="title" type="text" required />
                         </div>
                         <div>
                             <p>Project type:</p>
@@ -231,6 +246,18 @@ export default class ProjectUploadPage extends Component {
                             <Link to="/"  className="form-action-link">Close</Link>
                             <button onClick={this.submitProject}>Publish</button>
                         </div>
+                    </div>
+                    <div  className="upload-img">
+                        <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
+                        {/* {this.state.img.length ?
+                            <div>
+                                {this.state.img.map( m => 
+                                    <img src={URL.createObjectURL(m)}></img>
+                                )}
+                            </div>
+                            :
+                            false
+                        } */}
                     </div>
                 </div>
             </div>

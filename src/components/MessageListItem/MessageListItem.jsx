@@ -1,5 +1,5 @@
 import './MessageListItem.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
@@ -8,40 +8,26 @@ import MessageBubble from '../MessageBubble/MessageBubble'
 import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack'
-import {io} from 'socket.io-client';
-const socket = io()
-
 
 export default function MessageListItem(props) {
     const [draftMessage, setDraftMessage] = useState('')
     const [listofMessages, setListofMessages] = useState(props.messageData.messages)
-
+    const [socketInit, setsocketInit] = useState(false)
+    
     function handleChange(e){
         setDraftMessage(e.target.value)
     };
-
-    async function recieveMessage(){
-        let jwt = localStorage.getItem('token')
-        let fetchResponse = await fetch('/api/users/recieve/message', {
-            method: "POST",
-            headers: {
-                'Authorization': 'Bearer ' + jwt,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                convoId: props.messageData._id,
-            })
+    
+    useEffect(() =>{
+        if (!socketInit){
+            props.socket.emit("join chat", props.messageData._id )
+            setsocketInit(true)
+        }
+        props.socket.on("message recieved", (convoObj) => {
+            console.log("recieving socket message rec client side")
+            console.log(convoObj.messages)
+            setListofMessages(convoObj.messages)
         })
-        console.log(fetchResponse.ok)
-                
-        let jsonResponse = await fetchResponse.json()
-        let parsed = await JSON.parse(jsonResponse)
-        setListofMessages(parsed.messages)
-        setDraftMessage('')
-    }
-
-    socket.on('add-message', function (data){
-        recieveMessage()
     })
 
     async function sendMessage(e){
@@ -59,17 +45,16 @@ export default function MessageListItem(props) {
                 users: props.messageData.users
             })
         })
-        console.log(fetchResponse.ok)
+        console.log('sent message here')
                 
         let jsonResponse = await fetchResponse.json()
         let parsed = await JSON.parse(jsonResponse)
+        console.log(parsed)
         setListofMessages(parsed.messages)
         setDraftMessage('')
 
-        socket.emit('add-message', {
-            package: 'sent'
-        })
-
+        props.socket.emit('new message', parsed)
+        console.log('hit')
     }
 
     return(

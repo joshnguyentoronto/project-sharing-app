@@ -18,7 +18,8 @@ module.exports = {
 }
 
 async function recieveMessage(req,res){
-
+    console.log(req.body)
+    let conversation = await ConversationModel.findById(req.body.convoId)
 }
 
 async function createConvo(req,res){

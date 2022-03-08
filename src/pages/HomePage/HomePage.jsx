@@ -95,6 +95,7 @@ export default class HomePage extends Component {
                         messageList={this.state.messageList} 
                         openChatList={this.openChatList}
                         currentUser={this.props.user}
+                        socket={this.props.socket}
                     /> 
                     : false }
                 <Footer />
