@@ -35,13 +35,20 @@ export default function ProjectDetail(props) {
                 }
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
-                    <p className='project-detail-body-img'>Image</p>
-                    {props.project.text.map(section => 
-                        <div key={section._id}>
-                            <h3>{section.heading}</h3>
-                            <p>{section.text}</p>
-                        </div>
-                    )}
+                    <div className='project-detail-body-img'>
+                        Images
+                    </div>
+                    <div className='project-detail-body-project-link'>
+                        
+                    </div>
+                    <div className='project-detail-body-section'>
+                        {props.project.text.map(section => 
+                            <div  className='project-detail-body-section-each' key={section._id}>
+                                <h3>{section.heading}</h3>
+                                <p>{section.text}</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className='project-detail-body-other' id="toScroll" ref={divRef}>
                     <h3>You may also like</h3>
@@ -114,7 +121,7 @@ export default function ProjectDetail(props) {
                     </div>
                     <button onClick={() => props.likeProject(props.project)}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
                     <button onClick={() => props.saveProject(props.project)}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
-                    <button onClick={openChatBox}><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
+                    <button onClick={openChatBox}><img src={require('../../images/icons/message-white.svg')} alt="svg icon" /></button>
                     <button onClick={() => divRef.current.scrollIntoView({ behavior: "smooth" }) } ><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>
             </div>

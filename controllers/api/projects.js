@@ -47,7 +47,10 @@ async function projectsFlag(req, res) {
     try {
         let flag = req.get("flag")
         if (flag) {
-            let projects = await ProjectModel.find({ flag: flag })
+            let projects = await ProjectModel.find({ flag: flag }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
             res.status(200).json(projects)
         } else {
             let projects = await ProjectModel.find({}).populate([
@@ -65,11 +68,41 @@ async function projectsTag(req, res) {
     try {
         let tag = req.get("tag")
         if (tag) {
-            let projects = await ProjectModel.find({ tag: tag }).populate([
+            let projects1 = await ProjectModel.find({ tag: tag }).populate([
                 { path: 'author', model: 'User' },
                 { path: 'comment', populate: { path: 'user', model: 'User' } }
             ])
-            res.status(200).json(projects)
+            let projects2 = await ProjectModel.find({ title: { "$regex": '^' + tag, "$options": "i" } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let projects3 = await ProjectModel.find({ flag: { "$regex": '^' + tag, "$options": "i" } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+
+            let users1 = await UserModel.find({ name: { "$regex": '^' + tag, "$options": "i" } }, "_id")
+            let users2 = await UserModel.find({ username: { "$regex": '^' + tag, "$options": "i" } }, "_id")
+            let users3 = await UserModel.find({ email: { "$regex": '^' + tag, "$options": "i" } }, "_id")
+            let users4 = await UserModel.find({ skill: { "$regex": '^' + tag, "$options": "i" } }, "_id")
+            let users = await users1.concat(users2, users3, users4)
+            users = await [...new Set([...users1,...users2,...users3,...users4])]
+            let projects4 = await ProjectModel.find({ author: { "$in": users } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let projects = projects1.concat(projects2, projects3, projects4)
+            projects = await [...new Set([...projects1,...projects2,...projects3,...projects4])]
+
+            if (projects.length <= 1) {
+                let projects = await ProjectModel.find({}).populate([
+                    { path: 'author', model: 'User' },
+                    { path: 'comment', populate: { path: 'user', model: 'User' } }
+                ])
+                res.status(200).json(projects)
+            } else {
+                res.status(200).json(projects)
+            }
         } else {
             let projects = await ProjectModel.find({}).populate([
                 { path: 'author', model: 'User' },

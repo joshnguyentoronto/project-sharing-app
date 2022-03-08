@@ -8,6 +8,8 @@ import Login from '../../components/Login/Login';
 import SignUpForm from '../../components/SignUp/Signup';
 import UserSetUpPage from '../UserSetUpPage/UserSetUpPage';
 import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
+import TermPage from '../TermPage/TermPage'
+import PolicyPage from '../PolicyPage/PolicyPage'
 import {io} from 'socket.io-client';
 
 const socket = io()
@@ -18,6 +20,7 @@ export default class App extends Component {
     flags: ['UX/UI design', 'Software Engineer', 'Data Science', 'Digital Marketing'],
     currentFlag: '',
     currentTag: '',
+    filter: '',
     openChat: false,
     messageList: [],
 
@@ -138,6 +141,31 @@ export default class App extends Component {
       } catch(err) {
           console.log(err)
       }
+  }
+
+  filterSort = async (evt) => {
+    if (evt.target.value == 'alphabetical') {
+      let newProjects = await this.state.projects.sort((a, b) => (a.title > b.title ? 1 : -1))
+      this.setState({ filter: evt.target.value, projects: newProjects })
+    } else if (evt.target.value == 'alpha') {
+      let newProjects = await this.state.projects.sort((a, b) => (a.title > b.title ? -1 : 1))
+      this.setState({ filter: evt.target.value, projects: newProjects })
+    } else if (evt.target.value == 'recent') {
+      let newProjects = await this.state.projects.sort((a, b) => (b.date > a.date ? 1 : -1))
+      this.setState({ filter: evt.target.value, projects: newProjects })
+    } else if (evt.target.value == 'view') {
+      let newProjects = await this.state.projects.sort((a, b) => b.viewCount - a.viewCount)
+      this.setState({ filter: evt.target.value, projects: newProjects })
+    } else if (evt.target.value == 'like') {
+      let newProjects = await this.state.projects.sort((a, b) => b.likeCount - a.likeCount)
+      this.setState({ filter: evt.target.value, projects: newProjects })
+    } else if (evt.target.value == 'comment') {
+      let newProjects = await this.state.projects.sort((a, b) => b.comment.length - a.comment.length)
+      this.setState({ filter: evt.target.value, projects: newProjects })
+    } else {
+      let newProjects = await this.state.projects.sort((a, b) => b.likeCount - a.likeCount)
+      this.setState({ filter: '', projects: newProjects })
+    }
   }
 
   handleChange = (evt) => {
@@ -343,7 +371,7 @@ export default class App extends Component {
           let fetchProjectList = await fetch('/api/projects')
           let projects = await fetchProjectList.json()
           console.log(projects)
-          this.setState({ projects: projects, user: null })
+          this.setState({ filter: '', projects: projects, user: null })
         } catch(err) {
           console.log("home page error: ", err)
         }
@@ -353,7 +381,7 @@ export default class App extends Component {
           let projects = await fetchProjectList.json()
           let fetchUser = await fetch('/api/users/', { headers: { "userId": payload.user._id }})
           let user = await fetchUser.json()
-          this.setState({ projects: projects, user: user })
+          this.setState({ filter: '', projects: projects, user: user })
         } catch(err) {
           console.log("home page error: ", err)
         }
@@ -362,7 +390,7 @@ export default class App extends Component {
       try {
         let fetchProjectList = await fetch('/api/projects')
         let projects = await fetchProjectList.json()
-        this.setState({ projects: projects, user: null })
+        this.setState({ filter: '', projects: projects, user: null })
       } catch(err) {
         console.log("home page error: ", err)
       }
@@ -391,6 +419,7 @@ export default class App extends Component {
               // hoverIsLiked={this.state.hoverIsLiked}
               currentTag={this.state.currentTag}
               currentFlag={this.state.currentFlag}
+              filter={this.state.filter}
               flags={this.state.flags}
               openChat={this.state.openChat}
               messageList={this.state.messageList}
@@ -404,6 +433,7 @@ export default class App extends Component {
               hoverProject={this.hoverProject}
               filterByFlag={this.filterByFlag}
               filterByTag={this.filterByTag}
+              filterSort={this.filterSort}
               socket={socket}
               postComment={this.postComment}
               delCom={this.delCom}
@@ -455,6 +485,26 @@ export default class App extends Component {
               openChat={this.state.openChat}
               messageList={this.state.messageList}
 
+              userLogout={this.userLogout}
+              openChatList={this.openChatList}
+            />}
+          />
+          <Route 
+            path="/terms-of-service"
+            element={<TermPage 
+              user={this.state.user} 
+              openChat={this.state.openChat}
+              messageList={this.state.messageList}
+              userLogout={this.userLogout}
+              openChatList={this.openChatList}
+            />}
+          />
+          <Route 
+            path="/privacy-policy"
+            element={<PolicyPage 
+              user={this.state.user} 
+              openChat={this.state.openChat}
+              messageList={this.state.messageList}
               userLogout={this.userLogout}
               openChatList={this.openChatList}
             />}
