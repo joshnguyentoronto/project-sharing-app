@@ -15,9 +15,19 @@ export default function Filter(props) {
                 </form>
             </div>
             <div className='filter-flags'>
-                {props.flags.map(f => 
-                    <Flag filterByFlag={props.filterByFlag} key={f} flag={f} />
-                )}
+                <div className='filter-flags-container'>
+                    {props.flags.map(f => 
+                        <Flag filterByFlag={props.filterByFlag} key={f} flag={f} />
+                    )}
+                    <select className='filter-flags-filter' name='sort'>
+                        <option value="">Filter</option>
+                        <option value="alphabetical">Alphabetical</option>
+                        <option value="recent">Most Recent</option>
+                        <option value="view">Most Viewed</option>
+                        <option value="like">Most Liked</option>
+                        <option value="comment">Most Comments</option>
+                    </select>
+                </div>
             </div>
         </div>
     )

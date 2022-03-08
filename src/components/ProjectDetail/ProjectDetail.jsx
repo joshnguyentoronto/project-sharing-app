@@ -1,5 +1,5 @@
 import './ProjectDetail.css'
-import React, {useState}from 'react';
+import React, { useState, useRef }from 'react';
 import { Link } from 'react-router-dom';
 import RefProjectItem from '../RefProjectItem/RefProjectItem';
 import CommentItem from '../CommentItem/CommentItem';
@@ -8,10 +8,11 @@ import UserCard from '../UserCard/UserCard';
 import MessagePopUp from '../MessagePopUp/MessagePopUp';
 
 export default function ProjectDetail(props) {
+    const divRef = useRef()
 
     const [popUpChat, setpopUpChat] = useState(false)
 
-    function openChatBox(){
+    function openChatBox() {
         let value = !popUpChat
         setpopUpChat(value)
     }
@@ -42,7 +43,7 @@ export default function ProjectDetail(props) {
                         </div>
                     )}
                 </div>
-                <div className='project-detail-body-other'>
+                <div className='project-detail-body-other' id="toScroll" ref={divRef}>
                     <h3>You may also like</h3>
                     <button className="project-detail-body-other-userimg"><Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link> {props.project.author.length > 1 ? <span className="project-detail-body-other-username">Group Project</span> : <span className="project-detail-body-other-name">{props.project.author[0].username}</span>} </button>
                     <div className='project-detail-body-other-projects'>
@@ -64,13 +65,12 @@ export default function ProjectDetail(props) {
                         <div className='project-detail-body-foot-comment-list'>
                             {props.project.comment.map(com => <CommentItem 
                                 key={com._id} 
-                                user={com.user} 
-                                comment={com.text} 
-                                like={com.likeCount} 
-                                date={com.date}
+                                comment={com}
+                                user={props.user} 
                                 delCom={props.delCom}
-                                id={com._id}
                                 projectId={props.project._id}
+                                likeComment={props.likeComment}
+                                unlikeComment={props.unlikeComment}
                             />)}
                         </div>
                     </div>
@@ -115,7 +115,7 @@ export default function ProjectDetail(props) {
                     <button onClick={() => props.likeProject(props.project)}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
                     <button onClick={() => props.saveProject(props.project)}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
                     <button onClick={openChatBox}><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
-                    <button><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
+                    <button onClick={() => divRef.current.scrollIntoView({ behavior: "smooth" }) } ><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>
             </div>
         </div>

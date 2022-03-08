@@ -8,19 +8,20 @@ export default function Header(props) {
     return(
         <div className="header">
             <div className='header-icon'>
-                <h1>THE EXHIBIT</h1>
-            </div>
-            <div className="header-search">
-                <form autoComplete='off'  onSubmit={props.filterByTag}>
-                    <input onChange={props.handleChange} name="currentTag" className='header-search-bar' type="text" />
-                    <button onSubmit={props.filterByTag} type='submit'><img src={require('../../images/icons/search.svg')} alt="svg icon" /></button>
-                </form>
+                <Link to="/"><h1>THE EXHIBIT</h1></Link>
             </div>
             <div className='header-link-container'>
                 <Link className='header-link' to="/upload">Upload</Link>
-                <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button>
-                <button className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
-                <Link className='header-link' to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                {/* <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button> */}
+                <button onClick={() => props.openChatList()} className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
+                {props.user ? 
+                    <div className='header-link-container-user'>
+                        <Link to="/profile" ><img className='header-link-container-user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                        <Link className='header-link' onClick={props.userLogout}to="/">Logout</Link>
+                    </div>
+                    : 
+                    <Link style={{width: "120px"}} className='header-link-upload' to="/account/login">Login / Signup</Link>
+                }
             </div>
         </div>
     )
