@@ -25,6 +25,7 @@ export default function MessageBox(props) {
                     onClick={onClick}
                     messageData={messageinfo}
                     currentUser={props.currentUser}
+                    socket={props.socket}
                 />
             </div>            
         )

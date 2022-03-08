@@ -7,19 +7,18 @@ export default function HomeHeader(props) {
 
     return(
         <div className="header">
-            <div className='header-icon'>
-            </div>
+            <div className='header-empty'></div>
             <div className='header-link-container'>
-                <Link to="/upload">Upload</Link>
-                <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button>
+                <Link className='header-link-upload' to="/upload">Upload</Link>
+                {/* <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button> */}
                 <button onClick={props.openChatList} className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                 {props.user ? 
-                    <div>
-                        <Link to="/profile" ><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
-                        <Link onClick={props.userLogout}to="/">Logout</Link>
+                    <div className='header-link-container-user'>
+                        <Link to="/profile" ><img className='header-link-container-user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                        <Link className='header-link-upload' onClick={props.userLogout}to="/">Logout</Link>
                     </div>
                     : 
-                    <Link to="/account/login">Login / Signup</Link>
+                    <Link style={{width: "120px"}} className='header-link-upload' to="/account/login">Login / Signup</Link>
                 }
             </div>
         </div>

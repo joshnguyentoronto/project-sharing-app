@@ -9,32 +9,21 @@ import Footer from "../../components/Footer/Footer"
 
 export default class HomePage extends Component {
     state={
-        openChat: false,
-        messageList: [],
-    }
-
-    openChatList = async () => {
-        let value = !this.state.openChat
-        if (value){
-            let jwt = localStorage.getItem('token')
-            let fetchResponse = await fetch('/api/users/allmessages', {headers: {'Authorization': 'Bearer ' + jwt}})
-            let messages = await fetchResponse.json()
-            let array = await JSON.parse(messages)
-            this.setState({messageList: array})
-        }
-        this.setState({openChat: value})
+        // hoverIsLiked: false
+        profile: false
     }
 
     render() {
         return(
             <div className="home">
                 <HomeHeader 
-                    openChatList={this.openChatList}
+                    openChatList={this.props.openChatList}
                     userLogout={this.props.userLogout}
                     user={this.props.user}
                 />
                 <Filter handleChange={this.props.handleChange} filterByTag={this.props.filterByTag} filterByFlag={this.props.filterByFlag} flags={this.props.flags}/>
-                <ProjectList 
+                <ProjectList
+                    profile={this.state.profile}
                     viewProject={this.props.viewProject}
                     projects={this.props.projects}
                     hoverUserState={this.props.hoverUserState}
@@ -48,6 +37,7 @@ export default class HomePage extends Component {
                 />
                 {this.props.viewMode ? 
                     <ProjectDetail 
+                        user={this.props.user}
                         closeProject={this.props.closeProject} 
                         project={this.props.currentProject} 
                         refProjects={this.props.refProjects}
@@ -56,6 +46,8 @@ export default class HomePage extends Component {
                         handleChange={this.props.handleChange}
                         postComment={this.props.postComment}
                         delCom={this.props.delCom}
+                        likeComment={this.props.likeComment}
+                        unlikeComment={this.props.unlikeComment}
                         comment={this.props.comment}
                         isSaved={this.props.isSaved}
                         isLiked={this.props.isLiked}
@@ -65,11 +57,12 @@ export default class HomePage extends Component {
                     :
                     false
                 }
-                {this.state.openChat ? 
+                {this.props.openChat ? 
                     <MessageBox 
-                        messageList={this.state.messageList} 
-                        openChatList={this.openChatList}
+                        messageList={this.props.messageList} 
+                        openChatList={this.props.openChatList}
                         currentUser={this.props.user}
+                        socket={this.props.socket}
                     /> 
                     : false }
                 <Footer />

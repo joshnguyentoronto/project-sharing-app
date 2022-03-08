@@ -1,7 +1,9 @@
 const ConversationModel = require('../../models/Conversation')
+const ProjectModel = require('../../models/Project.js')
 const UserModel = require('../../models/User');
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { CoPresentSharp } = require('@mui/icons-material');
 
 
 module.exports = {
@@ -10,6 +12,7 @@ module.exports = {
     setup,
     saveOne,
     likeOne,
+    likeOneProfile,
     getAllMessages,
     getUser,
     createMessage,
@@ -19,7 +22,8 @@ module.exports = {
 }
 
 async function recieveMessage(req,res){
-
+    console.log(req.body)
+    let conversation = await ConversationModel.findById(req.body.convoId)
 }
 
 async function createConvo(req,res){
@@ -151,17 +155,98 @@ async function saveOne(req, res) {
 
 async function likeOne(req, res) {
     try {
+        let project = await ProjectModel.findById(req.body.likedPosts)
+        console.log(project)
         let user = await UserModel.findById(req.body.userId)
         if (user.likedPosts.some(l => l === req.body.likedPosts)) {
             let index = user.likedPosts.indexOf(req.body.likedPosts)
             user.likedPosts.splice(index, 1)
-            user.save()
+            await user.save()
+            project.likeCount = project.likeCount - 1
+            await project.save()
         } else {
             user.likedPosts.push(req.body.likedPosts)
-            user.save()
+            await user.save()
+            project.likeCount = project.likeCount + 1
+            await project.save()
         }
+        let projects = await ProjectModel.find({}).populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        await project.populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        const object = {
+            user: user,
+            newProject: project,
+            projectsList: projects
+        }
+        res.status(200).json(object)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
 
-        res.status(200).json(user)
+
+async function likeOneProfile(req, res) {
+    try {
+        let project = await ProjectModel.findById(req.body.likedPosts)
+        console.log(project)
+        let user = await UserModel.findById(req.body.userId)
+        if (user.likedPosts.some(l => l === req.body.likedPosts)) {
+            let index = user.likedPosts.indexOf(req.body.likedPosts)
+            user.likedPosts.splice(index, 1)
+            await user.save()
+            project.likeCount = project.likeCount - 1
+            await project.save()
+        } else {
+            user.likedPosts.push(req.body.likedPosts)
+            await user.save()
+            project.likeCount = project.likeCount + 1
+            await project.save()
+        }
+        await project.populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        if (req.body.cat == 'Liked') {
+            let idArr = user.likedPosts
+            let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let object = {
+                user: user,
+                newProject: project,
+                projectsList: projects
+            }
+            res.status(200).json(object)
+        } else if (req.body.cat == 'Saved') {
+            let idArr = user.savedPosts
+            let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let object = {
+                user: user,
+                newProject: project,
+                projectsList: projects
+            }
+            res.status(200).json(object)
+        } else if (req.body.cat == 'Projects') {
+            let projects = await ProjectModel.find({ author: [req.body.userId] }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let object = {
+                user: user,
+                newProject: project,
+                projectsList: projects
+            }
+            res.status(200).json(object)
+        }
     } catch(err) {
         res.status(400).json(err)
     }

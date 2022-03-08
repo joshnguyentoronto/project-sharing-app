@@ -1,16 +1,26 @@
 .card {
+    width: 310px;
+    height: 300px;
+    padding: 0 30px 0 0;
+    bottom: 60px;
+    left: -40px;
+    position: absolute;
+    z-index: 10;
+}
+
+.user-card-container {
     width: 280px;
     height: 300px;
-    position: absolute;
-    background-color: lightgrey;
+    background-color: white;
     padding: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    z-index: 10;
-    bottom: 60px;
-    left: -40px;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.181);
+    user-select: none;
 }
 
 #card-img {
@@ -22,8 +32,9 @@
 .card-bg {
     width: 100%;
     height: 80px;
-    background-color: grey;
+    background: url('../../images/image/prop-background.jpg') no-repeat center;
 }
+
 
 .card-name-name {
     font-size: 20px;
@@ -33,6 +44,11 @@
 .card-name-lo {
     font-size: 15px;
     margin: 2px 0;
+}
+.card-name-lo img {
+    width: 15px;
+    height: 15px;
+    margin: 0 0 -2px 0;
 }
 
 .card-stat {
@@ -58,15 +74,55 @@
 }
 
 
-.card-btn {
+.user-card-btn {
     display: flex;
     flex-direction: column;
+    margin: 0 0 10px 0;
 }
-.card-btn button {
-    height: 25px;
-    width: 130px;
+#user-card-btn-1 img {
+    width: 13px;
+    height: 13px;
+    margin: 0 0 -2px 0;
+}
+#user-card-btn-2 img {
+    width: 13px;
+    height: 13px;
+    margin: 0 0 -2px 0;
+}
+#user-card-btn-1 {
+    height: 26px;
+    width: 252px;
     margin: 5px 0 0 0;
     background-color: transparent;
-    border: 1px solid black;
+    border: 1px solid #29465B;
     border-radius: 50px;
+    display: inline;
+    color: #29465B;
+}
+#user-card-btn-2 {
+    height: 26px;
+    width: 252px;
+    margin: 5px 0 0 0;
+    background-color: transparent;
+    border: 1px solid #29465B;
+    border-radius: 50px;
+    display: inline;
+    color: #29465B;
+}
+
+#user-card-btn-1:hover {
+    color: white;
+    background-color: #29465B;
+    border: none;
+}
+#user-card-btn-2:hover {
+    color: white;
+    background-color: #29465B;
+    border: none;
+}
+#user-card-btn-1:hover img {
+    content: url('../../images/icons/follow-btn-white.svg');
+}
+#user-card-btn-2:hover img {
+    content: url('../../images/icons/mess-btn-2.svg');
 }

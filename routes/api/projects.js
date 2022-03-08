@@ -13,5 +13,7 @@ router.get('/liked', projectsCtrl.projectsLiked)
 router.post('/new', projectsCtrl.createProject)
 router.post('/comment/new', projectsCtrl.createComment)
 router.post('/comment/delete', projectsCtrl.deleteComment)
+router.post('/comment/like', projectsCtrl.likeComment)
+router.post('/comment/unlike', projectsCtrl.unlikeComment)
 
 module.exports = router;

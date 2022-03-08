@@ -1,27 +1,45 @@
 .project-list-item {
-    border: 1px solid white;
-    border-radius: 5px;
+    border: none;
     width: 310px;
     height: 310px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 254px auto;
+    position: relative;
 }
 
 .project-list-item-img {
     position: relative;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-radius: 5px;
     width: 100%;
     height: 100%;
     background-color: grey;
 }
+
 
 .placeholder-img {
     display: block;
     background: rgba(226, 201, 255, 0.616);
     width: 100%;
     height: 100%;
+    overflow: hidden;
+}
+.placeholder-img img {
+    width: 100%;
+    height: 122%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+    display: block;
+}
+.placeholder-img .shader {
+    position: absolute;
+    inset: 0;
+    transition: 200ms ease-in-out;
+}
+.project-list-item-img:hover .shader {
+    background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0));
 }
 
 .project-list-item-img button:hover {
@@ -37,12 +55,18 @@
     gap: 16px;
     visibility: hidden;
     z-index: 10;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
 }
-
 .img-bottom-icons >span {
     display: flex;
     align-items: center;
     gap: 4px;
+}
+.img-bottom-icons span img {
+    width: 20px;
+    height: 20px;
 }
 
 .img-save-button {
@@ -58,11 +82,6 @@
     visibility: visible;
 }
 
-.project-list-item-foot {
-    display: flex;
-    align-items: center;
-}
-
 .user-card {
     visibility: hidden;
     position: relative;
@@ -71,4 +90,24 @@
 }
 .profile-btn-hover:hover .user-card {
     visibility: visible;
+}
+.project-list-item-foot {
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    background-color: #f8f8ff;
+}
+
+
+
+.project-list-item-foot-name {
+    text-align: left;
+}
+.project-list-item-foot-name p:nth-child(1) {
+    font-size: 18px;
+    font-weight: 600;
+}
+.project-list-item-foot-name p:nth-child(2) {
+    font-size: 14px;
+    
 }

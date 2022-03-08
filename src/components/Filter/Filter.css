@@ -1,9 +1,9 @@
 .filter {
     width: 100vw;
-    height: 250px;
-    margin: 80px 0;
+    margin: 100px 0;
     display: grid;
     place-content: center;
+    user-select: none;
 }
 
 .filter-name {
@@ -11,35 +11,69 @@
     place-content: center;
 }
 .filter-name h1 {
-    font-size: 32px;
+    font-size: 48px;
     letter-spacing: 10%;
     font-family: Arial;
-
+    margin: 0 0 30px 0;
 }
 
 .filter-search {
     display: grid;
     place-content: center;
+    width: 100vw;
+    margin: 0 auto;
 }
-.filter-search button {
+.filter-search form {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 100px;
+}
+.filter-search form button {
     border: none;
     background-color: transparent;
+    margin-left: -50px;
 }
 
 .filter-search-bar {
-    background-color: lightgray;
-    border: none;
+    background-color: transparent;
+    border: 2px solid black;
     border-radius: 10px;
-    width: 700px;
+    max-width: 1089px;
+    min-width: 300px;
+    width: 100%;
     line-height: 30px;
     height: 50px;
-    margin: 30px 0;
+    margin: 24px 0;
     font-size: 25px;
     padding: 0 10px;
 }
 
 .filter-flags {
     display: flex;
+    padding: 0 100px;
+    width: 100vw;
+    justify-content: center;
+
+}
+.filter-flags-container {
+    display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1089px;
+    flex-wrap: wrap;
+}
+.filter-flags-filter {
+    width: 199px;
+    height: 50px;
+    background-color: #29465B;
+    color: white;
+    font-size: 18px;
+    display: grid;
+    place-content: center;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
 }
