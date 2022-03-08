@@ -25,7 +25,7 @@ export default class App extends Component {
     isLiked: false,
     hoverUserState: false,
     hoverUser: {},
-    hoverIsLiked: false,
+    // hoverIsLiked: false,
   }
 
   // create a method that set currentProject when hover
@@ -93,18 +93,18 @@ export default class App extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   };
 
-  saveProject = async () => {
+  saveProject = async (project) => {
     try {
         let fetchResponse = await fetch('/api/users/save', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({savedPosts: this.state.currentProject._id, userId: this.state.user._id})
+            body: JSON.stringify({savedPosts: project._id, userId: this.state.user._id})
         })
         let user = await fetchResponse.json()
-        if (user.savedPosts.indexOf(this.state.currentProject._id) != -1 ) {
-          this.setState({ isSaved: true })
-        } else if (user.savedPosts.indexOf(this.state.currentProject._id) == -1 ) {
-          this.setState({ isSaved: false })
+        if (user.savedPosts.indexOf(project._id) != -1 ) {
+          this.setState({ isSaved: true, user: user  })
+        } else if (user.savedPosts.indexOf(project._id) == -1 ) {
+          this.setState({ isSaved: false, user: user  })
         }
         console.log("Success:", user)
     } catch (err) {
@@ -112,17 +112,17 @@ export default class App extends Component {
     }
   }
 
-  likeProject = async () => {
+  likeProject = async (project) => {
     try {
         let fetchResponse = await fetch('/api/users/like', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({likedPosts: this.state.currentProject._id, userId: this.state.user._id})
+            body: JSON.stringify({likedPosts: project._id, userId: this.state.user._id})
         })
         let user = await fetchResponse.json()
-        if (user.likedPosts.indexOf(this.state.currentProject._id) != -1 ) {
+        if (user.likedPosts.indexOf(project._id) != -1 ) {
             this.setState({ isLiked: true, user: user })
-        } else if (user.likedPosts.indexOf(this.state.currentProject._id) == -1 ) {
+        } else if (user.likedPosts.indexOf(project._id) == -1 ) {
             this.setState({ isLiked: false, user: user })
         }
         console.log("Success:", user)
@@ -132,11 +132,13 @@ export default class App extends Component {
   }
 
   hoverProject = async (project) => {
-    if (this.state.user.likedPosts.indexOf(project._id) == -1) {
-      this.setState({ hoverIsLiked: false, currentProject: project })
-    } else {
-      this.setState({ hoverIsLiked: true, currentProject: project })
-    }
+    this.setState({ currentProject: project })
+    // console.log(this.state.currentProject)
+    // if (this.state.user.likedPosts.indexOf(project._id) == -1) {
+    //   this.setState({ hoverIsLiked: false, currentProject: project })
+    // } else {
+    //   this.setState({ hoverIsLiked: true, currentProject: project })
+    // }
     
     //     try {
     //         let fetchUser = await fetch('/api/users/', { headers: { "userId": this.props.user._id }})
@@ -188,7 +190,6 @@ export default class App extends Component {
   }
 
   delCom = async (arr) => {
-      console.log(arr)
       try {
           let fetchResponse = await fetch('/api/projects/comment/delete', {
               method: "POST",
@@ -203,7 +204,7 @@ export default class App extends Component {
           if (!fetchResponse.ok) {
               throw new Error('Fetch failed - Bad request')
           } else {
-              this.setState({ currentProject: project, comment: '' })
+              this.setState({ currentProject: project })
           }
       } catch (err) {
           console.log(err)
@@ -225,17 +226,20 @@ export default class App extends Component {
           console.log("home page error: ", err)
         }
       } else {
-        let userDoc = payload.user
         try {
           let fetchProjectList = await fetch('/api/projects')
           let projects = await fetchProjectList.json()
-          this.setState({ projects: projects, user:userDoc })
+          let fetchUser = await fetch('/api/users/', { headers: { "userId": payload.user._id }})
+          let user = await fetchUser.json()
+          this.setState({ projects: projects, user: user })
         } catch(err) {
           console.log("home page error: ", err)
         }
       }
     }
   }
+
+  
 
   render() {
     return (
@@ -254,7 +258,7 @@ export default class App extends Component {
               isLiked={this.state.isLiked}
               hoverUserState={this.state.hoverUserState}
               hoverUser={this.state.hoverUser}
-              hoverIsLiked={this.state.hoverIsLiked}
+              // hoverIsLiked={this.state.hoverIsLiked}
               currentTag={this.state.currentTag}
               currentFlag={this.state.currentFlag}
               flags={this.state.flags}
@@ -285,7 +289,7 @@ export default class App extends Component {
               isLiked={this.state.isLiked}
               hoverUserState={this.state.hoverUserState}
               hoverUser={this.state.hoverUser}
-              hoverIsLiked={this.state.hoverIsLiked}
+              // hoverIsLiked={this.state.hoverIsLiked}
 
               userLogout={this.userLogout}
               viewProject={this.viewProject}

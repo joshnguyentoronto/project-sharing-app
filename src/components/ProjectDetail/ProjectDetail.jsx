@@ -113,8 +113,8 @@ export default function ProjectDetail(props) {
                             <UserCard user={props.project.author[0]} />
                         </div>
                     </div>
-                    <button onClick={() => props.likeProject()}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
-                    <button onClick={() => props.saveProject()}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
+                    <button onClick={() => props.likeProject(props.project)}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
+                    <button onClick={() => props.saveProject(props.project)}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
                     <button onClick={openChatBox}><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                     <button><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>

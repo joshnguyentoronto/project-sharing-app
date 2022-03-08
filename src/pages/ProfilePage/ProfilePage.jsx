@@ -25,9 +25,32 @@ export default class ProfilePage extends Component {
             console.log("home page error: ", err)
         }
     }
+    
+    likedProjects = async () => {
+        try {
+            console.log(this.props.user)
+            let fetchProjectList = await fetch('/api/projects/liked', {headers: { "user": this.props.user._id }})
+            let projects = await fetchProjectList.json()
+            this.setState({ projects: projects })
+        } catch(err) {
+            console.log("home page error: ", err)
+        }
+    }
+    
+    myProjects = async () => {
+        try {
+            console.log(this.props.user)
+            let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": this.props.user._id }})
+            let projects = await fetchProjectList.json()
+            this.setState({projects: projects})
+        } catch(err) {
+            console.log("home page error: ", err)
+        }
+    }
 
     async componentDidMount() {
         try {
+            console.log(this.props.user)
             let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": this.props.user._id }})
             let projects = await fetchProjectList.json()
             this.setState({projects: projects})
@@ -44,7 +67,10 @@ export default class ProfilePage extends Component {
                     <ul className="ProfileCategory">
                         <li 
                             className={"Projects" === this.state.activeCategory ? 'active' : ''}
-                            onClick={() => this.handleSetActiveCat("Projects")}
+                            onClick={() => {
+                                this.handleSetActiveCat("Projects")
+                                this.myProjects()
+                            }}
                         >Projects</li>
                         <li 
                             className={"Saved" === this.state.activeCategory ? 'active' : ''}
@@ -55,7 +81,10 @@ export default class ProfilePage extends Component {
                         >Saved</li>
                         <li 
                             className={"Liked" === this.state.activeCategory ? 'active' : ''}
-                            onClick={() => this.handleSetActiveCat("Liked")}
+                            onClick={() => {
+                                this.handleSetActiveCat("Liked")
+                                this.likedProjects()
+                            }}
                         >Liked</li>
                         <li 
                             className={"About" === this.state.activeCategory ? 'active' : ''}
@@ -75,8 +104,9 @@ export default class ProfilePage extends Component {
                     </div>
                     :
                     <ProjectList 
+                        user={this.props.user}
                         projects={this.state.projects} 
-                        hoverIsLiked={this.props.hoverIsLiked}
+                        // hoverIsLiked={this.props.hoverIsLiked}
                         hoverProject={this.props.hoverProject} 
                         hoverUser={this.props.hoverUser}
                         hoverUserState={this.props.hoverUserState}

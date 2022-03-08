@@ -8,6 +8,7 @@ module.exports = {
     projectsRef,
     projectsUser,
     projectsSaved,
+    projectsLiked,
     createProject,
     createComment,
     deleteComment,
@@ -29,8 +30,6 @@ async function projectsUser(req, res) {
     try {
         let userId = req.get("user")
         if (userId) {
-            let user = await UserModel.findById(userId)
-            // console.log(user)
             let projects = await ProjectModel.find({ author: [userId] }).populate([
                 { path: 'author', model: 'User' },
                 { path: 'comment', populate: { path: 'user', model: 'User' } }
@@ -118,6 +117,22 @@ async function projectsSaved(req, res) {
     }
 }
 
+async function projectsLiked(req, res) {
+    try {
+        let userId = req.get("user")
+        let user = await UserModel.findById(userId)
+        let idArr = user.likedPosts
+        let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        console.log(projects)
+        res.status(200).json(projects)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
 
 async function createProject(req, res) {
     try {
@@ -151,11 +166,32 @@ async function createComment(req, res) {
 
 async function deleteComment(req, res) {
     try {
-        let newProject = await ProjectModel.findByIdAndUpdate(
-            req.body.projectId,
-            { "comment": { "$pull": {"_id": req.body.commentId} } }
-        )
-        console.log(newProject)
+        // let newProject = await ProjectModel.findByIdAndUpdate(
+        //     req.body.projectId,
+        //     { "$pull": { "comment": [{ "_id": req.body.commentId }] } }
+        // )
+        let newProject = await ProjectModel.findById( req.body.projectId )
+        newProject.comment.remove({ _id: req.body.commentId })
+        newProject.save()
+        if (newProject.comment.length) {
+            let project = await newProject.populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            res.status(200).json(project);
+        } else {
+            let project = await newProject.populate('author')
+            res.status(200).json(project);
+        }
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function likeComment(req, res) {
+    try {
+        let newProject = await ProjectModel.findById( req.body.projectId )
+        
         let project = await newProject.populate([
             { path: 'author', model: 'User' },
             { path: 'comment', populate: { path: 'user', model: 'User' } }
@@ -166,3 +202,18 @@ async function deleteComment(req, res) {
     }
 }
 
+
+async function unlikeComment(req, res) {
+    try {
+        let newProject = await ProjectModel.findById( req.body.projectId )
+        
+
+        let project = await newProject.populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        res.status(200).json(project);
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
