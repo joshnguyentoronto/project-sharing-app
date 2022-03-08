@@ -50,11 +50,26 @@ export default class App extends Component {
 
   // create a method that set currentProject when hover
   viewProject = async (project) => {
+
+    
+    // try {
+    //   let fetchOneProject = await fetch('api/projects/getOne', {headers: {"projectId": project._id }})
+    //   let oneProject = await fetchOneProject.json()
+    //   console.log("that one project", oneProject)
+    //   this.setState({currentProject: oneProject})
+    // } catch(err) {
+    //   console.log(err)
+    // }
+
     if (!this.state.user) {
         try {
             let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
             let refProjects = await fetchRefProjectList.json()
-            this.setState({ currentProject: project, viewMode: true, refProjects: refProjects })
+            let fetchOneProject = await fetch('api/projects/getOne', {headers: {"projectId": project._id }})
+            let oneProject = await fetchOneProject.json()
+            let fetchAllProjects = await fetch('/api/projects')
+            let allProjects = await fetchAllProjects.json()
+            this.setState({ currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
         } catch(err) {
             console.log(err)
         }
@@ -64,21 +79,29 @@ export default class App extends Component {
         let user = await fetchUser.json()
         let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
         let refProjects = await fetchRefProjectList.json()
+        let fetchOneProject = await fetch('api/projects/getOne', {headers: {"projectId": project._id }})
+        let oneProject = await fetchOneProject.json()
+        let fetchAllProjects = await fetch('/api/projects')
+        let allProjects = await fetchAllProjects.json()
+        console.log("that one project", oneProject)
+      
         if (user.savedPosts.indexOf(project._id) != -1 ) {
-            if (user.likedPosts.indexOf(project._id) != -1 ) {
-                this.setState({ isLiked: true, isSaved: true, currentProject: project, viewMode: true, refProjects: refProjects })
-            } else if (user.likedPosts.indexOf(project._id) == -1 ) {
-                this.setState({ isLiked: false, isSaved: true, currentProject: project, viewMode: true, refProjects: refProjects })
-            }
+          if (user.likedPosts.indexOf(project._id) != -1 ) {
+            this.setState({ isLiked: true, isSaved: true, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+          } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+            this.setState({ isLiked: false, isSaved: true, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+          }
         } else if (user.savedPosts.indexOf(project._id) == -1 ) {
-            if (user.likedPosts.indexOf(project._id) != -1 ) {
-                this.setState({ isLiked: true, isSaved: false, currentProject: project, viewMode: true, refProjects: refProjects })
-            } else if (user.likedPosts.indexOf(project._id) == -1 ) {
-                this.setState({ isLiked: false, isSaved: false, currentProject: project, viewMode: true, refProjects: refProjects })
+          if (user.likedPosts.indexOf(project._id) != -1 ) {
+                this.setState({ isLiked: true, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+                
+              } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+                this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+              }
+            } else {
+              this.setState({ currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
             }
-        } else {
-            this.setState({ currentProject: project, viewMode: true, refProjects: refProjects })
-        }
+      console.log("current project", this.state.currentProject)
     } catch(err) {
         console.log(err)
     }
@@ -166,6 +189,7 @@ export default class App extends Component {
   }
 
   likeProject = async (obj) => {
+    console.log(obj.project)
     if (obj.profile) {
       let project = obj.project
       try {
@@ -177,6 +201,7 @@ export default class App extends Component {
         let object = await fetchResponse.json()
         let user = object.user
         let newProject = object.newProject
+        console.log(newProject)
         let newprojects = object.projectsList
         if (user.likedPosts.indexOf(newProject._id) != -1 ) {
             this.setState({ isLiked: true, user: user, projects: newprojects, currentProject: newProject })
@@ -204,7 +229,7 @@ export default class App extends Component {
         } else if (user.likedPosts.indexOf(newProject._id) == -1 ) {
             this.setState({ isLiked: false, user: user, projects: newprojects, currentProject: newProject })
         }
-        console.log("Success:", user)
+        console.log("Success:", user, )
       } catch (err) {
           console.log(err)
       }
