@@ -21,7 +21,6 @@ export default class HomePage extends Component {
             let fetchResponse = await fetch('/api/users/allmessages', {headers: {'Authorization': 'Bearer ' + jwt}})
             let messages = await fetchResponse.json()
             let array = await JSON.parse(messages)
-            console.log(array)
             this.setState({messageList: array})
         }
         this.setState({openChat: value})

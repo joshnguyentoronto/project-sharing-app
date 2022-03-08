@@ -12,7 +12,46 @@ module.exports = {
     likeOne,
     getAllMessages,
     getUser,
-    createMessage
+    createMessage,
+    createConvo,
+    recieveMessage,
+}
+
+async function recieveMessage(req,res){
+
+}
+
+async function createConvo(req,res){
+    let conversation = await ConversationModel.find({users: [req.user._id, req.body.recipient]})
+    if (conversation.length == 1){
+        let newMessage = {
+            text: req.body.text,
+            sender: req.user._id,
+            recipient: req.body.recipient,
+            date: new Date() 
+        }
+        conversation[0].messages.push(newMessage)
+        conversation[0].save()
+        res.status(200).json()
+    } else{
+        try {
+            ConversationModel.create({
+                users: [
+                    req.user._id,
+                    req.body.recipient,
+                ],
+                messages: [{
+                    text: req.body.text,
+                    sender: req.user._id,
+                    recipient: req.body.recipient,
+                    date: new Date ()
+                }]
+            })
+            res.status(200).json()
+        } catch(err){
+            res.status(400).json(err)
+        }
+    }
 }
 
 async function createMessage(req,res){
@@ -31,7 +70,6 @@ async function createMessage(req,res){
     }
     conversation.messages.push(newMessage)
     conversation.save()
-    console.log(conversation)
     res.status(200).json(JSON.stringify(conversation))
 }
 

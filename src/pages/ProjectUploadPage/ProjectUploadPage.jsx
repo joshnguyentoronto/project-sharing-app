@@ -192,7 +192,7 @@ export default class ProjectUploadPage extends Component {
                     <h3>Upload a Project</h3>
                     <div>
                         <div  className="upload-img">
-                            <input className="input-img" type="file" name="img" accept="image/*" />
+                            <input className="input-img" type="file" name="img" accept="image/*" multiple />
                         </div>
                         <div>
                             <p>Title</p>

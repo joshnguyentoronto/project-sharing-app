@@ -8,6 +8,8 @@ import MessageBubble from '../MessageBubble/MessageBubble'
 import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack'
+import {io} from 'socket.io-client';
+const socket = io()
 
 
 export default function MessageListItem(props) {
@@ -18,9 +20,32 @@ export default function MessageListItem(props) {
         setDraftMessage(e.target.value)
     };
 
+    async function recieveMessage(){
+        let jwt = localStorage.getItem('token')
+        let fetchResponse = await fetch('/api/users/recieve/message', {
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + jwt,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                convoId: props.messageData._id,
+            })
+        })
+        console.log(fetchResponse.ok)
+                
+        let jsonResponse = await fetchResponse.json()
+        let parsed = await JSON.parse(jsonResponse)
+        setListofMessages(parsed.messages)
+        setDraftMessage('')
+    }
+
+    socket.on('add-message', function (data){
+        recieveMessage()
+    })
+
     async function sendMessage(e){
         e.preventDefault();
-        console.log('submit button pressed')
         let jwt = localStorage.getItem('token')
         let fetchResponse = await fetch('/api/users/sendmessage',{
             method: "POST",
@@ -40,6 +65,11 @@ export default function MessageListItem(props) {
         let parsed = await JSON.parse(jsonResponse)
         setListofMessages(parsed.messages)
         setDraftMessage('')
+
+        socket.emit('add-message', {
+            package: 'sent'
+        })
+
     }
 
     return(

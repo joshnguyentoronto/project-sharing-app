@@ -6,7 +6,11 @@ require('dotenv').config()
 require('./config/database')
 
 const app = express();
-// const http = require('http')
+const http = require('http')
+const server = http.Server(app)
+
+const io = require('./io')
+io.attach(server)
 
 
 app.use(logger('dev'));
@@ -31,14 +35,8 @@ app.get('/*', function(req, res) {
 // development to avoid collision with React's dev server
 const port = process.env.PORT || 3001;
 
-app.listen(port, function() {
+server.listen(port, function() {
     console.log(`Express app running on port ${port}`)
 });
 
-// const { Server } = require("socket.io")
-// const io = new Server(server)
-
-// io.on('connection', (socket) => {
-//     console.log('a user connected')
-// })
 

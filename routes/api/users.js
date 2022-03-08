@@ -11,6 +11,8 @@ router.use(require('../../config/auth'))
 router.post('/setup',usersCtrl.setup)
 router.get('/allmessages', usersCtrl.getAllMessages)
 router.post('/sendmessage', usersCtrl.createMessage)
+router.post('/startconvo', usersCtrl.createConvo)
+router.get('/recieve/message', usersCtrl.recieveMessage)
 
 router.post('/save', usersCtrl.saveOne)
 router.post('/like', usersCtrl.likeOne)

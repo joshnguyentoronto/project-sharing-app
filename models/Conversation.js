@@ -11,8 +11,7 @@ const messageSchema = new Schema({
 })
 const conversationSchema = new Schema({
     users: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-    messages: [messageSchema],
-    lastMessage: String,  
+    messages: [messageSchema], 
 }, {
     timestamps: true
 })
