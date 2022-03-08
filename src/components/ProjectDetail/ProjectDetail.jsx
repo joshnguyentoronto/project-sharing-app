@@ -12,7 +12,6 @@ export default function ProjectDetail(props) {
     const [popUpChat, setpopUpChat] = useState(false)
 
     function openChatBox(){
-        console.log('hit')
         let value = !popUpChat
         setpopUpChat(value)
     }
@@ -27,9 +26,9 @@ export default function ProjectDetail(props) {
             <div className='project-detail-body'>
                 {popUpChat ?
                 <MessagePopUp
-                    name={'Placeholdername Change'}
-                    avatar={'placeholder'}
+                    author={props.project.author[0]}
                     closeChatBox={openChatBox}
+                    setpopUpChat={setpopUpChat}
                 /> :
                 false
                 }

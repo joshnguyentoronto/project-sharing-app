@@ -8,6 +8,9 @@ import Login from '../../components/Login/Login';
 import SignUpForm from '../../components/SignUp/Signup';
 import UserSetUpPage from '../UserSetUpPage/UserSetUpPage';
 import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
+// import {io} from 'socket.io-client';
+// const socket = io()
+
 
 export default class App extends Component {
   state = {
@@ -27,6 +30,7 @@ export default class App extends Component {
     hoverUser: {},
     hoverIsLiked: false,
   }
+  
 
   // create a method that set currentProject when hover
   viewProject = async (project) => {

@@ -6,18 +6,18 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { TextField, InputAdornment } from '@mui/material';
 
+
 export default function MessageBox(props) {
     const [messageData, setMessageData] = useState(false)
     const [messageinfo, setmessageInfo] = useState('')
-
+    
     function onClick(data){
         let value = !messageData
         setmessageInfo(data)
         setMessageData(value)
     }
-
+    
     if (messageData){
-        console.log('specific person view')
         return (
             <div className='message-container'>
                 <MessageListItem

@@ -10,9 +10,22 @@ export default function MessagePopUp(props) {
 
     const [draftmessage, setdraftMessage] = useState('')
 
-    function sendMessage(e){
+    async function sendMessage(e){
         e.preventDefault();
-        console.log('crazy')
+        let jwt = localStorage.getItem('token')
+        let fetchResponse = await fetch('/api/users/startconvo',{
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + jwt,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                text: draftmessage,
+                recipient: props.author._id
+            })
+        })
+        setdraftMessage('')
+        props.setpopUpChat(false)
     }
 
     return (
@@ -20,11 +33,12 @@ export default function MessagePopUp(props) {
             <CloseIcon className="close" onClick={props.closeChatBox}/>
             <div className='dp-container'>
                 <Avatar className="dp" src={require('../../images/image/no_profile_image.png')}/>
-                <p className='chat-name'>{props.name}</p>
+                <p className='chat-name'>{props.author.name}</p>
             </div>
             <form onSubmit={sendMessage}>
                 <TextField 
                     fullWidth
+                    value={draftmessage}
                     onChange={(e) => setdraftMessage(e.target.value)}
                 />
                 <br></br>
