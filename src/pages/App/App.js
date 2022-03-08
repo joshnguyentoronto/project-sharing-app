@@ -8,6 +8,9 @@ import Login from '../../components/Login/Login';
 import SignUpForm from '../../components/SignUp/Signup';
 import UserSetUpPage from '../UserSetUpPage/UserSetUpPage';
 import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
+import EditProfilePage from '../EditProfilePage/EditProfilePage';
+// import {io} from 'socket.io-client';
+// const socket = io()
 import {io} from 'socket.io-client';
 
 const socket = io()
@@ -31,7 +34,6 @@ export default class App extends Component {
     isLiked: false,
     hoverUserState: false,
     hoverUser: {},
-    // hoverIsLiked: false,
   }
   
   openChatList = async () => {
@@ -211,24 +213,6 @@ export default class App extends Component {
 
   hoverProject = async (project) => {
     this.setState({ currentProject: project })
-    // console.log(this.state.currentProject)
-    // if (this.state.user.likedPosts.indexOf(project._id) == -1) {
-    //   this.setState({ hoverIsLiked: false, currentProject: project })
-    // } else {
-    //   this.setState({ hoverIsLiked: true, currentProject: project })
-    // }
-    
-    //     try {
-    //         let fetchUser = await fetch('/api/users/', { headers: { "userId": this.props.user._id }})
-    //         let user = await fetchUser.json()
-    //         if (user.likedPosts.indexOf(project._id) != -1 ) {
-    //             this.setState({ hoverIsLiked: true })
-    //         } else if (user.likedPosts.indexOf(project._id) == -1 ) {
-    //             this.setState({ hoverIsLiked: false, currentProject: project })
-    //         }
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
   }
 
   setUserInState = (incomingUserData) => {
@@ -287,6 +271,25 @@ export default class App extends Component {
           console.log(err)
       }
   }
+
+  submitProfile = async (postBody) => {
+    const fetchResponse = await fetch('/api/users/edit', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "userId": this.state.user._id
+        },
+        body: JSON.stringify(postBody)
+    })
+    let user = await fetchResponse.json()
+    if (!fetchResponse.ok) {
+      throw new Error('Fetch failed - Bad request')
+    } else {
+      const hiddenLink = document.getElementById('hidden-link')
+      hiddenLink.click()
+      this.setState({ user: user}) 
+    }
+}
 
   likeComment = async (arr) => {
     try {
@@ -388,7 +391,7 @@ export default class App extends Component {
               isLiked={this.state.isLiked}
               hoverUserState={this.state.hoverUserState}
               hoverUser={this.state.hoverUser}
-              // hoverIsLiked={this.state.hoverIsLiked}
+    
               currentTag={this.state.currentTag}
               currentFlag={this.state.currentFlag}
               flags={this.state.flags}
@@ -425,8 +428,6 @@ export default class App extends Component {
               isLiked={this.state.isLiked}
               hoverUserState={this.state.hoverUserState}
               hoverUser={this.state.hoverUser}
-              // hoverIsLiked={this.state.hoverIsLiked}
-
               userLogout={this.userLogout}
               viewProject={this.viewProject}
               closeProject={this.closeProject}
@@ -442,6 +443,10 @@ export default class App extends Component {
               likedProjects={this.likedProjects}
               myProjects={this.myProjects}
             />}
+          />
+          <Route 
+            path="/profile/edit"
+            element={<EditProfilePage user={this.state.user}  submitProfile={this.submitProfile}/>}
           />
           <Route path="account" element={<AccountPage/>}>
             <Route path="login" element={<Login setUserInState={this.setUserInState}/>}/>
@@ -464,6 +469,7 @@ export default class App extends Component {
             element={<Navigate to="/" />}
           />
         </Routes>
+        <Link id="hidden-link" to="/profile"></Link>
       </main>
     );
   }

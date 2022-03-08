@@ -13,29 +13,6 @@ export default class HomePage extends Component {
         profile: false
     }
 
-    // async componentDidUpdate(prevProps){
-    //     console.log(prevProps)
-    //     console.log(this.props.user)
-    //     // if (this.props.user.likedPosts !== prevProps) {
-    //     //     this.setState({ hoverIsLiked: true })
-    //     // }
-    //     // if (this.state.user.likedPosts.indexOf(this.state.currentProject._id) == -1) {
-    //     //   this.setState({ hoverIsLiked: false})
-    //     // } else {
-    //     //   this.setState({ hoverIsLiked: true})
-    //     // }
-    //   }
-
-    //   async componentDidMount() {
-    //       console.log(this.props)
-    //     //   if (this.props.user.likedPosts.indexOf(this.props.currentProject._id) == -1) {
-    //     //   this.setState({ hoverIsLiked: false})
-    //     // } else {
-    //     //   this.setState({ hoverIsLiked: true})
-    //     // }
-    //   }
-
-
     render() {
         return(
             <div className="home">
@@ -57,7 +34,6 @@ export default class HomePage extends Component {
                     isSaved={this.props.isSaved}
                     isLiked={this.props.isLiked}
                     user={this.props.user} 
-                    // hoverIsLiked={this.props.hoverIsLiked}
                 />
                 {this.props.viewMode ? 
                     <ProjectDetail 
