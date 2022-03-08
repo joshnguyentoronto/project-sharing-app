@@ -9,6 +9,7 @@ router.get('/tag', projectsCtrl.projectsTag)
 router.get('/ref', projectsCtrl.projectsRef)
 router.get('/saved', projectsCtrl.projectsSaved)
 router.get('/liked', projectsCtrl.projectsLiked)
+router.get('/getOne', projectsCtrl.getOne)
 
 router.post('/new', projectsCtrl.createProject)
 router.post('/comment/new', projectsCtrl.createComment)

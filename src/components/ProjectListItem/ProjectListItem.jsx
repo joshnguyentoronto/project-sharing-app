@@ -4,24 +4,6 @@ import { Link } from 'react-router-dom'
 import UserCard from '../UserCard/UserCard'
 
 export default class ProjectListItem extends Component {
-    // state = {
-    //     hoverIsLiked: false
-    // }
-
-
-    
-    // componentDidMount() {
-    //     console.log("fdasfgagEGG",this.props.user)
-    //     console.log("this is project", this.props.project)
-    //     console.log(this.props.isLiked)
-    //     if (this.props.user.likedPosts.indexOf(this.props.project._id) == -1) {
-    //         console.log("is not in")
-    //         this.setState({ hoverIsLiked: false})
-    //     } else {
-    //         console.log("is in the liked post")
-    //         this.setState({ hoverIsLiked: true})
-    //     }
-    // }
 
     render() {
         return(

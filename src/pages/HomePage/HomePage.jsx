@@ -40,7 +40,6 @@ export default class HomePage extends Component {
                     isSaved={this.props.isSaved}
                     isLiked={this.props.isLiked}
                     user={this.props.user} 
-                    // hoverIsLiked={this.props.hoverIsLiked}
                 />
                 {this.props.viewMode ? 
                     <ProjectDetail 

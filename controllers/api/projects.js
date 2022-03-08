@@ -14,6 +14,7 @@ module.exports = {
     deleteComment,
     likeComment,
     unlikeComment,
+    getOne
 }
 
 async function projectsIndex(req, res) {
@@ -250,6 +251,18 @@ async function unlikeComment(req, res) {
             { path: 'comment', populate: { path: 'user', model: 'User' } }
         ])
         res.status(200).json(project);
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function getOne(req, res) {
+    try {
+        let projectId = req.get("projectId")
+        let project = await ProjectModel.findById(projectId)
+        project.viewCount += 1
+        await project.save()
+        res.status(200).json(project)
     } catch(err) {
         res.status(400).json(err)
     }
