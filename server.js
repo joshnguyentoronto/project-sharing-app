@@ -7,10 +7,9 @@ require('./config/database')
 
 const app = express();
 const http = require('http')
-const server = http.Server(app)
-
-const io = require('./io')
-io.attach(server)
+const server = http.createServer(app)
+const { Server } = require("socket.io")
+const io = new Server(server)
 
 
 app.use(logger('dev'));
@@ -29,6 +28,28 @@ app.use('/api/users', require('./routes/api/users.js'))
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+io.on('connection', (socket) => {
+    console.log('a user is connected')
+
+//     // socket.on('setup', function(userData){
+//     //     socket.join(userData._id)
+//     //     console.log(userData._id)
+//     //     socket.emit('connected')
+//     //     io.emit('add-message', data)
+//     // })
+
+    socket.on('join chat', (room) => {
+        socket.join(room)
+        console.log('User joined room: ' + room)
+    })
+
+    socket.on('new message', (convoObj) => {
+        console.log('new message socket hit')
+        socket.to(convoObj._id).emit("message recieved", convoObj)
+    })
+
+})
 
 
 // Configure to use port 3001 instead of 3000 during
