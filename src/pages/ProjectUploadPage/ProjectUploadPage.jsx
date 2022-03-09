@@ -13,8 +13,6 @@ export default class ProjectUploadPage extends Component {
         currentTag: '',
         projects: [],
         tagItem: '',
-
-        // author: this.props.user._id,
         author: '',
         title: '',
         flag: 'UX/UI design',
@@ -28,7 +26,6 @@ export default class ProjectUploadPage extends Component {
     }
 
 
-    
     handleChange = (evt) => {
         if (evt.target.name == "img"){
             console.log(evt.target.files)
@@ -63,46 +60,44 @@ export default class ProjectUploadPage extends Component {
         } else {
             if (window.confirm("Your project will be published. Do you want to continue ?")) {
                 try {
-                    let jwt = localStorage.getItem('token')
-                    let formData = new FormData()
-                    // formData.append('author', this.props.user._id)
-                    // formData.append('title', this.state.title)
-                    // formData.append('text', this.state.text)
-                    // formData.append('projectLink', this.state.link)
-                    // formData.append('flag', this.state.flag,)
-                    // formData.append('tag', this.state.tag)
+                    let imageArray = []
                     for(let i=0; i < this.state.imageFiles.length; i++){
-                        let key ='image' + i
-                        formData.append( key, this.state.imageFiles[i])
+                        let {url} = await fetch("/s3Url").then(res => res.json())
+                        let file = this.state.imageFiles[i].file
+                        let sendPhoto = await fetch(url,{
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            },
+                            body: file
+                        })
+                        const imageUrl = url.split('?')[0]
+                        imageArray.push(imageUrl)
                     }
-                    const fetchResponse = await fetch('/api/projects/photo', {
+
+                    let jwt = localStorage.getItem('token')
+                    const sendProjectData = await fetch('/api/projects/new',{
                         method: 'POST',
-                        body: formData
+                        headers: {
+                            'Authorization': 'Bearer ' + jwt,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            title: this.state.title,
+                            text: this.state.text,
+                            projectLink: this.state.link,
+                            flag: this.state.flag,
+                            tag: this.state.tag,
+                            images: imageArray
+                        })
                     })
-                    console.log(fetchResponse)
-                    let parsedfetchResp = await JSON.parse(fetchResponse)
-                    console.log(parsedfetchResp)
 
-                    // const sendProjectData = await fetch('/api/projects/new',{
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Authorization': 'Bearer ' + jwt,
-                    //         "Content-Type": "application/json"
-                    //     },
-                    //     body: JSON.stringify({
-                    //         title: this.state.title,
-                    //         text: this.state.text,
-                    //         projectLink: this.state.link,
-                    //         flag: this.state.flag,
-                    //         tag: this.state.tag,
-                    //     })
-                    // })
+                    if (!sendProjectData.ok) {
+                        throw new Error('Fetch failed - Bad request')
+                    } else {
+                        window.location.href = "/"
+                    }
 
-                    // if (!fetchResponse.ok && !sendProjectData.ok) {
-                    //     throw new Error('Fetch failed - Bad request')
-                    // } else {
-                    //     window.location.href = "/"
-                    // }
                 } catch (err) {
                     console.log("Submit error", err)
                 }
@@ -272,11 +267,11 @@ export default class ProjectUploadPage extends Component {
                     <div  className="upload-img">
                         <form>
                             <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
-
                         </form>
                         {this.state.img.length ?
                         <div className="image-preview">
-                            {this.state.img.map(i => <img src={i}></img>)}
+                            {this.state.img.map(i => 
+                                <img src={i}></img>)}
                         </div>
                         :
                         false 

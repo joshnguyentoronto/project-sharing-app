@@ -4,13 +4,17 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 require('dotenv').config()
 require('./config/database')
+const s3 = require('./s3.js')
 
-const bb = require('express-busboy'); // add this below the logger
+
+// const bb = require('express-busboy'); // add this below the logger
 
 const app = express();
-bb.extend(app, { // add this after our app
-    upload: true
-});
+// bb.extend(app, { // add this after our app
+//     upload: true,
+//     path:'./projects/photo'
+
+// });
 
 const http = require('http')
 const server = http.createServer(app)
@@ -25,10 +29,17 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 
+
 // Put API routes here, before the "catch all" route
 app.use('/api/projects', require('./routes/api/projects.js'))
 app.use('/api/users', require('./routes/api/users.js'))
 
+
+//S3 endpoint
+app.get('/s3Url', async (req,res) => {
+    const url = await s3.generateUploadURL()
+    res.send({url})
+})
 
 // The following "catch all" route to return the index.html on all non-AJAX requests
 app.get('/*', function(req, res) {

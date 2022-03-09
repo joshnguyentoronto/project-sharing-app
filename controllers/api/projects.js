@@ -55,8 +55,6 @@ async function createPhoto(req,res) {
                 }
             })
         }
-        console.log('')
-
         res.status(200).json(arr)
 
     } catch {
@@ -65,48 +63,16 @@ async function createPhoto(req,res) {
 }
 
 async function createProject(req, res) {
-    // try {
-    //     let arr = ['hi']
-    //     const s3 = new AWS.S3({
-    //         accessKeyID: process.env.AWS_ACCESS_KEY_ID,
-    //         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    //     })
-        
-    //     for(image in req.files){
-    //         let file = req.files[image].file
-    //         let  fileStream = fs.createReadStream(file);
-    //         let key = req.files[image].uuid+'.jpeg'
-    //         let url = `${S3_BASE_URL}${BUCKET}/${key}`
-    //         arr.push(url)
-
-    //         let params = {
-    //             Bucket: BUCKET,
-    //             Key: key,
-    //             Body: fileStream
-    //         }
-
-    //         s3.upload(params, function(err, data){
-    //             if (err){
-    //                 console.log(err)
-    //             } else {
-    //                 console.log(data)
-    //             }
-    //         })
-    //     }
-
-        // req.body.images = arr
-        console.log(req.body.text)
-        console.log(req.body.projectLink)
-        // ProjectModel.create(req.body, function(err, data){
-        //     console.log(err)
-        // })
-        console.log('done await')
-        // console.log(newProject)
-        // res.status(200).json(newProject);
-
-    // } catch(err) {
-    //     res.status(400).json(err)
-    // }
+    try {
+        req.body.author = req.user._id
+        console.log(req.user._id)
+        const newProject = await ProjectModel.create(req.body)
+        console.log(newProject)
+        res.status(200).json();
+    } catch(err) {
+        console.log('err block')
+        res.status(400).json(err)
+    }
 }
 
 //old function starts here

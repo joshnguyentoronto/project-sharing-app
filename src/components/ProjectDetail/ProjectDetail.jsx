@@ -36,7 +36,7 @@ export default function ProjectDetail(props) {
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
                     <div className='project-detail-body-img'>
-                        Images
+                        <img src={props.project.images[0]}></img>
                     </div>
                     <div className='project-detail-body-project-link'>
                         {props.project.projectLink.map(link => 
