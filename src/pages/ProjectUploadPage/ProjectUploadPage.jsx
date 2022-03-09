@@ -30,13 +30,15 @@ export default class ProjectUploadPage extends Component {
     handleChange = (evt) => {
         if (evt.target.name == "img"){
             console.log(evt.target.files)
-            let arr = []
+            let arr = [...this.state.img]
+            let imgArr =[...this.state.imageFiles]
             for(let i=0; i < evt.target.files.length; i++){
                 arr.push(URL.createObjectURL(evt.target.files[i]))
+                imgArr.push(evt.target.files[i])
             }
             this.setState({
                 img: arr,
-                imageFiles: evt.target.files
+                imageFiles: imgArr
             })
         }else {
             this.setState({[evt.target.name]: evt.target.value})
