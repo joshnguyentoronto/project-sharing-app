@@ -38,7 +38,7 @@
 
 .filter-search-bar {
     background-color: transparent;
-    border: 2px solid black;
+    border: 2px solid #29465B;
     border-radius: 10px;
     max-width: 1089px;
     min-width: 300px;
@@ -48,6 +48,12 @@
     margin: 24px 0;
     font-size: 25px;
     padding: 0 10px;
+    color: #29465B;
+}
+.filter-search-bar:focus {
+    outline: none !important;
+    border: 2px solid #29465B;
+    box-shadow: 0 0 5px #3f6d8d;
 }
 
 .filter-flags {
