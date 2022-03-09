@@ -115,8 +115,6 @@ input:focus {
     margin: 0 0 20px 0;
 }
 
-
-
 .form-action {
     display: flex;
     justify-content: space-between;
@@ -139,8 +137,19 @@ input:focus {
     display: grid;
     place-content: center;
 }
+
 .form-action button {
     border-radius: 50px;
+    background-color: #29465B;
+    height: 40px;
+    width: 100px;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.image-preview {
+    display: flex;
     background-color: #29465B;
     height: 40px;
     width: 100px;

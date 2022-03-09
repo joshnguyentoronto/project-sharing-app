@@ -48,7 +48,8 @@ export default function SignUpForm(props){
         }}>
             <form autoComplete="off" onSubmit= {handleSubmit}>
                 <div className="n-container">
-                    <TextField  
+                    <TextField 
+                        required 
                         label="Name"
                         id="fullWidth" 
                         size="small"
@@ -57,7 +58,8 @@ export default function SignUpForm(props){
                         name="name" 
                         onChange={handleChange} 
                     />
-                    <TextField 
+                    <TextField
+                        required  
                         label="Username" 
                         id="fullWidth"
                         size="small" 
@@ -68,6 +70,7 @@ export default function SignUpForm(props){
                     />
                 </div>
                 <TextField
+                    required 
                     fullWidth 
                     label="Email" 
                     id="fullWidth" 
@@ -79,6 +82,7 @@ export default function SignUpForm(props){
                 />
                 <br></br>
                 <TextField
+                    required 
                     fullWidth  
                     label="Password"
                     id="fullWidth" 
@@ -89,7 +93,8 @@ export default function SignUpForm(props){
                     onChange={handleChange} 
                 />
                 <br></br>
-                <TextField  
+                <TextField 
+                    required 
                     fullWidth 
                     label="Confirm Password" 
                     id="fullWidth"

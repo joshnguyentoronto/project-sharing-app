@@ -37,7 +37,6 @@ export default function MessageListItem(props) {
             method: "POST",
             headers: {
                 'Authorization': 'Bearer ' + jwt,
-                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 text: draftMessage,
