@@ -107,7 +107,6 @@ export default function EditProfilePage(props) {
     return(
         <div>
             <h1>helllo</h1>
-           
                 <TextField
                     label="Name"
                     // id="fullWidth" 
@@ -162,7 +161,7 @@ export default function EditProfilePage(props) {
                     <div className="tag-items">
                         {profileData.skill.map(skill=> <InputTagItem key={skill} tag={skill} removeTag={removeSkill} /> )}
                     </div>
-           
+
                 <TextField
                     id="outlined-multiline-static"
                     label="Bio"
@@ -175,13 +174,13 @@ export default function EditProfilePage(props) {
 
                 <Link to="/profile"  className="form-action-link">Cancel</Link>
                 <button onClick={()=>props.submitProfile({
-                                    name: profileData.name,
-                                    bio: profileData.bio,
-                                    education: profileData.education,
-                                    experiences: profileData.experiences,
-                                    location: profileData.location,
-                                    skill: profileData.skill,
-                                    userLink: profileData.userLink
+                    name: profileData.name,
+                    bio: profileData.bio,
+                    education: profileData.education,
+                    experiences: profileData.experiences,
+                    location: profileData.location,
+                    skill: profileData.skill,
+                    userLink: profileData.userLink
                 })}>Publish</button>
         </div>
     )

@@ -332,8 +332,8 @@ export default class App extends Component {
       throw new Error('Fetch failed - Bad request')
     } else {
       const hiddenLink = document.getElementById('hidden-link')
+      this.setState({ user: user }) 
       hiddenLink.click()
-      this.setState({ user: user}) 
     }
 }
 
