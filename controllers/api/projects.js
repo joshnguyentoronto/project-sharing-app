@@ -238,7 +238,6 @@ async function projectsSaved(req, res) {
             { path: 'author', model: 'User' },
             { path: 'comment', populate: { path: 'user', model: 'User' } }
         ])
-        console.log(projects)
         res.status(200).json(projects)
     } catch(err) {
         res.status(400).json(err)
@@ -254,7 +253,6 @@ async function projectsLiked(req, res) {
             { path: 'author', model: 'User' },
             { path: 'comment', populate: { path: 'user', model: 'User' } }
         ])
-        console.log(projects)
         res.status(200).json(projects)
     } catch(err) {
         res.status(400).json(err)

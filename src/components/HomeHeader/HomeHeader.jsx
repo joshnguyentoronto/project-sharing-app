@@ -9,7 +9,7 @@ export default function HomeHeader(props) {
         <div className="header">
             <div className='header-empty'></div>
             <div className='header-link-container'>
-                <Link className='header-link-upload' to="/upload">Upload</Link>
+                { !props.user._id ? <Link className='header-link-upload' to="/upload">Upload</Link> : <Link className='header-link-upload' to="/account/login">Upload</Link> }
                 {/* <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button> */}
                 <button onClick={props.openChatList} className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                 {props.user ? 

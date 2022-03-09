@@ -23,7 +23,13 @@ export default class ProfilePage extends Component {
         return(
             <div className="profile">
                 <div className="background-image"><img src={require('../../images/image/no_profile_image.png')} alt="profile background"/></div>
-                <ProfileCard user={this.props.user}/>
+                {/* {this.props.currentProject ? 
+                    <ProfileCard user={this.props.user} otherUser={this.props.currentProject.author[0]}/> 
+                :   
+                    <ProfileCard user={this.props.user}/>
+                } */}
+                <ProfileCard user={this.props.user} loginUser={this.props.user}/>
+                
                 <div className="profile-content-area">
                     <ul className="ProfileCategory">
                         <li 
