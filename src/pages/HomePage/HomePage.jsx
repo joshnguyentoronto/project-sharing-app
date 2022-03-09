@@ -59,6 +59,10 @@ export default class HomePage extends Component {
                         isLiked={this.props.isLiked}
                         hoverUserState={this.props.hoverUserState}
                         hoverUser={this.props.hoverUser}
+                        profile={this.state.profile}
+                        viewProject={this.props.viewProject}
+                        projects={this.props.projects}
+                        hoverProject={this.props.hoverProject}
                     /> 
                     :
                     false

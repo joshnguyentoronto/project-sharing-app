@@ -6,14 +6,14 @@ import InputLink from '../../components/InputLink/InputLink'
 import InputSection from '../../components/InputSection/InputSection'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
 import MessageBox from "../../components/MessageBox/MessageBox";
+import Footer from "../../components/Footer/Footer";
+
 
 export default class ProjectUploadPage extends Component {
     state = {
         currentTag: '',
         projects: [],
         tagItem: '',
-
-        // author: this.props.user._id,
         author: '',
         title: '',
         flag: 'UX/UI design',
@@ -23,22 +23,23 @@ export default class ProjectUploadPage extends Component {
         link: [{ index: 0, name: '', url: '' }],
         linkNum: 1,
         img:[],
+        imageFiles: []
     }
-    
+
+
     handleChange = (evt) => {
         if (evt.target.name == "img"){
-            for(let i=0; i< evt.target.files.length; i++){
-                if (i == 0){
-                    this.setState({ 
-                        img: URL.createObjectURL(evt.target.files[i]),
-                    });
-                }
-                this.setState({ 
-                    img: [...this.state.img, URL.createObjectURL(evt.target.files[i])],
-                });
+            console.log(evt.target.files)
+            let arr = []
+            for(let i=0; i < evt.target.files.length; i++){
+                arr.push(URL.createObjectURL(evt.target.files[i]))
             }
+            this.setState({
+                img: arr,
+                imageFiles: evt.target.files
+            })
         }else {
-            this.setState({[evt.target.name]: evt.target})
+            this.setState({[evt.target.name]: evt.target.value})
         }
     };
 
@@ -60,36 +61,49 @@ export default class ProjectUploadPage extends Component {
         } else {
             if (window.confirm("Your project will be published. Do you want to continue ?")) {
                 try {
-                    let date = new Date()
-                    const fetchResponse = await fetch('/api/projects/new', {
+                    let imageArray = []
+                    for(let i=0; i < this.state.imageFiles.length; i++){
+                        let {url} = await fetch("/s3Url").then(res => res.json())
+                        let file = this.state.imageFiles[i].file
+                        let sendPhoto = await fetch(url,{
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            },
+                            body: file
+                        })
+                        const imageUrl = url.split('?')[0]
+                        imageArray.push(imageUrl)
+                    }
+
+                    let jwt = localStorage.getItem('token')
+                    const sendProjectData = await fetch('/api/projects/new',{
                         method: 'POST',
-                        headers: {"Content-Type": "application/json"},
+                        headers: {
+                            'Authorization': 'Bearer ' + jwt,
+                            "Content-Type": "application/json"
+                        },
                         body: JSON.stringify({
-                            author: [this.props.user._id],
                             title: this.state.title,
-                            date: date,
-                            viewCount: 0,
-                            likeCount: 0,
                             text: this.state.text,
                             projectLink: this.state.link,
-                            comment: [],
                             flag: this.state.flag,
                             tag: this.state.tag,
+                            images: imageArray
                         })
                     })
-                    if (!fetchResponse.ok) {
+
+                    if (!sendProjectData.ok) {
                         throw new Error('Fetch failed - Bad request')
                     } else {
                         window.location.href = "/"
                     }
+
                 } catch (err) {
                     console.log("Submit error", err)
                 }
-            } else {
-                return false
-            }
+            } 
         }
-        
     }
 
     addTag = (evt) => {
@@ -199,9 +213,6 @@ export default class ProjectUploadPage extends Component {
         }
     }
 
-    imagePreview = async () => {
-
-    }
 
     render() {
         return(
@@ -211,15 +222,16 @@ export default class ProjectUploadPage extends Component {
                     userLogout={this.props.userLogout}
                     user={this.props.user} 
                 />
+
                 <h3>Upload a Project</h3>
+
                 <div className="upload">
-                    <div>
+                    <div className="upload-text">
                         <div>
                             <p>Title</p>
-                            <input onChange={() => {
-                                this.handleChange()
-                                this.imagePreview()
-                            }} name="title" type="text" required />
+                            <input onChange={this.handleChange} 
+                                name="title" type="text" required 
+                            />
                         </div>
                         <div>
                             <p>Project type:</p>
@@ -232,7 +244,7 @@ export default class ProjectUploadPage extends Component {
                         </div>
                         <div>
                             <p>Tag</p>
-                            <form onSubmit={this.addTag}>
+                            <form className="tag-form" onSubmit={this.addTag}>
                                 <input onChange={this.handleChange} name="tagItem" type="text" placeholder="Ex: javascript, nodejs, mongodb" required />
                                 <button onSubmit={this.addTag}>+</button>
                             </form>
@@ -240,7 +252,7 @@ export default class ProjectUploadPage extends Component {
                                 {this.state.tag.map(tag => <InputTagItem key={tag} tag={tag} removeTag={this.removeTag} /> )}
                             </div>
                         </div>
-                        <div>
+                        <div className="input-li-container-top">
                             <div className="input-li-container" >
                                 {this.state.link.map(obj => <InputLink key={obj.index} link={obj} handleInputLinkNameChange={this.handleInputLinkNameChange} handleInputLinkUrlChange={this.handleInputLinkUrlChange} deleteLink={this.deleteLink} />)}
                             </div>
@@ -250,24 +262,29 @@ export default class ProjectUploadPage extends Component {
                             {this.state.text.map(obj => <InputSection key={obj} text={obj} handleInputTextHeadingChange={this.handleInputTextHeadingChange} handleInputTextBoxChange={this.handleInputTextBoxChange} deleteSection={this.deleteSection} />)}
                             <p onClick={this.addSection} className="upload-btn-sec">Add Section</p>
                         </div>
-                        <div className="form-action">
-                            <Link to="/"  className="form-action-link">Close</Link>
-                            <button onClick={this.submitProject}>Publish</button>
-                        </div>
                     </div>
                     <div  className="upload-img">
-                        <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
-                        {/* {this.state.img.length ?
-                            <div>
-                                {this.state.img.map( m => 
-                                    <img src={URL.createObjectURL(m)}></img>
-                                )}
-                            </div>
-                            :
-                            false
-                        } */}
+                        <form>
+                            <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
+                        </form>
+                        {this.state.img.length ?
+                        <div className="image-preview">
+                            {this.state.img.map(i => 
+                                <img src={i}></img>)}
+                        </div>
+                        :
+                        false 
+                        }
                     </div>
                 </div>
+
+                <div className="form-action">
+                    <Link to="/"  className="form-action-link">Close</Link>
+                    <button onClick={this.submitProject}>Publish</button>
+                </div>
+
+                <Footer />
+
                 {this.props.openChat ? 
                     <MessageBox 
                         messageList={this.props.messageList} 

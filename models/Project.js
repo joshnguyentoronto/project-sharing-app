@@ -30,14 +30,15 @@ const commentSchema = new Schema({
 const projectSchema = new Schema({
   author: [{type: Schema.Types.ObjectId, ref: 'User'}],  
   title: String,
-  date: Date,
-  viewCount: Number,
-  likeCount: Number,
+  date: {type: Date, default: new Date()},
+  viewCount: {type: Number, default: 0},
+  likeCount: {type: Number, default: 0},
   text: [textSchema],
   projectLink: [projectLinkSchema],
   comment: [commentSchema],
   flag: String,
-  tag: Array
+  tag: Array,
+  images: Array,
 }, {
   timestamps: true
 });

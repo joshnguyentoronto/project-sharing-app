@@ -6,6 +6,8 @@ import CommentItem from '../CommentItem/CommentItem';
 import TagItem from '../TagItem/TagItem'
 import UserCard from '../UserCard/UserCard';
 import MessagePopUp from '../MessagePopUp/MessagePopUp';
+import ProjectListItem from '../ProjectListItem/ProjectListItem';
+import moment from 'moment'
 
 export default function ProjectDetail(props) {
     const divRef = useRef()
@@ -36,7 +38,7 @@ export default function ProjectDetail(props) {
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
                     <div className='project-detail-body-img'>
-                        Images
+                        <img src={props.project.images[0]}></img>
                     </div>
                     <div className='project-detail-body-project-link'>
                         {props.project.projectLink.map(link => 
@@ -55,8 +57,7 @@ export default function ProjectDetail(props) {
                 <div className='project-detail-body-other' id="toScroll" ref={divRef}>
                     <h2>You may also like</h2>
                     <div className='project-detail-body-other-projects'>
-                        {/* {props.refProjects.map(project => <RefProjectItem key={project._id} project={project} />)} */}
-                        {/* {props.refProjects.map(project => 
+                        {props.refProjects.map(project => 
                             <div key={project._id}>
                                 <ProjectListItem
                                     profile={props.profile}
@@ -73,7 +74,7 @@ export default function ProjectDetail(props) {
                                     user={props.user} 
                                 />
                             </div>
-                        )} */}
+                        )}
                     </div>
                 </div>
 
@@ -81,7 +82,7 @@ export default function ProjectDetail(props) {
                     <div className='project-detail-body-foot-comment'>
                         <div className='project-detail-body-foot-comment-box'>
                             <div className='comment-user'>
-                                <button className='comment-user-img'><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
+                                <button className='comment-user-img'><img src={require('../../images/icons/user.svg')} className='comment-user-image' alt="svg icon" /></button>
                             </div>
                             <div className='comment-main'>
                                 <textarea onChange={props.handleChange} name="comment" value={props.comment}></textarea>
@@ -104,23 +105,28 @@ export default function ProjectDetail(props) {
                         <div className='project-detail-body-foot-user'>
                             <div className='project-detail-body-foot-user-info'>
                                 <button><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
-                                <p>user name</p>
+                                <div className='project-detail-body-foot-user-info-name'>
+                                    <p>{props.project.author[0].name}</p>
+                                    <p><img src={require('../../images/icons/location.svg')} alt="svg icon" /> {props.project.author[0].location}</p>
+                                </div>
                             </div>
                             <div className='project-detail-body-foot-user-btn'>
-                                <button>Follow</button>
-                                <button>Message</button>
+                                <button id='user-card-btn-3'><img src={require('../../images/icons/follow-btn.svg')} alt="svg icon" /> <strong>Follow</strong></button>
+                                <button id='user-card-btn-4'><img src={require('../../images/icons/mess-btn-1.svg')} alt="svg icon" /> <strong>Message</strong></button>
                             </div>
                         </div>
                         <div className='project-detail-body-foot-info'>
-                            <p>{props.project.title}</p>
-                            <p>{props.project.date}</p>
-                            <p>{props.project.flag}</p>
-                            <p>{props.project.viewCount}</p>
-                            <p>{props.project.likeCount}</p>
-                            <p>{props.project.comment.length}</p>
+                            <p><strong>{props.project.title}</strong></p>
+                            <p>Published on: { moment(props.project.date).format("MMM Do YYYY") }</p>
+                            <p>Category: {props.project.flag}</p>
+                            <div className='project-detail-body-foot-info-stat'>
+                                <p><img src={require('../../images/icons/view.svg')} alt="svg icon" />{props.project.viewCount}</p>
+                                <p><img src={require('../../images/icons/like.svg')} alt="svg icon" />{props.project.likeCount}</p>
+                                <p><img src={require('../../images/icons/message-white.svg')} alt="svg icon" />{props.project.comment.length}</p>
+                            </div>
                         </div>
                         <div className='project-detail-body-foot-tag'>
-                            <p>Tags</p>
+                            <p className='project-detail-body-foot-tag-p'>Tags</p>
                             <div className='project-detail-body-foot-tag-container'>
                                 {props.project.tag.map(tag => <TagItem key={tag} tag={tag} />)}
                             </div>

@@ -26,7 +26,6 @@ export default class App extends Component {
     filter: '',
     openChat: false,
     messageList: [],
-
     user: null,
     currentProject: '',
     viewMode: false,
@@ -38,6 +37,23 @@ export default class App extends Component {
     isLiked: false,
     hoverUserState: false,
     hoverUser: {},
+  }
+
+  falseUser = {
+    _id: "",
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    skill: [],
+    edducation: "",
+    experiences: [],
+    conversations: [],
+    savedPosts: [],
+    likedPosts: [],
+    userLink: [],
+    bio: "",
+    location: "",
   }
   
   openChatList = async () => {
@@ -453,6 +469,9 @@ export default class App extends Component {
       } catch(err) {
         console.log("home page error: ", err)
       }
+    }
+    if (this.state.projects.length == 0) {
+      window.location.reload(false);
     }
   }
 
