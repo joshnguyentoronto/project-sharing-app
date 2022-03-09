@@ -11,6 +11,7 @@ import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
 import TermPage from '../TermPage/TermPage'
 import PolicyPage from '../PolicyPage/PolicyPage'
 import EditProfilePage from '../EditProfilePage/EditProfilePage';
+import OthersProfilePage from '../OthersProfilePage/OthersProfilePage';
 // import {io} from 'socket.io-client';
 // const socket = io()
 import {io} from 'socket.io-client';
@@ -30,6 +31,7 @@ export default class App extends Component {
     viewMode: false,
     refProjects: [],
     projects: [],
+    otherProjects: [],
     comment: '',
     isSaved: false,
     isLiked: false,
@@ -70,8 +72,8 @@ export default class App extends Component {
   viewProject = async (obj) => {
     let project = obj.project
     let profile = obj.profile
-    console.log(obj)
-    if (!this.state.user._id) {
+    let otherUser = obj.otherUser
+    if (!this.state.user) {
         try {
             let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
             let refProjects = await fetchRefProjectList.json()
@@ -83,19 +85,46 @@ export default class App extends Component {
         } catch(err) {
             console.log(err)
         }
-    } else {
+    } else if (otherUser) {
       try {
           let fetchUser = await fetch('/api/users/', { headers: { "userId": this.state.user._id }})
           let user = await fetchUser.json()
+          let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": otherUser._id }})
+          let refProjects = await fetchRefProjectList.json()
+          let fetchOneProject = await fetch('/api/projects/getOne', {headers: {"projectId": project._id }})
+          let oneProject = await fetchOneProject.json()
+          let fetchAllProjects = await fetch('/api/projects/user', {headers: { "profile": profile, "user": otherUser._id }})
+          let allProjects = await fetchAllProjects.json()
+        
+          if (user.savedPosts.indexOf(project._id) != -1 ) {
+            if (user.likedPosts.indexOf(project._id) != -1 ) {
+              this.setState({ isLiked: true, isSaved: true, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+            } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+              this.setState({ isLiked: false, isSaved: true, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+            }
+          } else if (user.savedPosts.indexOf(project._id) == -1 ) {
+            if (user.likedPosts.indexOf(project._id) != -1 ) {
+              this.setState({ isLiked: true, isSaved: false, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+              
+            } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+              this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+            }
+          } else {
+            this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+          }
+      } catch(err) {
+          console.log(err)
+      }
+    } else {
+      try {
+          let fetchUser = await fetch('/api/users', { headers: { "userId": this.state.user._id }})
+          let user = await fetchUser.json()
           let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
           let refProjects = await fetchRefProjectList.json()
-          let fetchOneProject = await fetch('api/projects/getOne', {headers: {"projectId": project._id }})
+          let fetchOneProject = await fetch('/api/projects/getOne', {headers: {"projectId": project._id }})
           let oneProject = await fetchOneProject.json()
           let fetchAllProjects = await fetch('/api/projects', {headers: { "profile": profile, "userId": this.state.user._id }})
           let allProjects = await fetchAllProjects.json()
-          console.log(allProjects)
-          console.log("that one project", oneProject)
-        
           if (user.savedPosts.indexOf(project._id) != -1 ) {
             if (user.likedPosts.indexOf(project._id) != -1 ) {
               this.setState({ isLiked: true, isSaved: true, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
@@ -104,15 +133,13 @@ export default class App extends Component {
             }
           } else if (user.savedPosts.indexOf(project._id) == -1 ) {
             if (user.likedPosts.indexOf(project._id) != -1 ) {
-                  this.setState({ isLiked: true, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
-                  
-                } else if (user.likedPosts.indexOf(project._id) == -1 ) {
-                  this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
-                }
-              } else {
-                this.setState({ currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
-              }
-        console.log("current project", this.state.currentProject)
+              this.setState({ isLiked: true, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+            } else if (user.likedPosts.indexOf(project._id) == -1 ) {
+              this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+            }
+          } else {
+            this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+          }
       } catch(err) {
           console.log(err)
       }
@@ -274,6 +301,7 @@ export default class App extends Component {
   }
 
   hoverProject = async (project) => {
+
     this.setState({ currentProject: project })
   }
 
@@ -396,6 +424,16 @@ export default class App extends Component {
     }
   }
 
+  getOtherProjects = async (userId) => {
+    try {
+      let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": userId }})
+      let projects = await fetchProjectList.json()
+      this.setState({ otherProjects: projects })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   async componentDidMount(){
     let token = localStorage.getItem('token')
     if (token){
@@ -486,6 +524,7 @@ export default class App extends Component {
             element={<ProfilePage
               user={this.state.user} 
               currentProject={this.state.currentProject}
+
               viewMode={this.state.viewMode}
               refProjects={this.state.refProjects}
               projects={this.state.projects}
@@ -513,6 +552,39 @@ export default class App extends Component {
           <Route 
             path="/profile/edit"
             element={<EditProfilePage user={this.state.user}  submitProfile={this.submitProfile}/>}
+          />
+          <Route
+            path="/profile/:id"
+            element={<OthersProfilePage user={this.state.user} 
+                      getOtherProjects={this.getOtherProjects}
+                      
+                      hoverProject={this.hoverProject} 
+                      hoverUser={this.state.hoverUser}
+                      hoverUserState={this.state.hoverUserState}
+                      likeProject={this.likeProject}
+                      saveProject={this.saveProject}
+                      viewProject={this.viewProject}
+
+                      closeProject={this.closeProject} 
+                      otherProjects={this.state.otherProjects} 
+                      currentProject={this.state.currentProject}
+                      projects={this.state.projects}
+
+                      refProjects={this.state.refProjects}
+                      saveProject={this.saveProject}
+                      likeProject={this.likeProject}
+                      handleChange={this.handleChange}
+                      postComment={this.postComment}
+                      delCom={this.delCom}
+                      likeComment={this.likeComment}
+                      unlikeComment={this.unlikeComment}
+                      comment={this.state.comment}
+                      isSaved={this.state.isSaved}
+                      isLiked={this.state.isLiked}
+                      hoverUserState={this.state.hoverUserState}
+                      hoverUser={this.state.hoverUser}
+                      viewMode={this.state.viewMode}
+                    />}
           />
           <Route path="account" element={<AccountPage/>}>
             <Route path="login" element={<Login setUserInState={this.setUserInState}/>}/>

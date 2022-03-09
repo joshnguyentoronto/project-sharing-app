@@ -20,6 +20,7 @@ export default function ProjectList(props) {
                         hoverUser={props.hoverUser}
                         viewProject={props.viewProject}
                         user={props.user} 
+                        otherUser={props.otherUser}
                     />
                 </div>
             )}
