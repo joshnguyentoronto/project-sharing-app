@@ -113,12 +113,14 @@ export default function ProjectDetail(props) {
             <div className='project-detail-right'>
                 <div className='project-detail-right-sub'>
                     <button className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></button>
-                    <div className='profilebtnhover' >
-                        <Link to="/profile"><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
-                        <div className="usercard" >
-                            <UserCard user={props.project.author[0]} />
+                    { props.project.author.map(user => 
+                        <div className='profilebtnhover' >
+                            <Link to="/profile"><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                            <div className="usercard" >
+                                <UserCard user={user} />
+                            </div>
                         </div>
-                    </div>
+                    ) }
                     <button onClick={() => props.likeProject(props.project)}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
                     <button onClick={() => props.saveProject(props.project)}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
                     <button onClick={openChatBox}><img src={require('../../images/icons/message-white.svg')} alt="svg icon" /></button>

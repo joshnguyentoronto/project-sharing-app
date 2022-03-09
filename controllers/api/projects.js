@@ -18,14 +18,51 @@ module.exports = {
 }
 
 async function projectsIndex(req, res) {
-    try {
-        let projects = await ProjectModel.find({}).populate([
-            { path: 'author', model: 'User' },
-            { path: 'comment', populate: { path: 'user', model: 'User' } }
-        ])
-        res.status(200).json(projects)
-    } catch(err) {
-        res.status(400).json(err)
+    let profile = req.get("profile")
+    let userId = req.get("userId")
+    let user = await UserModel.findById(userId)
+    if (profile == "Projects") {
+        try {
+            let projects = await ProjectModel.find({ author: [userId] }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            res.status(200).json(projects)
+        } catch(err) {
+            res.status(400).json(err)
+        }
+    } else if (profile == "Liked") {
+        try {
+            let idArr = user.likedPosts
+            let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            res.status(200).json(projects)
+        } catch(err) {
+            res.status(400).json(err)
+        }
+    } else if (profile == "Saved") {
+        try {
+            let idArr = user.savedPosts
+            let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            res.status(200).json(projects)
+        } catch(err) {
+            res.status(400).json(err)
+        }
+    } else {
+        try {
+            let projects = await ProjectModel.find({}).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            res.status(200).json(projects)
+        } catch(err) {
+            res.status(400).json(err)
+        }
     }
 }
 
@@ -259,7 +296,10 @@ async function unlikeComment(req, res) {
 async function getOne(req, res) {
     try {
         let projectId = req.get("projectId")
-        let project = await ProjectModel.findById(projectId)
+        let project = await ProjectModel.findById(projectId).populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
         project.viewCount += 1
         await project.save()
         res.status(200).json(project)

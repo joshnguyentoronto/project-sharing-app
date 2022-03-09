@@ -19,7 +19,7 @@ export default class ProjectListItem extends Component {
                             <img className="img-views-count" src={require('../../images/icons/views.svg')} alt="views" /><span>{this.props.project.viewCount}</span>
                         </span> 
                     </div>
-                    <span className="placeholder-img" onClick={() => this.props.viewProject(this.props.project)} ><img src={require('../../images/image/prop-img.png')} alt="svg icon" /><div className='shader'></div></span>
+                    <span className="placeholder-img" onClick={() => this.props.viewProject({ "profile": this.props.profile, "project": this.props.project })} ><img src={require('../../images/image/prop-img.png')} alt="svg icon" /><div className='shader'></div></span>
                 </div>
                 <div className="project-list-item-foot">
                     <div className='profile-btn-hover' >
