@@ -1,17 +1,27 @@
-.input-link-each {
+#input-link-each {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin: 5px 0 0 0;
 }
 
-.input-link-each-name input {
-    height: 30px;
-    width: 120px;
+#input-link-each-input1 {
+    height: 35px;
+    width: 150px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+#input-link-each-input2 {
+    height: 35px;
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 
-.input-link-each-url input {
-    height: 30px;
-    width: 270px;
+#link-name-id {
+    margin: 10px 0 2px 0;
+}
+#link-url-id {
+    margin: 10px 0 2px 0;
 }
 
 .input-link-each-del {
@@ -20,8 +30,9 @@
 }
 .input-link-each-del p {
     display: flex;
-    margin: 0;
+    margin: 0 0 4px 0;
     cursor: pointer;
+
 }
 
 .input-link-each-del p:hover {

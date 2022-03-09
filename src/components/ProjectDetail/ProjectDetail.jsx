@@ -7,6 +7,7 @@ import TagItem from '../TagItem/TagItem'
 import UserCard from '../UserCard/UserCard';
 import MessagePopUp from '../MessagePopUp/MessagePopUp';
 import ProjectListItem from '../ProjectListItem/ProjectListItem';
+import moment from 'moment'
 
 export default function ProjectDetail(props) {
     const divRef = useRef()
@@ -115,15 +116,17 @@ export default function ProjectDetail(props) {
                             </div>
                         </div>
                         <div className='project-detail-body-foot-info'>
-                            <p>{props.project.title}</p>
-                            <p>{props.project.date}</p>
-                            <p>{props.project.flag}</p>
-                            <p>{props.project.viewCount}</p>
-                            <p>{props.project.likeCount}</p>
-                            <p>{props.project.comment.length}</p>
+                            <p><strong>{props.project.title}</strong></p>
+                            <p>Published on: { moment(props.project.date).format("MMM Do YYYY") }</p>
+                            <p>Category: {props.project.flag}</p>
+                            <div className='project-detail-body-foot-info-stat'>
+                                <p><img src={require('../../images/icons/view.svg')} alt="svg icon" />{props.project.viewCount}</p>
+                                <p><img src={require('../../images/icons/like.svg')} alt="svg icon" />{props.project.likeCount}</p>
+                                <p><img src={require('../../images/icons/message-white.svg')} alt="svg icon" />{props.project.comment.length}</p>
+                            </div>
                         </div>
                         <div className='project-detail-body-foot-tag'>
-                            <p>Tags</p>
+                            <p className='project-detail-body-foot-tag-p'>Tags</p>
                             <div className='project-detail-body-foot-tag-container'>
                                 {props.project.tag.map(tag => <TagItem key={tag} tag={tag} />)}
                             </div>

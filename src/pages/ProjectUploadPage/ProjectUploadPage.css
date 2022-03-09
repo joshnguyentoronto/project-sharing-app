@@ -3,28 +3,56 @@
     text-align: left;
 }
 
-p {
-    margin: 5px 0;
+.uploadpage h3 {
+    margin: 100px 0 0 0;
+    text-align: center;
+    font-size: 35px;
 }
+
+
 input {
-    height: 30px;
-    width: 300px;
+    height: 40px;
+    width: 500px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 0 10px;
+}
+input:focus {
+    border: 1px solid black;
 }
 
 .upload {
     display: flex;
-    margin: 100px 0 0 0;
-    padding: 0 50px;
+    flex-wrap: wrap;
+    margin: 40px 0 0 0;
+    padding: 0 100px;
     width: 100%;
 
 }
-
+.upload-text {
+    width: 60%;
+    user-select: none;
+}
+.upload-text div p {
+    margin: 20px 0 5px 0;
+    font-weight: 600;
+    font-size: 18px;
+}
 .upload-img {
     border: 1px dashed black;
     border-radius: 10px;
     width: 300px;
+    width: 40%;
     height: 200px;
+    margin: 40px 0;
 }
+.upload-img input {
+    width: 400px;
+    border: none;
+    margin: 10px 0 0 0;
+}
+
 
 
 .input-img {
@@ -49,16 +77,29 @@ input {
     text-align: center;
     align-items: flex-start;
     width: fit-content;
-    margin-left: 40px;
-    margin-top: 15px;
+    margin: 15px 0 0 20px;
 }
 
 
 .option {
-    height: 30px;
-    width: 150px;
+    height: 40px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 0 5px;
+    font-size: 18px;
+
 }
 
+.tag-form {
+    display: flex;
+    align-items: center;
+}
+.tag-form button {
+    margin: 0 0 0 -32px;
+    font-size: 30px;
+    font-weight: 600;
+}
 .tag-items {
     display: flex;
     flex-wrap: wrap;
@@ -67,7 +108,9 @@ input {
     width: 500px;
 }
 
-
+.input-li-container-top {
+    margin: 20px 0 40px 0;
+}
 .input-li-container {
     margin: 0 0 20px 0;
 }
@@ -78,16 +121,30 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 0;
-    
+    margin: 80px auto;
+    max-width: 500px;
+    width: 40%;
 }
 .form-action-link {
-    background-color: white;
+    background-color: #29465B;
     border-radius: 50px;
     color: black;
-    border: 1px solid black;
+    border: none;
     text-decoration: none;
+    height: 40px;
+    width: 100px;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    display: grid;
+    place-content: center;
 }
 .form-action button {
     border-radius: 50px;
+    background-color: #29465B;
+    height: 40px;
+    width: 100px;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
 }
