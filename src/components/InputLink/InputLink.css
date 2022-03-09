@@ -1,22 +1,40 @@
-.input-link-each {
+#input-link-each {
     display: flex;
-    gap: 20px;
+    gap: 10px;
+    margin: 5px 0 0 0;
 }
 
-.input-link-each-name input {
-    height: 30px;
-    width: 120px;
+#input-link-each-input1 {
+    height: 35px;
+    width: 150px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+#input-link-each-input2 {
+    height: 35px;
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 
-.input-link-each-url input {
-    height: 30px;
-    width: 270px;
+#link-name-id {
+    margin: 10px 0 2px 0;
+}
+#link-url-id {
+    margin: 10px 0 2px 0;
 }
 
 .input-link-each-del {
-    width: 40px;
-    padding: 25px 0 0 0;
+    display: flex;
+    align-items: flex-end;
 }
 .input-link-each-del p {
-    margin: 0;
+    display: flex;
+    margin: 0 0 4px 0;
+    cursor: pointer;
+
+}
+
+.input-link-each-del p:hover {
+    opacity: .8;
 }

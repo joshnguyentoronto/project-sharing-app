@@ -3,6 +3,8 @@
 .project-detail-background {
     width: 100vw;
     height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
     bottom: 0;
     left: -20px;
     background-color: rgba(0, 0, 0, 0.782);
@@ -199,10 +201,9 @@
 }
 
 
-
 .project-detail-body-foot {
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     display: grid;
     grid-template-columns: auto 320px;
     grid-template-rows: 1fr;
@@ -211,6 +212,7 @@
 }
 .project-detail-body-foot-comment {
     border: 1px solid grey;
+    margin-bottom: 60px;
 }
 .project-detail-body-foot-comment-box {
     border-bottom: 1px solid grey;
@@ -223,8 +225,9 @@
 }
 .project-detail-body-foot-comment-list {
     width: 100%;
-    height: 100%;
+    height: 500px;
     padding: 20px;
+    overflow-y:scroll;
 }
 .comment-main {
     display: flex;
@@ -236,30 +239,131 @@
     height: 130px;
     resize: none;
     border: 1px solid grey;
+    font-size: 18px;
+    padding: 10px;
+    overflow: auto;
+    outline: none;
 }
 .comment-main button {
     height: 30px;
     width: auto;
-    background-color: white;
-    border-radius: 5px;
+    background-color: #29465B;
+    border-radius: 50px;
     font-size: 16px;
     margin: 10px 0 0 0;
+    padding: 0 15px;
     align-self: flex-end;
+    color: white;
+
 }
 .project-detail-body-foot-detail > div {
     border: 1px solid grey;
     margin: 0 0 20px 0;
     padding: 10px;
 }
-.project-detail-body-foot-tag p {
+.project-detail-body-foot-tag {
+    padding: 10px 10px 20px 10px;
+}
+.project-detail-body-foot-tag-p {
     margin: 0 0 20px 0;
+    font-weight: 600;
+    font-size: 18px;
 }
 .project-detail-body-foot-tag-container {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
 }
+.project-detail-body-foot-user {
+    height: 165px;
+}
+.project-detail-body-foot-user-info {
+    display: flex;
+    align-items: center;
+}
+.project-detail-body-foot-user-info button img {
+    width: 60px;
+    height: 60px;
+}
+.project-detail-body-foot-user-info-name p img {
+    width: 17px;
+    height: 17px;
+    margin: 0 0 -3px 0;
+}
+.project-detail-body-foot-user-info-name p {
+    margin: 5px 0;
+}
 
+.project-detail-body-foot-info p {
+    margin: 10px 0;
+}
+.project-detail-body-foot-info-stat {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.project-detail-body-foot-info-stat p img {
+    width: 18px;
+    height: 18px;
+    margin: 0 5px -3px 0;
+}
+
+
+
+
+.project-detail-body-foot-user-btn {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 0 10px 0;
+}
+#user-card-btn-3 img {
+    width: 13px;
+    height: 13px;
+    margin: 0 0 -2px 0;
+}
+#user-card-btn-4 img {
+    width: 13px;
+    height: 13px;
+    margin: 0 0 -2px 0;
+}
+#user-card-btn-3 {
+    height: 26px;
+    width: 252px;
+    margin: 10px 0 0 0;
+    background-color: transparent;
+    border: 1px solid #29465B;
+    border-radius: 50px;
+    display: inline;
+    color: #29465B;
+}
+#user-card-btn-4 {
+    height: 26px;
+    width: 252px;
+    margin: 10px 0 20px 0;
+    background-color: transparent;
+    border: 1px solid #29465B;
+    border-radius: 50px;
+    display: inline;
+    color: #29465B;
+}
+
+#user-card-btn-3:hover {
+    color: white;
+    background-color: #29465B;
+    border: none;
+}
+#user-card-btn-4:hover {
+    color: white;
+    background-color: #29465B;
+    border: none;
+}
+#user-card-btn-3:hover img {
+    content: url('../../images/icons/follow-btn-white.svg');
+}
+#user-card-btn-4:hover img {
+    content: url('../../images/icons/mess-btn-2.svg');
+}
 
 
 .usercard {

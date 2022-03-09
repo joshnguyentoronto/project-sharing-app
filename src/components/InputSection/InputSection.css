@@ -4,6 +4,11 @@
 .input-sec-each p {
     position: relative;
     width: 500px;
+    margin: 10px 0 5px 0;
+}
+.input-sec-each input {
+    position: relative;
+    width: 400px;
 }
 .input-sec-each p span {
     position: absolute;
@@ -11,8 +16,8 @@
     right: 0;
     border-radius: 50px;
     background-color: lightgrey;
-    padding: 5px 10px;
-    margin: 20px 0 0 0;
+    padding: 10px 10px;
+    margin: 25px 0 0 0;
 }
 
 .input-sec-each textarea {

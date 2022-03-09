@@ -1,3 +1,45 @@
-.account-container {
+.account {
+    display: grid;
+    grid-template-columns: auto 500px;
+    grid-template-rows: 1fr;
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+}
+
+.account-background {
+    background: url("../../images/image/login-background.jpg") no-repeat left center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
+
+.account-main-container {
+    width: 500px;
+    display: grid;
+    place-content: center;
+}
+
+.account-main {
+    height: 100%;
+    margin: 0 0 200px 0;
+}
+.account-main h1 {
+    font-size: 48px;
+    margin: 0 0 50px 0;
+}
+.account-main input:focus {
+    border: none;
+}
+.account-main div form {
+    height: 200px;
     display: flex;
+    flex-direction: column;
+    align-items: space-between;
+}
+
+.account-main div form a {
+    text-decoration: underline;
 }

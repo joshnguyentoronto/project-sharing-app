@@ -6,6 +6,7 @@ import InputLink from '../../components/InputLink/InputLink'
 import InputSection from '../../components/InputSection/InputSection'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
 import MessageBox from "../../components/MessageBox/MessageBox";
+import Footer from "../../components/Footer/Footer";
 
 
 export default class ProjectUploadPage extends Component {
@@ -221,9 +222,11 @@ export default class ProjectUploadPage extends Component {
                     userLogout={this.props.userLogout}
                     user={this.props.user} 
                 />
+
                 <h3>Upload a Project</h3>
+
                 <div className="upload">
-                    <div>
+                    <div className="upload-text">
                         <div>
                             <p>Title</p>
                             <input onChange={this.handleChange} 
@@ -241,7 +244,7 @@ export default class ProjectUploadPage extends Component {
                         </div>
                         <div>
                             <p>Tag</p>
-                            <form onSubmit={this.addTag}>
+                            <form className="tag-form" onSubmit={this.addTag}>
                                 <input onChange={this.handleChange} name="tagItem" type="text" placeholder="Ex: javascript, nodejs, mongodb" required />
                                 <button onSubmit={this.addTag}>+</button>
                             </form>
@@ -249,7 +252,7 @@ export default class ProjectUploadPage extends Component {
                                 {this.state.tag.map(tag => <InputTagItem key={tag} tag={tag} removeTag={this.removeTag} /> )}
                             </div>
                         </div>
-                        <div>
+                        <div className="input-li-container-top">
                             <div className="input-li-container" >
                                 {this.state.link.map(obj => <InputLink key={obj.index} link={obj} handleInputLinkNameChange={this.handleInputLinkNameChange} handleInputLinkUrlChange={this.handleInputLinkUrlChange} deleteLink={this.deleteLink} />)}
                             </div>
@@ -258,10 +261,6 @@ export default class ProjectUploadPage extends Component {
                         <div>
                             {this.state.text.map(obj => <InputSection key={obj} text={obj} handleInputTextHeadingChange={this.handleInputTextHeadingChange} handleInputTextBoxChange={this.handleInputTextBoxChange} deleteSection={this.deleteSection} />)}
                             <p onClick={this.addSection} className="upload-btn-sec">Add Section</p>
-                        </div>
-                        <div className="form-action">
-                            <Link to="/"  className="form-action-link">Close</Link>
-                            <button onClick={this.submitProject}>Publish</button>
                         </div>
                     </div>
                     <div  className="upload-img">
@@ -278,6 +277,14 @@ export default class ProjectUploadPage extends Component {
                         }
                     </div>
                 </div>
+
+                <div className="form-action">
+                    <Link to="/"  className="form-action-link">Close</Link>
+                    <button onClick={this.submitProject}>Publish</button>
+                </div>
+
+                <Footer />
+
                 {this.props.openChat ? 
                     <MessageBox 
                         messageList={this.props.messageList} 

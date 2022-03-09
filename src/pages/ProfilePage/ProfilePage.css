@@ -3,28 +3,82 @@
 }
 
 .profile-content-area {
-  padding: 100;
+  padding: 280px 30px 30px 30px;
+  min-width: 700px;
+  max-width: 100%;
+}
+
+.profile-content-area p {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.profile-content-area h4 {
+  margin-bottom: -10px;
 }
 
 .ProfileCategory {
     list-style: none;
     padding: 0;
     display: flex;
+    margin-bottom: 20px;
 }
 
 .ProfileCategory li {
     padding: 8px 16px;
     border-radius: 20px;
-    margin: 16px 32px;
+    margin: 16px 48px 16px 0;
   }
 
 .ProfileCategory li:hover:not(.active) {
-cursor: pointer;
-background-color: grey;
-color: white;
+  cursor: pointer;
+  background-color: #29465B;
+  color: white;
 }
 
 .ProfileCategory li.active {
-    color: black;
-    background-color: grey;
-  }
+  color: white;
+  background-color: #29465B;
+}
+
+.about-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.skill-item {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  margin-right: 16px;
+  border-radius: 6px;
+}
+
+.profile-social {
+  flex: 0 1 auto;
+  min-width: 200px;
+}
+
+.profile-info {
+  flex: 1 1 auto;
+  min-width: 300px;
+  max-width: 450px;
+}
+
+.profile .background-image {
+  width: 100vw;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 250px;
+  background: #ccc;
+}
+
+.profile .background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
