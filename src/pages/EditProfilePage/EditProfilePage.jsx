@@ -74,7 +74,7 @@ export default function EditProfilePage(props) {
     function removeSkill(skill) {
         let skillCopy = profileData.skill
         skillCopy.splice(skillCopy.findIndex(s => {
-            return s == skill
+            return s === skill
         }), 1)
         editProfileData({...profileData, skill: skillCopy })
     }

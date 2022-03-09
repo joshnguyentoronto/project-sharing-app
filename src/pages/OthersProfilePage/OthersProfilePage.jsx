@@ -73,7 +73,7 @@ export default function othersProfilePage(props) {
                 profile={userData.activeCategory}
                 user={props.user}
                 otherUser={userData.user}
-                projects={props.otherProjects}
+                otherProjects={props.otherProjects}
                 // hoverIsLiked={props.hoverIsLiked}
                 hoverProject={props.hoverProject} 
                 hoverUser={props.hoverUser}

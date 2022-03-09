@@ -3,8 +3,7 @@ import React, {useState} from 'react';
 import MessageList from "../../components/MessageList/MessageList"
 import MessageListItem from "../../components/MessageListItem/MessageListItem"
 import CloseIcon from '@mui/icons-material/Close';
-import SearchIcon from '@mui/icons-material/Search';
-import { TextField, InputAdornment } from '@mui/material';
+import { TextField } from '@mui/material';
 
 
 export default function MessageBox(props) {
