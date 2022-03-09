@@ -64,7 +64,7 @@ export default class ProjectUploadPage extends Component {
                     let imageArray = []
                     for(let i=0; i < this.state.imageFiles.length; i++){
                         let {url} = await fetch("/s3Url").then(res => res.json())
-                        let file = this.state.imageFiles[i].file
+                        let file = this.state.imageFiles[i]
                         let sendPhoto = await fetch(url,{
                             method: "PUT",
                             headers: {

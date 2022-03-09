@@ -18,6 +18,8 @@ export default function ProjectDetail(props) {
         let value = !popUpChat
         setpopUpChat(value)
     }
+
+    console.log(props.project.images[0])
     
     return(
         <div className='project-detail-background'>

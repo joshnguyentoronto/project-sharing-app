@@ -62,6 +62,7 @@ async function createConvo(req,res){
 async function createMessage(req,res){
     let conversation = await ConversationModel.findById(req.body.convoId)
     let recipient =''
+    console.log(req.body)
     if (req.body.users[0]._id == req.user._id){
         recipient = req.body.users[1]._id
     } else {

@@ -24,8 +24,6 @@ export default function MessageListItem(props) {
             setsocketInit(true)
         }
         props.socket.on("message recieved", (convoObj) => {
-            console.log("recieving socket message rec client side")
-            console.log(convoObj.messages)
             setListofMessages(convoObj.messages)
         })
     })
@@ -36,6 +34,7 @@ export default function MessageListItem(props) {
         let fetchResponse = await fetch('/api/users/sendmessage',{
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 'Authorization': 'Bearer ' + jwt,
             },
             body: JSON.stringify({

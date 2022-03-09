@@ -11,8 +11,6 @@ import ProjectUploadPage from '../ProjectUploadPage/ProjectUploadPage';
 import TermPage from '../TermPage/TermPage'
 import PolicyPage from '../PolicyPage/PolicyPage'
 import EditProfilePage from '../EditProfilePage/EditProfilePage';
-// import {io} from 'socket.io-client';
-// const socket = io()
 import {io} from 'socket.io-client';
 
 const socket = io()
