@@ -39,7 +39,9 @@ export default function ProjectDetail(props) {
                         Images
                     </div>
                     <div className='project-detail-body-project-link'>
-                        
+                        {props.project.projectLink.map(link => 
+                            <a target="_blank" href={link.url} >{link.name}</a>
+                        )}
                     </div>
                     <div className='project-detail-body-section'>
                         {props.project.text.map(section => 
@@ -51,10 +53,27 @@ export default function ProjectDetail(props) {
                     </div>
                 </div>
                 <div className='project-detail-body-other' id="toScroll" ref={divRef}>
-                    <h3>You may also like</h3>
-                    <button className="project-detail-body-other-userimg"><Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link> {props.project.author.length > 1 ? <span className="project-detail-body-other-username">Group Project</span> : <span className="project-detail-body-other-name">{props.project.author[0].username}</span>} </button>
+                    <h2>You may also like</h2>
                     <div className='project-detail-body-other-projects'>
-                        {props.refProjects.map(project => <RefProjectItem key={project._id} project={project} />)}
+                        {/* {props.refProjects.map(project => <RefProjectItem key={project._id} project={project} />)} */}
+                        {/* {props.refProjects.map(project => 
+                            <div key={project._id}>
+                                <ProjectListItem
+                                    profile={props.profile}
+                                    key={project._id} 
+                                    project={project} 
+                                    hoverProject={props.hoverProject} 
+                                    saveProject={props.saveProject}
+                                    likeProject={props.likeProject}
+                                    isSaved={props.isSaved}
+                                    isLiked={props.isLiked}
+                                    hoverUserState={props.hoverUserState}
+                                    hoverUser={props.hoverUser}
+                                    viewProject={props.viewProject}
+                                    user={props.user} 
+                                />
+                            </div>
+                        )} */}
                     </div>
                 </div>
 

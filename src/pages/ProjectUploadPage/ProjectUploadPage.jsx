@@ -216,7 +216,10 @@ export default class ProjectUploadPage extends Component {
                     <div>
                         <div>
                             <p>Title</p>
-                            <input onChange={this.handleChange, this.imagePreview} name="title" type="text" required />
+                            <input onChange={() => {
+                                this.handleChange()
+                                this.imagePreview()
+                            }} name="title" type="text" required />
                         </div>
                         <div>
                             <p>Project type:</p>
