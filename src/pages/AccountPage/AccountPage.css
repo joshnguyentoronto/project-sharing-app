@@ -8,7 +8,7 @@
 }
 
 .account-background {
-    background: url("../../images/image/login-background.jpg") no-repeat left center fixed; 
+    background: url("../../images/image/login-background.png") no-repeat left center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

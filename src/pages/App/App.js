@@ -25,7 +25,7 @@ export default class App extends Component {
     filter: '',
     openChat: false,
     messageList: [],
-    user: null,
+    user: this.falseUser,
     currentProject: '',
     viewMode: false,
     refProjects: [],
@@ -71,7 +71,7 @@ export default class App extends Component {
     let project = obj.project
     let profile = obj.profile
     console.log(obj)
-    if (!this.state.user) {
+    if (!this.state.user._id) {
         try {
             let fetchRefProjectList = await fetch('/api/projects/ref', {headers: { "user": project.author[0]._id }})
             let refProjects = await fetchRefProjectList.json()
@@ -282,12 +282,11 @@ export default class App extends Component {
   }
 
   userLogout = () =>{
-    console.log('logout')
     let token = localStorage.getItem('token')
     if (token){
       token= null
       localStorage.removeItem('token')
-      this.setState({user:null})
+      this.setState({ user: this.falseUser })
     }
   }
 
@@ -408,7 +407,7 @@ export default class App extends Component {
           let fetchProjectList = await fetch('/api/projects')
           let projects = await fetchProjectList.json()
           console.log(projects)
-          this.setState({ filter: '', projects: projects, user: null })
+          this.setState({ filter: '', projects: projects, user: this.falseUser })
         } catch(err) {
           console.log("home page error: ", err)
         }
@@ -427,7 +426,7 @@ export default class App extends Component {
       try {
         let fetchProjectList = await fetch('/api/projects')
         let projects = await fetchProjectList.json()
-        this.setState({ filter: '', projects: projects, user: null })
+        this.setState({ filter: '', projects: projects, user: this.falseUser })
       } catch(err) {
         console.log("home page error: ", err)
       }
