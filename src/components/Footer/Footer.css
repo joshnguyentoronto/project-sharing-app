@@ -1,7 +1,77 @@
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ul li {
+    margin: 10px 0;
+}
+
 .footer {
-    border-top: 1px solid black;
     width: 100vw;
-    margin-left: -20px;
-    height: 80px;
-    background-color: lightblue;
+    height: 400px;
+    margin: 100px 0 0 -5px;
+    padding: 50px 80px 10px 80px;
+    background-color: white;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-main h1 {
+    font-size: 32px;
+}
+.footer-main p {
+    font-size: 18px;
+}
+.footer-main-social {
+    display: flex;
+    justify-content: space-between;
+    width: 240px;
+    margin: 30px 0;
+}
+
+
+.footer-email {
+    width: 300px;
+}
+.footer-email p {
+    margin: 20px 0;
+}
+
+.footer-form input {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    background-color: transparent;
+    border: 2px solid #29465B;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #29465B;
+    margin: 0 0 20px 0;
+}
+.footer-form input:focus {
+    outline: none !important;
+    border: 2px solid #29465B;
+    box-shadow: 0 0 10px #29465B;
+}
+.footer-form button {
+    width: 125px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    background-color: #29465B;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
 }

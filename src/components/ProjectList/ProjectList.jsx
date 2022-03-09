@@ -7,7 +7,8 @@ export default function ProjectList(props) {
         <div className="project-list">
             {props.projects.map(project => 
                 <div key={project._id}>
-                    <ProjectListItem 
+                    <ProjectListItem
+                        profile={props.profile}
                         key={project._id} 
                         project={project} 
                         hoverProject={props.hoverProject} 
@@ -15,7 +16,6 @@ export default function ProjectList(props) {
                         likeProject={props.likeProject}
                         isSaved={props.isSaved}
                         isLiked={props.isLiked}
-                        // hoverIsLiked={props.hoverIsLiked}
                         hoverUserState={props.hoverUserState}
                         hoverUser={props.hoverUser}
                         viewProject={props.viewProject}

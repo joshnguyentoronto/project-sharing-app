@@ -9,31 +9,8 @@ import Footer from "../../components/Footer/Footer"
 
 export default class HomePage extends Component {
     state={
-        // hoverIsLiked: false
+        profile: false
     }
-
-    // async componentDidUpdate(prevProps){
-    //     console.log(prevProps)
-    //     console.log(this.props.user)
-    //     // if (this.props.user.likedPosts !== prevProps) {
-    //     //     this.setState({ hoverIsLiked: true })
-    //     // }
-    //     // if (this.state.user.likedPosts.indexOf(this.state.currentProject._id) == -1) {
-    //     //   this.setState({ hoverIsLiked: false})
-    //     // } else {
-    //     //   this.setState({ hoverIsLiked: true})
-    //     // }
-    //   }
-
-    //   async componentDidMount() {
-    //       console.log(this.props)
-    //     //   if (this.props.user.likedPosts.indexOf(this.props.currentProject._id) == -1) {
-    //     //   this.setState({ hoverIsLiked: false})
-    //     // } else {
-    //     //   this.setState({ hoverIsLiked: true})
-    //     // }
-    //   }
-
 
     render() {
         return(
@@ -43,8 +20,16 @@ export default class HomePage extends Component {
                     userLogout={this.props.userLogout}
                     user={this.props.user}
                 />
-                <Filter handleChange={this.props.handleChange} filterByTag={this.props.filterByTag} filterByFlag={this.props.filterByFlag} flags={this.props.flags}/>
-                <ProjectList 
+                <Filter 
+                    handleChange={this.props.handleChange}
+                    filterByTag={this.props.filterByTag}
+                    filterByFlag={this.props.filterByFlag}
+                    flags={this.props.flags}
+                    filterSort={this.props.filterSort}
+                    filter={this.props.filter}
+                />
+                <ProjectList
+                    profile={this.state.profile}
                     viewProject={this.props.viewProject}
                     projects={this.props.projects}
                     hoverUserState={this.props.hoverUserState}
@@ -55,7 +40,6 @@ export default class HomePage extends Component {
                     isSaved={this.props.isSaved}
                     isLiked={this.props.isLiked}
                     user={this.props.user} 
-                    // hoverIsLiked={this.props.hoverIsLiked}
                 />
                 {this.props.viewMode ? 
                     <ProjectDetail 

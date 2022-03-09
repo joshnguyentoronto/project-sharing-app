@@ -1,7 +1,9 @@
 const ConversationModel = require('../../models/Conversation')
+const ProjectModel = require('../../models/Project.js')
 const UserModel = require('../../models/User');
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { CoPresentSharp } = require('@mui/icons-material');
 
 
 module.exports = {
@@ -10,11 +12,13 @@ module.exports = {
     setup,
     saveOne,
     likeOne,
+    likeOneProfile,
     getAllMessages,
     getUser,
     createMessage,
     createConvo,
     recieveMessage,
+    editProfile
 }
 
 async function recieveMessage(req,res){
@@ -151,18 +155,120 @@ async function saveOne(req, res) {
 
 async function likeOne(req, res) {
     try {
+        let project = await ProjectModel.findById(req.body.likedPosts)
+        console.log(project)
         let user = await UserModel.findById(req.body.userId)
         if (user.likedPosts.some(l => l === req.body.likedPosts)) {
             let index = user.likedPosts.indexOf(req.body.likedPosts)
             user.likedPosts.splice(index, 1)
-            user.save()
+            await user.save()
+            project.likeCount = project.likeCount - 1
+            await project.save()
         } else {
             user.likedPosts.push(req.body.likedPosts)
-            user.save()
+            await user.save()
+            project.likeCount = project.likeCount + 1
+            await project.save()
         }
-
-        res.status(200).json(user)
+        let projects = await ProjectModel.find({}).populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        await project.populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        const object = {
+            user: user,
+            newProject: project,
+            projectsList: projects
+        }
+        res.status(200).json(object)
     } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+
+async function likeOneProfile(req, res) {
+    try {
+        let project = await ProjectModel.findById(req.body.likedPosts)
+        console.log(project)
+        let user = await UserModel.findById(req.body.userId)
+        if (user.likedPosts.some(l => l === req.body.likedPosts)) {
+            let index = user.likedPosts.indexOf(req.body.likedPosts)
+            user.likedPosts.splice(index, 1)
+            await user.save()
+            project.likeCount = project.likeCount - 1
+            await project.save()
+        } else {
+            user.likedPosts.push(req.body.likedPosts)
+            await user.save()
+            project.likeCount = project.likeCount + 1
+            await project.save()
+        }
+        await project.populate([
+            { path: 'author', model: 'User' },
+            { path: 'comment', populate: { path: 'user', model: 'User' } }
+        ])
+        if (req.body.cat == 'Liked') {
+            let idArr = user.likedPosts
+            let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let object = {
+                user: user,
+                newProject: project,
+                projectsList: projects
+            }
+            res.status(200).json(object)
+        } else if (req.body.cat == 'Saved') {
+            let idArr = user.savedPosts
+            let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let object = {
+                user: user,
+                newProject: project,
+                projectsList: projects
+            }
+            res.status(200).json(object)
+        } else if (req.body.cat == 'Projects') {
+            let projects = await ProjectModel.find({ author: [req.body.userId] }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let object = {
+                user: user,
+                newProject: project,
+                projectsList: projects
+            }
+            res.status(200).json(object)
+        }
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function editProfile(req, res) {
+    try {
+        let userId = req.get('userId')
+        let user = await UserModel.findById(userId)
+        console.log("before save", user)
+        console.log(req.body)
+        user.name = req.body.name
+        user.bio = req.body.bio
+        user.education = req.body.education
+        user.experiences = req.body.experiences
+        user.location = req.body.location
+        user.skill = req.body.skill
+        user.userLink = req.body.userLink
+        user.save()
+        console.log("afterr save", user)
+        res.status(200).json(user)
+    }catch(err) {
         res.status(400).json(err)
     }
 }

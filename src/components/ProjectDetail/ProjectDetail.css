@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .project-detail-background {
     width: 100vw;
     height: 100%;
@@ -7,8 +9,8 @@
     z-index: 100;
     position: absolute;
     display: grid;
-    grid-template-columns: 100px auto 120px;
-    grid-template-rows: 100px auto;
+    grid-template-columns: 90px auto 100px;
+    grid-template-rows: 90px auto;
     grid-template-areas:
         "left head right"
         "left body right";
@@ -19,14 +21,13 @@
 .project-detail-left {
     grid-area: left;
 }
-
-
 .project-detail-right {
     margin: 100px 0 0 0;
     grid-area: right;
 }
 .project-detail-right-sub {
-    height: 400px;
+    padding: 0 10px 0 0;
+    height: 350px;
     width: 100%;
     grid-area: right;
     display: flex;
@@ -37,7 +38,7 @@
 .project-detail-right button {
     height: 50px;
     width: 50px;
-    background-color: lightgrey;
+    background-color: white;
     border: none;
     border-radius: 50%;
     display: grid;
@@ -65,6 +66,7 @@
 }
 
 
+
 .project-detail-head {
     grid-area: head;
     display: flex;
@@ -82,10 +84,12 @@
 }
 .project-detail-head-name {
     color: white;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0 0 0 20px;
+    font-size: 24px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    margin: 0 0 0 10px;
 }
+
 
 
 .project-detail-body {
@@ -93,32 +97,90 @@
     background-color: white;
     width: 100%;
     height: 100%;
-    padding: 80px;
-}
-.project-detail-body h1 {
-    margin: 0 0 50px 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .project-detail-body-img {
-    background-color: grey;
+    background-color: black;
     width: 100%;
     height: 500px;
     display: grid;
     place-content: center;
     font-size: 40px;
+    color: white;
 }
+
+.project-detail-body-project-link {
+    margin: 50px 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px black;
+    justify-content: space-evenly;
+
+}
+.project-detail-body-project-link a {
+    color: #005cfc;
+    font-size: 22px;
+    padding: 0 30px;
+    border-right: 1px solid #005cfc;
+    border-left: 1px solid #005cfc;
+}
+.project-detail-body-project-link a:nth-child(1) {
+    border-left: none;
+}
+.project-detail-body-project-link a:last-child {
+    border-right: none;
+}
+.project-detail-body-project-link a:hover {
+    text-decoration: underline;
+}
+
+.project-detail-body-main {
+    width: 90%;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.project-detail-body-main h1 {
+    font-size: 45px;
+    letter-spacing: 1px;
+    margin: 30px 0 50px 0;
+    text-align: left;
+    width: 100%;
+}
+
+.project-detail-body-section {
+    width: 100%;
+    max-width: 800px;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+.project-detail-body-section-each h3 {
+    font-size: 30px;
+    margin: 40px 0 10px 0;
+    font-weight: 600;
+}
+.project-detail-body-section-each p {
+    font-size: 20px;
+    margin: 10px 0 20px 0;
+}
+
 
 
 .project-detail-body-other {
     width: 100%;
-    background-color: lightgrey;
-    position: relative;
+    background-color: white;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
     margin: 50px 0;
     padding: 15px 0;
+    user-select: none;
 }
-.project-detail-body-other h3 {
-    position: absolute;
-    top: 5px;
-    left: 40%;
+.project-detail-body-other h2 {
+    text-align: center;
+    margin: 20px 0 30px 0;
 }
 .project-detail-body-other-userimg {
     height: 70px;
@@ -126,22 +188,16 @@
     border: none;
     background-color: transparent;
 }
-.project-detail-body-other-userimg img {
-    height: 50px;
-    width: 50px;
-}
-.project-detail-body-other-username {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0 0 0 20px;
-}
 .project-detail-body-other-projects {
     margin: 20px 0 ;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-around;
+    user-select: none;
 }
+
 
 
 .project-detail-body-foot {
@@ -154,10 +210,10 @@
     user-select: none;
 }
 .project-detail-body-foot-comment {
-    border: 1px solid black;
+    border: 1px solid grey;
 }
 .project-detail-body-foot-comment-box {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid grey;
     display: grid;
     grid-template-columns: 50px auto;
     grid-template-rows: 1fr;
@@ -179,24 +235,22 @@
     width: 100%;
     height: 130px;
     resize: none;
-    border: 1px solid black;
+    border: 1px solid grey;
 }
 .comment-main button {
     height: 30px;
     width: auto;
-    background-color: lightgrey;
+    background-color: white;
     border-radius: 5px;
     font-size: 16px;
     margin: 10px 0 0 0;
     align-self: flex-end;
 }
-
 .project-detail-body-foot-detail > div {
-    border: 1px solid black;
+    border: 1px solid grey;
     margin: 0 0 20px 0;
     padding: 10px;
 }
-
 .project-detail-body-foot-tag p {
     margin: 0 0 20px 0;
 }
@@ -205,6 +259,8 @@
     flex-wrap: wrap;
     gap: 15px;
 }
+
+
 
 .usercard {
     visibility: hidden;

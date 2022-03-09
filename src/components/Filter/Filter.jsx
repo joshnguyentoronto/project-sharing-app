@@ -19,9 +19,10 @@ export default function Filter(props) {
                     {props.flags.map(f => 
                         <Flag filterByFlag={props.filterByFlag} key={f} flag={f} />
                     )}
-                    <select className='filter-flags-filter' name='sort'>
-                        <option value="">Filter</option>
-                        <option value="alphabetical">Alphabetical</option>
+                    <select onChange={props.filterSort} className='filter-flags-filter' name='sort'>
+                        <option value="all">Filter</option>
+                        <option value="alphabetical">Alphabetical A - Z</option>
+                        <option value="alpha">Alphabetical Z - A</option>
                         <option value="recent">Most Recent</option>
                         <option value="view">Most Viewed</option>
                         <option value="like">Most Liked</option>

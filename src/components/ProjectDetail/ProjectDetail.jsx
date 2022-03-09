@@ -35,19 +35,45 @@ export default function ProjectDetail(props) {
                 }
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
-                    <p className='project-detail-body-img'>Image</p>
-                    {props.project.text.map(section => 
-                        <div key={section._id}>
-                            <h3>{section.heading}</h3>
-                            <p>{section.text}</p>
-                        </div>
-                    )}
+                    <div className='project-detail-body-img'>
+                        Images
+                    </div>
+                    <div className='project-detail-body-project-link'>
+                        {props.project.projectLink.map(link => 
+                            <a target="_blank" href={link.url} >{link.name}</a>
+                        )}
+                    </div>
+                    <div className='project-detail-body-section'>
+                        {props.project.text.map(section => 
+                            <div  className='project-detail-body-section-each' key={section._id}>
+                                <h3>{section.heading}</h3>
+                                <p>{section.text}</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className='project-detail-body-other' id="toScroll" ref={divRef}>
-                    <h3>You may also like</h3>
-                    <button className="project-detail-body-other-userimg"><Link to="/profile"><img src={require('../../images/icons/user.svg')} alt="svg icon" /></Link> {props.project.author.length > 1 ? <span className="project-detail-body-other-username">Group Project</span> : <span className="project-detail-body-other-name">{props.project.author[0].username}</span>} </button>
+                    <h2>You may also like</h2>
                     <div className='project-detail-body-other-projects'>
-                        {props.refProjects.map(project => <RefProjectItem key={project._id} project={project} />)}
+                        {/* {props.refProjects.map(project => <RefProjectItem key={project._id} project={project} />)} */}
+                        {/* {props.refProjects.map(project => 
+                            <div key={project._id}>
+                                <ProjectListItem
+                                    profile={props.profile}
+                                    key={project._id} 
+                                    project={project} 
+                                    hoverProject={props.hoverProject} 
+                                    saveProject={props.saveProject}
+                                    likeProject={props.likeProject}
+                                    isSaved={props.isSaved}
+                                    isLiked={props.isLiked}
+                                    hoverUserState={props.hoverUserState}
+                                    hoverUser={props.hoverUser}
+                                    viewProject={props.viewProject}
+                                    user={props.user} 
+                                />
+                            </div>
+                        )} */}
                     </div>
                 </div>
 
@@ -106,15 +132,17 @@ export default function ProjectDetail(props) {
             <div className='project-detail-right'>
                 <div className='project-detail-right-sub'>
                     <button className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></button>
-                    <div className='profilebtnhover' >
-                        <Link to="/profile"><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
-                        <div className="usercard" >
-                            <UserCard user={props.project.author[0]} />
+                    { props.project.author.map(user => 
+                        <div className='profilebtnhover' >
+                            <Link to="/profile"><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                            <div className="usercard" >
+                                <UserCard user={user} />
+                            </div>
                         </div>
-                    </div>
+                    ) }
                     <button onClick={() => props.likeProject(props.project)}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
                     <button onClick={() => props.saveProject(props.project)}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
-                    <button onClick={openChatBox}><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
+                    <button onClick={openChatBox}><img src={require('../../images/icons/message-white.svg')} alt="svg icon" /></button>
                     <button onClick={() => divRef.current.scrollIntoView({ behavior: "smooth" }) } ><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>
             </div>
