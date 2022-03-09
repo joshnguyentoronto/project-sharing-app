@@ -8,7 +8,7 @@ import InputTagItem from "../../components/InputTagItem/InputTagItem";
 export default function EditProfilePage(props) {
     const [profileData, editProfileData] = useState({
         name: '',
-        experiences: '',
+        experiences: [],
         location:'',
         education: '',
         userLink: [{ index: 0, name: '', url: '' }],
@@ -106,43 +106,72 @@ export default function EditProfilePage(props) {
 
     return(
         <div>
-            <h1>helllo</h1>
-                <TextField
-                    label="Name"
-                    // id="fullWidth" 
-                    size="small"
-                    type="text"
-                    margin="normal" 
-                    name="name" 
-                    onChange={handleChange} 
-                />
-                <TextField 
+            <div className="edit-profile-header">
+                <div className="edit-profile-photo"></div>
+                <div className="edit-background-image"></div>
+            </div>
+
+        <div className="edit-profile-content-wrapper">
+            <div className="edit-profile-social">
+                <p className="label">Socials</p>
+                <p>Twitter</p>
+                <p>Facebook</p>
+                <p>Linkedin</p>
+            </div>
+            <div className="edit-profile-info-wrapper">
+                <div class="edit-profile-info">
+                    <span className="label">Name</span>             
+                    <TextField
+                        // label="Name"
+                        // id="fullWidth" 
+                        // size="small"
+                        type="text"
+                        // margin="normal" 
+                        name="name" 
+                        onChange={handleChange} 
+                    />
+                    
+                </div>
+
+ 
+                <div class="edit-profile-info">
+                    <span className="label">Work Experience</span>               
+                    <TextField 
                     // id="outlined-basic" 
-                    label="Work Experience" 
+                    // label="Work Experience" 
                     // variant="outlined"
                     type="text" 
                     name="experiences"
                     value={profileData.experiences} 
                     onChange={handleChange} 
                 />
+                </div>
+                <div class="edit-profile-info">
+                    <span className="label">Education</span>
                 <TextField 
                     // id="outlined-basic" 
-                    label="Education" 
+                    // label="Education" 
                     // variant="outlined"
                     type="text" 
                     name="education"
                     value={profileData.education} 
                     onChange={handleChange} 
                 />
+                </div>
+
+                <div class="edit-profile-info">
+                    <span className="label">Location</span>
                 <TextField 
                     // id="outlined-basic" 
-                    label="Location" 
+                    // label="Location" 
                     // variant="outlined"
                     type="text" 
                     name="location"
                     value={profileData.location} 
                     onChange={handleChange} 
                 />
+                </div>
+
                 {profileData.userLink.map(obj => <InputLink 
                     key={obj.index} 
                     link={obj} 
@@ -152,8 +181,8 @@ export default function EditProfilePage(props) {
                 />)}
                 <p onClick={addLink} className="upload-btn-li">Add Link</p>
 
-
-                <p>Skills</p>
+                <div className="edit-skills-wrapper">
+                <p className="label">Skills</p>
                     <form onSubmit={addSkill}>
                         <input onChange={handleChange} name="skillItem" type="text" placeholder="Ex: Javascript, Wireframing, Research" required />
                         <button onSubmit={addSkill}>+</button>
@@ -161,27 +190,35 @@ export default function EditProfilePage(props) {
                     <div className="tag-items">
                         {profileData.skill.map(skill=> <InputTagItem key={skill} tag={skill} removeTag={removeSkill} /> )}
                     </div>
+                </div>
+                
+                <div class="edit-profile-info">
+                    <span className="label">About me</span>
+                    <TextField
+                        id="outlined-multiline-static"
+                        // label="Bio"
+                        multiline
+                        name="bio"
+                        value={profileData.bio}
+                        rows={4}
+                        onChange={handleChange}
+                    />
+                </div>
 
-                <TextField
-                    id="outlined-multiline-static"
-                    label="Bio"
-                    multiline
-                    name="bio"
-                    value={profileData.bio}
-                    rows={4}
-                    onChange={handleChange}
-                />
-
-                <Link to="/profile"  className="form-action-link">Cancel</Link>
-                <button onClick={()=>props.submitProfile({
-                    name: profileData.name,
-                    bio: profileData.bio,
-                    education: profileData.education,
-                    experiences: profileData.experiences,
-                    location: profileData.location,
-                    skill: profileData.skill,
-                    userLink: profileData.userLink
-                })}>Publish</button>
+                <div className="edit-profile-submit">
+                    <Link to="/profile"  className="form-action-link">Cancel</Link>
+                    <button onClick={()=>props.submitProfile({
+                                        name: profileData.name,
+                                        bio: profileData.bio,
+                                        education: profileData.education,
+                                        experiences: profileData.experiences,
+                                        location: profileData.location,
+                                        skill: profileData.skill,
+                                        userLink: profileData.userLink
+                    })}>Publish</button>
+                </div>
+                </div>
+                </div>
         </div>
     )
 }

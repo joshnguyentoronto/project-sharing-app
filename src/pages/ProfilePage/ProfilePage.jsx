@@ -22,6 +22,7 @@ export default class ProfilePage extends Component {
     render() {
         return(
             <div className="profile">
+                <div className="background-image"><img src={require('../../images/image/no_profile_image.png')} alt="profile background"/></div>
                 <ProfileCard user={this.props.user}/>
                 <div className="profile-content-area">
                     <ul className="ProfileCategory">
@@ -53,14 +54,19 @@ export default class ProfilePage extends Component {
                     </ul>
                     
                     {this.state.activeCategory === "About" ?
-                        <div>
-                        <p>About<br />{this.props.user.bio}</p>
-                        <p>Skills<br /><ul>{this.props.user.skill.map(s => <li>{s}</li>)}</ul></p>
-                        <p>Work Experience<br /><ul>{this.props.user.experiences.map(e => <li>{e.company}: {e.title}</li>)}</ul></p>
-                        <p>Education<br />{this.props.user.education}</p>
-                        <p>Member since: March 2</p>
-                        <p>Contact<br />{this.props.user.email}</p>
-                        <p>Social<br /><ul>{this.props.user.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p>
+                    <div class="about-wrapper">
+                        <div className="profile-info">
+                            <p><h4>About</h4><br />{this.props.user.bio}</p>
+                            <p><h4>Skills</h4><br /><ul>{this.props.user.skill.map(s => <li className="skill-item">{s}</li>)}</ul></p>
+                            <p><h4>Work Experience</h4><br />{this.props.user.experiences}</p>
+                            <p><h4>Education</h4><br />{this.props.user.education}</p>
+                            <p><h5>Member since: March 2</h5></p>
+                        </div>
+
+                        <div className="profile-social">
+                            <p><h4>Contact</h4><br />{this.props.user.email}</p>
+                            <p><h4>Social</h4><br /><ul>{this.props.user.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p>
+                        </div>
                     </div>
                     :
                     <ProjectList 

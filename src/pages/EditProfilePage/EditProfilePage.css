@@ -1,0 +1,158 @@
+.edit-profile-header {
+    display: flex;
+    gap: 56px;
+    width: auto;
+    margin: 30px;
+    padding: 30px;
+}
+
+.edit-profile-photo {
+    background: white;
+    border: 1px solid black;
+    border-radius: 100%;
+    height: 200px;
+    width: 200px;
+}
+
+.edit-background-image {
+    flex: 1 1 auto;
+    height: 200px;
+    background: #ccc;
+}
+
+.edit-profile-content-wrapper {
+    display: flex;
+    margin: 0 30px;
+    padding: 0 30px;
+    gap: 40px;
+}
+
+.edit-profile-social {
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.edit-profile-social .label {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.edit-profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    margin-left: 40px;
+}
+
+.edit-profile-info .label {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.edit-profile-info input {
+    padding: 4px 8px !important;
+    width: 300px;
+}
+
+.input-link-each {
+    margin-left: 40px;
+}
+
+.input-link-each input {
+    border: 1px solid #ccc;
+    padding: 4px;
+    height: 21px;
+    border-radius: 4px;
+}
+
+.input-link-each-name p,
+.input-link-each-url p {
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.edit-skills-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 40px;
+    margin-top: 24px;
+}
+
+.edit-skills-wrapper .label {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.edit-skills-wrapper form {
+    display: flex;
+    align-items: flex-end;
+}
+
+.edit-skills-wrapper form input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 4px 8px;
+    height: 21px;
+    
+}
+
+.edit-skills-wrapper button {
+    font-size: 40px;
+    height: 35px;
+    cursor: pointer;
+    line-height: 1;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.edit-skills-wrapper button:hover {
+    opacity: .8;
+}
+
+#outlined-multiline-static {
+    width: 300px;
+}
+
+.edit-profile-submit {
+    display: flex;
+    margin: 40px;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.edit-profile-submit a {
+    font-size: 20px;
+    padding: 10px 50px;
+}
+
+.edit-profile-submit button {
+    background-color: #29465B;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 50px;
+    display: flex;
+    text-align: center;
+    align-items: flex-start;
+    width: fit-content;
+}
+
+.edit-profile-submit a:hover,
+.edit-profile-submit button:hover {
+    opacity: .8;
+}
