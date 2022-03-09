@@ -1,10 +1,10 @@
 .tag-item {
-    background-color: lightgrey;
+    background-color: white;
     border-radius: 50px;
-    height: 30px;
-    width: auto;
+    border: 1px solid #ccc;
+    width: fit-content;
     margin: 0;
-    padding: 0;
+    padding: 2px 8px;
     display: flex;
     align-items: center;
 }
@@ -14,6 +14,12 @@
 }
 
 .tag-item span img {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    cursor: pointer;
+}
+
+.tag-item span img:hover {
+    opacity: .8;
 }

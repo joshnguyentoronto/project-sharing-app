@@ -1,6 +1,7 @@
 .input-link-each {
     display: flex;
-    gap: 20px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .input-link-each-name input {
@@ -14,9 +15,15 @@
 }
 
 .input-link-each-del {
-    width: 40px;
-    padding: 25px 0 0 0;
+    display: flex;
+    align-items: flex-end;
 }
 .input-link-each-del p {
+    display: flex;
     margin: 0;
+    cursor: pointer;
+}
+
+.input-link-each-del p:hover {
+    opacity: .8;
 }
