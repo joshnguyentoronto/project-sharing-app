@@ -1,5 +1,13 @@
 const ProjectModel = require('../../models/Project.js')
 const UserModel = require('../../models/User.js')
+const AWS = require('aws-sdk')
+const uuid = require('uuid')
+const fs = require('fs')
+
+
+S3_BASE_URL = 'https://s3.ca-central-1.amazonaws.com/'
+BUCKET='project-sharing-app'
+AWS.config.update({region: 'ca-central-1'})
 
 module.exports = {
     projectsIndex,
@@ -14,7 +22,98 @@ module.exports = {
     deleteComment,
     likeComment,
     unlikeComment,
+    createPhoto,
 }
+
+async function createPhoto(req,res) {
+    try {
+        let arr = []
+        const s3 = new AWS.S3({
+            accessKeyID: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        })
+        
+        for(image in req.files){
+            let file = req.files[image].file
+            let fileStream = fs.createReadStream(file);
+            let key = req.files[image].uuid+'.jpeg'
+            let url = `${S3_BASE_URL}${BUCKET}/${key}`
+            arr.push(url)
+
+            let params = {
+                Bucket: BUCKET,
+                Key: key,
+                Body: fileStream
+            }
+
+            s3.upload(params, function(err, data){
+                if (err){
+                    console.log(err)
+                } else {
+                    console.log(data)
+                }
+            })
+        }
+        console.log('')
+
+        res.status(200).json(arr)
+
+    } catch {
+        res.status(400).json(err)
+    }
+}
+
+async function createProject(req, res) {
+    // try {
+    //     let arr = ['hi']
+    //     const s3 = new AWS.S3({
+    //         accessKeyID: process.env.AWS_ACCESS_KEY_ID,
+    //         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    //     })
+        
+    //     for(image in req.files){
+    //         let file = req.files[image].file
+    //         let  fileStream = fs.createReadStream(file);
+    //         let key = req.files[image].uuid+'.jpeg'
+    //         let url = `${S3_BASE_URL}${BUCKET}/${key}`
+    //         arr.push(url)
+
+    //         let params = {
+    //             Bucket: BUCKET,
+    //             Key: key,
+    //             Body: fileStream
+    //         }
+
+    //         s3.upload(params, function(err, data){
+    //             if (err){
+    //                 console.log(err)
+    //             } else {
+    //                 console.log(data)
+    //             }
+    //         })
+    //     }
+
+        // req.body.images = arr
+        console.log(req.body.text)
+        console.log(req.body.projectLink)
+        // ProjectModel.create(req.body, function(err, data){
+        //     console.log(err)
+        // })
+        console.log('done await')
+        // console.log(newProject)
+        // res.status(200).json(newProject);
+
+    // } catch(err) {
+    //     res.status(400).json(err)
+    // }
+}
+
+//old function starts here
+        // const newProject = await ProjectModel.create(req.body)
+        // res.status(200).json(newProject);
+    // } catch(err) {
+    //     res.status(400).json(err)
+    // }
 
 async function projectsIndex(req, res) {
     try {
@@ -136,14 +235,6 @@ async function projectsLiked(req, res) {
 }
 
 
-async function createProject(req, res) {
-    try {
-        const newProject = await ProjectModel.create(req.body)
-        res.status(200).json(newProject);
-    } catch(err) {
-        res.status(400).json(err)
-    }
-}
 
 async function createComment(req, res) {
     try {

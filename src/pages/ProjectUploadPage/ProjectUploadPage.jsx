@@ -7,6 +7,7 @@ import InputSection from '../../components/InputSection/InputSection'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
 import MessageBox from "../../components/MessageBox/MessageBox";
 
+
 export default class ProjectUploadPage extends Component {
     state = {
         currentTag: '',
@@ -23,22 +24,24 @@ export default class ProjectUploadPage extends Component {
         link: [{ index: 0, name: '', url: '' }],
         linkNum: 1,
         img:[],
+        imageFiles: []
     }
+
+
     
     handleChange = (evt) => {
         if (evt.target.name == "img"){
-            for(let i=0; i< evt.target.files.length; i++){
-                if (i == 0){
-                    this.setState({ 
-                        img: URL.createObjectURL(evt.target.files[i]),
-                    });
-                }
-                this.setState({ 
-                    img: [...this.state.img, URL.createObjectURL(evt.target.files[i])],
-                });
+            console.log(evt.target.files)
+            let arr = []
+            for(let i=0; i < evt.target.files.length; i++){
+                arr.push(URL.createObjectURL(evt.target.files[i]))
             }
+            this.setState({
+                img: arr,
+                imageFiles: evt.target.files
+            })
         }else {
-            this.setState({[evt.target.name]: evt.target})
+            this.setState({[evt.target.name]: evt.target.value})
         }
     };
 
@@ -60,36 +63,51 @@ export default class ProjectUploadPage extends Component {
         } else {
             if (window.confirm("Your project will be published. Do you want to continue ?")) {
                 try {
-                    let date = new Date()
-                    const fetchResponse = await fetch('/api/projects/new', {
-                        method: 'POST',
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify({
-                            author: [this.props.user._id],
-                            title: this.state.title,
-                            date: date,
-                            viewCount: 0,
-                            likeCount: 0,
-                            text: this.state.text,
-                            projectLink: this.state.link,
-                            comment: [],
-                            flag: this.state.flag,
-                            tag: this.state.tag,
-                        })
-                    })
-                    if (!fetchResponse.ok) {
-                        throw new Error('Fetch failed - Bad request')
-                    } else {
-                        window.location.href = "/"
+                    let jwt = localStorage.getItem('token')
+                    let formData = new FormData()
+                    // formData.append('author', this.props.user._id)
+                    // formData.append('title', this.state.title)
+                    // formData.append('text', this.state.text)
+                    // formData.append('projectLink', this.state.link)
+                    // formData.append('flag', this.state.flag,)
+                    // formData.append('tag', this.state.tag)
+                    for(let i=0; i < this.state.imageFiles.length; i++){
+                        let key ='image' + i
+                        formData.append( key, this.state.imageFiles[i])
                     }
+                    const fetchResponse = await fetch('/api/projects/photo', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    console.log(fetchResponse)
+                    let parsedfetchResp = await JSON.parse(fetchResponse)
+                    console.log(parsedfetchResp)
+
+                    // const sendProjectData = await fetch('/api/projects/new',{
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Authorization': 'Bearer ' + jwt,
+                    //         "Content-Type": "application/json"
+                    //     },
+                    //     body: JSON.stringify({
+                    //         title: this.state.title,
+                    //         text: this.state.text,
+                    //         projectLink: this.state.link,
+                    //         flag: this.state.flag,
+                    //         tag: this.state.tag,
+                    //     })
+                    // })
+
+                    // if (!fetchResponse.ok && !sendProjectData.ok) {
+                    //     throw new Error('Fetch failed - Bad request')
+                    // } else {
+                    //     window.location.href = "/"
+                    // }
                 } catch (err) {
                     console.log("Submit error", err)
                 }
-            } else {
-                return false
-            }
+            } 
         }
-        
     }
 
     addTag = (evt) => {
@@ -199,9 +217,6 @@ export default class ProjectUploadPage extends Component {
         }
     }
 
-    imagePreview = async () => {
-
-    }
 
     render() {
         return(
@@ -216,7 +231,9 @@ export default class ProjectUploadPage extends Component {
                     <div>
                         <div>
                             <p>Title</p>
-                            <input onChange={this.handleChange, this.imagePreview} name="title" type="text" required />
+                            <input onChange={this.handleChange} 
+                                name="title" type="text" required 
+                            />
                         </div>
                         <div>
                             <p>Project type:</p>
@@ -253,16 +270,17 @@ export default class ProjectUploadPage extends Component {
                         </div>
                     </div>
                     <div  className="upload-img">
-                        <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
-                        {/* {this.state.img.length ?
-                            <div>
-                                {this.state.img.map( m => 
-                                    <img src={URL.createObjectURL(m)}></img>
-                                )}
-                            </div>
-                            :
-                            false
-                        } */}
+                        <form>
+                            <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
+
+                        </form>
+                        {this.state.img.length ?
+                        <div className="image-preview">
+                            {this.state.img.map(i => <img src={i}></img>)}
+                        </div>
+                        :
+                        false 
+                        }
                     </div>
                 </div>
                 {this.props.openChat ? 

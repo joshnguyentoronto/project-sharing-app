@@ -5,7 +5,13 @@ const logger = require('morgan');
 require('dotenv').config()
 require('./config/database')
 
+const bb = require('express-busboy'); // add this below the logger
+
 const app = express();
+bb.extend(app, { // add this after our app
+    upload: true
+});
+
 const http = require('http')
 const server = http.createServer(app)
 const { Server } = require("socket.io")
