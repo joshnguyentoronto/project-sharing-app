@@ -148,7 +148,7 @@ export default function ProjectDetail(props) {
                             </div>
                         </div>
                     ) }
-                    <button onClick={() => props.likeProject(props.project)}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
+                    <button onClick={() => props.likeProject({ "profile": props.profile, "project": props.project })}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
                     <button onClick={() => props.saveProject(props.project)}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
                     <button onClick={openChatBox}><img src={require('../../images/icons/message-white.svg')} alt="svg icon" /></button>
                     <button onClick={() => divRef.current.scrollIntoView({ behavior: "smooth" }) } ><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>

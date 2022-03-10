@@ -12,7 +12,7 @@ export default function ProjectListItem(props) {
                     
                     <div className='img-bottom-icons'>
                         <span>
-                            <button className="img-like-button" onClick={() => props.likeProject({ "profile": props.profile, "project": props.project })}>{ props.user.likedPosts.indexOf(props.project._id) != -1 ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button><span>{props.project.likeCount}</span>
+                            <button className="img-like-button" onClick={() => props.likeProject({ "profile": props.profile, "project": props.project, "otherUser": props.otherUser })}>{ props.user.likedPosts.indexOf(props.project._id) != -1 ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button><span>{props.project.likeCount}</span>
                         </span>
                         <span>
                             <img className="img-views-count" src={require('../../images/icons/views.svg')} alt="views" /><span>{props.project.viewCount}</span>
