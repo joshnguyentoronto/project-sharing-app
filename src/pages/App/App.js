@@ -12,6 +12,7 @@ import TermPage from '../TermPage/TermPage'
 import PolicyPage from '../PolicyPage/PolicyPage'
 import EditProfilePage from '../EditProfilePage/EditProfilePage';
 import OthersProfilePage from '../OthersProfilePage/OthersProfilePage';
+import AboutPage from '../AboutPage/AboutPage';
 import {io} from 'socket.io-client';
 
 const socket = io()
@@ -779,6 +780,16 @@ export default class App extends Component {
           <Route 
             path="/privacy-policy"
             element={<PolicyPage 
+              user={this.state.user} 
+              openChat={this.state.openChat}
+              messageList={this.state.messageList}
+              userLogout={this.userLogout}
+              openChatList={this.openChatList}
+            />}
+          />
+          <Route 
+            path="/about"
+            element={<AboutPage 
               user={this.state.user} 
               openChat={this.state.openChat}
               messageList={this.state.messageList}
