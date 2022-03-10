@@ -87,6 +87,8 @@ export default class ProfilePage extends Component {
                         likeProject={this.props.likeProject}
                         saveProject={this.props.saveProject}
                         viewProject={this.props.viewProject}
+                        viewPeople={this.props.viewPeople}
+                        viewUser=""
                     />
                     }
                     {this.props.viewMode ? 

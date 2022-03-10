@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Button from '@mui/material/Button'
 import {Link ,useNavigate} from 'react-router-dom'
-import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import "./Login.css"
 
 export default function Login(props) {
@@ -19,7 +19,6 @@ export default function Login(props) {
     }
 
     async function handleSubmit(e) {
-        console.log('hit')
         e.preventDefault();
         const fetchResponse = await fetch('/api/users/login', {
             method: 'post',

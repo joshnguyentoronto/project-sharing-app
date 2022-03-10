@@ -45,7 +45,9 @@ a {
 }
 
 .header-link-container {
-    width: 300px;
+    min-width: 400px;
+    max-width: 530px;
+    width: 40%;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -28,7 +28,7 @@ export default class ProjectUploadPage extends Component {
 
 
     handleChange = (evt) => {
-        if (evt.target.name == "img"){
+        if (evt.target.name === "img"){
             console.log(evt.target.files)
             let arr = [...this.state.img]
             let imgArr =[...this.state.imageFiles]
@@ -117,7 +117,7 @@ export default class ProjectUploadPage extends Component {
     removeTag = (tag) => {
         let tagCopy = this.state.tag
         tagCopy.splice(tagCopy.findIndex(m => {
-            return m == tag
+            return m === tag
         }), 1)
         this.setState({ tag: tagCopy })
     }
