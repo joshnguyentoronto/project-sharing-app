@@ -77,7 +77,7 @@ export default class HomePage extends Component {
                         socket={this.props.socket}
                     /> 
                     : false }
-                <Footer />
+                <Footer user={this.props.user} />
             </div>
         )
     }

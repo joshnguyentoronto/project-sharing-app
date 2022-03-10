@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 
 
 export default function Footer(props) {
+    let theUser = ''
+    if (props.user) {
+        props.user._id ? theUser = props.user._id : theUser = ""
+    }
     return(
         <div className="footer">
             <div className='footer1'>
@@ -34,8 +38,8 @@ export default function Footer(props) {
                         <li><strong>My account</strong></li>
                         <li><Link to="/account/login">Login</Link></li>
                         <li><Link to="/account/login">Register</Link></li>
-                        <li><Link to="/profile">Profile</Link></li>
-                        <li><Link to="/profile">Favourites</Link></li>
+                        { theUser ?  <li><Link to="/profile">Profile</Link></li> : <li><Link to="/account/login">Profile</Link></li> }
+                        { theUser ? <li><Link to="/profile">Favourites</Link></li> : <li><Link to="/account/login">Favourites</Link></li> }
                     </ul>
                 </div>
                 <div className='footer-email'>

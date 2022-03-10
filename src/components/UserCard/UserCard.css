@@ -35,6 +35,18 @@
     background: url('../../images/image/prop-background.jpg') no-repeat center;
 }
 
+.card-user-icon {
+    background-color: transparent;
+    border: none;
+    margin: -40px 0 0 0;
+}
+.card-user-icon p {
+    width: 65px;
+    height: 65px;
+    font-size: 30px;
+    padding: 5px 0 0 0;
+    letter-spacing: 2px;
+}
 
 .card-name-name {
     font-size: 20px;

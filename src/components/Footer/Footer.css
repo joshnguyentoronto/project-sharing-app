@@ -6,6 +6,9 @@ ul {
 ul li {
     margin: 10px 0;
 }
+ul li:hover {
+    text-decoration: underline;
+}
 
 .footer {
     width: 100vw;
@@ -20,13 +23,18 @@ ul li {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    user-select: none;
 }
 
 .footer1 {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
-
+.footer-main {
+    width: 255px;
+    margin: 10px 20px;
+}
 .footer-main h1 {
     font-size: 32px;
 }
@@ -43,6 +51,7 @@ ul li {
 
 .footer-email {
     width: 300px;
+    margin: 10px 20px;
 }
 .footer-email p {
     margin: 20px 0;
@@ -74,4 +83,19 @@ ul li {
     color: white;
     font-weight: 600;
     font-size: 20px;
+}
+
+.footer-group1 {
+    min-width: 150px;
+    margin: 20px 20px;
+}
+.footer-group2 {
+    min-width: 150px;
+    margin: 20px 20px;
+}
+.footer-group1 li:first-child:hover {
+    text-decoration: none;
+}
+.footer-group2 li:first-child:hover {
+    text-decoration: none;
 }

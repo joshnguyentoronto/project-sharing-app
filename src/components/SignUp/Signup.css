@@ -1,0 +1,10 @@
+.SignUpPage {
+    text-align: center;
+}
+
+.SignUpPage form button {
+    background-color: #0c6baf;
+}
+.SignUpPage form button:hover {
+    background-color: #245880;
+}

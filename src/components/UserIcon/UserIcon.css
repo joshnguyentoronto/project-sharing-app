@@ -1,0 +1,15 @@
+.UserIcon {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background-color: #29465B;
+    font-weight: 600;
+    font-size: 26px;
+    display: grid;
+    place-content: center;
+    color: white;
+    margin: auto 0;
+    padding: 0 0;
+    user-select: none;
+}
