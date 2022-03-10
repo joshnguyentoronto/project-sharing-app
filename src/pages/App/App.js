@@ -654,7 +654,6 @@ export default class App extends Component {
               user={this.state.user} 
               openChat={this.state.openChat}
               messageList={this.state.messageList}
-
               userLogout={this.userLogout}
               openChatList={this.openChatList}
             />}

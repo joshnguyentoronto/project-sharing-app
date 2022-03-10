@@ -61,11 +61,14 @@ async function createPhoto(req,res) {
 
 async function createProject(req, res) {
     try {
-        req.body.author = req.user._id
-        console.log(req.user._id)
-        const newProject = await ProjectModel.create(req.body)
-        console.log(newProject)
-        res.status(200).json();
+        req.body.author.unshift(req.user._id)
+        let newProject = await ProjectModel.create(req.body)
+        // newProject = await newProject.populate([
+        //     { path: 'author', model: 'User' },
+        //     { path: 'comment', populate: { path: 'user', model: 'User' } }
+        // ])
+        // res.status(200).json();
+        res.status(200).json(newProject);
     } catch(err) {
         console.log('err block')
         res.status(400).json(err)

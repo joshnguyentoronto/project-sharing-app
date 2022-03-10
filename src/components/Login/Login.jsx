@@ -41,10 +41,7 @@ export default function Login(props) {
     }
 
     return (
-            <Box
-            sx={{
-                maxWidth: '100%',
-            }}>
+            <Box sx={{ maxWidth: '100%', }} className="LoginPage" >
                 <form autoComplete='off' onSubmit={handleSubmit}>
                     <TextField
                         fullWidth 
@@ -77,9 +74,7 @@ export default function Login(props) {
                     <Button type="submit" variant="contained">Login</Button>
                     <br></br>
                     <br></br>
-                    Not a Member?
-                    <br></br> 
-                    <Link to="/account/signup">Sign up here</Link>
+                    <p>Not a Member? &nbsp;<Link to="/account/signup">Sign up here</Link></p>
                 </form>
             </Box>
     )

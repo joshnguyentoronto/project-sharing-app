@@ -1,8 +1,12 @@
 .project-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
-    justify-content: space-around;
+    gap: 40px;
     user-select: none;
+    width: 100%;
+    max-width: 1400px;
 }
 
+.project-list >div {
+    width: 320px;
+}

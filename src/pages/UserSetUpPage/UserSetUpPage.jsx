@@ -1,3 +1,4 @@
+import './UserSetUpPage.css'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
@@ -36,13 +37,16 @@ export default function UserSetUpPage(props){
         navigate("/")
     }
 
+    const theme = {
+        spacing: 8,
+    }
+
     return (
-        <div>
-            <h1>Welcome! Lets get you started</h1>
-            <h3>Whether now or later lets help you differentiate yourself!</h3>
-            <p>Add a photo (Change this)</p>
+        <div className='UserSetUpPage'>
+            <h1>Welcome!<br></br>Lets get you started</h1>
+            <h3>Whether now or later<br></br>lets help you differentiate yourself!</h3>
             <form onSubmit={handleSubmit}>
-                <TextField 
+                <TextField sx={{ my: 2 }}
                     id="outlined-basic" 
                     label="Location" 
                     variant="outlined"
@@ -51,7 +55,7 @@ export default function UserSetUpPage(props){
                     value={profileData.location} 
                     onChange={handleChange} 
                 />
-                <TextField 
+                <TextField sx={{ my: 2 }}
                     id="outlined-basic" 
                     label="Education" 
                     variant="outlined"
@@ -60,7 +64,7 @@ export default function UserSetUpPage(props){
                     value={profileData.education} 
                     onChange={handleChange} 
                 />
-                <TextField
+                <TextField sx={{ my: 2 }}
                     id="outlined-multiline-static"
                     label="Bio"
                     multiline

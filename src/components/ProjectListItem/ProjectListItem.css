@@ -1,6 +1,6 @@
 .project-list-item {
     border: none;
-    width: 310px;
+    min-width: 300px;
     height: 310px;
     display: grid;
     grid-template-columns: 1fr;

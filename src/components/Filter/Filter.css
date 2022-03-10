@@ -1,6 +1,6 @@
 .filter {
     width: 100vw;
-    margin: 100px 0;
+    margin: 120px 0 60px 0;
     display: grid;
     place-content: center;
     user-select: none;

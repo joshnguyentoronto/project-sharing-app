@@ -5,6 +5,7 @@ import Header from '../../components/Header/Header'
 import InputLink from '../../components/InputLink/InputLink'
 import InputSection from '../../components/InputSection/InputSection'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
+import InputUserItem from "../../components/InputUserItem/InputUserItem";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import Footer from "../../components/Footer/Footer";
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,7 +16,6 @@ export default class ProjectUploadPage extends Component {
         currentTag: '',
         projects: [],
         tagItem: '',
-        author: '',
         title: '',
         flag: 'UX/UI design',
         tag: [],
@@ -24,7 +24,11 @@ export default class ProjectUploadPage extends Component {
         link: [{ index: 0, name: '', url: '' }],
         linkNum: 1,
         img:[],
-        imageFiles: []
+        imageFiles: [],
+        author: [],
+        allUser: [],
+        users: [],
+        userItem: '',
     }
 
 
@@ -46,66 +50,87 @@ export default class ProjectUploadPage extends Component {
         }
     };
 
-
     submitProject = async (evt) => {
         evt.preventDefault()
-        if (!this.state.title) {
-            alert("Invalid Project Title!")
-        } else if (!this.state.tag[0]) {
-            alert("Your project need at least 1 tag")
-        } else if (!this.state.link[0].name) {
-            alert("You must name your link to the Url!")
-        } else if (!this.state.link[0].url) {
-            alert("Your project should have link to your GitHub repo or your website product!")
-        } else if (!this.state.text[0].heading) {
-            alert("Your project should have smaller heading for each section")
-        } else if (!this.state.text[0].text) {
-            alert("You must describe or introduce your project!")
-        } else {
-            if (window.confirm("Your project will be published. Do you want to continue ?")) {
-                try {
-                    let imageArray = []
-                    for(let i=0; i < this.state.imageFiles.length; i++){
-                        let {url} = await fetch("/s3Url").then(res => res.json())
-                        let file = this.state.imageFiles[i]
-                        let sendPhoto = await fetch(url,{
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "multipart/form-data"
-                            },
-                            body: file
-                        })
-                        const imageUrl = url.split('?')[0]
-                        imageArray.push(imageUrl)
-                    }
-
-                    let jwt = localStorage.getItem('token')
-                    const sendProjectData = await fetch('/api/projects/new',{
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Bearer ' + jwt,
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            title: this.state.title,
-                            text: this.state.text,
-                            projectLink: this.state.link,
-                            flag: this.state.flag,
-                            tag: this.state.tag,
-                            images: imageArray
-                        })
-                    })
-
-                    if (!sendProjectData.ok) {
-                        throw new Error('Fetch failed - Bad request')
-                    } else {
-                        window.location.href = "/"
-                    }
-
-                } catch (err) {
-                    console.log("Submit error", err)
+        let valid = true
+        this.state.link.forEach( ( link, index )=> {
+            if ((/\s/).test(link.url)) {
+                valid = false
+                alert(`The link url number ${index + 1} should not have any white space in it!`)
+            } else if (!link.url.startsWith("http://")) {
+                if (!link.url.startsWith("https://")) {
+                    valid = false
+                    alert(`The link number ${index + 1} should have proper format of 'http://' or 'https://' `)
                 }
             } 
+        })
+        if (valid) {
+            if (!this.state.title) {
+                alert("Invalid Project Title!")
+            } else if (!this.state.tag[0]) {
+                alert("Your project need at least 1 tag")
+            } else if (!this.state.link[0].name) {
+                alert("You must name your link to the Url!")
+            } else if (!this.state.link[0].url) {
+                alert("Your project should have link to your GitHub repo or your website product!")
+            } else if (!this.state.text[0].heading) {
+                alert("Your project should have smaller heading for each section")
+            } else if (!this.state.text[0].text) {
+                alert("You must describe or introduce your project!")
+            } else {
+                if (window.confirm("Your project will be published. Do you want to continue ?")) {
+                    try {
+                        let imageArray = []
+                        for(let i=0; i < this.state.imageFiles.length; i++){
+                            let {url} = await fetch("/s3Url").then(res => res.json())
+                            let file = this.state.imageFiles[i]
+                            let sendPhoto = await fetch(url,{
+                                method: "PUT",
+                                headers: {
+                                    "Content-Type": "multipart/form-data"
+                                },
+                                body: file
+                            })
+                            const imageUrl = url.split('?')[0]
+                            imageArray.push(imageUrl)
+                        }
+                        let jwt = localStorage.getItem('token')
+                        const fetchUserByUsername = await fetch('/api/users/allbyusername',{
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                users: this.state.users
+                            })
+                        })
+                        const userIdList = await fetchUserByUsername.json()
+                        const sendProjectData = await fetch('/api/projects/new',{
+                            method: 'POST',
+                            headers: {
+                                'Authorization': 'Bearer ' + jwt,
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                author: userIdList,
+                                title: this.state.title,
+                                text: this.state.text,
+                                projectLink: this.state.link,
+                                flag: this.state.flag,
+                                tag: this.state.tag,
+                                images: imageArray
+                            })
+                        })
+                        if (!sendProjectData.ok) {
+                            throw new Error('Fetch failed - Bad request')
+                        } else {
+                            window.location.href = "/"
+                        }
+                    } catch (err) {
+                        console.log("Submit error", err)
+                    }
+                } 
+            }
         }
     }
 
@@ -114,13 +139,40 @@ export default class ProjectUploadPage extends Component {
         evt.target.firstChild.value = ""
         this.setState({ tag: [...this.state.tag, this.state.tagItem.toLowerCase() ], tagItem: '' })
     }
-    
     removeTag = (tag) => {
         let tagCopy = this.state.tag
         tagCopy.splice(tagCopy.findIndex(m => {
             return m === tag
         }), 1)
         this.setState({ tag: tagCopy })
+    }
+
+    addUser = async (evt) => {
+        evt.preventDefault()
+        let valid = false;
+        await this.state.allUser.forEach(user => {
+            if (user.username === this.state.userItem) {
+                valid = true
+            }
+        })
+        if (this.props.user.username === this.state.userItem) {
+            valid = false
+            alert("You cannot add yourself as contributor!")
+        }
+        if (valid) {
+            evt.target.firstChild.value = ""
+            this.setState({ users: [...this.state.users, this.state.userItem], userItem: '' })
+        } else {
+            alert("Cannot find username, please try again!")
+            this.setState({ users: [...this.state.users], userItem: '' })
+        }
+    }
+    removeUser = (user) => {
+        let userCopy = this.state.users
+        userCopy.splice(userCopy.findIndex(m => {
+            return m === user
+        }), 1)
+        this.setState({ users: userCopy })
     }
 
     addLink = () => {
@@ -234,6 +286,12 @@ export default class ProjectUploadPage extends Component {
             }
         }
     }
+    
+    async componentDidMount() {
+        let fetchUsers = await fetch('/api/users/all')
+        let users = await fetchUsers.json()
+        this.setState({ allUser: users })
+    }
 
 
     render() {
@@ -265,11 +323,23 @@ export default class ProjectUploadPage extends Component {
                             </select>
                         </div>
                         <div>
-                            <p>Tag</p>
+                            <p>Add Collaborators:</p>
+                            <form className="tag-form" onSubmit={this.addUser}>
+                                <input onChange={this.handleChange} name="userItem" type="text" placeholder="Accept Username only, case sensitive!" required />
+                                <button onSubmit={this.addUser}>+</button>
+                            </form>
+                            <small>Note: you can only add collaborators who already have an account<br></br>And you can add them by enter their username and hit Enter</small>
+                            <div className="tag-items">
+                                {this.state.users.map(user => <InputUserItem key={user} user={user} removeUser={this.removeUser} /> )}
+                            </div>
+                        </div>
+                        <div>
+                            <p>Tag:</p>
                             <form className="tag-form" onSubmit={this.addTag}>
                                 <input onChange={this.handleChange} name="tagItem" type="text" placeholder="Ex: javascript, nodejs, mongodb" required />
                                 <button onSubmit={this.addTag}>+</button>
                             </form>
+                            <small>Note: add Tag by typing the tag and hit Enter</small>
                             <div className="tag-items">
                                 {this.state.tag.map(tag => <InputTagItem key={tag} tag={tag} removeTag={this.removeTag} /> )}
                             </div>
@@ -309,7 +379,7 @@ export default class ProjectUploadPage extends Component {
                     <button onClick={this.submitProject}>Publish</button>
                 </div>
 
-                <Footer />
+                <Footer user={this.props.user} />
 
                 {this.props.openChat ? 
                     <MessageBox 

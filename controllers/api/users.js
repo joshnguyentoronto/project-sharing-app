@@ -15,6 +15,8 @@ module.exports = {
     likeOneProfile,
     getAllMessages,
     getUser,
+    getAll,
+    getAllByUserName,
     createMessage,
     createConvo,
     recieveMessage,
@@ -87,6 +89,24 @@ async function getUser(req,res){
         let userId = req.get('userId')
         const user = await UserModel.findById(userId)
         res.status(200).json(user)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function getAll(req,res){
+    try {
+        const users = await UserModel.find({}).select('username email _id');
+        res.status(200).json(users)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+}
+
+async function getAllByUserName(req,res){
+    try {
+        const users = await UserModel.find({ username: { $in: req.body.users } }).select('_id');
+        res.status(200).json(users)
     } catch(err) {
         res.status(400).json(err)
     }
