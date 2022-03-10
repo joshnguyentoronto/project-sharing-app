@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import HomeHeader from "../../components/HomeHeader/HomeHeader";
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectDetail from '../../components/ProjectDetail/ProjectDetail';
@@ -47,6 +48,11 @@ export default function othersProfilePage(props) {
 
     return (
         <div className="profile">
+        <HomeHeader 
+            openChatList={props.openChatList}
+            userLogout={props.userLogout}
+            user={props.user}
+        />
         <div className="background-image"><img src={require('../../images/image/no_profile_image.png')} alt="profile background"/></div>
             <ProfileCard loginUser={props.user} user={props.viewUser}/>
     

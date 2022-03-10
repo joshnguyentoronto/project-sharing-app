@@ -60,3 +60,12 @@
     width: 24px;
     height: 24px;
 }
+
+.home-link h1 {
+    font-size: 20px;
+    margin: 50px;
+}
+
+.home-link h1:hover {
+    opacity: .8;
+}

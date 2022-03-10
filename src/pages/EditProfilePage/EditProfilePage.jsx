@@ -112,12 +112,12 @@ export default function EditProfilePage(props) {
             </div>
 
         <div className="edit-profile-content-wrapper">
-            <div className="edit-profile-social">
+            {/* <div className="edit-profile-social">
                 <p className="label">Socials</p>
                 <p>Twitter</p>
                 <p>Facebook</p>
                 <p>Linkedin</p>
-            </div>
+            </div> */}
             <div className="edit-profile-info-wrapper">
                 <div class="edit-profile-info">
                     <span className="label">Name</span>             
@@ -206,7 +206,7 @@ export default function EditProfilePage(props) {
                 </div>
 
                 <div className="edit-profile-submit">
-                    <Link to="/profile"  className="form-action-link">Cancel</Link>
+                    <Link to="/profile">Cancel</Link>
                     <button onClick={()=>props.submitProfile({
                                         name: profileData.name,
                                         bio: profileData.bio,

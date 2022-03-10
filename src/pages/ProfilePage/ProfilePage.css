@@ -3,7 +3,7 @@
 }
 
 .profile-content-area {
-  padding: 280px 30px 30px 30px;
+  padding: 360px 30px 30px 30px;
   min-width: 700px;
   max-width: 100%;
 }
@@ -11,6 +11,12 @@
 .profile-content-area p {
   text-align: left;
   margin-bottom: 40px;
+}
+
+.profile-content-area .user-card-container p,
+.profile-content-area .project-detail-body-foot-user p {
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .profile-content-area h4 {
@@ -70,8 +76,8 @@
 .profile .background-image {
   width: 100vw;
   position: absolute;
-  z-index: -1;
-  top: 0;
+  z-index: 1;
+  top: 80px;
   left: 0;
   height: 250px;
   background: #ccc;

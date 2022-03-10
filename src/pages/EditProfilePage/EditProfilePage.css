@@ -61,11 +61,11 @@
     width: 300px;
 }
 
-.input-link-each {
+#input-link-each {
     margin-left: 40px;
 }
 
-.input-link-each input {
+#input-link-each input {
     border: 1px solid #ccc;
     padding: 4px;
     height: 21px;
@@ -136,6 +136,8 @@
 .edit-profile-submit a {
     font-size: 20px;
     padding: 10px 50px;
+    border: 1px solid #29465B;
+    border-radius: 50px;
 }
 
 .edit-profile-submit button {
