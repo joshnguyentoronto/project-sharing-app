@@ -1,11 +1,35 @@
 .flag-btn {
+    background-color: rgba(255, 255, 255, 0.535);
+    border-radius: 10px;
+    width: 199px;
+    height: 50px;
+    font-weight: 600;
+    border: 2px solid #29465B;
+    display: inline;
+    margin: 0 0 20px 0;
+    color: #29465B;
+    font-size: 18px;
+}
+
+.flag-btn:hover {
+    background-color: #29465B;
+    color: white;
+}
+
+.flag-btn-blue {
     background-color: #29465B;
     border-radius: 10px;
     width: 199px;
     height: 50px;
-    border: 1px solid #29465B;
+    font-weight: 600;
+    border: 2px solid #29465B;
     display: inline;
     margin: 0 0 20px 0;
     color: white;
     font-size: 18px;
+}
+
+.flag-btn:hover {
+    background-color: rgba(255, 255, 255, 0.535);
+    color: #29465B;
 }

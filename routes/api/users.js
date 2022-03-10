@@ -10,6 +10,7 @@ router.post('/signup', usersCtrl.create)
 router.post('/login',usersCtrl.login)
 //protected routes
 router.use(require('../../config/auth'))
+
 router.post('/setup',usersCtrl.setup)
 router.get('/allmessages', usersCtrl.getAllMessages)
 router.post('/sendmessage', usersCtrl.createMessage)
@@ -19,6 +20,8 @@ router.get('/recieve/message', usersCtrl.recieveMessage)
 router.post('/save', usersCtrl.saveOne)
 router.post('/like', usersCtrl.likeOne)
 router.post('/edit', usersCtrl.editProfile)
+router.get('/profile/data', usersCtrl.getProfileData)
+
 router.post('/like/profile', usersCtrl.likeOneProfile)
 
 module.exports = router;

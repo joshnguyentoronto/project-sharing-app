@@ -6,7 +6,8 @@ import UserCard from '../UserCard/UserCard'
 export default function ProjectListItem(props) {
     
         return(
-            <div className="project-list-item" onMouseEnter={() => props.hoverProject(props.project)}>
+            
+            <div className="project-list-item" onMouseEnter={() => { props.needHover ? props.hoverProject(props.project) : console.log('') } }>
                 <div className="project-list-item-img">
                     <button className="img-save-button" onClick={() => props.saveProject(props.project)}>{ props.user.savedPosts.indexOf(props.project._id) !== -1 ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
                     
@@ -18,11 +19,10 @@ export default function ProjectListItem(props) {
                             <img className="img-views-count" src={require('../../images/icons/views.svg')} alt="views" /><span>{props.project.viewCount}</span>
                         </span> 
                     </div>
-                    <span className="placeholder-img" onClick={() => props.viewProject({ "profile": props.profile, "project": props.project, "otherUser": props.otherUser })} ><img src={require('../../images/image/prop-img.png')} alt="svg icon" /><div className='shader'></div></span>
+                    <span className="placeholder-img" onClick={() => props.viewProject({ "profile": props.profile, "project": props.project, "otherUser": props.otherUser })} ><img src={props.project.images[0]} alt="svg icon" /><div className='shader'></div></span>
                 </div>
                 <div className="project-list-item-foot">
                     <div className='profile-btn-hover' >
-                        {/* <button onClick={() => props.viewPeople(props.project.author[0]._id)}><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></button> */}
                         <button onClick={() => props.viewPeople(props.project.author[0]._id)}><UserIcon user={props.project.author[0]} /></button>
                         <div className="user-card">
                             <UserCard user={props.project.author[0]} />

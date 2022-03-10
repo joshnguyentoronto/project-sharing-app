@@ -4,13 +4,18 @@
 
 .profile-content-area {
   padding: 360px 30px 30px 30px;
-  min-width: 700px;
-  max-width: 100%;
+  /* min-width: 700px;
+  max-width: 100%; */
+  width: 100%;
 }
 
 .profile-content-area p {
   text-align: left;
   margin-bottom: 40px;
+}
+
+.profile-content-area button p {
+  margin-bottom: 0;
 }
 
 .profile-content-area .user-card-container p,

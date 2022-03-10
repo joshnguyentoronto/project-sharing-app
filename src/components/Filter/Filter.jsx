@@ -6,7 +6,7 @@ export default function Filter(props) {
     return(
         <div className="filter">
             <div className="filter-name">
-                <h1>THE EXHIBIT</h1>
+                <h1 onClick={() => window.location.reload(false)}>THE EXHIBIT</h1>
             </div>
             <div className="filter-search">
                 <form autoComplete='off'  onSubmit={props.filterByTag}>
@@ -17,7 +17,7 @@ export default function Filter(props) {
             <div className='filter-flags'>
                 <div className='filter-flags-container'>
                     {props.flags.map(f => 
-                        <Flag filterByFlag={props.filterByFlag} key={f} flag={f} />
+                        <Flag filterByFlag={props.filterByFlag} currentFlag={props.currentFlag} key={f} flag={f} />
                     )}
                     <select onChange={props.filterSort} className='filter-flags-filter' name='sort'>
                         <option value="all">Filter</option>

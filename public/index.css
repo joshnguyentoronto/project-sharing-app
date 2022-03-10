@@ -5,17 +5,23 @@
 body {
     width: 100vw;
     scroll-behavior: smooth;
-    background-color: white;
-    background: white;
+    background: url('./unsplash.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
+    background-color: transparent;
 }
 ::-webkit-scrollbar-track {
-    background: rgb(225, 225, 225);
+    background: rgba(255, 255, 255, 0);
+    border: 1px solid #29465b80;
+    border-radius: 100vw;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgb(167, 167, 167);
+    background: #29465B;
     border-radius: 100vw;
 }

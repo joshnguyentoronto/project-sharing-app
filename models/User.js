@@ -28,6 +28,7 @@ const userSchema = new Schema({
     required: true,
   },
   avatar: String,
+  background: String,
   bio: String,
   location: String,
   skill: Array,

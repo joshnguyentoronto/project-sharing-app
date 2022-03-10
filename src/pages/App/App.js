@@ -36,6 +36,8 @@ export default class App extends Component {
     isLiked: false,
     hoverUserState: false,
     hoverUser: {},
+    allLike: 0,
+    allView: 0,
   }
 
   falseUser = {
@@ -486,6 +488,18 @@ export default class App extends Component {
     }
   }
 
+  lala = async () => {
+    try {
+      // let fetchProjectList = await fetch('/api/projects')
+      // let projects = await fetchProjectList.json()
+      // this.setState({ projects: projects })
+      window.location.href = "/"
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+
   async componentDidMount(){
     let token = localStorage.getItem('token')
     if (token){
@@ -525,6 +539,7 @@ export default class App extends Component {
       window.location.reload(false);
     }
   }
+  
 
   render() {
     let theId = ''
@@ -583,6 +598,8 @@ export default class App extends Component {
               user={this.state.user} 
               currentProject={this.state.currentProject}
               viewUser={this.state.viewUser}
+              componentDidMount={this.componentDidMount}
+              lala={this.lala}
 
               viewMode={this.state.viewMode}
               refProjects={this.state.refProjects}
@@ -611,7 +628,9 @@ export default class App extends Component {
           />
           <Route 
             path="/profile/edit"
-            element={<EditProfilePage user={this.state.user}  submitProfile={this.submitProfile}/>}
+            element={<EditProfilePage 
+              user={this.state.user}  
+              submitProfile={this.submitProfile}/>}
           />
           <Route
             path="/profile/:id"

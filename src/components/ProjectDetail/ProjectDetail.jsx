@@ -10,9 +10,30 @@ import UserIcon from '../UserIcon/UserIcon';
 import moment from 'moment'
 
 export default function ProjectDetail(props) {
+    
     const divRef = useRef()
 
     const [popUpChat, setpopUpChat] = useState(false)
+
+    const theImage = document.getElementById('image-preview-slider')
+    const Images = props.project.images
+    let index = 0
+    const leftBtn = document.getElementById('left-btn')
+    const rightBtn = document.getElementById('right-btn')
+    function goToLeft() {
+        if (index === 0) {
+            index = props.project.images.length - 1
+        } else {
+            index -= 1
+        }
+    }
+    function goToRight() {
+        if (index === props.project.images.length) {
+            index = 0
+        } else {
+            index += 1
+        }
+    }
 
     function openChatBox() {
         let value = !popUpChat
@@ -40,7 +61,16 @@ export default function ProjectDetail(props) {
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
                     <div className='project-detail-body-img'>
-                        <img src={props.project.images[0]} alt="project preview"></img>
+                        <img id='image-preview-slider' src={props.project.images[index]} alt="project preview"></img>
+                    </div>
+                    <div className='image-preview-btn'>
+                        <p onClick={() => goToLeft()} id="left-btn">Left</p>
+                        <div>
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                        </div>
+                        <p onClick={() => goToRight()} id="right-btn">Right</p>
                     </div>
                     <div className='project-detail-body-project-link'>
                         {props.project.projectLink.map(link => 
@@ -62,6 +92,7 @@ export default function ProjectDetail(props) {
                         {props.refProjects.map(project => 
                             <div key={project._id}>
                                 <ProjectListItem
+                                    needHover={false}
                                     profile={props.profile}
                                     key={project._id} 
                                     project={project} 

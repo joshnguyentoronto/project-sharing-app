@@ -1,6 +1,7 @@
 .uploadpage {
     margin: 0 20px;
     text-align: left;
+    user-select: none;
 }
 
 .uploadpage h3 {
@@ -10,16 +11,18 @@
 }
 
 
-input {
-    height: 40px;
+.uploadpage input, textarea, select {
+    height: 35px;
     width: 500px;
-    border: 1px solid black;
+    border: 1px solid rgb(128, 128, 128);
     border-radius: 3px;
     font-size: 18px;
     padding: 0 10px;
+    background-color: transparent;
 }
-input:focus {
-    border: 1px solid black;
+.uploadpage input:focus {
+    border: 1px solid rgb(128, 128, 128);
+    outline:none;
 }
 
 .upload {
@@ -39,31 +42,6 @@ input:focus {
     font-weight: 600;
     font-size: 18px;
 }
-.upload-img {
-    border: 1px dashed black;
-    border-radius: 10px;
-    width: 300px;
-    width: 40%;
-    height: 200px;
-    margin: 40px 0;
-}
-.upload-img input {
-    width: 400px;
-    border: none;
-    margin: 10px 0 0 0;
-}
-
-
-
-.input-img {
-    background-color: transparent;
-    font-size: 20px;
-    
-}
-.upload-img img {
-    width: 150px;
-    height: 150px;
-}
 
 .upload-btn-li,
 .upload-btn-sec {
@@ -80,15 +58,17 @@ input:focus {
     margin: 15px 0 0 40px;
 }
 
-
 .option {
-    height: 40px;
+    height: 35px;
     width: 200px;
-    border: 1px solid black;
+    border: 1px solid rgb(128, 128, 128);
     border-radius: 3px;
     padding: 0 5px;
     font-size: 18px;
-
+}
+.option:focus {
+    border: 1px solid rgb(128, 128, 128);
+    outline:none;
 }
 
 .tag-form {
@@ -113,6 +93,12 @@ input:focus {
 }
 .input-li-container {
     margin: 0 0 20px 0;
+}
+
+.input-li-container-top .input-li-container #input-link-each {
+    display: flex;
+    gap: 10px;
+    margin: 5px 0 0 0;
 }
 
 .form-action {
@@ -148,21 +134,74 @@ input:focus {
     font-size: 20px;
 }
 
+.upload-img-container {
+    min-width: 410px;
+    width: 40%;
+    min-height: 200px;
+    margin: 40px 0;
+}
+.upload-img {
+    border: 1px dashed black;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 200px;
+    margin: 0;
+}
+.upload-img input {
+    width: 400px;
+    border: none;
+    margin: 10px 0 0 0;
+}
+.input-img {
+    background-color: transparent;
+    font-size: 20px;
+    
+}
+.upload-img img {
+    width: 150px;
+    height: 150px;
+}
 .image-preview {
     display: flex;
-    background-color: #29465B;
-    height: 40px;
-    width: 100px;
+    background-color: transparent;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     color: white;
     font-weight: 600;
     font-size: 20px;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
-
+.image-preview-choices {
+    border: 2px solid #29465B;
+    border-radius: 10px;
+    position: relative;
+    margin: 5px;
+    padding: 0 0;
+}
 .image-remove {
-    color:red
-
+    color: black;
+    background-color: lightgrey;
+    border: none;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    display: grid;
+    place-content: center;
+    margin: 0 0 -20px auto;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    font-weight: 600;
 }
-
 .image-remove:hover {
     cursor: pointer;
+}
+.image-lala {
+    border-radius: 10px;
+    margin: 0 0;
 }

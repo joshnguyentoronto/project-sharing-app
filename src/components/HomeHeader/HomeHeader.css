@@ -7,7 +7,11 @@
     left: 0;
     width: 100%;
     height: 80px;
-    background-color: white;
+    background: url('../../images/image/unsplash.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     padding: 0 20px;
     z-index: 100;
     user-select: none;
@@ -41,10 +45,28 @@
     border: none;
     border-radius: 50px;
     color: white;
+    font-weight: 600;
     font-size: 14px;
     text-decoration: none;
     display: grid;
     place-content: center;
+}
+.header-link-log {
+    padding: 0 10px;
+    height: 32px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50px;
+    color: #29465B;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    display: grid;
+    place-content: center;
+}
+.header-link-log:hover {
+    background-color: #29465B;
+    color: white;
 }
 
 .header-btn {

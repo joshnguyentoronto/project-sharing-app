@@ -77,6 +77,8 @@ export default class ProjectUploadPage extends Component {
                 alert("Your project should have smaller heading for each section")
             } else if (!this.state.text[0].text) {
                 alert("You must describe or introduce your project!")
+            } else if (this.state.imageFiles.length === 0) {
+                alert("You must have atleast one image about your project!")
             } else {
                 if (window.confirm("Your project will be published. Do you want to continue ?")) {
                     try {
@@ -355,22 +357,25 @@ export default class ProjectUploadPage extends Component {
                             <p onClick={this.addSection} className="upload-btn-sec">Add Section</p>
                         </div>
                     </div>
-                    <div  className="upload-img">
-                        <form>
-                            <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
-                        </form>
-                        {this.state.img.length ?
-                        <div className="image-preview">
-                            {this.state.img.map(i =>
-                                <div className="image-preview-choices">
-                                    <img src={i}></img>
-                                    <button id={i} className="image-remove" onClick={this.delete}>Delete</button>
-                                </div> 
-                            )}
+                    <div className="upload-img-container">
+                        <div  className="upload-img">
+                            <form>
+                                <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
+                            </form>
+                            {this.state.img.length ?
+                            <div className="image-preview">
+                                {this.state.img.map(i =>
+                                    <div className="image-preview-choices">
+                                        <button id={i} className="image-remove" onClick={this.delete}>x</button>
+                                        <img className="image-lala" src={i}></img>
+                                    </div> 
+                                )}
+                            </div>
+                            :
+                            false 
+                            }
                         </div>
-                        :
-                        false 
-                        }
+                        <small>Note: the first image will also be used as the thumbnail in feeds</small>
                     </div>
                 </div>
 

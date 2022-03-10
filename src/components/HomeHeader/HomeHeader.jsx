@@ -28,9 +28,9 @@ export default function HomeHeader(props) {
                     false
                 }
                 {theUser ? 
-                    <Link className='header-link-upload' onClick={props.userLogout}to="/">Logout</Link>
+                    <Link className='header-link-log' onClick={props.userLogout}to="/">Logout</Link>
                     : 
-                    <Link style={{width: "120px"}} className='header-link-upload' to="/account/login">Login / Signup</Link>
+                    <Link style={{width: "120px"}} className='header-link-log' to="/account/login">Login / Signup</Link>
                 }
             </div>
         </div>

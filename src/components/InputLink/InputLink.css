@@ -5,15 +5,15 @@
 }
 
 #input-link-each-input1 {
-    height: 31px;
+    height: 35px;
     width: 150px;
-    border: 1px solid black;
+    border: 1px solid rgb(128, 128, 128);
     border-radius: 3px;
 }
 #input-link-each-input2 {
-    height: 31px;
+    height: 35px;
     width: 300px;
-    border: 1px solid black;
+    border: 1px solid rgb(128, 128, 128);
     border-radius: 3px;
 }
 

@@ -13,8 +13,10 @@ export default function SignUpForm(props){
         password: '',
         confirm: '',
         signup: false,
-        error: '',
     })
+    const [errorFlag, setErrorFlag] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+
     let navigate = useNavigate()
 
     const [checkData, setCheckData] = useState([])
@@ -36,13 +38,19 @@ export default function SignUpForm(props){
     async function handleSubmit(e) {
         e.preventDefault();
         let valid = true
-        await checkData.forEach(user => {
+        checkData.forEach(user => {
             if (user.username === userData.username) {
+                setErrorFlag(true)
+                setErrorMessage('Username already exists, please try again')
                 valid = false
-                alert("Username already exist!")
             } else if (user.email === userData.email) {
+                setErrorFlag(true)
+                setErrorMessage('Email already exists, please try again')
                 valid = false
-                alert("Email already exist!")
+            } else if (userData.password !== userData.confirm){
+                setErrorFlag(true)
+                setErrorMessage('Password does not match, please try again')
+                valid = false
             }
         })
         if (valid) {
@@ -99,7 +107,7 @@ export default function SignUpForm(props){
                     label="Email" 
                     id="fullWidth" 
                     size="small"
-                    type="text"
+                    type="email"
                     margin="normal"
                     name="email" 
                     onChange={handleChange} 
@@ -128,6 +136,10 @@ export default function SignUpForm(props){
                     name="confirm" 
                     onChange={handleChange} 
                 />
+                { errorFlag ?
+                    <p className='error-red'>{errorMessage}</p> :
+                    false
+                }
                 <br></br>
                 <br></br>
                 <Button disabled={userData.signup} type="submit" variant="contained">Signup</Button>

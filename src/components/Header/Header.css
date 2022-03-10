@@ -20,18 +20,29 @@ a {
     left: 0;
     width: 100%;
     height: 80px;
-    background-color: white;
+    background: url('../../images/image/unsplash.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     padding: 0 20px;
     user-select: none;
 }
+
 
 .header-icon h1 {
     font-size: 28px;
     color: black;
     text-decoration: none;
     margin: 0 0 0 30px;
+    display: flex;
+    align-items: center;
 }
-
+.home-icon {
+    height: 60px;
+    width: 60px;
+    margin: 0 20px 0 0;
+}
 .header-search form {
     display: flex;
     align-items: center;
@@ -60,6 +71,24 @@ a {
     border: none;
     display: inline;
     margin: 0 10px;
+}
+
+.header-link-log {
+    padding: 0 10px;
+    height: 32px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50px;
+    color: #29465B;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    display: grid;
+    place-content: center;
+}
+.header-link-log:hover {
+    background-color: #29465B;
+    color: white;
 }
 
 .header-link-container-user-img {

@@ -25,9 +25,11 @@
     font-weight: bold;
     font-size: 27px;
     line-height: 37px;
-    color: #29465B
+    color: #29465B;
+    margin: 0;
 }
 
 .scroll-container{
     overflow-y: scroll;
+    overflow-x: hidden;
 }

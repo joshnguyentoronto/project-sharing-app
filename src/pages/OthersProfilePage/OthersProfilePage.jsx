@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import HomeHeader from "../../components/HomeHeader/HomeHeader";
+import Header from "../../components/Header/Header";
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectDetail from '../../components/ProjectDetail/ProjectDetail';
@@ -48,7 +48,7 @@ export default function othersProfilePage(props) {
 
     return (
         <div className="profile">
-        <HomeHeader 
+        <Header 
             openChatList={props.openChatList}
             userLogout={props.userLogout}
             user={props.user}
@@ -92,6 +92,7 @@ export default function othersProfilePage(props) {
             </div>
             :
             <ProjectList 
+                needHover={true}
                 profile={userData.activeCategory}
                 user={props.user}
                 otherUser={props.viewUser}

@@ -1,12 +1,14 @@
 .project-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
+    display: grid;
+    padding: 0 40px;
+    /* justify-content: flex-start; */
+    /* flex-wrap: wrap; */
+    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     user-select: none;
     width: 100%;
-    max-width: 1400px;
 }
 
 .project-list >div {
-    width: 320px;
+    width: 100%;
 }

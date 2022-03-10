@@ -27,8 +27,10 @@ export default class HomePage extends Component {
                     flags={this.props.flags}
                     filterSort={this.props.filterSort}
                     filter={this.props.filter}
+                    currentFlag={this.props.currentFlag}
                 />
                 <ProjectList
+                    needHover={true}
                     profile={this.state.profile}
                     viewProject={this.props.viewProject}
                     projects={this.props.projects}

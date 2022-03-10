@@ -1,5 +1,5 @@
 import "./EditProfilePage.css"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { TextField } from '@mui/material';
 import InputLink from '../../components/InputLink/InputLink'
@@ -17,6 +17,19 @@ export default function EditProfilePage(props) {
         skillItem: '',
         bio:'',
     })
+
+    useEffect(()=> {
+        populateProfile()
+    })
+
+
+
+    async function populateProfile(){
+        // let profileData = await fetch('/api/users/editprofile)
+        console.log('hit')
+
+
+    }
 
     function handleChange(e){
         editProfileData({...profileData, [e.target.name]:e.target.value })
@@ -175,15 +188,18 @@ export default function EditProfilePage(props) {
                     onChange={handleChange} 
                 />
                 </div>
-
-                {profileData.userLink.map(obj => <InputLink 
-                    key={obj.index} 
-                    link={obj} 
-                    handleInputLinkNameChange={handleInputLinkNameChange} 
-                    handleInputLinkUrlChange={handleInputLinkUrlChange} 
-                    deleteLink={deleteLink} 
-                />)}
-                <p onClick={addLink} className="upload-btn-li">Add Link</p>
+                <div className="input-li-container-top-2">
+                    <div className="input-li-container">
+                        {profileData.userLink.map(obj => <InputLink 
+                            key={obj.index} 
+                            link={obj} 
+                            handleInputLinkNameChange={handleInputLinkNameChange} 
+                            handleInputLinkUrlChange={handleInputLinkUrlChange} 
+                            deleteLink={deleteLink} 
+                        />)}
+                    </div>
+                    <p onClick={addLink} className="upload-btn-li-2">Add Link</p>
+                </div>
 
                 <div className="edit-skills-wrapper">
                 <p className="label">Skills</p>

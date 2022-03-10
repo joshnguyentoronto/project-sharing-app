@@ -3,7 +3,6 @@ const ProjectModel = require('../../models/Project.js')
 const UserModel = require('../../models/User');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
-const { CoPresentSharp } = require('@mui/icons-material');
 
 
 module.exports = {
@@ -20,7 +19,15 @@ module.exports = {
     createMessage,
     createConvo,
     recieveMessage,
-    editProfile
+    editProfile,
+    getProfileData,
+}
+
+async function getProfileData(req,res){
+    console.log('hit')
+    let userprofile = await UserModel.findById(req.user._id).populate('userLink')
+    console.log(userprofile)
+    res.status(200).json()
 }
 
 async function recieveMessage(req,res){

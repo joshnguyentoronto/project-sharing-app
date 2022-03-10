@@ -1,7 +1,7 @@
 import "./ProfilePage.css"
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"; 
-import HomeHeader from "../../components/HomeHeader/HomeHeader";
+import Header from "../../components/Header/Header";
 import ProjectList from "../../components/ProjectList/ProjectList";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import ProjectDetail from "../../components/ProjectDetail/ProjectDetail";
@@ -25,7 +25,7 @@ export default class ProfilePage extends Component {
         return(
             
             <div className="profile">
-                <HomeHeader 
+                <Header 
                     openChatList={this.props.openChatList}
                     userLogout={this.props.userLogout}
                     user={this.props.user}
@@ -89,6 +89,7 @@ export default class ProfilePage extends Component {
                     </div>
                     :
                     <ProjectList 
+                        needHover={true}
                         profile={this.state.activeCategory}
                         user={this.props.user}
                         projects={this.props.projects}
@@ -106,6 +107,7 @@ export default class ProfilePage extends Component {
                     }
                     {this.props.viewMode ? 
                         <ProjectDetail
+                            hoverProject={this.props.hoverProject} 
                             user={this.props.user}
                             closeProject={this.props.closeProject} 
                             project={this.props.currentProject} 

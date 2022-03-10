@@ -1,6 +1,6 @@
 import './Header.css';
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import UserIcon from '../UserIcon/UserIcon';
 
 
@@ -9,11 +9,10 @@ export default function Header(props) {
     if (props.user) {
         props.user._id ? theUser = props.user._id : theUser = ""
     }
-
     return(
         <div className="header">
             <div className='header-icon'>
-                <Link to="/"><h1>THE EXHIBIT</h1></Link>
+                <button onClick={ () => window.location.href = "/"}><h1><img className='home-icon' src={require('../../images/icons/home.svg')} alt="svg icon" />THE EXHIBIT</h1></button>
             </div>
             <div className='header-link-container'>
                 { theUser ? <Link className='header-link-upload' to="/upload">Upload</Link> : <Link className='header-link-upload' to="/account/login">Login to Upload new Project</Link> }
@@ -27,7 +26,7 @@ export default function Header(props) {
                 {theUser ? 
                     <Link className='header-link' onClick={props.userLogout}to="/">Logout</Link>
                     : 
-                    <Link style={{width: "120px"}} className='header-link-upload' to="/account/login">Login / Signup</Link>
+                    <Link style={{width: "120px"}} className='header-link-log' to="/account/login">Login / Signup</Link>
                 }
             </div>
         </div>

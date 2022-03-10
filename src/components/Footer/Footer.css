@@ -12,10 +12,10 @@ ul li:hover {
 
 .footer {
     width: 100vw;
-    height: 400px;
+    min-height: 400px;
     margin: 100px 0 0 -5px;
     padding: 50px 80px 10px 80px;
-    background-color: white;
+    background-color: #29465bbb;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;

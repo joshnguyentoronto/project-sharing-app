@@ -74,12 +74,15 @@
 .filter-flags-filter {
     width: 199px;
     height: 50px;
-    background-color: #29465B;
-    color: white;
+    background-color: rgba(255, 255, 255, 0.535);
+    color: #29465B;
     font-size: 18px;
-    display: grid;
-    place-content: center;
-    padding: 5px;
-    border: none;
+    font-weight: 600;
+    padding: 0 0 0 20px ;
+    border: 2px solid #29465B;
     border-radius: 10px;
+    text-align: left;
+}
+.filter-flags-filter:focus {
+    border: 2px solid #29465B;
 }
