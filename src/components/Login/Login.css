@@ -1,4 +1,4 @@
-body {
+.LoginPage {
     font-family: Arial;
     font-style: normal;
     font-weight: normal;
@@ -10,6 +10,14 @@ h1{
     line-height: 30px;
     letter-spacing: 0.1em;
     font-weight: normal;
+    text-align: center;
+}
+
+.LoginPage form button {
+    background-color: #0c6baf;
+}
+.LoginPage form button:hover {
+    background-color: #245880;
 }
 
 .account {

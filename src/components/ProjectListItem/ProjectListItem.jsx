@@ -1,6 +1,6 @@
 import './ProjectListItem.css';
 import React from 'react';
-import { Link } from 'react-router-dom'
+import UserIcon from '../UserIcon/UserIcon';
 import UserCard from '../UserCard/UserCard'
 
 export default function ProjectListItem(props) {
@@ -22,15 +22,15 @@ export default function ProjectListItem(props) {
                 </div>
                 <div className="project-list-item-foot">
                     <div className='profile-btn-hover' >
-                        {/* <Link to={`/profile/${props.project.author[0]._id}`}><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link> */}
-                        <button onClick={() => props.viewPeople(props.project.author[0]._id)}><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
+                        {/* <button onClick={() => props.viewPeople(props.project.author[0]._id)}><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></button> */}
+                        <button onClick={() => props.viewPeople(props.project.author[0]._id)}><UserIcon user={props.project.author[0]} /></button>
                         <div className="user-card">
                             <UserCard user={props.project.author[0]} />
                         </div>
                     </div>
                     <div className="project-list-item-foot-name">
                         <p>{props.project.title}</p>
-                        <p>{props.project.author[0].name}</p>
+                        { props.project.author.length > 1 ? <p>{props.project.author[0].name}'s group project</p> : <p>{props.project.author[0].name}</p> }
                     </div>
                 </div>
             </div>

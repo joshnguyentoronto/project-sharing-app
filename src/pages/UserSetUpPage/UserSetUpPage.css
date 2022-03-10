@@ -1,0 +1,19 @@
+.UserSetUpPage {
+    
+}
+
+
+.UserSetUpPage h1 {
+    font-size: 34px;
+    margin: 0 0 20px 0;
+    letter-spacing: 0;
+    line-height: 40px;
+}
+.UserSetUpPage h3 {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+.UserSetUpPage form button {
+    background-color: #29465B;
+}

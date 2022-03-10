@@ -1,12 +1,13 @@
 import './CommentItem.css';
 import React from 'react';
 import moment from 'moment'
+import UserIcon from '../UserIcon/UserIcon';
 
 export default function CommentItem(props) {
     return(
         <div className='comment-each'>
             <div className='comment-each-user'>
-                <button className='comment-user-img'><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
+                <button className='comment-user-img'><UserIcon user={props.user} /></button>
             </div>
             <div className='comment-each-main'>
                 <div className='comment-each-main-head'>

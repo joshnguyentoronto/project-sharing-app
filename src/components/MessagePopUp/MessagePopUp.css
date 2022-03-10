@@ -1,7 +1,7 @@
 .chat-box-popup {
     border: 1px solid black;
     position: fixed;
-    z-index: 2;
+    z-index: 15;
     background-color: #29465B;
     top: 35%;
     left: 35%;
@@ -9,7 +9,10 @@
     width: 400px;
     padding: 20px;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 }
+
 
 .dp-container {
     display: flex;
@@ -19,4 +22,26 @@
     justify-content: center;
     padding: 0px;
     margin-bottom: 10px;
+}
+
+.chat-pop-name{
+    color:white;
+    font-size: medium;
+}
+
+.chat-box-popup button {
+    font-size: 17px;
+    background-color: white;
+    width: 200px;
+    margin: auto;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.pop-close{
+    float: right;
+    color: white;
 }

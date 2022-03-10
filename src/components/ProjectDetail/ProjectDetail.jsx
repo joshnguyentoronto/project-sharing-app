@@ -6,6 +6,7 @@ import TagItem from '../TagItem/TagItem'
 import UserCard from '../UserCard/UserCard';
 import MessagePopUp from '../MessagePopUp/MessagePopUp';
 import ProjectListItem from '../ProjectListItem/ProjectListItem';
+import UserIcon from '../UserIcon/UserIcon';
 import moment from 'moment'
 
 export default function ProjectDetail(props) {
@@ -24,8 +25,8 @@ export default function ProjectDetail(props) {
         <div className='project-detail-background'>
             <div className='project-detail-left' onClick={() => {props.closeProject()}}></div>
             <div className='project-detail-head' onClick={() => {props.closeProject()}}>
-                <button><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
-                {props.project.author.length > 1 ? <p className="project-detail-head-name">Group Project</p> : <p className="project-detail-head-name">{props.project.author[0].username}</p>}
+                <button className='card-user-icon-2'><UserIcon user={props.project.author[0]} /></button>
+                {props.project.author.length > 1 ? <p className="project-detail-head-name">Group Project of <span>{props.project.author.map(author => <span className='author-list-item-span'>{author.name}<span>,</span> </span>)}</span></p> : <p className="project-detail-head-name">{props.project.author[0].username}</p>}
             </div>
             <div className='project-detail-body'>
                 {popUpChat ?
@@ -83,7 +84,7 @@ export default function ProjectDetail(props) {
                     <div className='project-detail-body-foot-comment'>
                         <div className='project-detail-body-foot-comment-box'>
                             <div className='comment-user'>
-                                <button className='comment-user-img'><img src={require('../../images/icons/user.svg')} className='comment-user-image' alt="svg icon" /></button>
+                                <button className='comment-user-img'><UserIcon user={props.user} /></button>
                             </div>
                             <div className='comment-main'>
                                 <textarea onChange={props.handleChange} name="comment" value={props.comment}></textarea>
@@ -105,7 +106,7 @@ export default function ProjectDetail(props) {
                     <div className='project-detail-body-foot-detail'>
                         <div className='project-detail-body-foot-user'>
                             <div className='project-detail-body-foot-user-info'>
-                                <button><img src={require('../../images/icons/user.svg')} alt="svg icon" /></button>
+                                <button><UserIcon user={props.project.author[0]} /></button>
                                 <div className='project-detail-body-foot-user-info-name'>
                                     <p>{props.project.author[0].name}</p>
                                     <p><img src={require('../../images/icons/location.svg')} alt="svg icon" /> {props.project.author[0].location}</p>
@@ -141,7 +142,7 @@ export default function ProjectDetail(props) {
                     <button className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></button>
                     { props.project.author.map(user => 
                         <div className='profilebtnhover' >
-                            <Link to="/profile"><img id='user-img' src={require('../../images/icons/user.svg')} alt="svg icon" /></Link>
+                            <Link to="/profile"><button className='card-user-icon-3'><UserIcon user={user} /></button></Link>
                             <div className="usercard" >
                                 <UserCard user={user} />
                             </div>

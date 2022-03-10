@@ -6,7 +6,6 @@ import Avatar from '@mui/material/Avatar';
 
 export default function MessageList(props) {
 
-
     let chatName = 'could not load'
     for (let i=0; i < props.users.length; i++){
         if (props.users[i]._id !== props.currentUser._id){
@@ -15,9 +14,9 @@ export default function MessageList(props) {
     }
 
     return(
-        <div onClick={() => props.onClick(props.messageData)} className='messagelist-container'>
+        <div onClick={() => props.onClick(props.messageData,chatName)} className='messagelist-container'>
             <Avatar className="dp" src={require('../../images/image/no_profile_image.png')}/>
-            <div>
+            <div className="name-message-preview">
                 <p className='chat-name'>{chatName}</p>
                 <p className='message-preview'>{props.lastMessage}</p>
             </div>

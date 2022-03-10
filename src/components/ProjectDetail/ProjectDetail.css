@@ -29,7 +29,7 @@
 }
 .project-detail-right-sub {
     padding: 0 10px 0 0;
-    height: 350px;
+    /* height: 350px; */
     width: 100%;
     grid-area: right;
     display: flex;
@@ -40,6 +40,7 @@
 .project-detail-right button {
     height: 50px;
     width: 50px;
+    margin: 15px 0;
     background-color: white;
     border: none;
     border-radius: 50%;
@@ -90,6 +91,9 @@
     letter-spacing: 2px;
     font-weight: 500;
     margin: 0 0 0 10px;
+}
+.author-list-item-span:last-child span {
+    display: none;
 }
 
 
@@ -200,6 +204,27 @@
     user-select: none;
 }
 
+.card-user-icon-2, .card-user-icon-3 {
+    background-color: transparent;
+    border: none;
+    margin: 0 0;
+}
+.card-user-icon-2 p {
+    width: 55px;
+    height: 55px;
+    font-size: 28px;
+    border: 1px solid white;
+    padding: 0 0;
+    letter-spacing: 1px;
+}
+.card-user-icon-3 p {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+    border: 1px solid #29465B;
+    padding: 0 0;
+    letter-spacing: 1px;
+}
 
 .project-detail-body-foot {
     width: 100%;
@@ -217,7 +242,7 @@
 .project-detail-body-foot-comment-box {
     border-bottom: 1px solid grey;
     display: grid;
-    grid-template-columns: 50px auto;
+    grid-template-columns: 60px auto;
     grid-template-rows: 1fr;
     width: 100%;
     height: 200px;
@@ -364,7 +389,6 @@
 #user-card-btn-4:hover img {
     content: url('../../images/icons/mess-btn-2.svg');
 }
-
 
 .usercard {
     visibility: hidden;

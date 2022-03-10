@@ -1,5 +1,6 @@
 import './UserCard.css';
 import React from 'react';
+import UserIcon from '../UserIcon/UserIcon';
 
 export default function UserCard(props) {
     return(
@@ -8,7 +9,7 @@ export default function UserCard(props) {
                 <div className='card-bg'>
                     
                 </div>
-                <img className='card-img' id='card-img' src={require('../../images/icons/user.svg')} alt="svg icon" />
+                <button className='card-user-icon'><UserIcon user={props.user} /></button>
                 <div className='card-name'>
                     <p className='card-name-name'>{props.user.name}</p>
                     <p className='card-name-lo'><img src={require('../../images/icons/location.svg')} alt="svg icon" /> {props.user.location}</p>

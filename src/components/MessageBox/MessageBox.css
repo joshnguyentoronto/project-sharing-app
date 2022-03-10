@@ -1,14 +1,20 @@
 .message-container{
     border: 1px solid black;
-    border-radius: 15px;
+    border-radius: 15px 15px 0px 0px;
     position:fixed;
-    right: 90px;
-    top: 80px;
-    height: 550px;
-    width:315px;
+    right: 0px;
+    bottom: 0px;
+    height: 540px;
+    width:330px;
     z-index: 20;
     background-color: white;
     padding:12px;
+    font-family: Arial;
+    font-style: normal;
+}
+
+.message-search-bar{
+    background-color: #8796A0; 
 }
 
 .close {
@@ -16,15 +22,12 @@
 }
 
 .message-title {
-    font-family: Arial;
-    font-style: normal;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 27px;
     line-height: 37px;
     color: #29465B
 }
 
 .scroll-container{
     overflow-y: scroll;
-    color:red;
 }

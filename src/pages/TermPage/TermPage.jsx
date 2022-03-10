@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import Header from '../../components/Header/Header'
 import Footer from "../../components/Footer/Footer"
 
-export default class HomePage extends Component {
+export default class TermPage extends Component {
     state={
         
     }
@@ -19,7 +19,7 @@ export default class HomePage extends Component {
                 <div>
                     <h1>Term of Services</h1>
                 </div>
-                <Footer />
+                <Footer user={this.props.user} />
             </div>
         )
     }

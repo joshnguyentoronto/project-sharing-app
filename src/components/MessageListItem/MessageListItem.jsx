@@ -19,7 +19,6 @@ export default function MessageListItem(props) {
     
     function scrollToBottom(){
         messagesEndRef.current.scrollIntoView({behavior: "smooth"})
-        console.log('hello')
     }
 
     function handleChange(e){
@@ -43,40 +42,40 @@ export default function MessageListItem(props) {
 
     async function sendMessage(e){
         e.preventDefault();
-        if (draftMessage){
-            let jwt = localStorage.getItem('token')
-            let fetchResponse = await fetch('/api/users/sendmessage',{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': 'Bearer ' + jwt,
-                },
-                body: JSON.stringify({
-                    text: draftMessage,
-                    convoId: props.messageData._id,
-                    users: props.messageData.users
+        if(draftMessage && !draftMessage.match(/^ *$/)){
+            if (draftMessage){
+                let jwt = localStorage.getItem('token')
+                let fetchResponse = await fetch('/api/users/sendmessage',{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': 'Bearer ' + jwt,
+                    },
+                    body: JSON.stringify({
+                        text: draftMessage,
+                        convoId: props.messageData._id,
+                        users: props.messageData.users
+                    })
                 })
-            })
-            console.log('sent message here')
-                    
-            let jsonResponse = await fetchResponse.json()
-            let parsed = await JSON.parse(jsonResponse)
-            console.log(parsed)
-            setListofMessages(parsed.messages)
-            setDraftMessage('')
-    
-            props.socket.emit('new message', parsed)
+                
+                let jsonResponse = await fetchResponse.json()
+                let parsed = await JSON.parse(jsonResponse)
+                setListofMessages(parsed.messages)
+                setDraftMessage('')
+                
+                props.socket.emit('new message', parsed)
+            }
         }
     }
 
     return(
         <div >
-            <Stack direction="row">
-                    <ArrowBackIosNewIcon onClick={props.onClick} />
-                    <Avatar src={require('../../images/image/no_profile_image.png')}/>
-                    <p>Name</p>
-                    <CloseIcon className="close" onClick={props.closeChat}/>
-            </Stack>
+            <div className='message-header-box'>
+                <ArrowBackIosNewIcon onClick={props.onClick} />
+                <Avatar src={require('../../images/image/no_profile_image.png')}/>
+                <p>{props.name}</p>
+                <CloseIcon className="close" onClick={props.closeChat}/>
+            </div>
             <div className='scroll-container'>
                 <div className='messages'>
                     {listofMessages.map(m =>
@@ -96,10 +95,10 @@ export default function MessageListItem(props) {
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                      <SendIcon
+                                        <SendIcon
                                         type="submit"
                                         onClick={sendMessage}
-                                      />
+                                        />
                                     </InputAdornment>
                                 ), 
                             }}
