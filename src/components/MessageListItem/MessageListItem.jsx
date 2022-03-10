@@ -1,5 +1,5 @@
 import './MessageListItem.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
@@ -9,14 +9,23 @@ import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack'
 
+
 export default function MessageListItem(props) {
     const [draftMessage, setDraftMessage] = useState('')
     const [listofMessages, setListofMessages] = useState(props.messageData.messages)
     const [socketInit, setsocketInit] = useState(false)
+
+    const messagesEndRef = useRef(null)
     
+    function scrollToBottom(){
+        messagesEndRef.current.scrollIntoView({behavior: "smooth"})
+        console.log('hello')
+    }
+
     function handleChange(e){
         setDraftMessage(e.target.value)
     };
+
     
     useEffect(() =>{
         if (!socketInit){
@@ -27,59 +36,74 @@ export default function MessageListItem(props) {
             setListofMessages(convoObj.messages)
         })
     })
+    
+    useEffect(() => {
+        scrollToBottom()
+    }, [listofMessages])
 
     async function sendMessage(e){
         e.preventDefault();
-        let jwt = localStorage.getItem('token')
-        let fetchResponse = await fetch('/api/users/sendmessage',{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + jwt,
-            },
-            body: JSON.stringify({
-                text: draftMessage,
-                convoId: props.messageData._id,
-                users: props.messageData.users
+        if (draftMessage){
+            let jwt = localStorage.getItem('token')
+            let fetchResponse = await fetch('/api/users/sendmessage',{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + jwt,
+                },
+                body: JSON.stringify({
+                    text: draftMessage,
+                    convoId: props.messageData._id,
+                    users: props.messageData.users
+                })
             })
-        })
-        console.log('sent message here')
-                
-        let jsonResponse = await fetchResponse.json()
-        let parsed = await JSON.parse(jsonResponse)
-        console.log(parsed)
-        setListofMessages(parsed.messages)
-        setDraftMessage('')
-
-        props.socket.emit('new message', parsed)
-        console.log('hit')
+            console.log('sent message here')
+                    
+            let jsonResponse = await fetchResponse.json()
+            let parsed = await JSON.parse(jsonResponse)
+            console.log(parsed)
+            setListofMessages(parsed.messages)
+            setDraftMessage('')
+    
+            props.socket.emit('new message', parsed)
+        }
     }
 
     return(
-        <div>
-            {/* <div className='messageListItem'>
-            </div> */}
+        <div >
             <Stack direction="row">
                     <ArrowBackIosNewIcon onClick={props.onClick} />
                     <Avatar src={require('../../images/image/no_profile_image.png')}/>
                     <p>Name</p>
                     <CloseIcon className="close" onClick={props.closeChat}/>
             </Stack>
-            <div className='messages'>
-                {listofMessages.map(m =>
-                    <MessageBubble
-                        text={m.text}
-                        currentUser={props.currentUser}
-                        sender={m.sender}
-                        recipient={m.recipient}                   
-                    />
-                )}
+            <div className='scroll-container'>
+                <div className='messages'>
+                    {listofMessages.map(m =>
+                        <MessageBubble
+                            text={m.text}
+                            currentUser={props.currentUser}
+                            sender={m.sender}
+                            recipient={m.recipient}                  
+                        />
+                    )}
+                    <div id={'el'} ref={messagesEndRef}></div>
+                </div>
             </div>
             <div>
                 <form onSubmit={sendMessage}>
                     <TextField 
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                      <SendIcon
+                                        type="submit"
+                                        onClick={sendMessage}
+                                      />
+                                    </InputAdornment>
+                                ), 
+                            }}
                             fullWidth 
-                            label="text"
                             size="small"
                             type="text"
                             margin="normal" 
@@ -88,13 +112,6 @@ export default function MessageListItem(props) {
                             onChange={handleChange} 
                     />
                     <br></br>
-                    <Button 
-                        type="submit" 
-                        variant="contained" 
-                        endIcon={<SendIcon />}
-                    >
-                        Send
-                    </Button>
                 </form>
             </div>
         </div>

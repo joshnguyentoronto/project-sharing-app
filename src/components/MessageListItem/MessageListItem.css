@@ -5,3 +5,8 @@
 .close{
     float: right;
 }
+
+.scroll-container{
+    overflow-y: scroll;
+    height: 410px;
+}

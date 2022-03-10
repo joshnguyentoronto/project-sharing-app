@@ -9,11 +9,10 @@
 }
 
 .bubble{
-    /* display: inline-block; */
     color:white;
     border: 1px black solid;
     border-radius: 5px;
     margin-bottom: 2px;
-    padding: 5px
+    padding: 5px;
 
 }

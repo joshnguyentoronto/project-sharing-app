@@ -9,8 +9,10 @@ export default function MessageListItem(props) {
         position='bubble-right'
     }
     return(
-        <div className={`bubble ${position}`}>
-            <p>{props.text}</p>
+        <div>
+            <div className={`bubble ${position}`}>
+                <p>{props.text}</p>
+            </div>
         </div>
     )
 }

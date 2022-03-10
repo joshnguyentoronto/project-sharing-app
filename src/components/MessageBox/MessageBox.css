@@ -6,9 +6,9 @@
     top: 80px;
     height: 550px;
     width:315px;
-    z-index: 1;
+    z-index: 20;
     background-color: white;
-    padding:12px
+    padding:12px;
 }
 
 .close {
@@ -22,4 +22,9 @@
     font-size: 22px;
     line-height: 37px;
     color: #29465B
+}
+
+.scroll-container{
+    overflow-y: scroll;
+    color:red;
 }
