@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import MessageBubble from '../MessageBubble/MessageBubble'
-import { TextField } from '@mui/material';
+import { TextField, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack'
 
