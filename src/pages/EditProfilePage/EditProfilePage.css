@@ -12,12 +12,30 @@
     border-radius: 100%;
     height: 200px;
     width: 200px;
+    position: relative;
+    overflow: hidden;
 }
 
 .edit-background-image {
     flex: 1 1 auto;
     height: 200px;
     background: #ccc;
+    position: relative;
+    overflow: hidden;
+}
+
+.edit-button {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    transform: translateX(-50%);
+    cursor: pointer;
+    background: rgba(0,0,0, .1);
+}
+
+.edit-button:hover {
+    opacity: .8;
 }
 
 .edit-profile-content-wrapper {
@@ -67,8 +85,8 @@
 
 #input-link-each input {
     border: 1px solid #ccc;
-    padding: 4px;
-    height: 21px;
+    /* padding: 4px; */
+    /* height: 21px; */
     border-radius: 4px;
 }
 
@@ -102,8 +120,8 @@
 .edit-skills-wrapper form input {
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 4px 8px;
-    height: 21px;
+    padding: 0 8px;
+    height: 31px;
     
 }
 

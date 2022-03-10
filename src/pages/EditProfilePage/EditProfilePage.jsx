@@ -107,8 +107,12 @@ export default function EditProfilePage(props) {
     return(
         <div>
             <div className="edit-profile-header">
-                <div className="edit-profile-photo"></div>
-                <div className="edit-background-image"></div>
+                <div className="edit-profile-photo">
+                    <a className="edit-button">Edit</a>
+                </div>
+                <div className="edit-background-image">
+                    <a className="edit-button">Edit</a>
+                </div>
             </div>
 
         <div className="edit-profile-content-wrapper">
