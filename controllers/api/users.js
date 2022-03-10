@@ -22,7 +22,6 @@ module.exports = {
 }
 
 async function recieveMessage(req,res){
-    console.log(req.body)
     let conversation = await ConversationModel.findById(req.body.convoId)
 }
 
@@ -62,7 +61,6 @@ async function createConvo(req,res){
 async function createMessage(req,res){
     let conversation = await ConversationModel.findById(req.body.convoId)
     let recipient =''
-    console.log(req.body)
     if (req.body.users[0]._id == req.user._id){
         recipient = req.body.users[1]._id
     } else {
@@ -95,8 +93,6 @@ async function getUser(req,res){
 }
 
 async function setup(req,res){
-    console.log(req.user)
-    console.log(req.body)
     try {
         let user = await UserModel.findById(req.user._id)
         user.location = req.body.location,

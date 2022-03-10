@@ -157,3 +157,12 @@ input:focus {
     font-weight: 600;
     font-size: 20px;
 }
+
+.image-remove {
+    color:red
+
+}
+
+.image-remove:hover {
+    cursor: pointer;
+}

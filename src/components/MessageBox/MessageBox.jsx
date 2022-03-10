@@ -1,20 +1,38 @@
 import './MessageBox.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import MessageList from "../../components/MessageList/MessageList"
 import MessageListItem from "../../components/MessageListItem/MessageListItem"
 import CloseIcon from '@mui/icons-material/Close';
-import { TextField } from '@mui/material';
+import { TextField, InputAdornment } from '@mui/material';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 
 export default function MessageBox(props) {
     const [messageData, setMessageData] = useState(false)
     const [messageinfo, setmessageInfo] = useState('')
+    const [messageList, setmessageList] = useState([])
+    const [nameFromList, setNameFromList] = useState('')
     
-    function onClick(data){
+    function onClick(data, name){
         let value = !messageData
         setmessageInfo(data)
         setMessageData(value)
+        setNameFromList(name)
     }
+
+    function searchUsers(e){
+        e.preventDefault();
+    }
+
+    useEffect( async () =>{
+        let jwt = localStorage.getItem('token')
+        let fetchResponse = await fetch('/api/users/allmessages', 
+            {headers: {'Authorization': 'Bearer ' + jwt}})
+        let messages = await fetchResponse.json()
+        let array = await JSON.parse(messages)
+        setmessageList(array)
+    },[messageinfo])
+    
     
     if (messageData){
         return (
@@ -25,6 +43,7 @@ export default function MessageBox(props) {
                     messageData={messageinfo}
                     currentUser={props.currentUser}
                     socket={props.socket}
+                    name={nameFromList}
                 />
             </div>            
         )
@@ -33,16 +52,23 @@ export default function MessageBox(props) {
             <div className='message-container'>
                 <CloseIcon className="close" onClick={props.openChatList} />
                 <p className="message-title">Messages</p>            
-                <form>
-                    <TextField
+                <form onSubmit={searchUsers}>
+                    <TextField className='message-search-bar'
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchRoundedIcon
+                                        sx={{color: 'white'}}
+                                    />
+                                </InputAdornment>
+                            ), 
+                        }}
                         fullWidth
                         size="small"
-                        id="outlined-search" 
-                        label="Search" 
                         type="search" />
                 </form>
                 <br></br>
-                {props.messageList.map(m =>
+                {messageList.map(m =>
                     <MessageList
                         messageData={m}
                         closeChat={props.openChatList} 

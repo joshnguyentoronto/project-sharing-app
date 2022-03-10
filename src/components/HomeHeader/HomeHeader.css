@@ -56,6 +56,10 @@
     margin: 0 10px;
 }
 
+.header-btn:hover {
+    cursor: pointer;
+}
+
 .header-btn img {
     width: 24px;
     height: 24px;

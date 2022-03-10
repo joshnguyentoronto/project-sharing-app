@@ -1,12 +1,22 @@
 .messageListItem{
     display:flex;
+    width:300px;
 }
 
-.close{
-    float: right;
-}
 
 .scroll-container{
     overflow-y: scroll;
     height: 410px;
+}
+
+.message-header-box{
+    display: flex;
+    position: relative;
+    gap:5px;
+    align-items: center;
+}
+
+.close{
+    position: absolute;
+    right: 0;
 }

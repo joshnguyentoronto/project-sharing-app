@@ -7,6 +7,7 @@ import InputSection from '../../components/InputSection/InputSection'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import Footer from "../../components/Footer/Footer";
+import CloseIcon from '@mui/icons-material/Close';
 
 
 export default class ProjectUploadPage extends Component {
@@ -215,6 +216,25 @@ export default class ProjectUploadPage extends Component {
         }
     }
 
+    delete = async (e) => {
+        e.preventDefault()
+        console.log(this.state.img.length)
+        console.log(e.target.id)
+        console.log(this.state.img[0])
+        for (let i=0; i <this.state.img.length; i++){
+            if(e.target.id == this.state.img[i]){
+                let arr = [...this.state.img]
+                let imgArr =[...this.state.imageFiles]
+                arr.splice(i,1)
+                imgArr.splice(i,1)
+                this.setState({
+                    img: arr,
+                    imageFiles: imgArr
+                })
+            }
+        }
+    }
+
 
     render() {
         return(
@@ -271,8 +291,12 @@ export default class ProjectUploadPage extends Component {
                         </form>
                         {this.state.img.length ?
                         <div className="image-preview">
-                            {this.state.img.map(i => 
-                                <img src={i}></img>)}
+                            {this.state.img.map(i =>
+                                <div className="image-preview-choices">
+                                    <img src={i}></img>
+                                    <button id={i} className="image-remove" onClick={this.delete}>Delete</button>
+                                </div> 
+                            )}
                         </div>
                         :
                         false 
