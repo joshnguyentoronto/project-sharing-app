@@ -1,10 +1,10 @@
-<h1 align="center">Project Sharing App</h1>
+<h1 align="center">THE EXHIBIT</h1>
 
 <p align="center">
-    <img alt="la" width="120px" src="" />
+    <img alt="la" width="120px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/logo.png" />
 </p>
 
-<h3 align="center">Share your project with us!</h3>
+<h3 align="center">Share your project with the world!</h3>
 
 <br />
 
@@ -12,7 +12,7 @@
 
 ### Web link:
 
-[.](https://smorerecipes.herokuapp.com)
+[THE EXHIBIT](https://theexhibit.herokuapp.com)
 
 <br />
 
@@ -20,21 +20,19 @@
 
 ### About:
 
-La La La\
+THE EXHIBIT is a group project which ideas originally come from the Needs of sharing student's projects to showcase to the world.\
 &nbsp;\
-la la la\
+THE EXHIBIT is the place where we can Learn new thing, Get ideas for your next projects, help others to improve and meet potential employer.\
 &nbsp;\
-la la la
+THE EXHIBIT was founded by three student: Lu Ye, Janusshan Paramasivam, and Josh Nguyen; and was build completely by them. With the help of three design students from GA's UXDI course: Linette Yang, Paula Abejero, Paulo Saroma; the app was build from scratch to finish in just one week.\
+&nbsp;\
+This collaborate project help us the SEI and UXDI students to gain direct experiences that is relevant to our future carrer.
+&nbsp;\
+Interesting fact about THE EXHIBIT:
+- It was build within only 8 days.
+- Total amount of hours the SEI student put in is estimated at least 240 hours
+- The entire code base have at least 10,000 line of codes as of due date.
 
-<br />
-
----
-
-### Outcome:
-
-la la la\
-la la la\
-la la la
 
 <br />
 
@@ -55,28 +53,39 @@ la la la
 
 ### Usage:
 
-1. la la la
-2. la la la
-3. la la la
-4. la la la
-5. la la la
-6. la la la
-7. la la la
+1. Everyone can come and use our app without having to login as a new user. However, in order to use all the features, we recommend user to log in or sign up.
+2. Inside the home page, we can see all other's people projects
+3. We can find the specific project by their tools, languages, author name, ect.
+4. We can view the detail of the project, Like, Save, see info, and Comment on it.
+5. We can also view other user page as well to see if they have more cool projects to see.
+6. If we want to send a message to our friends, to an author of the project that we like or to make more friend, we can now send the message to them directly in realtime.
+6. If we want to share a project, we can go to upload page and create a project easily as we have all instruction for each field.
+7. Finally, we can go to our profile page to see our detail, edit our background information, view projects that we created, view projects that we liked or saved.
 
 <br />
 
 ---
 
-### Role:
+### Meet the Developer:
+| Name | Roles |
+| ---- | ----- |
+| Lu Ye             | GitHub Manager, Task Manager, Styling, Wireframe, Routing, Component, Functionality, Authorization,  |
+| Josh Nguyen       | GitHub Manager, Documenter, Images and Logo, Styling, Wireframe, Routing, Component, Functionality, Authorization,  |
+| Janusshan Paramasivam | Database Manager, Authentication, Styling, Wireframe, Routing, Component, Functionality, Authorization,  |
 
-| Role      | Student           | Tasks                                                                                                              |
-| --------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Developer | Lu Ye             | la la la |
-| Developer | Josh Nguyen       | la la la |
-| Developer | Janusshan Paramasivam |    la la la  |
-| Designer  | Paula Abejero     | la la la |
-| Designer  | Linette Yang    | la la la |
-| Designer  | Paulo Saromo | la la la |
+
+<br />
+
+---
+
+### Meet the Designer:
+
+| Name | Roles |
+| ---- | ----- |
+| Paula Abejero | Wireframe, User Flow, Style guild, Prototype |
+| Linette Yang | Wireframe, User Flow, Style guild, Prototype |
+| Paulo Saromo | Wireframe, User Flow, Style guild, Prototype |
+
 
 <br />
 
@@ -125,57 +134,18 @@ la la la
 ### Technologies:
 
 <p>
-    <img alt="Trello" width="24px" height="24px" src="https://github.com/luye713/SmoreRecipes/blob/main/main_app/static/assets/md/trello.png" />
-    Tasks Manager - <a href="https://trello.com/b/dG98ePOY/trip-planning-project" target="_blank">Trello Board</a> 
+    <img alt="Trello" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/trello.png" />
+    Tasks Manager - <a href="https://trello.com/b/xPWClGaB/the-exhibit" target="_blank">Trello Board</a> 
 </p>
 <p>
-    <img alt="Lucid" width="24px" height="24px" src="https://github.com/luye713/SmoreRecipes/blob/main/main_app/static/assets/md/lucid.png" />
-    Database Model - <a href="https://lucid.app/lucidchart/6fb696a5-9bec-42ec-9246-b8bd7f494bab/edit?viewport_loc=170%2C7%2C1794%2C908%2C0_0&invitationId=inv_bdb99228-e4f4-43b4-ab51-f9e801b8ef3b" target="_blank">Lucid Chart</a> 
+    <img alt="Lucid" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/lucid.png" />
+    Database Model - <a href="https://lucid.app/lucidchart/f1cb0294-cac3-4005-bc56-06b03bd44496/edit?invitationId=inv_8aaa1e39-3596-4e43-a717-998f718ab440" target="_blank">Lucid Chart</a> 
 </p>
 <p>
-    <img alt="Figma" width="24px" height="24px" src="https://github.com/luye713/SmoreRecipes/blob/main/main_app/static/assets/md/figma.png" />
-    Wireframe and Prototype - <a href="https://www.figma.com/file/takNmKI5aGFRkOmjYqurdx/Team-Mango-Wireframes?node-id=2%3A720" target="_blank">Figma + Figjam</a>
-</p>
-<p>
-    <img alt="Whimsical" width="24px" height="24px" src="https://github.com/luye713/SmoreRecipes/blob/main/main_app/static/assets/md/whimsical.png" />
-    User flow - <a href="https://whimsical.com/camping-recipe-youtube-kids-LHhdL9EKaor3mwowBfcdry" target="_blank">Whimsical</a>
+    <img alt="Figma" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/figma.png" />
+    Wireframe and Prototype - <a href="https://www.figma.com/file/3MCP8fdtxnw1WWuRhua2A2/Project-Sharing-App?node-id=0%3A1" target="_blank">Figma + Figjam</a>
 </p>
 
-
-<br />
-
----
-
-### User flow:
-
-- la la la  
-- la la la  
-- la la la  
-
-
-<img align="center" alt="user flow diagram" src="" />
-
-#### User Persona:
-
-la la la\
-la la la\
-la la la
-
-#### Needs:
-
-la la la\
-la la la\
-la la la
-
-#### Frustration:
-
-la la la\
-la la la
-
-#### User Testing Notes 2022-02-11
-
-la la la\
-la la la
 
 <br />
 
@@ -183,7 +153,7 @@ la la la
 
 ### Entity Relationship Diagram:
 
-<img align="center" alt="Database ERD diagram" src="" />
+<img align="center" alt="Database ERD diagram" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/THEEXHIBIT-ERD.png" />
 
 <br />
 
@@ -191,22 +161,26 @@ la la la
 
 ### Icebox:
 
-- Instant messaging between 2 people
+- Save Project as Draf feature when create Project
+- Notification Feature
 - Instant messaging between Group of people
-- GitHub intergration -> enable Cloning github directory from the website
+- GitHub intergration to enable Cloning github repository directory from the website
 - Light - Dark mode tongle
-- Google, GitHub, Facebook authentication
+- Google, GitHub authentication
 
 ---
 
-### Key Learning & Challenges:
+### Key Learning:
 
-- la la la
-- la la la
-- la la la
-- la la la
-- la la la
-- la la la
+- React is a very powerful and dynamic tool, but we have to do it "The React Way"
+- In React, state management is everything, it's difficult, it's important, and of course "follow the React way"
+
+---
+
+### Challenges:
+
+- Create a great and fully functional app in only a small amount of time take a lot of effort
+- React version 6 required to use Function Component for many feature that Class base Component is more difficult to work with
 
 ---
 
@@ -221,9 +195,9 @@ Distributed under the MIT License.
 Developer:\
 [Lu Ye](https://github.com/luye713)\
 [Josh Nguyen](https://joshnguyentoronto.com)\
-[Janusshan Paramasivam](https://joshnguyentoronto.com)
+[Janusshan Paramasivam](https://google.com)
 
 Designer:\
 [Linette Yang](https://www.google.com/)\
 [Paula Abejero](https://www.google.com/)\
-[Paulo Saromo](https://www.google.com/)
+[Paulo Saromo](https://www.linkedin.com/in/paulosaromo/)
