@@ -22,6 +22,9 @@ export default function ProjectList(props) {
                         user={props.user} 
                         otherUser={props.otherUser}
                         currentProject={props.currentProject}
+                        viewPeople={props.viewPeople}
+                        viewUser={props.viewUser}
+
                     />
                 </div>
             )}

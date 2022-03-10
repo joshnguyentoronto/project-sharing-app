@@ -13,16 +13,15 @@ export default function ProfileCard (props) {
     return (
         <div className="profile-card" >
             <img src={require('../../images/image/no_profile_image.png')} alt="profile"/>
-           
-            {/* { props.otherUser ? props.user._id == props.otherUser._id ? <h1>{props.user.name}</h1> : <h1>{props.otherUser.name}</h1>
+            {/* { props.otherUser ? props.user._id === props.otherUser._id ? <h1>{props.user.name}</h1> : <h1>{props.otherUser.name}</h1>
             : <h1>{props.user.name}</h1>} */}
             <h1>{props.user.name}</h1>
             <h4>{props.user.location}</h4>
-            {props.loginUser ? props.user._id == props.loginUser._id ? <Link to="/profile/edit">Edit Profile</Link> 
+            {props.loginUser ? props.user._id === props.loginUser._id ? <Link to="/profile/edit">Edit Profile</Link> 
             : <Link to="/profile/follow">follow</Link> 
             : <Link to="/profile/follow">follow</Link> }
             <br />
-            {props.loginUser ? props.user._id == props.loginUser._id ? <Link to="/upload">Upload a Project</Link> 
+            {props.loginUser ? props.user._id === props.loginUser._id ? <Link to="/upload">Upload a Project</Link> 
             : <Link to="/profile/message">Message</Link> 
             : <Link to="/profile/message">Message</Link> }
             

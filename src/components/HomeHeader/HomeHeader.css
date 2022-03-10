@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     top: 0;
@@ -14,7 +14,9 @@
 }
 
 .header-link-container {
-    width: 300px;
+    min-width: 400px;
+    max-width: 530px;
+    width: 40%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +35,7 @@
 }
 
 .header-link-upload {
-    width: 62px;
+    padding: 0 10px;
     height: 32px;
     background-color: #29465B;
     border: none;

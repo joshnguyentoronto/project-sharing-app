@@ -194,7 +194,6 @@ async function likeOne(req, res) {
 async function likeOneProfile(req, res) {
     try {
         let project = await ProjectModel.findById(req.body.likedPosts)
-        console.log(project)
         let user = await UserModel.findById(req.body.userId)
         if (user.likedPosts.some(l => l === req.body.likedPosts)) {
             let index = user.likedPosts.indexOf(req.body.likedPosts)
@@ -227,6 +226,17 @@ async function likeOneProfile(req, res) {
         } else if (req.body.cat == 'Saved') {
             let idArr = user.savedPosts
             let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
+                { path: 'author', model: 'User' },
+                { path: 'comment', populate: { path: 'user', model: 'User' } }
+            ])
+            let object = {
+                user: user,
+                newProject: project,
+                projectsList: projects
+            }
+            res.status(200).json(object)
+        } else if (req.body.otherUser) {
+            let projects = await ProjectModel.find({ author: [req.body.otherUser] }).populate([
                 { path: 'author', model: 'User' },
                 { path: 'comment', populate: { path: 'user', model: 'User' } }
             ])

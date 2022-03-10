@@ -1,7 +1,7 @@
 import './MessagePopUp.css'
 import React, {useState}from 'react';
 import Avatar from '@mui/material/Avatar';
-import { Button, TextField, InputAdornment } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 
