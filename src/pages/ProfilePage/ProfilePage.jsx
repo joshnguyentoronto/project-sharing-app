@@ -1,6 +1,8 @@
 import "./ProfilePage.css"
 import React, { Component } from 'react'
-import ProjectList from "../../components/ProjectList/ProjectList"
+import { Link } from "react-router-dom"; 
+import HomeHeader from "../../components/HomeHeader/HomeHeader";
+import ProjectList from "../../components/ProjectList/ProjectList";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import ProjectDetail from "../../components/ProjectDetail/ProjectDetail";
 
@@ -21,7 +23,14 @@ export default class ProfilePage extends Component {
 
     render() {
         return(
+            
             <div className="profile">
+                <HomeHeader 
+                    openChatList={this.props.openChatList}
+                    userLogout={this.props.userLogout}
+                    user={this.props.user}
+                />
+                
                 <div className="background-image"><img src={require('../../images/image/no_profile_image.png')} alt="profile background"/></div>
                 {/* {this.props.currentProject ? 
                     <ProfileCard user={this.props.user} otherUser={this.props.currentProject.author[0]}/> 

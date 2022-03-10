@@ -14,6 +14,7 @@ export default function HomeHeader(props) {
 
     return(
         <div className="header">
+            <Link className="home-link" to='/'><h1>THE EXHIBIT</h1></Link>
             <div className='header-empty'>
             </div>
             <div className='header-link-container'>
