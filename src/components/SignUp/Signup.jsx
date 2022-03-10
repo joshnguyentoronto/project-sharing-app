@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Button from '@mui/material/Button'
 import {Link, useNavigate} from 'react-router-dom'
-import { Box, FormHelperText, TextField, InputAdornment } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 export default function SignUpForm(props){
 

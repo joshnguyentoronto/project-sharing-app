@@ -1,7 +1,6 @@
 import './ProjectDetail.css'
 import React, { useState, useRef }from 'react';
 import { Link } from 'react-router-dom';
-import RefProjectItem from '../RefProjectItem/RefProjectItem';
 import CommentItem from '../CommentItem/CommentItem';
 import TagItem from '../TagItem/TagItem'
 import UserCard from '../UserCard/UserCard';
@@ -40,11 +39,11 @@ export default function ProjectDetail(props) {
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
                     <div className='project-detail-body-img'>
-                        <img src={props.project.images[0]}></img>
+                        <img src={props.project.images[0]} alt="project preview"></img>
                     </div>
                     <div className='project-detail-body-project-link'>
                         {props.project.projectLink.map(link => 
-                            <a target="_blank" href={link.url} >{link.name}</a>
+                            <a target="_blank" href={link.url} rel="noopener noreferrer">{link.name}</a>
                         )}
                     </div>
                     <div className='project-detail-body-section'>
