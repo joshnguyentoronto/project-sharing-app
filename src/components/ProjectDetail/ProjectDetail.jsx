@@ -186,7 +186,11 @@ export default function ProjectDetail(props) {
                         <div className='profilebtnhover' >
                             <Link to="/profile"><button className='card-user-icon-3'><UserIcon user={user} /></button></Link>
                             <div className="usercard" >
-                                <UserCard user={user} />
+                                <UserCard user={user} 
+                                getUserCardCounts={props.getUserCardCounts}
+                                userCardLike={props.userCardLike}
+                                userCardView={props.userCardView}
+                                />
                             </div>
                         </div>
                     ) }
