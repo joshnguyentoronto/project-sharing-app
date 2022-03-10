@@ -5,23 +5,23 @@
 }
 
 #input-link-each-input1 {
-    height: 35px;
+    height: 31px;
     width: 150px;
     border: 1px solid black;
     border-radius: 3px;
 }
 #input-link-each-input2 {
-    height: 35px;
+    height: 31px;
     width: 300px;
     border: 1px solid black;
     border-radius: 3px;
 }
 
 #link-name-id {
-    margin: 10px 0 2px 0;
+    margin: 10px 0 15px 0;
 }
 #link-url-id {
-    margin: 10px 0 2px 0;
+    margin: 10px 0 15px 0;
 }
 
 .input-link-each-del {

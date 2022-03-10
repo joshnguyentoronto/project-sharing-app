@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import HomeHeader from "../../components/HomeHeader/HomeHeader";
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import ProjectList from '../../components/ProjectList/ProjectList';
@@ -83,8 +83,11 @@ export default function othersProfilePage(props) {
                 </div>
 
                 <div className="profile-social">
-                    <p><h4>Contact</h4><br />{props.viewUser.email}</p>
-                    <p><h4>Social</h4><br /><ul>{props.viewUser.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p>
+                    <p><h4>Contact</h4><br />{props.viewUser.email}
+                    <br />
+                    <ul>{props.user.userLink.map(e => <li><Link to={`${e.url}`}>{e.name}</Link></li>)}</ul>
+                    </p>
+                    {/* <p><h4>Social</h4><br /><ul>{props.viewUser.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p> */}
                 </div>
             </div>
             :

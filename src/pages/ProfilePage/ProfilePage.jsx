@@ -79,8 +79,12 @@ export default class ProfilePage extends Component {
                         </div>
 
                         <div className="profile-social">
-                            <p><h4>Contact</h4><br />{this.props.user.email}</p>
-                            <p><h4>Social</h4><br /><ul>{this.props.user.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p>
+                            <p><h4>Contact</h4>
+                            <br />
+                            {this.props.user.email}
+                            <br />
+                            <ul>{this.props.user.userLink.map(e => <li><Link to={`${e.url}`}>{e.name}</Link></li>)}</ul>
+                            </p>
                         </div>
                     </div>
                     :
