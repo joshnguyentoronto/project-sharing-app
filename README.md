@@ -1,7 +1,7 @@
 <h1 align="center">THE EXHIBIT</h1>
 
 <p align="center">
-    <img alt="la" width="120px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/logo.png" />
+    <img alt="la" width="120px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/logo.png" />
 </p>
 
 <h3 align="center">Share your project with the world!</h3>
@@ -26,11 +26,12 @@ THE EXHIBIT is the place where we can Learn new thing, Get ideas for your next p
 &nbsp;\
 THE EXHIBIT was founded by three student: Lu Ye, Janusshan Paramasivam, and Josh Nguyen; and was build completely by them. With the help of three design students from GA's UXDI course: Linette Yang, Paula Abejero, Paulo Saroma; the app was build from scratch to finish in just one week.\
 &nbsp;\
-This collaborate project help us the SEI and UXDI students to gain direct experiences that is relevant to our future carrer.
+This collaborate project help us the SEI and UXDI students to gain direct experiences that is relevant to our future carrer.\
+&nbsp;\
 &nbsp;\
 Interesting fact about THE EXHIBIT:
 - It was build within only 8 days.
-- Total amount of hours the SEI student put in is estimated at least 240 hours
+- Total amount of hours the SEI student put in is estimated at least 240 hours.
 - The entire code base have at least 10,000 line of codes as of due date.
 
 
@@ -134,15 +135,15 @@ Interesting fact about THE EXHIBIT:
 ### Technologies:
 
 <p>
-    <img alt="Trello" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/trello.png" />
+    <img alt="Trello" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/trello.png" />
     Tasks Manager - <a href="https://trello.com/b/xPWClGaB/the-exhibit" target="_blank">Trello Board</a> 
 </p>
 <p>
-    <img alt="Lucid" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/lucid.png" />
+    <img alt="Lucid" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/lucid.png" />
     Database Model - <a href="https://lucid.app/lucidchart/f1cb0294-cac3-4005-bc56-06b03bd44496/edit?invitationId=inv_8aaa1e39-3596-4e43-a717-998f718ab440" target="_blank">Lucid Chart</a> 
 </p>
 <p>
-    <img alt="Figma" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/figma.png" />
+    <img alt="Figma" width="24px" height="24px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/figma.png" />
     Wireframe and Prototype - <a href="https://www.figma.com/file/3MCP8fdtxnw1WWuRhua2A2/Project-Sharing-App?node-id=0%3A1" target="_blank">Figma + Figjam</a>
 </p>
 
@@ -153,7 +154,7 @@ Interesting fact about THE EXHIBIT:
 
 ### Entity Relationship Diagram:
 
-<img align="center" alt="Database ERD diagram" src="https://github.com/joshnguyentoronto/project-sharing-app/tree/master/public/images/THEEXHIBIT-ERD.png" />
+<img align="center" alt="Database ERD diagram" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/THEEXHIBIT-ERD.png" />
 
 <br />
 
