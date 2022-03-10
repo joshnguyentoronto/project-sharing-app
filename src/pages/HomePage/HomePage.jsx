@@ -44,6 +44,13 @@ export default class HomePage extends Component {
                     user={this.props.user} 
                     viewPeople={this.props.viewPeople}
                     viewUser=""
+
+                    // otherLike={this.props.otherLike}
+                    // otherView={this.props.otherView}
+                    // getOtherCounts={this.props.getOtherCounts}
+                    getUserCardCounts={this.props.getUserCardCounts}
+                    userCardLike={this.props.userCardLike}
+                    userCardView={this.props.userCardView}
                 />
                 {this.props.viewMode ? 
                     <ProjectDetail 
@@ -67,6 +74,10 @@ export default class HomePage extends Component {
                         viewProject={this.props.viewProject}
                         projects={this.props.projects}
                         hoverProject={this.props.hoverProject}
+                        
+                        getUserCardCounts={this.props.getUserCardCounts}
+                        userCardLike={this.props.userCardLike}
+                        userCardView={this.props.userCardView}
                     /> 
                     :
                     false

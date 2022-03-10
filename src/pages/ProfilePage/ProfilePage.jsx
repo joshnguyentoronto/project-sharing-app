@@ -37,7 +37,12 @@ export default class ProfilePage extends Component {
                 :   
                     <ProfileCard user={this.props.user}/>
                 } */}
-                <ProfileCard user={this.props.user} loginUser={this.props.user}/>
+                <ProfileCard 
+                    user={this.props.user} 
+                    loginUser={this.props.user}
+                    allLike={this.props.allLike}
+                    allView={this.props.allView}
+                />
                 
                 <div className="profile-content-area">
                     <ul className="ProfileCategory">
@@ -103,6 +108,9 @@ export default class ProfilePage extends Component {
                         viewProject={this.props.viewProject}
                         viewPeople={this.props.viewPeople}
                         viewUser=""
+                        getUserCardCounts={this.props.getUserCardCounts}
+                        userCardLike={this.props.userCardLike}
+                        userCardView={this.props.userCardView}
                     />
                     }
                     {this.props.viewMode ? 
@@ -124,6 +132,9 @@ export default class ProfilePage extends Component {
                             isLiked={this.props.isLiked}
                             hoverUserState={this.props.hoverUserState}
                             hoverUser={this.props.hoverUser}
+                            getUserCardCounts={this.props.getUserCardCounts}
+                            userCardLike={this.props.userCardLike}
+                            userCardView={this.props.userCardView}
                         /> 
                         :
                         false

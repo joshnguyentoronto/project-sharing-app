@@ -25,7 +25,15 @@ export default function ProjectListItem(props) {
                     <div className='profile-btn-hover' >
                         <button onClick={() => props.viewPeople(props.project.author[0]._id)}><UserIcon user={props.project.author[0]} /></button>
                         <div className="user-card">
-                            <UserCard user={props.project.author[0]} />
+                            <UserCard 
+                                user={props.project.author[0]} 
+                                // otherLike={props.otherLike}
+                                // otherView={props.otherView}
+                                // getOtherCounts={props.getOtherCounts}
+                                getUserCardCounts={props.getUserCardCounts}
+                                userCardLike={props.userCardLike}
+                                userCardView={props.userCardView}
+                            />
                         </div>
                     </div>
                     <div className="project-list-item-foot-name">
