@@ -1,8 +1,14 @@
 import './UserCard.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserIcon from '../UserIcon/UserIcon';
 
 export default function UserCard(props) {
+
+
+    useEffect(() => {
+        props.getUserCardCounts(props.user._id)
+    }, [])
+
     return(
         <div className="card">
             <div className='user-card-container'>
@@ -16,7 +22,7 @@ export default function UserCard(props) {
                 </div>
                 <div className='card-stat'>
                     <div className='card-stat-each'>
-                        <p>{props.user.likedPosts.length}</p>
+                        <p>{props.userCardLike}</p>
                         <p>Project Likes</p>
                     </div>
                     <div className='card-stat-each'>
@@ -24,7 +30,7 @@ export default function UserCard(props) {
                         <p>Follower</p>
                     </div>
                     <div className='card-stat-each'>
-                        <p>{props.user.savedPosts.length}</p>
+                        <p>{props.userCardView}</p>
                         <p>Project View</p>
                     </div>
                 </div>
