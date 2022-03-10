@@ -18,12 +18,12 @@ export default function ProfileCard (props) {
             <h1>{props.user.name}</h1>
             <h4>{props.user.location}</h4>
             {props.loginUser ? props.user._id === props.loginUser._id ? <Link to="/profile/edit">Edit Profile</Link> 
-            : <Link to="/profile/follow">follow</Link> 
-            : <Link to="/profile/follow">follow</Link> }
+            : <Link to="/profile/follow"><img src={require('../../images/icons/follow-btn.svg')} alt="svg icon" />follow</Link> 
+            : <Link to="/profile/follow"><img src={require('../../images/icons/follow-btn.svg')} alt="svg icon" />follow</Link> }
             <br />
             {props.loginUser ? props.user._id === props.loginUser._id ? <Link to="/upload">Upload a Project</Link> 
-            : <Link to="/profile/message">Message</Link> 
-            : <Link to="/profile/message">Message</Link> }
+            : <Link to="/profile/message"><img src={require('../../images/icons/mess-btn-1.svg')} alt="svg icon" />Message</Link> 
+            : <Link to="/profile/message"><img src={require('../../images/icons/mess-btn-1.svg')} alt="svg icon" />Message</Link> }
             
             <p><span>Project Views</span> <span>{props.user.viewCount}</span></p>
             <p><span>Likes</span> <span>{props.user.likeCount}</span></p>
