@@ -20,19 +20,19 @@
 
 ### About:
 
-THE EXHIBIT is a group project which ideas originally come from the Needs of sharing student's projects to showcase to the world.\
+THE EXHIBIT is a group project which ideas originally come from the needs of sharing student's projects to showcase to the world.\
 &nbsp;\
-THE EXHIBIT is the place where we can Learn new thing, Get ideas for your next projects, help others to improve and meet potential employer.\
+THE EXHIBIT is the place where we can Learn new things, get ideas for your next projects, help others to improve and meet potential employer.\
 &nbsp;\
-THE EXHIBIT was founded by three student: Lu Ye, Janusshan Paramasivam, and Josh Nguyen; and was build completely by them. With the help of three design students from GA's UXDI course: Linette Yang, Paula Abejero, Paulo Saroma; the app was build from scratch to finish in just one week.\
+THE EXHIBIT was created by three students: Lu Ye, Janusshan Paramasivam, and Josh Nguyen, and was build completely by them. With the help of three design students from GA's UXDI course: Linette Yang, Paula Abejero, Paulo Saroma; the app was build from scratch to finish in just one week.\
 &nbsp;\
-This collaborate project help us the SEI and UXDI students to gain direct experiences that is relevant to our future carrer.\
+This collaborate project helps us the SEI and UXDI students to gain direct experience that is relevant to our future carrer.\
 &nbsp;\
 &nbsp;\
 Interesting fact about THE EXHIBIT:
 - It was build within only 8 days.
-- Total amount of hours the SEI student put in is estimated at least 250 hours.
-- The entire code base have at least 10,000 line of codes as of due date.
+- Total amount of hours the SEI student put in are estimated at least 250 hours.
+- The entire code base have at least 10,000 line of code as of due date.
 
 
 <br />
@@ -56,8 +56,8 @@ Interesting fact about THE EXHIBIT:
 
 1. Everyone can come and use our app without having to login as a new user. However, in order to use all the features, we recommend user to log in or sign up.
 2. Inside the home page, we can see all other's people projects
-3. We can find the specific project by their tools, languages, author name, ect.
-4. We can view the detail of the project, Like, Save, see info, and Comment on it.
+3. We can find the specific project by their tools, languages, and author name, ect.
+4. We can view the detail of the project, like, save, see info, and comment on it.
 5. We can also view other user page as well to see if they have more cool projects to see.
 6. If we want to send a message to our friends, to an author of the project that we like or to make more friend, we can now send the message to them directly in realtime.
 6. If we want to share a project, we can go to upload page and create a project easily as we have all instruction for each field.
@@ -70,7 +70,7 @@ Interesting fact about THE EXHIBIT:
 ### Meet the Developer:
 | Name | Roles |
 | ---- | ----- |
-| Lu Ye             | GitHub Manager, Task Manager, Styling, Wireframe, Routing, Component, Functionality, Authorization,  |
+| Lu Ye             | Task Manager, Styling, Wireframe, Routing, Component, Functionality, Authorization,  |
 | Josh Nguyen       | GitHub Manager, Documenter, Images and Logo, Styling, Wireframe, Routing, Component, Functionality, Authorization,  |
 | Janusshan Paramasivam | Database Manager, Authentication, Styling, Wireframe, Routing, Component, Functionality, Authorization,  |
 
@@ -182,13 +182,13 @@ Interesting fact about THE EXHIBIT:
 
 ### Icebox:
 
-- Save Project as Draf feature when create Project
-- Notification Feature
-- Enable Edit Project
-- Enable Delete Project
-- Instant messaging between Group of people
-- GitHub intergration to enable Cloning github repository directory from the website
-- Light - Dark mode tongle
+- Save Project as draf feature when create Project
+- Notification feature
+- Enable edit project
+- Enable delete project
+- Instant messaging between group of people
+- GitHub intergration to enable cloning github repository directory from the website
+- Light - dark mode tagle
 - Google, GitHub authentication
 
 ---
@@ -204,7 +204,7 @@ Interesting fact about THE EXHIBIT:
 ### Challenges:
 
 - Create a great and fully functional app in only a small amount of time take a lot of effort
-- React version 6 required to use Function Component for many feature that Class base Component is more difficult to work with
+- React version 6 required to use function component for many feature that class base component is more difficult to work with
 
 ---
 
