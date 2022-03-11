@@ -42,11 +42,11 @@ Interesting fact about THE EXHIBIT:
 ### Review:
 
 
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/1.png" />
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/2.png" />
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/3.png" />
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/4.png" />
-<img  alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/5.png" />
+<img align="left" alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/1.png" />
+<img align="left" alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/2.png" />
+<img align="left" alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/3.png" />
+<img align="left" alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/4.png" />
+<img  alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/5.png" />
 
 <br />
 
