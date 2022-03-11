@@ -1,5 +1,5 @@
 import './ProjectDetail.css'
-import React, { useState, useRef }from 'react';
+import React, { useState, useRef, useEffect }from 'react';
 import { Link } from 'react-router-dom';
 import CommentItem from '../CommentItem/CommentItem';
 import TagItem from '../TagItem/TagItem'
