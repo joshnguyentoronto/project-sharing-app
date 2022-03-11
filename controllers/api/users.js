@@ -21,11 +21,23 @@ module.exports = {
     recieveMessage,
     editProfile,
     getProfileData,
+    updatePhoto,
 }
+async function updatePhoto(req,res){
+    let user = await UserModel.findById(req.user._id)
+    if(req.body.avatarUrl){
+        user.avatar = req.body.avatarUrl
+    }else if (req.body.background) {
+        user.background = req.body.background
+    }
+    user.save()
+    res.status(200).json('success')
+}
+
 
 async function getProfileData(req,res){
     let userprofile = await UserModel.findById(req.user._id).populate('userLink')
-    res.status(200).json()
+    res.status(200).json(JSON.stringify(userprofile[0]))
 }
 
 async function recieveMessage(req,res){
