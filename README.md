@@ -42,11 +42,11 @@ Interesting fact about THE EXHIBIT:
 ### Review:
 
 
-<img align="left" alt="la" width="180px" src="" />
-<img align="left" alt="la" width="180px" src="" />
-<img align="left" alt="la" width="180px" src="" />
-<img align="left" alt="la" width="180px" src="" />
-<img  alt="la" width="180px" src="" />
+<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/1.png" />
+<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/2.png" />
+<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/3.png" />
+<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/4.png" />
+<img  alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/5.png" />
 
 <br />
 
@@ -217,9 +217,9 @@ Distributed under the MIT License.
 ### Contact:
 
 Developer:\
-[Lu Ye](https://github.com/luye713/)\
+[Lu Ye](https://www.linkedin.com/in/lu-ye-b17192109/)\
 [Josh Nguyen](https://joshnguyentoronto.com/)\
-[Janusshan Paramasivam](https://github.com/janusshanp/)
+[Janusshan Paramasivam](https://www.linkedin.com/in/janusshan-param/)
 
 Designer:\
 [Linette Yang](https://www.linkedin.com/in/linetteyang/)\
