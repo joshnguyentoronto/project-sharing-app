@@ -20,7 +20,7 @@
 
 ### About:
 
-THE EXHIBIT is a group project which ideas originally come from the needs of sharing student's projects to showcase to the world.\
+THE EXHIBIT is a group project which ideas originally came from the needs of sharing student's projects to showcase to the world.\
 &nbsp;\
 THE EXHIBIT is the place where we can Learn new things, get ideas for your next projects, help others to improve and meet potential employer.\
 &nbsp;\
@@ -31,8 +31,8 @@ This collaborate project helps us the SEI and UXDI students to gain direct exper
 &nbsp;\
 Interesting fact about THE EXHIBIT:
 - It was build within only 8 days.
-- Total amount of hours the SEI student put in are estimated at least 250 hours.
-- The entire code base have at least 10,000 line of code as of due date.
+- Total amount of hours the SEI students put in are estimated at least 250 hours.
+- The entire code base has at least 10,000 lines of code as of due date.
 
 
 <br />
@@ -54,14 +54,14 @@ Interesting fact about THE EXHIBIT:
 
 ### Usage:
 
-1. Everyone can come and use our app without having to login as a new user. However, in order to use all the features, we recommend user to log in or sign up.
-2. Inside the home page, we can see all other's people projects
-3. We can find the specific project by their tools, languages, and author name, ect.
-4. We can view the detail of the project, like, save, see info, and comment on it.
-5. We can also view other user page as well to see if they have more cool projects to see.
-6. If we want to send a message to our friends, to an author of the project that we like or to make more friend, we can now send the message to them directly in realtime.
-6. If we want to share a project, we can go to upload page and create a project easily as we have all instruction for each field.
-7. Finally, we can go to our profile page to see our detail, edit our background information, view projects that we created, view projects that we liked or saved.
+1. Everyone can come and use our app without having to sign up for an account. However, in order to use all the features, we recommend user to log in or sign up.
+2. On the home page, we can see all the projects from users.
+3. We can filter and sort the projects by their tools, languages, and author name, ect.
+4. We can view, like, save, and comment on a specific project.
+5. We can also view other users' page as well to see if they have more cool projects to showcase.
+6. If we want to contact other users, we can send a direct message to them in realtime.
+6. We can go to the upload page and create a project easily as we have instructions for each input field.
+7. Finally, we can go to our profile page to see our profile info, edit our background image, view projects that we created, view projects that we liked or saved.
 
 <br />
 
@@ -182,29 +182,29 @@ Interesting fact about THE EXHIBIT:
 
 ### Icebox:
 
-- Save Project as draf feature when create Project
+- Save project as a draf when creating a project
 - Notification feature
 - Enable edit project
 - Enable delete project
-- Instant messaging between group of people
-- GitHub intergration to enable cloning github repository directory from the website
-- Light - dark mode tagle
-- Google, GitHub authentication
+- Instant messaging between group of users
+- GitHub intergration to enable cloning GitHub repository directly from our website
+- Light and dark mode toggle
+- Google and GitHub authentication
 
 ---
 
 ### Key Learning:
 
-- React is a very powerful and dynamic tool, but we have to do it "The React Way"
-- In React, state management is everything, it's difficult, it's important, and of course "follow the React way"
-- Important: know what you are capable of! We are so ambitious about this final project that we put so much hours and effort in it.
+- React is a very powerful and dynamic tool, but we have to do it "The React Way".
+- In React, state and props management is important.
+- Component management is the key.
 
 ---
 
 ### Challenges:
 
-- Create a great and fully functional app in only a small amount of time take a lot of effort
-- React version 6 required to use function component for many feature that class base component is more difficult to work with
+- Creating a fully functional app in a small amount of time takes a lot of effort.
+- The newest version of React and React Router required to use functional component for many features, and it makes class based component difficult to work with
 
 ---
 
