@@ -102,10 +102,11 @@ export default function EditProfilePage(props) {
     //     navigate("/profile")  
     // }
 
-    async function avatarphotoUpload(){
+    async function avatarphotoUpload(e){
         try {
             let {url} = await fetch("/s3Url").then(res => res.json())
-            let file = avatar
+            console.log(avatar)
+            let file = e.target.files[0]
             let avatarPhoto = await fetch(url,{
                     method: "PUT",
                     headers: {
@@ -130,10 +131,10 @@ export default function EditProfilePage(props) {
             console.log("Submit error", err)
         }
     }
-    async function bgphotoUpload(){
+    async function bgphotoUpload(e){
         try {
             let {url} = await fetch("/s3Url").then(res => res.json())
-            let file = bgImageFile
+            let file = e.target.files[0]
             let bgPhoto = await fetch(url,{
                 method: "PUT",
                 headers: {
@@ -158,22 +159,24 @@ export default function EditProfilePage(props) {
             console.log("Submit error", err)
         }
     }
+
+    async function imageChange(e){
+        setImagePreview(URL.createObjectURL(e.target.files[0]))
+        console.log(e.target.files)
+        console.log(e.target.files[0])
+        setAvatar(e.target.files)
+        console.log(avatar)
+    }
     
     return(
         <div>
             <div className="edit-profile-header">
                 <div className="edit-profile-photo">
-                   
                     <img src={imagePreview}></img>
-                    
-                
-                
-                    <input onChange={(evt) => {
+                    <input onChange={(evt)=>{
                         setImagePreview(URL.createObjectURL(evt.target.files[0]))
-                        setAvatar(evt.target.files[0])
-                        avatarphotoUpload()
-                    }
-                    } type="file" name="dp-img" accept="image/*" />
+                        avatarphotoUpload(evt)
+                    }} type="file" name="dp-img" accept="image/*" />
                     <a className="edit-button">Edit</a>
                 </div>
                 <div className="edit-background-image">
@@ -181,8 +184,7 @@ export default function EditProfilePage(props) {
                     <img src={bgImagePreview}></img>
                     <input onChange={(evt) => {
                         setBgImagePreview(URL.createObjectURL(evt.target.files[0]))
-                        setBgImageFile(evt.target.files[0])
-                        bgphotoUpload()
+                        bgphotoUpload(evt)
                     }
                     }type="file" name="bg-img" accept="image/*" />
                 </div>

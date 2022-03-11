@@ -7,7 +7,6 @@ import SendIcon from '@mui/icons-material/Send';
 import MessageBubble from '../MessageBubble/MessageBubble'
 import { TextField, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack'
 
 
 export default function MessageListItem(props) {
