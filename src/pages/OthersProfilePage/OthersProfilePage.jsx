@@ -90,6 +90,9 @@ export default function othersProfilePage(props) {
                 projects={props.projects}
                 viewPeople={props.viewPeople}
                 viewUser={props.viewUser}
+                getUserCardCounts={this.props.getUserCardCounts}
+                userCardLike={this.props.userCardLike}
+                userCardView={this.props.userCardView}
             />
             }
             {props.viewMode ? 

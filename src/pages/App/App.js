@@ -339,7 +339,6 @@ export default class App extends Component {
           let object = await fetchResponse.json()
           let user = object.user
           let newProject = object.newProject
-          console.log(newProject)
           let newprojects = object.projectsList
           if (user.likedPosts.indexOf(newProject._id) !== -1 ) {
               this.setState({ isLiked: true, user: user, projects: newprojects, currentProject: newProject })
@@ -528,7 +527,6 @@ export default class App extends Component {
             likeNum = p.likeCount + likeNum
             viewNum = p.viewCount + viewNum
             this.setState({ otherLike: likeNum, otherView: viewNum})
-            console.log(this.state.otherView, this.state.otherLike)
           })
         }}
 
@@ -541,8 +539,9 @@ export default class App extends Component {
     try {
       let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": userId }})
       let projects = await fetchProjectList.json()
-      console.log(projects)
-      if (projects.length) {
+      if (projects.length === 0) {
+        this.setState({ userCardLike: 0, userCardView: 0})
+      } else if (projects.length) {
         if(projects.length == 1) {
           this.setState({ userCardLike: projects.likeCount, userCardView: projects.viewCount})
         } else {
@@ -551,7 +550,6 @@ export default class App extends Component {
           await projects.forEach((p) => {
             likeNum = p.likeCount + likeNum
             viewNum = p.viewCount + viewNum
-            console.log(this.state.otherView, this.state.otherLike)
             this.setState({ userCardLike: likeNum, userCardView: viewNum})
           })
         }}
@@ -582,7 +580,6 @@ export default class App extends Component {
         try {
           let fetchProjectList = await fetch('/api/projects')
           let projects = await fetchProjectList.json()
-          console.log(projects)
           this.setState({ filter: '', projects: projects, user: this.falseUser })
         } catch(err) {
           console.log("home page error: ", err)
@@ -750,6 +747,9 @@ export default class App extends Component {
                 otherLike={this.state.otherLike}
                 otherView={this.state.otherView}
                 getOtherCounts={this.getOtherCounts}
+                getUserCardCounts={this.getUserCardCounts}
+                userCardLike={this.state.userCardLike}
+                userCardView={this.state.userCardView}
               />}
           />
           <Route path="account" element={<AccountPage/>}>

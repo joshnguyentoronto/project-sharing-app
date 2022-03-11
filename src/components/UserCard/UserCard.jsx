@@ -5,9 +5,9 @@ import UserIcon from '../UserIcon/UserIcon';
 export default function UserCard(props) {
 
 
-    useEffect(() => {
-        props.getUserCardCounts(props.user._id)
-    }, [])
+    // useEffect(() => {
+    //     props.getUserCardCounts(props.user._id)
+    // }, [])
 
     return(
         <div className="card">

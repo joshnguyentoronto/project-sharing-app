@@ -38,8 +38,6 @@ export default function ProjectDetail(props) {
         let value = !popUpChat
         setpopUpChat(value)
     }
-
-    console.log(props.project.images[0])
     
     return(
         <div className='project-detail-background'>
@@ -116,6 +114,9 @@ export default function ProjectDetail(props) {
                                     hoverUser={props.hoverUser}
                                     viewProject={props.viewProject}
                                     user={props.user} 
+                                    getUserCardCounts={props.getUserCardCounts}
+                                    userCardLike={props.userCardLike}
+                                    userCardView={props.userCardView}
                                 />
                             </div>
                         )}
@@ -184,7 +185,7 @@ export default function ProjectDetail(props) {
                     <div className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></div>
                     { props.project.author.map(user => 
                         <div className='profilebtnhover' >
-                            <Link to="/profile"><button className='card-user-icon-3'><UserIcon user={user} /></button></Link>
+                            <Link to="/profile"><button onMouseEnter={() => props.getUserCardCounts(user._id)} className='card-user-icon-3'><UserIcon user={user} /></button></Link>
                             <div className="usercard" >
                                 <UserCard user={user} 
                                 getUserCardCounts={props.getUserCardCounts}

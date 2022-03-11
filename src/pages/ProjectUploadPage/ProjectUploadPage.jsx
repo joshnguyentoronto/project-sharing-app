@@ -34,7 +34,6 @@ export default class ProjectUploadPage extends Component {
 
     handleChange = (evt) => {
         if (evt.target.name === "img"){
-            console.log(evt.target.files)
             let arr = [...this.state.img]
             let imgArr =[...this.state.imageFiles]
             for(let i=0; i < evt.target.files.length; i++){
@@ -272,9 +271,6 @@ export default class ProjectUploadPage extends Component {
 
     delete = async (e) => {
         e.preventDefault()
-        console.log(this.state.img.length)
-        console.log(e.target.id)
-        console.log(this.state.img[0])
         for (let i=0; i <this.state.img.length; i++){
             if(e.target.id == this.state.img[i]){
                 let arr = [...this.state.img]

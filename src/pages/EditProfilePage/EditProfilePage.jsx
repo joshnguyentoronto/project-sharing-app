@@ -26,9 +26,6 @@ export default function EditProfilePage(props) {
 
     async function populateProfile(){
         // let profileData = await fetch('/api/users/editprofile)
-        console.log('hit')
-
-
     }
 
     function handleChange(e){
@@ -74,11 +71,9 @@ export default function EditProfilePage(props) {
             url: ''
         }
         editProfileData({...profileData, linkNum: newNum, userLink: [...profileData.userLink, newObj ] })
-        console.log(profileData.userLink)
     }
 
     function addSkill(evt) {
-        console.log("fafa")
         evt.preventDefault()
         evt.target.firstChild.value = ""
         editProfileData({...profileData, skill: [...profileData.skill, profileData.skillItem.toLowerCase() ], skillItem: '' })
@@ -93,7 +88,6 @@ export default function EditProfilePage(props) {
     }
 
     // async function submitProfile() {
-    //     console.log("is this working?", props.user)
     //     const fetchResponse = await fetch('/api/users/edit', {
     //         method: 'POST',
     //         headers: {
@@ -111,10 +105,8 @@ export default function EditProfilePage(props) {
     //         })
     //     })
     //     if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-
     //     navigate("/profile")  
     // }
-    
 
 
     return(

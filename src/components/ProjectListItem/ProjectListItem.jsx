@@ -7,7 +7,7 @@ export default function ProjectListItem(props) {
     
         return(
             
-            <div className="project-list-item" onMouseEnter={() => { props.needHover ? props.hoverProject(props.project) : console.log('') } }>
+            <div className="project-list-item" onMouseEnter={() => { props.needHover ? props.hoverProject(props.project) : console.log('')} }>
                 <div className="project-list-item-img">
                     <button className="img-save-button" onClick={() => props.saveProject(props.project)}>{ props.user.savedPosts.indexOf(props.project._id) !== -1 ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
                     
@@ -23,7 +23,7 @@ export default function ProjectListItem(props) {
                 </div>
                 <div className="project-list-item-foot">
                     <div className='profile-btn-hover' >
-                        <button onClick={() => props.viewPeople(props.project.author[0]._id)}><UserIcon user={props.project.author[0]} /></button>
+                        <button onMouseEnter={() => props.getUserCardCounts(props.project.author[0]._id)} onClick={() => props.viewPeople(props.project.author[0]._id)}><UserIcon user={props.project.author[0]} /></button>
                         <div className="user-card">
                             <UserCard 
                                 user={props.project.author[0]} 

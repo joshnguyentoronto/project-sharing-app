@@ -24,9 +24,7 @@ module.exports = {
 }
 
 async function getProfileData(req,res){
-    console.log('hit')
     let userprofile = await UserModel.findById(req.user._id).populate('userLink')
-    console.log(userprofile)
     res.status(200).json()
 }
 
@@ -180,7 +178,6 @@ async function saveOne(req, res) {
 async function likeOne(req, res) {
     try {
         let project = await ProjectModel.findById(req.body.likedPosts)
-        console.log(project)
         let user = await UserModel.findById(req.body.userId)
         if (user.likedPosts.some(l => l === req.body.likedPosts)) {
             let index = user.likedPosts.indexOf(req.body.likedPosts)
@@ -290,8 +287,6 @@ async function editProfile(req, res) {
     try {
         let userId = req.get('userId')
         let user = await UserModel.findById(userId)
-        console.log("before save", user)
-        console.log(req.body)
         user.name = req.body.name
         user.bio = req.body.bio
         user.education = req.body.education
@@ -300,7 +295,6 @@ async function editProfile(req, res) {
         user.skill = req.body.skill
         user.userLink = req.body.userLink
         user.save()
-        console.log("afterr save", user)
         res.status(200).json(user)
     }catch(err) {
         res.status(400).json(err)

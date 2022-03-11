@@ -48,7 +48,7 @@ async function createPhoto(req,res) {
                 if (err){
                     console.log(err)
                 } else {
-                    console.log(data)
+                    return false
                 }
             })
         }
@@ -134,6 +134,7 @@ async function projectsUser(req, res) {
             ])
             res.status(200).json(projects)
         }
+        
     } catch(err) {
         res.status(400).json(err)
     }
