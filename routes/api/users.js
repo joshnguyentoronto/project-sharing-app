@@ -20,7 +20,8 @@ router.get('/recieve/message', usersCtrl.recieveMessage)
 router.post('/save', usersCtrl.saveOne)
 router.post('/like', usersCtrl.likeOne)
 router.post('/edit', usersCtrl.editProfile)
-router.get('/profile/data', usersCtrl.getProfileData)
+router.post('/profile/data', usersCtrl.getProfileData)
+router.post('/update/images', usersCtrl.updatePhoto)
 
 router.post('/like/profile', usersCtrl.likeOneProfile)
 

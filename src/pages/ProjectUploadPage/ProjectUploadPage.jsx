@@ -8,7 +8,6 @@ import InputTagItem from "../../components/InputTagItem/InputTagItem";
 import InputUserItem from "../../components/InputUserItem/InputUserItem";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import Footer from "../../components/Footer/Footer";
-import CloseIcon from '@mui/icons-material/Close';
 
 
 export default class ProjectUploadPage extends Component {

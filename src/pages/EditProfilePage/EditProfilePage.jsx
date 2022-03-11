@@ -7,29 +7,44 @@ import InputTagItem from "../../components/InputTagItem/InputTagItem";
 
 export default function EditProfilePage(props) {
     const [profileData, editProfileData] = useState({
-        name: '',
-        experiences: [],
-        location:'',
-        education: '',
-        userLink: [{ index: 0, name: '', url: '' }],
-        linkNum: 1,
-        skill: [],
-        skillItem: '',
-        bio:'',
-    })
+            name: '',
+            experiences: [],
+            location:'',
+            education: '',
+            userLink: [{ index: 0, name: '', url: '' }],
+            linkNum: 1,
+            skill: [],
+            skillItem: '',
+            bio:'',
+        })
+    const [imagePreview, setImagePreview] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [bgImagePreview, setBgImagePreview] = useState('')
+    const [bgImageFile, setBgImageFile] = useState('')
 
-    useEffect(()=> {
-        populateProfile()
-    })
+    // const [firstLoad, setFirstLoad] = useState (false)
+    // const [dummyload, setdummyload] = useState(false)
 
+    // console.log(props.user)
 
-
-    async function populateProfile(){
-        // let profileData = await fetch('/api/users/editprofile)
-        console.log('hit')
-
-
-    }
+    // useEffect(()=> {
+    //     console.log('second use effect ran')
+    //     if(props.user){
+    //         console.log('hit if block')
+    //         editProfileData({
+    //             ...profileData,
+    //             name: props.user.name,
+    //             experiences: props.user.experiences,
+    //             location: props.user.location,
+    //             education: props.user.education,
+    //             // userLink: user.userLink,
+    //             // linkNum: 1,
+    //             // skill: user.skill,
+    //             // skillItem: user.,
+    //             bio: props.user.bio,
+    //             })
+    //     }
+    // },[])
 
     function handleChange(e){
         editProfileData({...profileData, [e.target.name]:e.target.value })
@@ -114,17 +129,90 @@ export default function EditProfilePage(props) {
 
     //     navigate("/profile")  
     // }
+
+    async function avatarphotoUpload(){
+        try {
+            let {url} = await fetch("/s3Url").then(res => res.json())
+            let file = avatar
+            let avatarPhoto = await fetch(url,{
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    },
+                    body: file
+            })
+            let avatarUrl = url.split('?')[0]
+            
+            let jwt = localStorage.getItem('token')
+            const sendUpdate = await fetch('/api/users/update/images',{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + jwt,
+                },
+                body: JSON.stringify({
+                    avatar: avatarUrl,
+                })
+            })
+        } catch (err) {
+            console.log("Submit error", err)
+        }
+    }
+    async function bgphotoUpload(){
+        try {
+            let {url} = await fetch("/s3Url").then(res => res.json())
+            let file = bgImageFile
+            let bgPhoto = await fetch(url,{
+                method: "PUT",
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                body: file
+            })
+            let bgUrl = url.split('?')[0]
+        
+            let jwt = localStorage.getItem('token')
+            const sendUpdate = await fetch('/api/users/update/images',{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + jwt,
+                },
+                body: JSON.stringify({
+                    background: bgUrl,
+                })
+            })
+        } catch (err) {
+            console.log("Submit error", err)
+        }
+    }
     
-
-
     return(
         <div>
             <div className="edit-profile-header">
                 <div className="edit-profile-photo">
+                   
+                    <img src={imagePreview}></img>
+                    
+                
+                
+                    <input onChange={(evt) => {
+                        setImagePreview(URL.createObjectURL(evt.target.files[0]))
+                        setAvatar(evt.target.files[0])
+                        avatarphotoUpload()
+                    }
+                    } type="file" name="dp-img" accept="image/*" />
                     <a className="edit-button">Edit</a>
                 </div>
                 <div className="edit-background-image">
                     <a className="edit-button">Edit</a>
+                    <img src={bgImagePreview}></img>
+                    <input onChange={(evt) => {
+                        setBgImagePreview(URL.createObjectURL(evt.target.files[0]))
+                        setBgImageFile(evt.target.files[0])
+                        bgphotoUpload()
+                    }
+                    }type="file" name="bg-img" accept="image/*" />
                 </div>
             </div>
 
