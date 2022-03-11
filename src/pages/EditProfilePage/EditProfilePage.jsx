@@ -303,8 +303,6 @@ export default function EditProfilePage(props) {
                             userLink: profileData.userLink
                         })
                         navigate("/profile")       
-
-
                     }
                     }>Publish</button>
                 </div>
