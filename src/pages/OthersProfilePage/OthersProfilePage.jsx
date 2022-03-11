@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectDetail from '../../components/ProjectDetail/ProjectDetail';
+import MessageBox from "../../components/MessageBox/MessageBox"
 
 export default function othersProfilePage(props) {
     const [userData, setUserData] = useState({
@@ -24,19 +25,28 @@ export default function othersProfilePage(props) {
 
     return (
         <div className="profile">
+        {props.openChat ? 
+                    <MessageBox 
+                        messageList={props.messageList} 
+                        openChatList={props.openChatList}
+                        currentUser={props.user}
+                        socket={props.socket}
+                    /> 
+        : false }
         <Header 
             openChatList={props.openChatList}
             userLogout={props.userLogout}
             user={props.user}
         />
-        <div className="background-image"><img src={require('../../images/image/no_profile_image.png')} alt="profile background"/></div>
+        <div className="background-image">
+            <img src={require('../../images/image/no_profile_image.png')} alt="profile background"/>
+        </div>
             <ProfileCard 
                 loginUser={props.user} 
                 user={props.viewUser}
                 otherLike={props.otherLike}
                 otherView={props.otherView}
             />
-    
         <div className="profile-content-area">
             <ul className="ProfileCategory">
                 <li 
@@ -46,29 +56,33 @@ export default function othersProfilePage(props) {
                         props.getOtherProjects(props.viewUser._id)
                     }}
                 >Projects</li>
-
                 <li 
                     className={"About" === userData.activeCategory ? 'active' : ''}
                     onClick={() => handleSetActiveCat("About")}
                 >About</li>
             </ul>
-            
             {userData.activeCategory === "About" ?
             <div class="about-wrapper">
                 <div className="profile-info">
                     <p><h4>About</h4><br />{props.viewUser.bio}</p>
-                    <p><h4>Skills</h4><br /><ul>{props.viewUser ? props.viewUser.skill.map(s => <li className="skill-item">{s}</li>): props.viewUser.skill}</ul></p>
+                    <p><h4>Skills</h4><br />
+                        <ul>{props.viewUser 
+                            ? 
+                            props.viewUser.skill.map(s => <li className="skill-item">{s}</li>)
+                            : 
+                            props.viewUser.skill
+                            }
+                        </ul>
+                    </p>
                     <p><h4>Work Experience</h4><br />{props.viewUser.experiences}</p>
                     <p><h4>Education</h4><br />{props.viewUser.education}</p>
                     <p><h5>Member since: {moment(props.viewUser.date).format('LL')} </h5></p>
                 </div>
-
                 <div className="profile-social">
                     <p><h4>Contact</h4><br />{props.viewUser.email}
                     <br />
                     <ul>{props.user.userLink.map(e => <li><Link to={`${e.url}`}>{e.name}</Link></li>)}</ul>
                     </p>
-                    {/* <p><h4>Social</h4><br /><ul>{props.viewUser.userLink.map(e => <li>{e.name}: {e.url}</li>)}</ul></p> */}
                 </div>
             </div>
             :
@@ -78,7 +92,6 @@ export default function othersProfilePage(props) {
                 user={props.user}
                 otherUser={props.viewUser}
                 otherProjects={props.otherProjects}
-                // hoverIsLiked={props.hoverIsLiked}
                 currentProject={props.currentProject}
                 hoverProject={props.hoverProject} 
                 hoverUser={props.hoverUser}

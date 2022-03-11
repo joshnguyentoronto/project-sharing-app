@@ -9,7 +9,6 @@ import InputUserItem from "../../components/InputUserItem/InputUserItem";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import Footer from "../../components/Footer/Footer";
 
-
 export default class ProjectUploadPage extends Component {
     state = {
         currentTag: '',
@@ -29,7 +28,6 @@ export default class ProjectUploadPage extends Component {
         users: [],
         userItem: '',
     }
-
 
     handleChange = (evt) => {
         if (evt.target.name === "img"){
@@ -150,7 +148,7 @@ export default class ProjectUploadPage extends Component {
     addUser = async (evt) => {
         evt.preventDefault()
         let valid = false;
-        await this.state.allUser.forEach(user => {
+        this.state.allUser.forEach(user => {
             if (user.username === this.state.userItem) {
                 valid = true
             }
@@ -299,9 +297,7 @@ export default class ProjectUploadPage extends Component {
                     userLogout={this.props.userLogout}
                     user={this.props.user} 
                 />
-
                 <h3>Upload a Project</h3>
-
                 <div className="upload">
                     <div className="upload-text">
                         <div>
@@ -322,7 +318,13 @@ export default class ProjectUploadPage extends Component {
                         <div>
                             <p>Add Collaborators:</p>
                             <form className="tag-form" onSubmit={this.addUser}>
-                                <input onChange={this.handleChange} name="userItem" type="text" placeholder="Accept Username only, case sensitive!" required />
+                                <input 
+                                    onChange={this.handleChange} 
+                                    name="userItem" 
+                                    type="text" 
+                                    placeholder="Accept Username only, case sensitive!" 
+                                    required 
+                                />
                                 <button onSubmit={this.addUser}>+</button>
                             </form>
                             <small>Note: you can only add collaborators who already have an account<br></br>And you can add them by enter their username and hit Enter</small>
@@ -333,7 +335,13 @@ export default class ProjectUploadPage extends Component {
                         <div>
                             <p>Tag:</p>
                             <form className="tag-form" onSubmit={this.addTag}>
-                                <input onChange={this.handleChange} name="tagItem" type="text" placeholder="Ex: javascript, nodejs, mongodb" required />
+                                <input 
+                                    onChange={this.handleChange} 
+                                    name="tagItem" 
+                                    type="text" 
+                                    placeholder="Ex: javascript, nodejs, mongodb" 
+                                    required 
+                                />
                                 <button onSubmit={this.addTag}>+</button>
                             </form>
                             <small>Note: add Tag by typing the tag and hit Enter</small>
@@ -343,19 +351,42 @@ export default class ProjectUploadPage extends Component {
                         </div>
                         <div className="input-li-container-top">
                             <div className="input-li-container" >
-                                {this.state.link.map(obj => <InputLink key={obj.index} link={obj} handleInputLinkNameChange={this.handleInputLinkNameChange} handleInputLinkUrlChange={this.handleInputLinkUrlChange} deleteLink={this.deleteLink} />)}
+                                {this.state.link.map(obj => 
+                                    <InputLink 
+                                        key={obj.index} 
+                                        link={obj} 
+                                        handleInputLinkNameChange={this.handleInputLinkNameChange} 
+                                        handleInputLinkUrlChange={this.handleInputLinkUrlChange} 
+                                        deleteLink={this.deleteLink} 
+                                    />)
+                                }
                             </div>
                             <p onClick={this.addLink} className="upload-btn-li">Add Link</p>
                         </div>
                         <div>
-                            {this.state.text.map(obj => <InputSection key={obj} text={obj} handleInputTextHeadingChange={this.handleInputTextHeadingChange} handleInputTextBoxChange={this.handleInputTextBoxChange} deleteSection={this.deleteSection} />)}
+                            {this.state.text.map(obj => 
+                                <InputSection 
+                                    key={obj} 
+                                    text={obj} 
+                                    handleInputTextHeadingChange={this.handleInputTextHeadingChange} 
+                                    handleInputTextBoxChange={this.handleInputTextBoxChange} 
+                                    deleteSection={this.deleteSection} 
+                                />)
+                            }
                             <p onClick={this.addSection} className="upload-btn-sec">Add Section</p>
                         </div>
                     </div>
                     <div className="upload-img-container">
                         <div  className="upload-img">
                             <form>
-                                <input onChange={this.handleChange}className="input-img" type="file" name="img" accept="image/*" multiple />
+                                <input 
+                                    className="input-img" 
+                                    onChange={this.handleChange}
+                                    type="file" 
+                                    name="img" 
+                                    accept="image/*" 
+                                    multiple 
+                                />
                             </form>
                             {this.state.img.length ?
                             <div className="image-preview">

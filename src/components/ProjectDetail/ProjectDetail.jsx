@@ -12,10 +12,9 @@ import moment from 'moment'
 export default function ProjectDetail(props) {
     const divRef = useRef()
     const [popUpChat, setpopUpChat] = useState(false)
-    
     const [index, setIndex] = useState(0)
-    
     let newIndex = 0
+
     function goToLeft() {
         if (index === 0) {
             newIndex = props.project.images.length - 1
@@ -25,6 +24,7 @@ export default function ProjectDetail(props) {
             setIndex(newIndex - 1)
         }
     }
+
     function goToRight() {
         if (index === props.project.images.length - 1) {
             setIndex(0)
@@ -43,8 +43,17 @@ export default function ProjectDetail(props) {
         <div className='project-detail-background'>
             <div className='project-detail-left' onClick={() => {props.closeProject()}}></div>
             <div className='project-detail-head' onClick={() => {props.closeProject()}}>
-                <button className='card-user-icon-2'><UserIcon user={props.project.author[0]} /></button>
-                {props.project.author.length > 1 ? <p className="project-detail-head-name">Group Project of <span>{props.project.author.map(author => <span className='author-list-item-span'>{author.name}<span>,</span> </span>)}</span></p> : <p className="project-detail-head-name">{props.project.author[0].username}</p>}
+                { props.project.author[0].avatar 
+                ? 
+                <button  className='user-icon-bg-btn' style={{backgroundImage: `url(${props.project.author[0].avatar})`}}></button> 
+                : 
+                <button className='card-user-icon-2'><UserIcon user={props.project.author[0]} /></button> 
+                }
+                {props.project.author.length > 1 
+                ? 
+                <p className="project-detail-head-name">Group Project of <span>{props.project.author.map(author => <span className='author-list-item-span'>{author.name}<span>,</span> </span>)}</span></p> 
+                : 
+                <p className="project-detail-head-name">{props.project.author[0].username}</p>}
             </div>
             <div className='project-detail-body'>
                 {popUpChat ?
@@ -127,10 +136,19 @@ export default function ProjectDetail(props) {
                     <div className='project-detail-body-foot-comment'>
                         <div className='project-detail-body-foot-comment-box'>
                             <div className='comment-user'>
-                                <button className='comment-user-img'><UserIcon user={props.user} /></button>
+                                { props.user.avatar 
+                                ? 
+                                <button className='user-icon-bg-btn' style={{backgroundImage: `url(${props.user.avatar})`}}></button> 
+                                : 
+                                <button className='comment-user-img'><UserIcon user={props.user} /></button> 
+                                }
                             </div>
                             <div className='comment-main'>
-                                <textarea onChange={props.handleChange} name="comment" value={props.comment}></textarea>
+                                <textarea 
+                                    onChange={props.handleChange} 
+                                    name="comment" 
+                                    value={props.comment}
+                                ></textarea>
                                 <button onClick={() => props.postComment()} >Post a Comment</button>
                             </div>
                         </div>
@@ -149,7 +167,12 @@ export default function ProjectDetail(props) {
                     <div className='project-detail-body-foot-detail'>
                         <div className='project-detail-body-foot-user'>
                             <div className='project-detail-body-foot-user-info'>
-                                <button><UserIcon user={props.project.author[0]} /></button>
+                                { props.project.author[0].avatar 
+                                ? 
+                                <button  className='user-icon-bg-btn' style={{backgroundImage: `url(${props.project.author[0].avatar})`}}></button> 
+                                : 
+                                <button><UserIcon user={props.project.author[0]} /></button> 
+                                }
                                 <div className='project-detail-body-foot-user-info-name'>
                                     <p>{props.project.author[0].name}</p>
                                     <p><img src={require('../../images/icons/location.svg')} alt="svg icon" /> {props.project.author[0].location}</p>
@@ -185,7 +208,12 @@ export default function ProjectDetail(props) {
                     <div className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></div>
                     { props.project.author.map(user => 
                         <div className='profilebtnhover' >
-                            <Link to="/profile"><button onMouseEnter={() => props.getUserCardCounts(user._id)} className='card-user-icon-3'><UserIcon user={user} /></button></Link>
+                            { user.avatar 
+                            ? 
+                            <Link to="/profile"><button className='user-icon-bg-btn' style={{backgroundImage: `url(${user.avatar})`}} onMouseEnter={() => props.getUserCardCounts(user._id)}></button></Link> 
+                            : 
+                            <Link to="/profile"><button onMouseEnter={() => props.getUserCardCounts(user._id)} className='card-user-icon-3'><UserIcon user={user} /></button></Link> 
+                            }
                             <div className="usercard" >
                                 <UserCard user={user} 
                                 getUserCardCounts={props.getUserCardCounts}
@@ -195,8 +223,22 @@ export default function ProjectDetail(props) {
                             </div>
                         </div>
                     ) }
-                    <button onClick={() => props.likeProject({ "profile": props.profile, "project": props.project })}>{ props.isLiked ? <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> : <img src={require('../../images/icons/like.svg')} alt="svg icon" /> }</button>
-                    <button onClick={() => props.saveProject(props.project)}>{ props.isSaved ? <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> : <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> }</button>
+                    <button onClick={() => props.likeProject({ "profile": props.profile, "project": props.project })}>
+                        { props.isLiked 
+                        ? 
+                        <img src={require('../../images/icons/like-red.svg')} alt="svg icon" /> 
+                        : 
+                        <img src={require('../../images/icons/like.svg')} alt="svg icon" /> 
+                        }
+                    </button>
+                    <button onClick={() => props.saveProject(props.project)}>
+                        { props.isSaved 
+                        ? 
+                        <img src={require('../../images/icons/save-dark.svg')} alt="svg icon" /> 
+                        : 
+                        <img src={require('../../images/icons/save-white.svg')} alt="svg icon" /> 
+                        }
+                    </button>
                     <button onClick={openChatBox}><img src={require('../../images/icons/message-white.svg')} alt="svg icon" /></button>
                     <button onClick={() => divRef.current.scrollIntoView({ behavior: "smooth" }) } ><img src={require('../../images/icons/info.svg')} alt="svg icon" /></button>
                 </div>

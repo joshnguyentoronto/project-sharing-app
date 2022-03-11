@@ -89,7 +89,21 @@
     bottom: -10px;
     right: -20px;
 }
+.user-card-123 {
+    visibility: hidden;
+    position: relative;
+    bottom: -25px;
+    right: -20px;
+    
+}
+.user-card-123 .card {
+    padding: 0 30px 30px 0;
+    margin: 0 0 -8px 0;
+}
 .profile-btn-hover:hover .user-card {
+    visibility: visible;
+}
+.profile-btn-hover:hover .user-card-123 {
     visibility: visible;
 }
 .project-list-item-foot {

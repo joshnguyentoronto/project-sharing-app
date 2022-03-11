@@ -5,7 +5,6 @@ import {Link, useNavigate} from 'react-router-dom'
 import { Box, TextField } from '@mui/material';
 
 export default function SignUpForm(props){
-
     const [userData, setUserData] = useState({
         name:'',
         email: '',
@@ -16,15 +15,13 @@ export default function SignUpForm(props){
     })
     const [errorFlag, setErrorFlag] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-
-    let navigate = useNavigate()
-
     const [checkData, setCheckData] = useState([])
+    let navigate = useNavigate()
 
     async function getAllUser() {
         let fetchUsers = await fetch('/api/users/all')
         let users = await fetchUsers.json()
-        await setCheckData(users)
+        setCheckData(users)
     }
 
     useEffect(() => {
@@ -65,17 +62,14 @@ export default function SignUpForm(props){
                 })
             })
             if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-    
             let token = await fetchResponse.json()
             localStorage.setItem('token', token)
-    
             const userDoc = await JSON.parse(atob(token.split('.')[1])).user
             props.setUserInState(userDoc)
             navigate("/account/setup")       
         }
     }
 
-    
     return (
         <Box sx={{ maxWidth: '100%', }} className="SignUpPage">
             <form autoComplete="off" onSubmit= {handleSubmit}>
@@ -142,7 +136,11 @@ export default function SignUpForm(props){
                 }
                 <br></br>
                 <br></br>
-                <Button disabled={userData.signup} type="submit" variant="contained">Signup</Button>
+                <Button 
+                    disabled={userData.signup} 
+                    type="submit" 
+                    variant="contained"
+                >Signup</Button>
                 <br></br>
                 <br></br>
                 <p>Already a Member? &nbsp;<Link to="/account/login">Login here</Link></p>

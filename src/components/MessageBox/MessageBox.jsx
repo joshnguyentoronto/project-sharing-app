@@ -6,7 +6,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { TextField, InputAdornment } from '@mui/material';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-
 export default function MessageBox(props) {
     const [messageData, setMessageData] = useState(false)
     const [messageinfo, setmessageInfo] = useState('')
@@ -32,7 +31,6 @@ export default function MessageBox(props) {
         let array = await JSON.parse(messages)
         setmessageList(array)
     },[messageinfo])
-    
     
     if (messageData){
         return (

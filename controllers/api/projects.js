@@ -30,20 +30,17 @@ async function createPhoto(req,res) {
             accessKeyID: process.env.AWS_ACCESS_KEY_ID,
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
         })
-        
         for(image in req.files){
             let file = req.files[image].file
             let fileStream = fs.createReadStream(file);
             let key = req.files[image].uuid+'.jpeg'
             let url = `${S3_BASE_URL}${BUCKET}/${key}`
             arr.push(url)
-
             let params = {
                 Bucket: BUCKET,
                 Key: key,
                 Body: fileStream
             }
-
             s3.upload(params, function(err, data){
                 if (err){
                     console.log(err)
@@ -63,11 +60,6 @@ async function createProject(req, res) {
     try {
         req.body.author.unshift(req.user._id)
         let newProject = await ProjectModel.create(req.body)
-        // newProject = await newProject.populate([
-        //     { path: 'author', model: 'User' },
-        //     { path: 'comment', populate: { path: 'user', model: 'User' } }
-        // ])
-        // res.status(200).json();
         res.status(200).json(newProject);
     } catch(err) {
         console.log('err block')
@@ -176,19 +168,18 @@ async function projectsTag(req, res) {
                 { path: 'author', model: 'User' },
                 { path: 'comment', populate: { path: 'user', model: 'User' } }
             ])
-
             let users1 = await UserModel.find({ name: { "$regex": '^' + tag, "$options": "i" } }, "_id")
             let users2 = await UserModel.find({ username: { "$regex": '^' + tag, "$options": "i" } }, "_id")
             let users3 = await UserModel.find({ email: { "$regex": '^' + tag, "$options": "i" } }, "_id")
             let users4 = await UserModel.find({ skill: { "$regex": '^' + tag, "$options": "i" } }, "_id")
-            let users = await users1.concat(users2, users3, users4)
-            users = await [...new Set([...users1,...users2,...users3,...users4])]
+            let users = users1.concat(users2, users3, users4)
+            users = [...new Set([...users1,...users2,...users3,...users4])]
             let projects4 = await ProjectModel.find({ author: { "$in": users } }).populate([
                 { path: 'author', model: 'User' },
                 { path: 'comment', populate: { path: 'user', model: 'User' } }
             ])
             let projects = projects1.concat(projects2, projects3, projects4)
-            projects = await [...new Set([...projects1,...projects2,...projects3,...projects4])]
+            projects = [...new Set([...projects1,...projects2,...projects3,...projects4])]
 
             if (projects.length <= 1) {
                 let projects = await ProjectModel.find({}).populate([
@@ -262,8 +253,6 @@ async function projectsLiked(req, res) {
     }
 }
 
-
-
 async function createComment(req, res) {
     try {
         let newProject = await ProjectModel.findById( req.body.projectId )
@@ -322,7 +311,6 @@ async function likeComment(req, res) {
         res.status(400).json(err)
     }
 }
-
 
 async function unlikeComment(req, res) {
     try {

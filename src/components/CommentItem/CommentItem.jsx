@@ -7,7 +7,7 @@ export default function CommentItem(props) {
     return(
         <div className='comment-each'>
             <div className='comment-each-user'>
-                <button className='comment-user-img'><UserIcon user={props.user} /></button>
+                { props.comment.user.avatar ? <button style={{backgroundImage: `url(${props.comment.user.avatar})`}}  className='user-icon-bg-btn'></button> : <button className='comment-user-img'><UserIcon user={props.user} /></button> }
             </div>
             <div className='comment-each-main'>
                 <div className='comment-each-main-head'>

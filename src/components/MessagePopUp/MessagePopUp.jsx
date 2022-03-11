@@ -1,16 +1,12 @@
 import './MessagePopUp.css'
 import React, {useState}from 'react';
 import Avatar from '@mui/material/Avatar';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import SendIcon from '@mui/icons-material/Send';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
-
 export default function MessagePopUp(props) {
-
     const [draftmessage, setdraftMessage] = useState('')
-
     async function sendMessage(e){
         if(draftmessage && !draftmessage.match(/^ *$/)){
             e.preventDefault();
@@ -54,13 +50,6 @@ export default function MessagePopUp(props) {
                 <button type="submit" className='pop-button'>
                     <ChatBubbleOutlineIcon/>Message
                 </button>
-                {/* <Button 
-                    type="submit" 
-                    variant="contained" 
-                    endIcon={<SendIcon />}
-                >
-                    Send
-                </Button> */}
             </form>
         </div>
     )

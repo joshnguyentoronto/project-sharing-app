@@ -3,7 +3,6 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import UserIcon from '../UserIcon/UserIcon';
 
-
 export default function HomeHeader(props) {
     let theUser = ''
     if (props.user) {
@@ -23,7 +22,7 @@ export default function HomeHeader(props) {
                 <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button>
                 { theUser ? <button onClick={props.openChatList} className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button> : <button onClick={() => alertUser()} className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button> }
                 {theUser ? 
-                    <Link to="/profile" ><UserIcon user={props.user} /></Link>
+                    props.user.avatar ? <Link to="/profile" ><button className='user-icon-bg-btn' style={{backgroundImage: `url(${props.user.avatar})`}}></button></Link> : <Link to="/profile" ><UserIcon user={props.user} /></Link>
                     : 
                     false
                 }

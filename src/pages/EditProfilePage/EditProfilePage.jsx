@@ -1,6 +1,6 @@
 import "./EditProfilePage.css"
-import React, { useState } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useRef } from 'react'
+import { Link, useNavigate} from "react-router-dom";
 import { TextField } from '@mui/material';
 import InputLink from '../../components/InputLink/InputLink'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
@@ -18,13 +18,10 @@ export default function EditProfilePage(props) {
             bio:'',
         })
     const [imagePreview, setImagePreview] = useState('')
-    const [avatar, setAvatar] = useState('')
     const [bgImagePreview, setBgImagePreview] = useState('')
-    const [bgImageFile, setBgImageFile] = useState('')
-    let navigate = useNavigate()
-
-
     const navigate = useNavigate()
+    const avatarInputRef = useRef()
+    const bgInputRef = useRef()
 
     function handleChange(e){
         editProfileData({...profileData, [e.target.name]:e.target.value })
@@ -68,13 +65,19 @@ export default function EditProfilePage(props) {
             name: '',
             url: ''
         }
-        editProfileData({...profileData, linkNum: newNum, userLink: [...profileData.userLink, newObj ] })
+        editProfileData({...profileData, 
+            linkNum: newNum, 
+            userLink: [...profileData.userLink, newObj ] 
+        })
     }
 
     function addSkill(evt) {
         evt.preventDefault()
         evt.target.firstChild.value = ""
-        editProfileData({...profileData, skill: [...profileData.skill, profileData.skillItem.toLowerCase() ], skillItem: '' })
+        editProfileData({...profileData, 
+            skill: [...profileData.skill, profileData.skillItem.toLowerCase() ], 
+            skillItem: '' 
+        })
     }
 
     function removeSkill(skill) {
@@ -85,31 +88,9 @@ export default function EditProfilePage(props) {
         editProfileData({...profileData, skill: skillCopy })
     }
 
-    // async function submitProfile() {
-    //     const fetchResponse = await fetch('/api/users/edit', {
-    //         method: 'POST',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "userId": props.user._id
-    //         },
-    //         body: JSON.stringify({
-    //             name: profileData.name,
-    //             bio: profileData.bio,
-    //             education: profileData.education,
-    //             experiences: profileData.experiences,
-    //             location: profileData.location,
-    //             skill: profileData.skill,
-    //             userLink: profileData.userLink
-    //         })
-    //     })
-    //     if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-    //     navigate("/profile")  
-    // }
-
     async function avatarphotoUpload(e){
         try {
             let {url} = await fetch("/s3Url").then(res => res.json())
-            console.log(avatar)
             let file = e.target.files[0]
             let avatarPhoto = await fetch(url,{
                     method: "PUT",
@@ -135,6 +116,7 @@ export default function EditProfilePage(props) {
             console.log("Submit error", err)
         }
     }
+
     async function bgphotoUpload(e){
         try {
             let {url} = await fetch("/s3Url").then(res => res.json())
@@ -147,7 +129,6 @@ export default function EditProfilePage(props) {
                 body: file
             })
             let bgUrl = url.split('?')[0]
-        
             let jwt = localStorage.getItem('token')
             const sendUpdate = await fetch('/api/users/update/images',{
                 method: 'POST',
@@ -164,12 +145,12 @@ export default function EditProfilePage(props) {
         }
     }
 
-    async function imageChange(e){
-        setImagePreview(URL.createObjectURL(e.target.files[0]))
-        console.log(e.target.files)
-        console.log(e.target.files[0])
-        setAvatar(e.target.files)
-        console.log(avatar)
+    function handleEdit(){
+        avatarInputRef.current.click()
+    };
+    
+    function backgroundEdit(){
+        bgInputRef.current.click()
     }
     
     return(
@@ -180,74 +161,62 @@ export default function EditProfilePage(props) {
                     <input onChange={(evt)=>{
                         setImagePreview(URL.createObjectURL(evt.target.files[0]))
                         avatarphotoUpload(evt)
-                    }} type="file" name="dp-img" accept="image/*" />
-                    <a className="edit-button">Edit</a>
+                        }} 
+                        type="file" 
+                        name="dp-img" 
+                        ref={avatarInputRef}
+                        accept="image/*" 
+                        hidden 
+                    />
+                    <a onClick={handleEdit} className="edit-button">Edit</a>
                 </div>
                 <div className="edit-background-image">
-                    <a className="edit-button">Edit</a>
+                    <a onClick={backgroundEdit}className="edit-button">Edit</a>
                     <img src={bgImagePreview}></img>
                     <input onChange={(evt) => {
-                        setBgImagePreview(URL.createObjectURL(evt.target.files[0]))
-                        bgphotoUpload(evt)
-                    }
-                    }type="file" name="bg-img" accept="image/*" />
+                            setBgImagePreview(URL.createObjectURL(evt.target.files[0]))
+                            bgphotoUpload(evt)
+                            }
+                        }
+                        type="file" 
+                        ref={bgInputRef} 
+                        name="bg-img" 
+                        accept="image/*" 
+                        hidden 
+                    />
                 </div>
             </div>
-
         <div className="edit-profile-content-wrapper">
-            {/* <div className="edit-profile-social">
-                <p className="label">Socials</p>
-                <p>Twitter</p>
-                <p>Facebook</p>
-                <p>Linkedin</p>
-            </div> */}
             <div className="edit-profile-info-wrapper">
                 <div class="edit-profile-info">
                     <span className="label">Name</span>             
                     <TextField
-                        // label="Name"
-                        // id="fullWidth" 
-                        // size="small"
-                        type="text"
-                        // margin="normal" 
+                        type="text" 
                         name="name" 
                         onChange={handleChange} 
                     />
-                    
                 </div>
-
- 
                 <div class="edit-profile-info">
                     <span className="label">Work Experience</span>               
                     <TextField 
-                    // id="outlined-basic" 
-                    // label="Work Experience" 
-                    // variant="outlined"
                     type="text" 
                     name="experiences"
                     value={profileData.experiences} 
                     onChange={handleChange} 
-                />
+                    />
                 </div>
                 <div class="edit-profile-info">
                     <span className="label">Education</span>
                 <TextField 
-                    // id="outlined-basic" 
-                    // label="Education" 
-                    // variant="outlined"
                     type="text" 
                     name="education"
                     value={profileData.education} 
                     onChange={handleChange} 
                 />
                 </div>
-
                 <div class="edit-profile-info">
                     <span className="label">Location</span>
                 <TextField 
-                    // id="outlined-basic" 
-                    // label="Location" 
-                    // variant="outlined"
                     type="text" 
                     name="location"
                     value={profileData.location} 
@@ -262,27 +231,30 @@ export default function EditProfilePage(props) {
                             handleInputLinkNameChange={handleInputLinkNameChange} 
                             handleInputLinkUrlChange={handleInputLinkUrlChange} 
                             deleteLink={deleteLink} 
-                        />)}
+                            />)}
                     </div>
                     <p onClick={addLink} className="upload-btn-li-2">Add Link</p>
                 </div>
-
                 <div className="edit-skills-wrapper">
                 <p className="label">Skills</p>
                     <form onSubmit={addSkill}>
-                        <input onChange={handleChange} name="skillItem" type="text" placeholder="Ex: Javascript, Wireframing, Research" required />
+                        <input 
+                            onChange={handleChange} 
+                            name="skillItem" 
+                            type="text" 
+                            placeholder="Ex: Javascript, Wireframing, Research" 
+                            required 
+                        />
                         <button onSubmit={addSkill}>+</button>
                     </form>
                     <div className="tag-items">
                         {profileData.skill.map(skill=> <InputTagItem key={skill} tag={skill} removeTag={removeSkill} /> )}
                     </div>
                 </div>
-                
                 <div class="edit-profile-info">
                     <span className="label">About me</span>
                     <TextField
                         id="outlined-multiline-static"
-                        // label="Bio"
                         multiline
                         name="bio"
                         value={profileData.bio}
@@ -290,7 +262,6 @@ export default function EditProfilePage(props) {
                         onChange={handleChange}
                     />
                 </div>
-
                 <div className="edit-profile-submit">
                     <Link to="/profile">Cancel</Link>
                     <button onClick={()=>

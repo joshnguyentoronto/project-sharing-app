@@ -25,18 +25,18 @@ export default class App extends Component {
     filter: '',
     openChat: false,
     messageList: [],
+    comment: '',
     user: this.falseUser,
     viewUser: null,
-    currentProject: '',
     viewMode: false,
+    currentProject: '',
     refProjects: [],
     projects: [],
     otherProjects: [],
-    comment: '',
-    isSaved: false,
-    isLiked: false,
     hoverUserState: false,
     hoverUser: {},
+    isSaved: false,
+    isLiked: false,
     allLike: 0,
     allView: 0,
     otherLike: 0,
@@ -86,7 +86,12 @@ export default class App extends Component {
             let oneProject = await fetchOneProject.json()
             let fetchAllProjects = await fetch('/api/projects')
             let allProjects = await fetchAllProjects.json()
-            this.setState({ currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+            this.setState({ 
+              currentProject: oneProject, 
+              projects: allProjects, 
+              viewMode: true, 
+              refProjects: refProjects 
+            })
         } catch(err) {
             console.log(err)
         }
@@ -103,19 +108,53 @@ export default class App extends Component {
         
           if (user.savedPosts.indexOf(project._id) !== -1 ) {
             if (user.likedPosts.indexOf(project._id) !== -1 ) {
-              this.setState({ isLiked: true, isSaved: true, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+              this.setState({ 
+                isLiked: true, 
+                isSaved: true, 
+                currentProject: oneProject, 
+                otherProjects: allProjects, 
+                viewMode: true, 
+                refProjects: refProjects 
+              })
             } else if (user.likedPosts.indexOf(project._id) === -1 ) {
-              this.setState({ isLiked: false, isSaved: true, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+              this.setState({ 
+                isLiked: false, 
+                isSaved: true, 
+                currentProject: oneProject, 
+                otherProjects: allProjects, 
+                viewMode: true, 
+                refProjects: refProjects 
+              })
             }
           } else if (user.savedPosts.indexOf(project._id) === -1 ) {
             if (user.likedPosts.indexOf(project._id) !== -1 ) {
-              this.setState({ isLiked: true, isSaved: false, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
-              
+              this.setState({ 
+                isLiked: true, 
+                isSaved: false, 
+                currentProject: oneProject, 
+                otherProjects: allProjects, 
+                viewMode: true,
+                refProjects: refProjects 
+              })
             } else if (user.likedPosts.indexOf(project._id) === -1 ) {
-              this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+              this.setState({ 
+                isLiked: false, 
+                isSaved: false, 
+                currentProject: oneProject, 
+                otherProjects: allProjects, 
+                viewMode: true, 
+                refProjects: refProjects 
+              })
             }
           } else {
-            this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, otherProjects: allProjects, viewMode: true, refProjects: refProjects })
+            this.setState({ 
+              isLiked: false, 
+              isSaved: false, 
+              currentProject: oneProject, 
+              otherProjects: allProjects, 
+              viewMode: true, 
+              refProjects: refProjects 
+            })
           }
       } catch(err) {
           console.log(err)
@@ -132,18 +171,53 @@ export default class App extends Component {
           let allProjects = await fetchAllProjects.json()
           if (user.savedPosts.indexOf(project._id) !== -1 ) {
             if (user.likedPosts.indexOf(project._id) !== -1 ) {
-              this.setState({ isLiked: true, isSaved: true, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+              this.setState({ 
+                isLiked: true, 
+                isSaved: true, 
+                currentProject: oneProject, 
+                projects: allProjects, 
+                viewMode: true, 
+                refProjects: refProjects 
+              })
             } else if (user.likedPosts.indexOf(project._id) === -1 ) {
-              this.setState({ isLiked: false, isSaved: true, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+              this.setState({ 
+                isLiked: false, 
+                isSaved: true, 
+                currentProject: oneProject, 
+                projects: allProjects, 
+                viewMode: true, 
+                refProjects: refProjects 
+              })
             }
           } else if (user.savedPosts.indexOf(project._id) === -1 ) {
             if (user.likedPosts.indexOf(project._id) !== -1 ) {
-              this.setState({ isLiked: true, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+              this.setState({ 
+                isLiked: true, 
+                isSaved: false, 
+                currentProject: oneProject, 
+                projects: allProjects, 
+                viewMode: true, 
+                refProjects: refProjects 
+              })
             } else if (user.likedPosts.indexOf(project._id) === -1 ) {
-              this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+              this.setState({ 
+                isLiked: false, 
+                isSaved: false, 
+                currentProject: oneProject, 
+                projects: allProjects, 
+                viewMode: true, 
+                refProjects: refProjects 
+              })
             }
           } else {
-            this.setState({ isLiked: false, isSaved: false, currentProject: oneProject, projects: allProjects, viewMode: true, refProjects: refProjects })
+            this.setState({ 
+              isLiked: false, 
+              isSaved: false, 
+              currentProject: oneProject, 
+              projects: allProjects, 
+              viewMode: true, 
+              refProjects: refProjects 
+            })
           }
       } catch(err) {
           console.log(err)
@@ -191,26 +265,23 @@ export default class App extends Component {
           this.setState({ projects: projects })
           if (projects.length) {
             if(projects.length == 1) {
-              this.setState({ projects: projects, allLike: projects.likeCount, allView: projects.viewCount})
+              this.setState({ 
+                projects: projects, 
+                allLike: projects.likeCount,
+                allView: projects.viewCount
+              })
             } else {
-              // let numOne = 0
-              // let numTwo = projects[0].likeCount
-              // console.log("numtwo", numTwo)
               let likeNum = 0
               let viewNum = 0
               await projects.forEach((p) => {
                 likeNum = p.likeCount + likeNum
                 viewNum = p.viewCount + viewNum
-                // let count = numOne + numTwo
-                // numOne = numTwo
-                // numTwo = count
-                // console.log("fasdff", count)
-                this.setState({ projects: projects, allLike: likeNum, allView: viewNum})
-                console.log(this.state.allView)
+                this.setState({ 
+                  projects: projects, 
+                  allLike: likeNum, 
+                  allView: viewNum})
               })
             }}
-            
-
       } catch(err) {
           console.log("home page error: ", err)
       }
@@ -252,25 +323,25 @@ export default class App extends Component {
 
   filterSort = async (evt) => {
     if (evt.target.value === 'alphabetical') {
-      let newProjects = await this.state.projects.sort((a, b) => (a.title > b.title ? 1 : -1))
+      let newProjects = this.state.projects.sort((a, b) => (a.title > b.title ? 1 : -1))
       this.setState({ filter: evt.target.value, projects: newProjects })
     } else if (evt.target.value === 'alpha') {
-      let newProjects = await this.state.projects.sort((a, b) => (a.title > b.title ? -1 : 1))
+      let newProjects = this.state.projects.sort((a, b) => (a.title > b.title ? -1 : 1))
       this.setState({ filter: evt.target.value, projects: newProjects })
     } else if (evt.target.value === 'recent') {
-      let newProjects = await this.state.projects.sort((a, b) => (b.date > a.date ? 1 : -1))
+      let newProjects = this.state.projects.sort((a, b) => (b.date > a.date ? 1 : -1))
       this.setState({ filter: evt.target.value, projects: newProjects })
     } else if (evt.target.value === 'view') {
-      let newProjects = await this.state.projects.sort((a, b) => b.viewCount - a.viewCount)
+      let newProjects = this.state.projects.sort((a, b) => b.viewCount - a.viewCount)
       this.setState({ filter: evt.target.value, projects: newProjects })
     } else if (evt.target.value === 'like') {
-      let newProjects = await this.state.projects.sort((a, b) => b.likeCount - a.likeCount)
+      let newProjects = this.state.projects.sort((a, b) => b.likeCount - a.likeCount)
       this.setState({ filter: evt.target.value, projects: newProjects })
     } else if (evt.target.value === 'comment') {
-      let newProjects = await this.state.projects.sort((a, b) => b.comment.length - a.comment.length)
+      let newProjects = this.state.projects.sort((a, b) => b.comment.length - a.comment.length)
       this.setState({ filter: evt.target.value, projects: newProjects })
     } else {
-      let newProjects = await this.state.projects.sort((a, b) => b.likeCount - a.likeCount)
+      let newProjects = this.state.projects.sort((a, b) => b.likeCount - a.likeCount)
       this.setState({ filter: '', projects: newProjects })
     }
   }
@@ -308,18 +379,31 @@ export default class App extends Component {
           let fetchResponse = await fetch('/api/users/like/profile', {
               method: "POST",
               headers: {"Content-Type": "application/json"},
-              body: JSON.stringify({likedPosts: project._id, userId: this.state.user._id, cat: "Projects", otherUser: obj.userId })
+              body: JSON.stringify({
+                likedPosts: project._id, 
+                userId: this.state.user._id, 
+                cat: "Projects", 
+                otherUser: obj.userId 
+              })
           })
           let object = await fetchResponse.json()
           let user = object.user
           let newProject = object.newProject
-          // let fetchMe = await fetch("/api/users/", {headers: { "user": this.state.user._id }})
-          // let MeUser = await fetchMe.json()
           let newprojects = object.projectsList
           if (user.likedPosts.indexOf(newProject._id) !== -1 ) {
-              this.setState({ isLiked: true, user: user, projects: newprojects, currentProject: newProject })
+              this.setState({ 
+                isLiked: true, 
+                user: user, 
+                projects: newprojects, 
+                currentProject: newProject 
+              })
           } else if (user.likedPosts.indexOf(newProject._id) === -1 ) {
-              this.setState({ isLiked: false, user: user, projects: newprojects, currentProject: newProject })
+              this.setState({ 
+                isLiked: false, 
+                user: user, 
+                projects: newprojects, 
+                currentProject: newProject 
+              })
           }
         } catch (err) {
             console.log(err)
@@ -340,9 +424,19 @@ export default class App extends Component {
           let newProject = object.newProject
           let newprojects = object.projectsList
           if (user.likedPosts.indexOf(newProject._id) !== -1 ) {
-              this.setState({ isLiked: true, user: user, projects: newprojects, currentProject: newProject })
+              this.setState({ 
+                isLiked: true, 
+                user: user, 
+                projects: newprojects, 
+                currentProject: newProject 
+              })
           } else if (user.likedPosts.indexOf(newProject._id) === -1 ) {
-              this.setState({ isLiked: false, user: user, projects: newprojects, currentProject: newProject })
+              this.setState({ 
+                isLiked: false, 
+                user: user, 
+                projects: newprojects, 
+                currentProject: newProject 
+              })
           }
         } catch (err) {
             console.log(err)
@@ -360,9 +454,19 @@ export default class App extends Component {
           let newProject = object.newProject
           let newprojects = object.projectsList
           if (user.likedPosts.indexOf(newProject._id) !== -1 ) {
-              this.setState({ isLiked: true, user: user, projects: newprojects, currentProject: newProject })
+              this.setState({ 
+                isLiked: true, 
+                user: user, 
+                projects: newprojects, 
+                currentProject: newProject 
+              })
           } else if (user.likedPosts.indexOf(newProject._id) === -1 ) {
-              this.setState({ isLiked: false, user: user, projects: newprojects, currentProject: newProject })
+              this.setState({ 
+                isLiked: false, 
+                user: user, 
+                projects: newprojects, 
+                currentProject: newProject 
+              })
           }
         } catch (err) {
             console.log(err)
@@ -436,21 +540,25 @@ export default class App extends Component {
   }
 
   submitProfile = async (postBody) => {
-    const fetchResponse = await fetch('/api/users/edit', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "userId": this.state.user._id
-        },
-        body: JSON.stringify(postBody)
-    })
-    let user = await fetchResponse.json()
-    if (!fetchResponse.ok) {
-      throw new Error('Fetch failed - Bad request')
+    if (!postBody.name) {
+      alert("You need to enter your name")
     } else {
-      const hiddenLink = document.getElementById('hidden-link')
-      this.setState({ user: user }) 
-      hiddenLink.click()
+      const fetchResponse = await fetch('/api/users/edit', {
+          method: 'POST',
+          headers: {
+              "Content-Type": "application/json",
+              "userId": this.state.user._id
+          },
+          body: JSON.stringify(postBody)
+      })
+      let user = await fetchResponse.json()
+      if (!fetchResponse.ok) {
+        throw new Error('Fetch failed - Bad request')
+      } else {
+        const hiddenLink = document.getElementById('hidden-link')
+        this.setState({ user: user }) 
+        hiddenLink.click()
+      }
     }
 }
 
@@ -553,29 +661,21 @@ export default class App extends Component {
     }
   }
 
-  lala = async () => {
-    try {
-      // let fetchProjectList = await fetch('/api/projects')
-      // let projects = await fetchProjectList.json()
-      // this.setState({ projects: projects })
-      window.location.href = "/"
-    } catch(err) {
-      console.log(err)
-    }
-  }
-
-
   async componentDidMount(){
     let token = localStorage.getItem('token')
     if (token){
       const payload = await JSON.parse(window.atob(token.split('.')[1]))
       if (payload.exp < (Date.now() / 1000)) {
-        await localStorage.removeItem('token')
+        localStorage.removeItem('token')
         token = null
         try {
           let fetchProjectList = await fetch('/api/projects')
           let projects = await fetchProjectList.json()
-          this.setState({ filter: '', projects: projects, user: this.falseUser })
+          this.setState({ 
+            filter: '', 
+            projects: projects, 
+            user: this.falseUser 
+          })
         } catch(err) {
           console.log("home page error: ", err)
         }
@@ -585,7 +685,11 @@ export default class App extends Component {
           let projects = await fetchProjectList.json()
           let fetchUser = await fetch('/api/users/', { headers: { "userId": payload.user._id }})
           let user = await fetchUser.json()
-          this.setState({ filter: '', projects: projects, user: user })
+          this.setState({ 
+            filter: '', 
+            projects: projects, 
+            user: user 
+          })
         } catch(err) {
           console.log("home page error: ", err)
         }
@@ -594,7 +698,11 @@ export default class App extends Component {
       try {
         let fetchProjectList = await fetch('/api/projects')
         let projects = await fetchProjectList.json()
-        this.setState({ filter: '', projects: projects, user: this.falseUser })
+        this.setState({ 
+          filter: '', 
+          projects: projects, 
+          user: this.falseUser 
+        })
       } catch(err) {
         console.log("home page error: ", err)
       }
@@ -604,7 +712,6 @@ export default class App extends Component {
     }
   }
   
-
   render() {
     let theId = ''
     if (this.state.viewUser) {
@@ -630,14 +737,12 @@ export default class App extends Component {
               hoverUser={this.state.hoverUser}
               viewPeople={this.viewPeople}
               viewUser={this.state.viewUser}
-
               currentTag={this.state.currentTag}
               currentFlag={this.state.currentFlag}
               filter={this.state.filter}
               flags={this.state.flags}
               openChat={this.state.openChat}
               messageList={this.state.messageList}
-
               userLogout={this.userLogout}
               viewProject={this.viewProject}
               closeProject={this.closeProject}
@@ -654,10 +759,6 @@ export default class App extends Component {
               likeComment={this.likeComment}
               unlikeComment={this.unlikeComment}
               openChatList={this.openChatList}
-
-              // otherLike={this.state.otherLike}
-              // otherView={this.state.otherView}
-              // getOtherCounts={this.getOtherCounts}
               getUserCardCounts={this.getUserCardCounts}
               userCardLike={this.state.userCardLike}
               userCardView={this.state.userCardView}
@@ -669,9 +770,6 @@ export default class App extends Component {
               user={this.state.user} 
               currentProject={this.state.currentProject}
               viewUser={this.state.viewUser}
-              componentDidMount={this.componentDidMount}
-              lala={this.lala}
-
               viewMode={this.state.viewMode}
               refProjects={this.state.refProjects}
               projects={this.state.projects}
@@ -697,10 +795,13 @@ export default class App extends Component {
               viewPeople={this.viewPeople}
               allLike={this.state.allLike}
               allView={this.state.allView}
-              
               getUserCardCounts={this.getUserCardCounts}
               userCardLike={this.state.userCardLike}
               userCardView={this.state.userCardView}
+              messageList={this.state.messageList} 
+              openChatList={this.openChatList}
+              socket={socket}
+              openChat={this.state.openChat}
             />}
           />
           <Route 
@@ -727,7 +828,6 @@ export default class App extends Component {
                 currentProject={this.state.currentProject}
                 projects={this.state.projects}
                 viewUser={this.state.viewUser}
-
                 refProjects={this.state.refProjects}
                 handleChange={this.handleChange}
                 postComment={this.postComment}
@@ -745,6 +845,10 @@ export default class App extends Component {
                 getUserCardCounts={this.getUserCardCounts}
                 userCardLike={this.state.userCardLike}
                 userCardView={this.state.userCardView}
+                messageList={this.state.messageList} 
+                openChatList={this.openChatList}
+                socket={socket}
+                openChat={this.state.openChat}
               />}
           />
           <Route path="account" element={<AccountPage/>}>
@@ -798,7 +902,6 @@ export default class App extends Component {
           />
         </Routes>
         { theId ? <Link id="hidden-link" to={"/profile/" + theId}></Link> : <p id="hidden-link"></p> }
-        {/* // <Link id="hidden-link" to={"/profile/" + this.state.viewUser._id}></Link> */}
         <Link id="hidden-link-login" to="/account/login"></Link>
       </main>
     );

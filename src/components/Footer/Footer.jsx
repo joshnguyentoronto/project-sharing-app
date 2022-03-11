@@ -2,7 +2,6 @@ import './Footer.css';
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-
 export default function Footer(props) {
     let theUser = ''
     if (props.user) {

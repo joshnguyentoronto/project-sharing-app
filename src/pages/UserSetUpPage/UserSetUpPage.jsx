@@ -5,13 +5,11 @@ import Button from '@mui/material/Button'
 import { TextField } from '@mui/material';
 
 export default function UserSetUpPage(props){
-
     const [profileData, setProfileData] = useState({
         location:'',
         education: '',
         bio:'',
     })
-
     let navigate = useNavigate()
 
     function handleChange(e){
@@ -35,10 +33,6 @@ export default function UserSetUpPage(props){
         })
         if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
         navigate("/")
-    }
-
-    const theme = {
-        spacing: 8,
     }
 
     return (

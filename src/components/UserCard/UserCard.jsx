@@ -1,21 +1,24 @@
 import './UserCard.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import UserIcon from '../UserIcon/UserIcon';
 
 export default function UserCard(props) {
 
-
-    // useEffect(() => {
-    //     props.getUserCardCounts(props.user._id)
-    // }, [])
-
     return(
         <div className="card">
             <div className='user-card-container'>
-                <div className='card-bg'>
-                    
-                </div>
-                <button className='card-user-icon'><UserIcon user={props.user} /></button>
+                { props.user.background ? <div style={{backgroundImage: `url(${props.user.background})`}} className='card-bg'></div> : <div className='card-bg-2'></div> }
+                { props.user.avatar 
+                ? 
+                <button 
+                    className='user-icon-bg-btn' 
+                    style={{backgroundImage: `url(${props.user.avatar})`}}
+                ></button> 
+                : 
+                <button className='card-user-icon'>
+                    <UserIcon user={props.user} 
+                /></button> 
+                }
                 <div className='card-name'>
                     <p className='card-name-name'>{props.user.name}</p>
                     <p className='card-name-lo'><img src={require('../../images/icons/location.svg')} alt="svg icon" /> {props.user.location}</p>
@@ -35,8 +38,12 @@ export default function UserCard(props) {
                     </div>
                 </div>
                 <div className='user-card-btn'>
-                    <button id='user-card-btn-1'><img src={require('../../images/icons/follow-btn.svg')} alt="svg icon" /> <strong>Follow</strong></button>
-                    <button id='user-card-btn-2'><img src={require('../../images/icons/mess-btn-1.svg')} alt="svg icon" /> <strong>Message</strong></button>
+                    <button id='user-card-btn-1'><img src={require('../../images/icons/follow-btn.svg')} alt="svg icon" /> 
+                        <strong>Follow</strong>
+                    </button>
+                    <button id='user-card-btn-2'><img src={require('../../images/icons/mess-btn-1.svg')} alt="svg icon" /> 
+                        <strong>Message</strong>
+                    </button>
                 </div>
             </div>
         </div>

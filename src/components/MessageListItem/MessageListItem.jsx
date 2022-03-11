@@ -2,18 +2,15 @@ import './MessageListItem.css';
 import React, {useState, useEffect, useRef} from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from '@mui/icons-material/Close';
-import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import MessageBubble from '../MessageBubble/MessageBubble'
 import { TextField, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 
-
 export default function MessageListItem(props) {
     const [draftMessage, setDraftMessage] = useState('')
     const [listofMessages, setListofMessages] = useState(props.messageData.messages)
     const [socketInit, setsocketInit] = useState(false)
-
     const messagesEndRef = useRef(null)
     
     function scrollToBottom(){
@@ -24,7 +21,6 @@ export default function MessageListItem(props) {
         setDraftMessage(e.target.value)
     };
 
-    
     useEffect(() =>{
         if (!socketInit){
             props.socket.emit("join chat", props.messageData._id )
@@ -56,12 +52,10 @@ export default function MessageListItem(props) {
                         users: props.messageData.users
                     })
                 })
-                
                 let jsonResponse = await fetchResponse.json()
                 let parsed = await JSON.parse(jsonResponse)
                 setListofMessages(parsed.messages)
                 setDraftMessage('')
-                
                 props.socket.emit('new message', parsed)
             }
         }

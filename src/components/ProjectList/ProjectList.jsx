@@ -4,9 +4,11 @@ import ProjectListItem from '../ProjectListItem/ProjectListItem';
 
 export default function ProjectList(props) {
     const divRef2 = useRef()
+
     function scrollPage() {
         divRef2.current.scrollIntoView({ behavior: "smooth" })
     }
+    
     return(
         <div className="project-list" >
             <p id="hidden-to-scroll" ref={divRef2}>hidden</p>

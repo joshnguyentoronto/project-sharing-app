@@ -42,7 +42,6 @@ export default class AboutPage extends Component {
                     <p>Unfortunately we are not hiring right now.</p>
                     <p>However if you want to hire us for your company, feel free to reach out to us.</p>
                     <p>Our contact information is in <a href="https://github.com/joshnguyentoronto/project-sharing-app" target="_blank" rel="noopener noreferrer">this GitHub repo</a>.</p>
-                    
                     <h1>Support</h1>
                     <p>If the app not working properly, feel free to let us know by contacting us.</p>
                     <p>Our contact information is in <a href="https://github.com/joshnguyentoronto/project-sharing-app" target="_blank" rel="noopener noreferrer">this GitHub repo</a>.</p>

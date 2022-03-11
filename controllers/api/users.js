@@ -4,7 +4,6 @@ const UserModel = require('../../models/User');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 
-
 module.exports = {
     create,
     login,
@@ -23,17 +22,17 @@ module.exports = {
     getProfileData,
     updatePhoto,
 }
+
 async function updatePhoto(req,res){
     let user = await UserModel.findById(req.user._id)
-    if(req.body.avatarUrl){
-        user.avatar = req.body.avatarUrl
-    }else if (req.body.background) {
+    if (req.body.avatar) {
+        user.avatar = req.body.avatar
+    } else if (req.body.background) {
         user.background = req.body.background
     }
     user.save()
     res.status(200).json('success')
 }
-
 
 async function getProfileData(req,res){
     let userprofile = await UserModel.findById(req.user._id).populate('userLink')
@@ -162,7 +161,6 @@ async function login(req,res){
     try {
         const user = await UserModel.findOne({username: req.body.username})
         if (!(await bcrypt.compare(req.body.password, user.password))) throw new Error();
-
         const token = jwt.sign({user}, process.env.SECRET, {expiresIn: '24h'})
         res.status(200).json(token)
     } catch(err) {
@@ -221,7 +219,6 @@ async function likeOne(req, res) {
         res.status(400).json(err)
     }
 }
-
 
 async function likeOneProfile(req, res) {
     try {
