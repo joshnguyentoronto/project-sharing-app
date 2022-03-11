@@ -604,9 +604,9 @@ export default class App extends Component {
         console.log("home page error: ", err)
       }
     }
-    // if (this.state.projects.length === 0) {
-    //   window.location.reload(false);
-    // }
+    if (this.state.projects.length === 0) {
+      window.location.reload(false);
+    }
   }
   
 
