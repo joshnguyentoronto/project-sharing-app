@@ -1,6 +1,6 @@
 import "./EditProfilePage.css"
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField } from '@mui/material';
 import InputLink from '../../components/InputLink/InputLink'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
@@ -21,6 +21,7 @@ export default function EditProfilePage(props) {
     const [avatar, setAvatar] = useState('')
     const [bgImagePreview, setBgImagePreview] = useState('')
     const [bgImageFile, setBgImageFile] = useState('')
+    let navigate = useNavigate()
 
     function handleChange(e){
         editProfileData({...profileData, [e.target.name]:e.target.value })
@@ -289,15 +290,16 @@ export default function EditProfilePage(props) {
 
                 <div className="edit-profile-submit">
                     <Link to="/profile">Cancel</Link>
-                    <button onClick={()=>props.submitProfile({
+                    <button onClick={()=>{props.submitProfile({
                                         name: profileData.name,
                                         bio: profileData.bio,
                                         education: profileData.education,
                                         experiences: profileData.experiences,
                                         location: profileData.location,
                                         skill: profileData.skill,
-                                        userLink: profileData.userLink
-                    })}>Publish</button>
+                                        userLink: profileData.userLink})
+                                        navigate("/profile")}
+                    }>Publish</button>
                 </div>
                 </div>
                 </div>
