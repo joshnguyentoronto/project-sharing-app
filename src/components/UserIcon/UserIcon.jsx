@@ -8,11 +8,11 @@ export default function UserIcon(props) {
     }
     let Initial = "A"
     if (theUser) {
-        let name = props.user.name.split(' ')
+        let name = props.user.username.split(' ')
         if (name.length > 1) {
             Initial = name[0][0].toUpperCase() + name[1][0].toUpperCase();
         } else {
-            Initial = props.user.name[0].toUpperCase();
+            Initial = props.user.username[0].toUpperCase();
         }
     }
     return(

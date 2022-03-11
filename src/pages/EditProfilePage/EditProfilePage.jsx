@@ -1,5 +1,5 @@
 import "./EditProfilePage.css"
-import React, { useState, } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { TextField } from '@mui/material';
 import InputLink from '../../components/InputLink/InputLink'
@@ -21,6 +21,7 @@ export default function EditProfilePage(props) {
     const [avatar, setAvatar] = useState('')
     const [bgImagePreview, setBgImagePreview] = useState('')
     const [bgImageFile, setBgImageFile] = useState('')
+    let navigate = useNavigate()
 
 
     const navigate = useNavigate()

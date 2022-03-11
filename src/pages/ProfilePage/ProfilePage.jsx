@@ -1,6 +1,7 @@
 import "./ProfilePage.css"
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"; 
+import moment from 'moment'
 import Header from "../../components/Header/Header";
 import ProjectList from "../../components/ProjectList/ProjectList";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
@@ -31,7 +32,8 @@ export default class ProfilePage extends Component {
                     user={this.props.user}
                 />
                 
-                <div className="background-image"><img src={require('../../images/image/no_profile_image.png')} alt="profile background"/></div>
+                <div className="background-image" style={{backgroundImage: `url(${this.props.user.background})`}}></div>
+                {/* // <div style={{backgroundImage: `url(${props.project.images[index]})`}} className='project-detail-body-img'></div> */}
                 {/* {this.props.currentProject ? 
                     <ProfileCard user={this.props.user} otherUser={this.props.currentProject.author[0]}/> 
                 :   
@@ -80,7 +82,7 @@ export default class ProfilePage extends Component {
                             <p><h4>Skills</h4><br /><ul>{this.props.user.skill.map(s => <li className="skill-item">{s}</li>)}</ul></p>
                             <p><h4>Work Experience</h4><br />{this.props.user.experiences}</p>
                             <p><h4>Education</h4><br />{this.props.user.education}</p>
-                            <p><h5>Member since: March 2</h5></p>
+                            <p><h5>Member since: {moment(this.props.user.date).format('LL')} </h5></p>
                         </div>
 
                         <div className="profile-social">
