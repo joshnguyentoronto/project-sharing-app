@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import moment from 'moment'
 import Header from "../../components/Header/Header";
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import ProjectList from '../../components/ProjectList/ProjectList';
@@ -59,7 +60,7 @@ export default function othersProfilePage(props) {
                     <p><h4>Skills</h4><br /><ul>{props.viewUser ? props.viewUser.skill.map(s => <li className="skill-item">{s}</li>): props.viewUser.skill}</ul></p>
                     <p><h4>Work Experience</h4><br />{props.viewUser.experiences}</p>
                     <p><h4>Education</h4><br />{props.viewUser.education}</p>
-                    <p><h5>Member since: March 2</h5></p>
+                    <p><h5>Member since: {moment(props.viewUser.date).format('LL')} </h5></p>
                 </div>
 
                 <div className="profile-social">
@@ -90,9 +91,9 @@ export default function othersProfilePage(props) {
                 projects={props.projects}
                 viewPeople={props.viewPeople}
                 viewUser={props.viewUser}
-                getUserCardCounts={this.props.getUserCardCounts}
-                userCardLike={this.props.userCardLike}
-                userCardView={this.props.userCardView}
+                getUserCardCounts={props.getUserCardCounts}
+                userCardLike={props.userCardLike}
+                userCardView={props.userCardView}
             />
             }
             {props.viewMode ? 

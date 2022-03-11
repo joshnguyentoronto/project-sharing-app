@@ -1,6 +1,6 @@
 import "./EditProfilePage.css"
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField } from '@mui/material';
 import InputLink from '../../components/InputLink/InputLink'
 import InputTagItem from "../../components/InputTagItem/InputTagItem";
@@ -21,6 +21,10 @@ export default function EditProfilePage(props) {
     const [avatar, setAvatar] = useState('')
     const [bgImagePreview, setBgImagePreview] = useState('')
     const [bgImageFile, setBgImageFile] = useState('')
+    let navigate = useNavigate()
+
+
+    const navigate = useNavigate()
 
     function handleChange(e){
         editProfileData({...profileData, [e.target.name]:e.target.value })
@@ -102,10 +106,11 @@ export default function EditProfilePage(props) {
     //     navigate("/profile")  
     // }
 
-    async function avatarphotoUpload(){
+    async function avatarphotoUpload(e){
         try {
             let {url} = await fetch("/s3Url").then(res => res.json())
-            let file = avatar
+            console.log(avatar)
+            let file = e.target.files[0]
             let avatarPhoto = await fetch(url,{
                     method: "PUT",
                     headers: {
@@ -130,10 +135,10 @@ export default function EditProfilePage(props) {
             console.log("Submit error", err)
         }
     }
-    async function bgphotoUpload(){
+    async function bgphotoUpload(e){
         try {
             let {url} = await fetch("/s3Url").then(res => res.json())
-            let file = bgImageFile
+            let file = e.target.files[0]
             let bgPhoto = await fetch(url,{
                 method: "PUT",
                 headers: {
@@ -158,22 +163,24 @@ export default function EditProfilePage(props) {
             console.log("Submit error", err)
         }
     }
+
+    async function imageChange(e){
+        setImagePreview(URL.createObjectURL(e.target.files[0]))
+        console.log(e.target.files)
+        console.log(e.target.files[0])
+        setAvatar(e.target.files)
+        console.log(avatar)
+    }
     
     return(
         <div>
             <div className="edit-profile-header">
                 <div className="edit-profile-photo">
-                   
                     <img src={imagePreview}></img>
-                    
-                
-                
-                    <input onChange={(evt) => {
+                    <input onChange={(evt)=>{
                         setImagePreview(URL.createObjectURL(evt.target.files[0]))
-                        setAvatar(evt.target.files[0])
-                        avatarphotoUpload()
-                    }
-                    } type="file" name="dp-img" accept="image/*" />
+                        avatarphotoUpload(evt)
+                    }} type="file" name="dp-img" accept="image/*" />
                     <a className="edit-button">Edit</a>
                 </div>
                 <div className="edit-background-image">
@@ -181,8 +188,7 @@ export default function EditProfilePage(props) {
                     <img src={bgImagePreview}></img>
                     <input onChange={(evt) => {
                         setBgImagePreview(URL.createObjectURL(evt.target.files[0]))
-                        setBgImageFile(evt.target.files[0])
-                        bgphotoUpload()
+                        bgphotoUpload(evt)
                     }
                     }type="file" name="bg-img" accept="image/*" />
                 </div>
@@ -287,15 +293,19 @@ export default function EditProfilePage(props) {
 
                 <div className="edit-profile-submit">
                     <Link to="/profile">Cancel</Link>
-                    <button onClick={()=>props.submitProfile({
-                                        name: profileData.name,
-                                        bio: profileData.bio,
-                                        education: profileData.education,
-                                        experiences: profileData.experiences,
-                                        location: profileData.location,
-                                        skill: profileData.skill,
-                                        userLink: profileData.userLink
-                    })}>Publish</button>
+                    <button onClick={()=>
+                        {props.submitProfile({
+                            name: profileData.name,
+                            bio: profileData.bio,
+                            education: profileData.education,
+                            experiences: profileData.experiences,
+                            location: profileData.location,
+                            skill: profileData.skill,
+                            userLink: profileData.userLink
+                        })
+                        navigate("/profile")       
+                    }
+                    }>Publish</button>
                 </div>
                 </div>
                 </div>
