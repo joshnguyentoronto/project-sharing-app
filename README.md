@@ -42,12 +42,12 @@ Interesting fact about THE EXHIBIT:
 ### Review:
 
 
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/1.png" />
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/2.png" />
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/3.png" />
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/4.png" />
-<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/5.png" />
-<img  alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/6.png" />
+<img  alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/1.png" />
+<img  alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/2.png" />
+<img  alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/3.png" />
+<img  alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/4.png" />
+<img  alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/5.png" />
+<img  alt="la" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/6.png" />
 
 <br />
 
@@ -140,11 +140,11 @@ Interesting fact about THE EXHIBIT:
     MongoDB
 </p>
 <p>
-    <img alt="aws3" width="26px" height="26px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/aws3.svg" />
+    <img alt="aws3" width="26px" height="26px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/aws3.png" />
     Amazon Web Service 3
 </p>
 <p>
-    <img alt="socket.io" width="26px" height="26px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/socket.svg" />
+    <img alt="socket.io" width="26px" height="26px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/socket.png" />
     Socket.io
 </p>
 <p>
