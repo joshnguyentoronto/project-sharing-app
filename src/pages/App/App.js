@@ -802,7 +802,7 @@ export default class App extends Component {
             element={<Navigate to="/" />}
           />
         </Routes>
-        { theId ? <Link id="hidden-link" to={"/profile/" + theId}></Link> : false }
+        { theId ? <Link id="hidden-link" to={"/profile/" + theId}></Link> : <p id="hidden-link"></p> }
         {/* // <Link id="hidden-link" to={"/profile/" + this.state.viewUser._id}></Link> */}
         <Link id="hidden-link-login" to="/account/login"></Link>
       </main>
