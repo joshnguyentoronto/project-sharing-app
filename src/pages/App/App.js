@@ -12,6 +12,7 @@ import TermPage from '../TermPage/TermPage'
 import PolicyPage from '../PolicyPage/PolicyPage'
 import EditProfilePage from '../EditProfilePage/EditProfilePage';
 import OthersProfilePage from '../OthersProfilePage/OthersProfilePage';
+import AboutPage from '../AboutPage/AboutPage';
 import {io} from 'socket.io-client';
 
 const socket = io()
@@ -38,6 +39,10 @@ export default class App extends Component {
     hoverUser: {},
     allLike: 0,
     allView: 0,
+    otherLike: 0,
+    otherView: 0,
+    userCardLike: 0,
+    userCardView: 0
   }
 
   falseUser = {
@@ -184,6 +189,28 @@ export default class App extends Component {
           let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": this.state.user._id }})
           let projects = await fetchProjectList.json()
           this.setState({ projects: projects })
+          if (projects.length) {
+            if(projects.length == 1) {
+              this.setState({ projects: projects, allLike: projects.likeCount, allView: projects.viewCount})
+            } else {
+              // let numOne = 0
+              // let numTwo = projects[0].likeCount
+              // console.log("numtwo", numTwo)
+              let likeNum = 0
+              let viewNum = 0
+              await projects.forEach((p) => {
+                likeNum = p.likeCount + likeNum
+                viewNum = p.viewCount + viewNum
+                // let count = numOne + numTwo
+                // numOne = numTwo
+                // numTwo = count
+                // console.log("fasdff", count)
+                this.setState({ projects: projects, allLike: likeNum, allView: viewNum})
+                console.log(this.state.allView)
+              })
+            }}
+            
+
       } catch(err) {
           console.log("home page error: ", err)
       }
@@ -193,7 +220,6 @@ export default class App extends Component {
   }
 
   viewPeople = async (id) => {
-    console.log('hello')
     let fetchUser = await fetch('/api/users/', { headers: { "userId": id }})
     let user = await fetchUser.json()
     let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": id }})
@@ -488,6 +514,52 @@ export default class App extends Component {
     }
   }
 
+  getOtherCounts = async (userId) => {
+    try {
+      let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": userId }})
+      let projects = await fetchProjectList.json()
+      if (projects.length) {
+        if(projects.length == 1) {
+          this.setState({ otherLike: projects.likeCount, otherView: projects.viewCount})
+        } else {
+          let likeNum = 0
+          let viewNum = 0
+          await projects.forEach((p) => {
+            likeNum = p.likeCount + likeNum
+            viewNum = p.viewCount + viewNum
+            this.setState({ otherLike: likeNum, otherView: viewNum})
+            console.log(this.state.otherView, this.state.otherLike)
+          })
+        }}
+
+    }catch (err) {
+      console.log(err)
+    }
+  }
+
+  getUserCardCounts = async (userId) => {
+    try {
+      let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": userId }})
+      let projects = await fetchProjectList.json()
+      console.log(projects)
+      if (projects.length) {
+        if(projects.length == 1) {
+          this.setState({ userCardLike: projects.likeCount, userCardView: projects.viewCount})
+        } else {
+          let likeNum = 0
+          let viewNum = 0
+          await projects.forEach((p) => {
+            likeNum = p.likeCount + likeNum
+            viewNum = p.viewCount + viewNum
+            console.log(this.state.otherView, this.state.otherLike)
+            this.setState({ userCardLike: likeNum, userCardView: viewNum})
+          })
+        }}
+    }catch (err) {
+      console.log(err)
+    }
+  }
+
   lala = async () => {
     try {
       // let fetchProjectList = await fetch('/api/projects')
@@ -590,6 +662,13 @@ export default class App extends Component {
               likeComment={this.likeComment}
               unlikeComment={this.unlikeComment}
               openChatList={this.openChatList}
+
+              // otherLike={this.state.otherLike}
+              // otherView={this.state.otherView}
+              // getOtherCounts={this.getOtherCounts}
+              getUserCardCounts={this.getUserCardCounts}
+              userCardLike={this.state.userCardLike}
+              userCardView={this.state.userCardView}
             />}
           />
           <Route 
@@ -624,17 +703,25 @@ export default class App extends Component {
               likedProjects={this.likedProjects}
               myProjects={this.myProjects}
               viewPeople={this.viewPeople}
+              allLike={this.state.allLike}
+              allView={this.state.allView}
+              
+              getUserCardCounts={this.getUserCardCounts}
+              userCardLike={this.state.userCardLike}
+              userCardView={this.state.userCardView}
             />}
           />
           <Route 
             path="/profile/edit"
             element={<EditProfilePage 
               user={this.state.user}  
-              submitProfile={this.submitProfile}/>}
+              submitProfile={this.submitProfile}
+            />}
           />
           <Route
             path="/profile/:id"
             element={<OthersProfilePage 
+                route={this.props.route}
                 user={this.state.user} 
                 getOtherProjects={this.getOtherProjects}
                 hoverProject={this.hoverProject} 
@@ -660,6 +747,9 @@ export default class App extends Component {
                 isLiked={this.state.isLiked}
                 viewMode={this.state.viewMode}
                 viewPeople={this.viewPeople}
+                otherLike={this.state.otherLike}
+                otherView={this.state.otherView}
+                getOtherCounts={this.getOtherCounts}
               />}
           />
           <Route path="account" element={<AccountPage/>}>
@@ -690,6 +780,16 @@ export default class App extends Component {
           <Route 
             path="/privacy-policy"
             element={<PolicyPage 
+              user={this.state.user} 
+              openChat={this.state.openChat}
+              messageList={this.state.messageList}
+              userLogout={this.userLogout}
+              openChatList={this.openChatList}
+            />}
+          />
+          <Route 
+            path="/about"
+            element={<AboutPage 
               user={this.state.user} 
               openChat={this.state.openChat}
               messageList={this.state.messageList}

@@ -11,40 +11,15 @@ export default function othersProfilePage(props) {
         categories: ["Projects", "About"],
         activeCategory: "Projects",
     })
-    const [projectData, setProjectData] = useState([])
-
+        
     let { id } = useParams() 
-
-    // useEffect(() => {
-    //     getUserData()
-    //     getProjectData()
-    // }, [])
-
-    // useEffect(() => {
-    //     getProjectData()
-    // }, [])
+    useEffect(() => {
+        props.getOtherCounts(id)
+    }, [])
 
     function handleSetActiveCat (cat) {
         setUserData({...userData, activeCategory: cat})
     }
-
-    // const getProjectData = async () => {
-    //     let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": props.viewUser._id }})
-    //     let projects = await fetchProjectList.json()
-    //     console.log(projects)
-    //     await setProjectData(projects)
-    // }
-
-    // const getUserData = async () => {
-    //     let fetchUser = await fetch('/api/users/', { headers: { "userId": id }})
-    //     let user = await fetchUser.json()
-    //     // let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": id }})
-    //     // let projects = await fetchProjectList.json()
-    //     await getProjectData()
-    //     setUserData({...userData, user: user })
-    //     // console.log(projects)
-    //     // setProjectData(projects)
-    // }
 
     return (
         <div className="profile">
@@ -54,7 +29,12 @@ export default function othersProfilePage(props) {
             user={props.user}
         />
         <div className="background-image"><img src={require('../../images/image/no_profile_image.png')} alt="profile background"/></div>
-            <ProfileCard loginUser={props.user} user={props.viewUser}/>
+            <ProfileCard 
+                loginUser={props.user} 
+                user={props.viewUser}
+                otherLike={props.otherLike}
+                otherView={props.otherView}
+            />
     
         <div className="profile-content-area">
             <ul className="ProfileCategory">

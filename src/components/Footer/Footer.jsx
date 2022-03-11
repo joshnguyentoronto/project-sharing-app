@@ -25,10 +25,11 @@ export default function Footer(props) {
                 <div className='footer-group1'>
                     <ul>
                         <li><strong>Company</strong></li>
-                        <li><a href="https://github.com/joshnguyentoronto/project-sharing-app" target="_blank" rel="noopener noreferrer">About</a></li>
-                        <li><a href="https://github.com/joshnguyentoronto/project-sharing-app" target="_blank" rel="noopener noreferrer">FAQs</a></li>
-                        <li><a href="https://github.com/joshnguyentoronto/project-sharing-app" target="_blank" rel="noopener noreferrer">Career</a></li>
-                        <li><a href="https://github.com/joshnguyentoronto/project-sharing-app" target="_blank" rel="noopener noreferrer">Support</a></li>
+                        <li><a href="https://github.com/joshnguyentoronto/project-sharing-app" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><Link to="/about">About</Link></li>
+                        <li><Link to="/about">FAQs</Link></li>
+                        <li><Link to="/about">Career</Link></li>
+                        <li><Link to="/about">Support</Link></li>
                         <li><Link to="/terms-of-service">Terms of Service</Link></li>
                         <li><Link to="/privacy-policy">Privacy Policy</Link></li>
                     </ul>

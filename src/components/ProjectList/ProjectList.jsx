@@ -24,6 +24,13 @@ export default function ProjectList(props) {
                         currentProject={props.currentProject}
                         viewPeople={props.viewPeople}
                         viewUser={props.viewUser}
+
+                        // otherLike={props.otherLike}
+                        // otherView={props.otherView}
+                        // getOtherCounts={props.getOtherCounts}
+                        getUserCardCounts={props.getUserCardCounts}
+                        userCardLike={props.userCardLike}
+                        userCardView={props.userCardView}
                     />
                 </div>
             )}

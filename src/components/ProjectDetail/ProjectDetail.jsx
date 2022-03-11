@@ -10,28 +10,27 @@ import UserIcon from '../UserIcon/UserIcon';
 import moment from 'moment'
 
 export default function ProjectDetail(props) {
-    
     const divRef = useRef()
-
     const [popUpChat, setpopUpChat] = useState(false)
-
-    const theImage = document.getElementById('image-preview-slider')
-    const Images = props.project.images
-    let index = 0
-    const leftBtn = document.getElementById('left-btn')
-    const rightBtn = document.getElementById('right-btn')
+    
+    const [index, setIndex] = useState(0)
+    
+    let newIndex = 0
     function goToLeft() {
         if (index === 0) {
-            index = props.project.images.length - 1
+            newIndex = props.project.images.length - 1
+            setIndex(newIndex)
         } else {
-            index -= 1
+            newIndex = index
+            setIndex(newIndex - 1)
         }
     }
     function goToRight() {
-        if (index === props.project.images.length) {
-            index = 0
+        if (index === props.project.images.length - 1) {
+            setIndex(0)
         } else {
-            index += 1
+            let newIndex = index
+            setIndex(newIndex + 1)
         }
     }
 
@@ -60,18 +59,30 @@ export default function ProjectDetail(props) {
                 }
                 <div className='project-detail-body-main'>
                     <h1>{props.project.title}</h1>
-                    <div className='project-detail-body-img'>
-                        <img id='image-preview-slider' src={props.project.images[index]} alt="project preview"></img>
+                    <div style={{backgroundImage: `url(${props.project.images[index]})`}} className='project-detail-body-img'>
+                        { props.project.images.length === 1 ? 
+                            false
+                            :
+                            <div className='image-preview-btn'>
+                                <button onClick={() => goToLeft()} id="left-btn"><img src={require('../../images/icons/left-arrow.svg')} alt="svg icon" /></button>
+                                <button onClick={() => goToRight()} id="right-btn"><img src={require('../../images/icons/right-arrow.svg')} alt="svg icon" /></button>
+                            </div>
+                        }
                     </div>
-                    <div className='image-preview-btn'>
-                        <p onClick={() => goToLeft()} id="left-btn">Left</p>
-                        <div>
-                            <p>1</p>
-                            <p>2</p>
-                            <p>3</p>
+                    { props.project.images.length === 1 ? 
+                        false
+                        :
+                        <div className='image-preview-btn-middle'>
+                            { props.project.images.map((img, i) => {
+                                if (i === index ) {
+                                    return <div className='small-img-btn-blue'></div> 
+                                } else {
+                                    return <div className='small-img-btn-grey'></div> 
+                                }
+                            } ) }
                         </div>
-                        <p onClick={() => goToRight()} id="right-btn">Right</p>
-                    </div>
+                    }
+                    
                     <div className='project-detail-body-project-link'>
                         {props.project.projectLink.map(link => 
                             <a target="_blank" href={link.url} rel="noopener noreferrer">{link.name}</a>
@@ -170,12 +181,16 @@ export default function ProjectDetail(props) {
             
             <div className='project-detail-right'>
                 <div className='project-detail-right-sub'>
-                    <button className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></button>
+                    <div className='project-detail-right-x' onClick={() => {props.closeProject()}}><img src={require('../../images/icons/x.svg')} alt="svg icon" /></div>
                     { props.project.author.map(user => 
                         <div className='profilebtnhover' >
                             <Link to="/profile"><button className='card-user-icon-3'><UserIcon user={user} /></button></Link>
                             <div className="usercard" >
-                                <UserCard user={user} />
+                                <UserCard user={user} 
+                                getUserCardCounts={props.getUserCardCounts}
+                                userCardLike={props.userCardLike}
+                                userCardView={props.userCardView}
+                                />
                             </div>
                         </div>
                     ) }
