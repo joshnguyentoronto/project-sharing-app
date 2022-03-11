@@ -23,6 +23,9 @@ export default function EditProfilePage(props) {
     const [bgImageFile, setBgImageFile] = useState('')
     let navigate = useNavigate()
 
+
+    const navigate = useNavigate()
+
     function handleChange(e){
         editProfileData({...profileData, [e.target.name]:e.target.value })
     }
@@ -290,15 +293,18 @@ export default function EditProfilePage(props) {
 
                 <div className="edit-profile-submit">
                     <Link to="/profile">Cancel</Link>
-                    <button onClick={()=>{props.submitProfile({
-                                        name: profileData.name,
-                                        bio: profileData.bio,
-                                        education: profileData.education,
-                                        experiences: profileData.experiences,
-                                        location: profileData.location,
-                                        skill: profileData.skill,
-                                        userLink: profileData.userLink})
-                                        navigate("/profile")}
+                    <button onClick={()=>
+                        {props.submitProfile({
+                            name: profileData.name,
+                            bio: profileData.bio,
+                            education: profileData.education,
+                            experiences: profileData.experiences,
+                            location: profileData.location,
+                            skill: profileData.skill,
+                            userLink: profileData.userLink
+                        })
+                        navigate("/profile")       
+                    }
                     }>Publish</button>
                 </div>
                 </div>

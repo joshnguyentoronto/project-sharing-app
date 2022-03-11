@@ -13,6 +13,7 @@
     font-style: normal;
 }
 
+
 .message-search-bar{
     background-color: #8796A0; 
 }
@@ -22,6 +23,7 @@
 }
 
 .message-title {
+    text-align: center;
     font-weight: bold;
     font-size: 27px;
     line-height: 37px;
