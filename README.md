@@ -31,7 +31,7 @@ This collaborate project helps us the SEI and UXDI students to gain direct exper
 &nbsp;\
 Interesting fact about THE EXHIBIT:
 - It was build within only 8 days.
-- Total amount of hours the SEI student put in are estimated at least 250 hours.
+- Total amount of hours the SEI student put in are estimated at least 330 hours.
 - The entire code base have at least 10,000 line of code as of due date.
 
 
@@ -46,7 +46,8 @@ Interesting fact about THE EXHIBIT:
 <img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/2.png" />
 <img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/3.png" />
 <img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/4.png" />
-<img  alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/5.png" />
+<img align="left" alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/5.png" />
+<img  alt="la" width="180px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/6.png" />
 
 <br />
 
@@ -137,6 +138,18 @@ Interesting fact about THE EXHIBIT:
 <p>
     <img alt="mongodb" width="26px" height="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
     MongoDB
+</p>
+<p>
+    <img alt="aws3" width="26px" height="26px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/aws3.svg" />
+    Amazon Web Service 3
+</p>
+<p>
+    <img alt="socket.io" width="26px" height="26px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/socket.svg" />
+    Socket.io
+</p>
+<p>
+    <img alt="heroku" width="26px" height="26px" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/heroku.png" />
+    Heroku
 </p>
 
 
