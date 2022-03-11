@@ -158,6 +158,7 @@
     height: 50px;
     width: 50px;
     opacity: 70%;
+    z-index: 10;
 }
 .image-preview-btn-middle {
     display: flex;

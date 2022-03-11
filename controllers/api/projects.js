@@ -128,13 +128,12 @@ async function projectsUser(req, res) {
     try {
         let userId = req.get("user")
         if (userId) {
-            let projects = await ProjectModel.find({ author: [userId] }).populate([
+            let projects = await ProjectModel.find({ author: userId }).populate([
                 { path: 'author', model: 'User' },
                 { path: 'comment', populate: { path: 'user', model: 'User' } }
             ])
             res.status(200).json(projects)
         }
-        
     } catch(err) {
         res.status(400).json(err)
     }

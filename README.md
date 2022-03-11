@@ -12,7 +12,7 @@
 
 ### Web link:
 
-[THE EXHIBIT](https://theexhibit.herokuapp.com)
+<a href="https://the-exhibit.herokuapp.com/" target="_blank">THE EXHIBIT</a>
 
 <br />
 
@@ -31,7 +31,7 @@ This collaborate project help us the SEI and UXDI students to gain direct experi
 &nbsp;\
 Interesting fact about THE EXHIBIT:
 - It was build within only 8 days.
-- Total amount of hours the SEI student put in is estimated at least 240 hours.
+- Total amount of hours the SEI student put in is estimated at least 250 hours.
 - The entire code base have at least 10,000 line of codes as of due date.
 
 
@@ -83,9 +83,9 @@ Interesting fact about THE EXHIBIT:
 
 | Name | Roles |
 | ---- | ----- |
-| Paula Abejero | Wireframe, User Flow, Style guild, Prototype |
-| Linette Yang | Wireframe, User Flow, Style guild, Prototype |
-| Paulo Saromo | Wireframe, User Flow, Style guild, Prototype |
+| Paula Abejero | Wireframe, User Flow, Style guild, Prototype, Competitive analysis |
+| Linette Yang | Wireframe, User Flow, Style guild, Prototype, Competitive analysis |
+| Paulo Saromo | Wireframe, User Flow, Style guild, Prototype, Competitive analysis |
 
 
 <br />
@@ -119,12 +119,24 @@ Interesting fact about THE EXHIBIT:
     CSS 3
 </p>
 <p>
-    <img alt="sass" width="24px" height="24px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sass/sass.png" />
-    SASS
-</p>
-<p>
     <img alt="javascript" width="24px" height="24px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />
     JavaScript
+</p>
+<p>
+    <img alt="react" width="26px" height="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
+    React
+</p>
+<p>
+    <img alt="nodejs" width="26px" height="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />
+    Node.js
+</p>
+<p>
+    <img alt="express" width="26px" height="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/express/express.png" />
+    Express
+</p>
+<p>
+    <img alt="mongodb" width="26px" height="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
+    MongoDB
 </p>
 
 
@@ -152,6 +164,14 @@ Interesting fact about THE EXHIBIT:
 
 ---
 
+### User flow:
+
+<img align="center" alt="user flow diagram" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/user-flow.png" />
+
+<br />
+
+---
+
 ### Entity Relationship Diagram:
 
 <img align="center" alt="Database ERD diagram" src="https://github.com/joshnguyentoronto/project-sharing-app/blob/master/public/images/THEEXHIBIT-ERD.png" />
@@ -164,6 +184,8 @@ Interesting fact about THE EXHIBIT:
 
 - Save Project as Draf feature when create Project
 - Notification Feature
+- Enable Edit Project
+- Enable Delete Project
 - Instant messaging between Group of people
 - GitHub intergration to enable Cloning github repository directory from the website
 - Light - Dark mode tongle
@@ -175,6 +197,7 @@ Interesting fact about THE EXHIBIT:
 
 - React is a very powerful and dynamic tool, but we have to do it "The React Way"
 - In React, state management is everything, it's difficult, it's important, and of course "follow the React way"
+- Important: know what you are capable of! We are so ambitious about this final project that we put so much hours and effort in it.
 
 ---
 
@@ -194,11 +217,11 @@ Distributed under the MIT License.
 ### Contact:
 
 Developer:\
-[Lu Ye](https://github.com/luye713)\
-[Josh Nguyen](https://joshnguyentoronto.com)\
-[Janusshan Paramasivam](https://google.com)
+[Lu Ye](https://github.com/luye713/)\
+[Josh Nguyen](https://joshnguyentoronto.com/)\
+[Janusshan Paramasivam](https://github.com/janusshanp/)
 
 Designer:\
-[Linette Yang](https://www.google.com/)\
-[Paula Abejero](https://www.google.com/)\
+[Linette Yang](https://www.linkedin.com/in/linetteyang/)\
+[Paula Abejero](https://www.linkedin.com/in/paulaabejero/)\
 [Paulo Saromo](https://www.linkedin.com/in/paulosaromo/)

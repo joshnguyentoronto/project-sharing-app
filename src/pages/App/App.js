@@ -326,7 +326,6 @@ export default class App extends Component {
         }
     } else if (!this.state.user._id) {
       alert("Please log in to use this feature")
-      window.setTimeout(window.close(), 5000);
     } else {
       if (obj.profile) {
         let project = obj.project
@@ -529,7 +528,6 @@ export default class App extends Component {
             this.setState({ otherLike: likeNum, otherView: viewNum})
           })
         }}
-
     }catch (err) {
       console.log(err)
     }
@@ -541,10 +539,7 @@ export default class App extends Component {
       let projects = await fetchProjectList.json()
       if (projects.length === 0) {
         this.setState({ userCardLike: 0, userCardView: 0})
-      } else if (projects.length) {
-        if(projects.length == 1) {
-          this.setState({ userCardLike: projects.likeCount, userCardView: projects.viewCount})
-        } else {
+      } else {
           let likeNum = 0
           let viewNum = 0
           await projects.forEach((p) => {
@@ -552,8 +547,8 @@ export default class App extends Component {
             viewNum = p.viewCount + viewNum
             this.setState({ userCardLike: likeNum, userCardView: viewNum})
           })
-        }}
-    }catch (err) {
+      }
+    } catch (err) {
       console.log(err)
     }
   }

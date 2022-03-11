@@ -16,7 +16,7 @@ export default function Header(props) {
             </div>
             <div className='header-link-container'>
                 { theUser ? <Link className='header-link-upload' to="/upload">Upload</Link> : <Link className='header-link-upload' to="/account/login">Login to Upload new Project</Link> }
-                {/* <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button> */}
+                <button className="header-btn"><img src={require('../../images/icons/notification.svg')} alt="svg icon" /></button>
                 <button onClick={() => props.openChatList()} className="header-btn"><img src={require('../../images/icons/message.svg')} alt="svg icon" /></button>
                 {theUser ? 
                     <Link to="/profile" ><UserIcon user={props.user} /></Link>

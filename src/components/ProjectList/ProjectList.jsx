@@ -1,10 +1,15 @@
 import './ProjectList.css';
-import React from 'react';
+import React, { useRef } from 'react';
 import ProjectListItem from '../ProjectListItem/ProjectListItem';
 
 export default function ProjectList(props) {
+    const divRef2 = useRef()
+    function scrollPage() {
+        divRef2.current.scrollIntoView({ behavior: "smooth" })
+    }
     return(
-        <div className="project-list">
+        <div className="project-list" >
+            <p id="hidden-to-scroll" ref={divRef2}>hidden</p>
             {props.projects.map(project => 
                 <div key={project._id}>
                     <ProjectListItem
@@ -24,10 +29,7 @@ export default function ProjectList(props) {
                         currentProject={props.currentProject}
                         viewPeople={props.viewPeople}
                         viewUser={props.viewUser}
-
-                        // otherLike={props.otherLike}
-                        // otherView={props.otherView}
-                        // getOtherCounts={props.getOtherCounts}
+                        scrollPage={scrollPage}
                         getUserCardCounts={props.getUserCardCounts}
                         userCardLike={props.userCardLike}
                         userCardView={props.userCardView}
