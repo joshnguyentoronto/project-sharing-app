@@ -61,12 +61,17 @@ export default function SignUpForm(props){
                     password: userData.password,
                 })
             })
-            if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
+            // if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
+            if (!fetchResponse.ok) {
+                console.log(fetchResponse)
+            }
             let token = await fetchResponse.json()
             localStorage.setItem('token', token)
             const userDoc = await JSON.parse(atob(token.split('.')[1])).user
             props.setUserInState(userDoc)
-            navigate("/account/setup")       
+            navigate("/account/setup")
+        } else {
+            navigate("/account/signup")
         }
     }
 

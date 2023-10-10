@@ -13,9 +13,9 @@ import PolicyPage from '../PolicyPage/PolicyPage'
 import EditProfilePage from '../EditProfilePage/EditProfilePage';
 import OthersProfilePage from '../OthersProfilePage/OthersProfilePage';
 import AboutPage from '../AboutPage/AboutPage';
-import {io} from 'socket.io-client';
-
-const socket = io()
+// import {io} from 'socket.io-client';
+// const socket = io()
+import { socket } from '../../socket';
 
 export default class App extends Component {
   state = {
@@ -264,7 +264,7 @@ export default class App extends Component {
           let projects = await fetchProjectList.json()
           this.setState({ projects: projects })
           if (projects.length) {
-            if(projects.length == 1) {
+            if(projects.length === 1) {
               this.setState({ 
                 projects: projects, 
                 allLike: projects.likeCount,
@@ -625,7 +625,7 @@ export default class App extends Component {
       let fetchProjectList = await fetch('/api/projects/user', {headers: { "user": userId }})
       let projects = await fetchProjectList.json()
       if (projects.length) {
-        if(projects.length == 1) {
+        if(projects.length === 1) {
           this.setState({ otherLike: projects.likeCount, otherView: projects.viewCount})
         } else {
           let likeNum = 0
@@ -707,11 +707,11 @@ export default class App extends Component {
         console.log("home page error: ", err)
       }
     }
-    if (this.state.projects.length === 0) {
-      window.location.reload(false);
-    }
-  }
-  
+  };
+  // if (this.state.projects.length === 0) {
+  //   window.location.reload(false);
+  // }
+
   render() {
     let theId = ''
     if (this.state.viewUser) {

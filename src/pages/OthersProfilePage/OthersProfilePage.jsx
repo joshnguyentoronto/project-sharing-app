@@ -7,7 +7,7 @@ import ProjectList from '../../components/ProjectList/ProjectList';
 import ProjectDetail from '../../components/ProjectDetail/ProjectDetail';
 import MessageBox from "../../components/MessageBox/MessageBox"
 
-export default function othersProfilePage(props) {
+export default function OthersProfilePage(props) {
     const [userData, setUserData] = useState({
         user: {},
         categories: ["Projects", "About"],

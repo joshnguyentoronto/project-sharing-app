@@ -71,7 +71,7 @@ async function projectsIndex(req, res) {
     let profile = req.get("profile")
     let userId = req.get("userId")
     let user = await UserModel.findById(userId)
-    if (profile == "Projects") {
+    if (profile === "Projects") {
         try {
             let projects = await ProjectModel.find({ author: [userId] }).populate([
                 { path: 'author', model: 'User' },
@@ -81,7 +81,7 @@ async function projectsIndex(req, res) {
         } catch(err) {
             res.status(400).json(err)
         }
-    } else if (profile == "Liked") {
+    } else if (profile === "Liked") {
         try {
             let idArr = user.likedPosts
             let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
@@ -92,7 +92,7 @@ async function projectsIndex(req, res) {
         } catch(err) {
             res.status(400).json(err)
         }
-    } else if (profile == "Saved") {
+    } else if (profile === "Saved") {
         try {
             let idArr = user.savedPosts
             let projects = await ProjectModel.find({ _id: { $in: idArr } }).populate([
@@ -298,7 +298,7 @@ async function deleteComment(req, res) {
 async function likeComment(req, res) {
     try {
         let newProject = await ProjectModel.findById( req.body.projectId )
-        let index = await newProject.comment.findIndex(com => com._id == req.body.commentId)
+        let index = await newProject.comment.findIndex(com => com._id === req.body.commentId)
         await newProject.comment[index].likedUser.push(req.body.userId)
         newProject.comment[index].likeCount = newProject.comment[index].likeCount + 1;
         await newProject.save()
@@ -315,7 +315,7 @@ async function likeComment(req, res) {
 async function unlikeComment(req, res) {
     try {
         let newProject = await ProjectModel.findById( req.body.projectId )
-        let index = await newProject.comment.findIndex(com => com._id == req.body.commentId)
+        let index = await newProject.comment.findIndex(com => com._id === req.body.commentId)
         await newProject.comment[index].likedUser.splice( newProject.comment[index].likedUser.indexOf( req.body.userId ), 1 )
         newProject.comment[index].likeCount = newProject.comment[index].likeCount - 1;
         await newProject.save()
